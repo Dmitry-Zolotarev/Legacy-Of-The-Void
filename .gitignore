@@ -1,0 +1,52 @@
+# ========================
+# Unity generated files
+# ========================
+
+# Visual Studio / Rider / IDE files
+.vs/
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Unity-specific folders
+Library/
+Temp/
+Obj/
+Logs/
+MemoryCaptures/
+UserSettings/
+
+# Unity cache / debug
+sysinfo.txt
+crash.log
+crash.dmp
+*.stacktrace
+
+# Exported/auto-generated
+ExportedObj/
+*.unityproj
+
+# Unity packages
+*.unitypackage
+
+# Do NOT ignore assets or meta files
+# (They MUST remain!)
+#!*.meta
+
+# ========================
+# Custom fix
+# ========================
+# УДАЛЕНО правило *.txt, чтобы не терялись .txt.meta
