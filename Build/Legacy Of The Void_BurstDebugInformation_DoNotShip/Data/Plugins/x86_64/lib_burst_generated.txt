@@ -8,7 +8,7 @@ Library: D:\Games\Legacy Of The Void\Temp\BurstOutput\Data\Plugins\x86_64\lib_bu
 --dump=Function
 --float-precision=Standard
 --target-framework=NetFramework
---linker-options=PdbAltPath="Angry Girl Adventures_Data/Plugins/x86_64/lib_burst_generated.pdb"
+--linker-options=PdbAltPath="Legacy Of The Void_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Games\Legacy Of The Void\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
@@ -125,7 +125,7 @@ Library: D:\Games\Legacy Of The Void\Temp\BurstOutput\Data\Plugins\x86_64\lib_bu
 --dump=Function
 --float-precision=Standard
 --target-framework=NetFramework
---linker-options=PdbAltPath="Angry Girl Adventures_Data/Plugins/x86_64/lib_burst_generated.pdb"
+--linker-options=PdbAltPath="Legacy Of The Void_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Games\Legacy Of The Void\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
@@ -242,7 +242,7 @@ Library: D:\Games\Legacy Of The Void\Temp\BurstOutput\Data\Plugins\x86_64\lib_bu
 --dump=Function
 --float-precision=Standard
 --target-framework=NetFramework
---linker-options=PdbAltPath="Angry Girl Adventures_Data/Plugins/x86_64/lib_burst_generated.pdb"
+--linker-options=PdbAltPath="Legacy Of The Void_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Games\Legacy Of The Void\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
@@ -286,7 +286,7 @@ Library: D:\Games\Legacy Of The Void\Temp\BurstOutput\Data\Plugins\x86_64\lib_bu
 --dump=Function
 --float-precision=Standard
 --target-framework=NetFramework
---linker-options=PdbAltPath="Angry Girl Adventures_Data/Plugins/x86_64/lib_burst_generated.pdb"
+--linker-options=PdbAltPath="Legacy Of The Void_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Games\Legacy Of The Void\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
@@ -332,7 +332,7 @@ Library: D:\Games\Legacy Of The Void\Temp\BurstOutput\Data\Plugins\x86_64\lib_bu
 --float-precision=Standard
 --target-framework=NetFramework
 --float-mode=Fast
---linker-options=PdbAltPath="Angry Girl Adventures_Data/Plugins/x86_64/lib_burst_generated.pdb"
+--linker-options=PdbAltPath="Legacy Of The Void_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Games\Legacy Of The Void\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
@@ -353,7 +353,7 @@ Library: D:\Games\Legacy Of The Void\Temp\BurstOutput\Data\Plugins\x86_64\lib_bu
 --float-precision=Standard
 --target-framework=NetFramework
 --float-mode=Fast
---linker-options=PdbAltPath="Angry Girl Adventures_Data/Plugins/x86_64/lib_burst_generated.pdb"
+--linker-options=PdbAltPath="Legacy Of The Void_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\Games\Legacy Of The Void\Temp\Burst
 --key-folder=C:/Program Files/Unity/Hub/Editor/6000.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
