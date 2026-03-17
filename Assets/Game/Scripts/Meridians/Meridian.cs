@@ -1,8 +1,6 @@
 [System.Serializable]
 public class Meridian
 {
-    public string name;
-    public bool opened;
-    public int bodyBonus;
-    public int qiBonus;
+    public bool opened = false;
+    public int bodyBonus = 10, spiritBonus = 10, qiBonus = 10;
 }

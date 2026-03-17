@@ -13,8 +13,6 @@ public class CharacterData
     [HideInInspector] public int Qi = 0;
 
     [HideInInspector] public States currentState = States.Alive;
-    [HideInInspector] public int MeditationProgress = 0;
-    [HideInInspector] public bool BreakthroughReadyFlag = false;
     [HideInInspector] public bool DiscipleUnlockedFlag = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
 

@@ -8,7 +8,6 @@ public class MeridianSystem : MonoBehaviour
     public List<Meridian> meridians = new List<Meridian>();
     [SerializeField] private float scoreToOpenMeridian = 2;
     private GameCore gameCore;
-    int currentIndex = 0;
 
     void Awake()
     {
@@ -16,15 +15,16 @@ public class MeridianSystem : MonoBehaviour
         gameCore = GameObject.FindGameObjectWithTag("GameCore").GetComponent<GameCore>();
     }
 
-    public void CheckBreakthrough(float meditationScore)
+    public void CheckBreakthrough(float meditationScore, int meridianIndex)
     {
-        if (meditationScore > scoreToOpenMeridian) OpenNextMeridian();
+        if (meditationScore > scoreToOpenMeridian) OpenMeridian(meridianIndex);
     }
-    void OpenNextMeridian()
+    public void OpenMeridian(int i)
     {
-        if (gameCore == null || currentIndex >= meridians.Count) return;
-        gameCore.Run.CurrentMaster.Body += meridians[currentIndex].bodyBonus;
-        gameCore.Run.CurrentMaster.Body += meridians[currentIndex].qiBonus;
-        currentIndex++;
+        if (gameCore == null || i >= meridians.Count) return;
+        gameCore.Run.CurrentMaster.Body += meridians[i].bodyBonus;
+        gameCore.Run.CurrentMaster.Spirit += meridians[i].spiritBonus;
+        gameCore.Run.CurrentMaster.Body += meridians[i].qiBonus;
+        meridians[i].opened = true;
     }
 }
