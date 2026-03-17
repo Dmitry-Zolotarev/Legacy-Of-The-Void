@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PerksMenu : MonoBehaviour, IPointerClickHandler
+public class MeridiansMenu : MonoBehaviour, IPointerClickHandler
 {
     
     [SerializeField] private Sprite SilverButtonSprite, GreenButtonSprite;

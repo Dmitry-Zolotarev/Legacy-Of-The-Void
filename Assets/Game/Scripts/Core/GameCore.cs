@@ -5,10 +5,13 @@ public class GameCore : MonoBehaviour
 {
     public static GameCore Instance;
     public RunData Run;
+    [SerializeField] private StatsPanel statsPanel;
     void Awake()
     {
+        
         if (Instance == null) Instance = this;
         if (Run == null) StartGame();
+        if (statsPanel == null) statsPanel = GameObject.FindGameObjectWithTag("StatsPanel").GetComponent<StatsPanel>();
     }
     public void StartGame()
     {
@@ -20,8 +23,9 @@ public class GameCore : MonoBehaviour
     }
     public void AdvanceTime()
     {
-        var master = Instance.Run.CurrentMaster;
-        master.Age += 1;
-        if (master.Age >= master.LifeLimit) master.currentState = CharacterData.States.Dying;
+        var master = Run.CurrentMaster;
+        if (master.Age >= master.LifeLimit) master.currentState = CharacterData.States.Dead;
+        statsPanel?.UpdateLabels();
+        master.Age++;
     }
 }

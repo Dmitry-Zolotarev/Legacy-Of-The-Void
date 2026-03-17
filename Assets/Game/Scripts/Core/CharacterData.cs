@@ -7,16 +7,16 @@ public class CharacterData
 {
     public enum States { Alive, Injured, Exhausted, Aging, Critical, Dying, Dead, Archived };
     private static System.Random random = new System.Random();
-    public int ID;
-    public int Generation = 1;
-    public int LifeLimit = 75;
-    public int Qi = 0;
-    
-    public States currentState = States.Alive;
-    public int MeditationProgress = 0;
-    public bool BreakthroughReadyFlag = false;
-    public bool DiscipleUnlockedFlag = false;
-    public bool FinalBreakReadyFlag = false;
+    [HideInInspector] public int ID;
+    [HideInInspector] public int Generation = 1;
+    [HideInInspector] public readonly int LifeLimit;
+    [HideInInspector] public int Qi = 0;
+
+    [HideInInspector] public States currentState = States.Alive;
+    [HideInInspector] public int MeditationProgress = 0;
+    [HideInInspector] public bool BreakthroughReadyFlag = false;
+    [HideInInspector] public bool DiscipleUnlockedFlag = false;
+    [HideInInspector] public bool FinalBreakReadyFlag = false;
 
     public int Age = 18;
     public int MinLifeLimit = 50;
@@ -38,5 +38,6 @@ public class CharacterData
     {
         ID = Guid.NewGuid().GetHashCode();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit);
+        Debug.Log("Master life limit: " + LifeLimit);
     }
 }

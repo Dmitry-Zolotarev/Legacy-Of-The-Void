@@ -2,24 +2,36 @@ using UnityEngine;
 
 public class TrainingSystem:MonoBehaviour
 {
+    [SerializeField] private int BodyTrainInrease = 1, SpiritTrainInrease = 1, QiTrainIncrease = 10;
     public void TrainBody()
     {
-        var m=GameCore.Instance.Run.CurrentMaster;
-        m.Body+=1;
-        GameCore.Instance.AdvanceTime();
+        var master = GameCore.Instance.Run.CurrentMaster;
+        if (master.currentState == CharacterData.States.Alive)
+        {
+            master.Body += BodyTrainInrease;
+            GameCore.Instance.AdvanceTime();
+        }
+    }
+    public void TrainSpirit()
+    {
+        var master = GameCore.Instance.Run.CurrentMaster;
+        if(master.currentState == CharacterData.States.Alive)
+        {
+            master.Spirit += SpiritTrainInrease;
+            GameCore.Instance.AdvanceTime();
+        }     
     }
     public void TrainQi()
     {
-        var m=GameCore.Instance.Run.CurrentMaster;
-        m.Qi+=1;
-        GameCore.Instance.AdvanceTime();
-    }
-
-    public void TrainSpirit()
-    {
-        var m=GameCore.Instance.Run.CurrentMaster;
-        m.Spirit+=1;
-        GameCore.Instance.AdvanceTime();
-    }
-
+        var master = GameCore.Instance.Run.CurrentMaster;
+        if (master.Qi >= master.MaxQi)
+        {
+            master.Qi = master.MaxQi;
+        } 
+        else if (master.currentState == CharacterData.States.Alive)
+        {
+            master.Qi += QiTrainIncrease;
+            GameCore.Instance.AdvanceTime();
+        }      
+    }  
 }
