@@ -8,7 +8,7 @@ public class InheritanceSystem:MonoBehaviour
         var run=GameCore.Instance.Run;
         if(run.DiscipleData==null||!run.DiscipleData.DiscipleReadyFlag)return;
 
-        var oldMaster=run.CurrentMasterData;
+        var oldMaster=run.CurrentMaster;
         run.ArchivedMasters.Add(oldMaster);
 
         CharacterData newMaster= new CharacterData();
@@ -18,10 +18,10 @@ public class InheritanceSystem:MonoBehaviour
         newMaster.Qi=oldMaster.Qi/2+1;
         newMaster.Spirit=oldMaster.Spirit/2+1;
         newMaster.MaxQi=oldMaster.MaxQi;
-        newMaster.CurrentQi=newMaster.MaxQi;
+        newMaster.Qi=newMaster.MaxQi;
 
         run.GenerationIndex++;
-        run.CurrentMasterData=newMaster;
+        run.CurrentMaster=newMaster;
         run.DiscipleData=null;
     }
 }

@@ -4,29 +4,22 @@ public class TrainingSystem:MonoBehaviour
 {
     public void TrainBody()
     {
-        var m=GameCore.Instance.Run.CurrentMasterData;
+        var m=GameCore.Instance.Run.CurrentMaster;
         m.Body+=1;
-        AdvanceTime();
+        GameCore.Instance.AdvanceTime();
     }
-
     public void TrainQi()
     {
-        var m=GameCore.Instance.Run.CurrentMasterData;
+        var m=GameCore.Instance.Run.CurrentMaster;
         m.Qi+=1;
-        AdvanceTime();
+        GameCore.Instance.AdvanceTime();
     }
 
     public void TrainSpirit()
     {
-        var m=GameCore.Instance.Run.CurrentMasterData;
+        var m=GameCore.Instance.Run.CurrentMaster;
         m.Spirit+=1;
-        AdvanceTime();
+        GameCore.Instance.AdvanceTime();
     }
 
-    void AdvanceTime()
-    {
-        var m=GameCore.Instance.Run.CurrentMasterData;
-        m.Age+=1;
-        if(m.Age>=m.LifeLimit)m.AliveState="Dying";
-    }
 }

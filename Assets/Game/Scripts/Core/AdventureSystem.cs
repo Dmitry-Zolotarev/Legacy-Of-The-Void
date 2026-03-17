@@ -5,7 +5,7 @@ public class AdventureSystem:MonoBehaviour
 {
     public void Travel()
     {
-        var m=GameCore.Instance.Run.CurrentMasterData;
+        var m=GameCore.Instance.Run.CurrentMaster;
         int roll=Random.Range(0,100);
         if(roll<60)
         {
@@ -14,7 +14,7 @@ public class AdventureSystem:MonoBehaviour
         }
         else
         {
-            m.CurrentQi=Mathf.Max(0,m.CurrentQi-3);
+            m.Qi=Mathf.Max(0,m.Qi - 3);
         }
         m.Age+=1;
     }

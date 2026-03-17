@@ -6,9 +6,9 @@ public class FinalVoidBreakSystem:MonoBehaviour
     public bool TryFinalBreak()
     {
         var run=GameCore.Instance.Run;
-        var m=run.CurrentMasterData;
+        var m=run.CurrentMaster;
 
-        if(m.RankId>=5 && m.OpenedMeridians.Count>=12)
+        if(m.Rank>=5 && m.OpenedMeridians.Count>=12)
         {
             run.VictoryFlag=true;
             run.RunState="Victory";

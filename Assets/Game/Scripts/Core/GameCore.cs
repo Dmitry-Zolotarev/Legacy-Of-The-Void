@@ -1,11 +1,10 @@
 
 using UnityEngine;
 
-public class GameCore:MonoBehaviour
+public class GameCore : MonoBehaviour
 {
     public static GameCore Instance;
     public RunData Run;
-
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -13,25 +12,16 @@ public class GameCore:MonoBehaviour
     }
     public void StartGame()
     {
-        Run=new RunData();
-        Run.RunId=System.Guid.NewGuid().ToString();
-        Run.GenerationIndex=1;
-        Run.RunState="HubActive";
-        Run.CurrentMasterData=CreateMaster(1);
+        Run = new RunData();
+        Run.RunId = System.Guid.NewGuid().ToString();
+        Run.GenerationIndex = 1;
+        Run.RunState = "HubActive";
+        Run.CurrentMaster = new CharacterData();
     }
-
-    CharacterData CreateMaster(int generation)
+    public void AdvanceTime()
     {
-        CharacterData m = new CharacterData();
-        m.ID = System.Guid.NewGuid().GetHashCode();
-        m.Generation=generation;
-        m.Age=18;
-        m.LifeLimit=80;
-        m.Body=1;
-        m.Qi=1;
-        m.Spirit=1;
-        m.MaxQi=10;
-        m.CurrentQi=10;
-        return m;
+        var master = Instance.Run.CurrentMaster;
+        master.Age += 1;
+        if (master.Age >= master.LifeLimit) master.currentState = CharacterData.States.Dying;
     }
 }

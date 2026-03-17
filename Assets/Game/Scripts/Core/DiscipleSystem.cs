@@ -13,10 +13,10 @@ public class DiscipleSystem:MonoBehaviour
     public void InfuseQi(int amount)
     {
         var run=GameCore.Instance.Run;
-        var m=run.CurrentMasterData;
-        if(m.CurrentQi>=amount)
+        var m=run.CurrentMaster;
+        if(m.Qi >=amount)
         {
-            m.CurrentQi-=amount;
+            m.Qi -= amount;
             run.DiscipleData.DiscipleQiReserve+=amount;
         }
     }
