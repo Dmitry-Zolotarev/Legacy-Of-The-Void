@@ -11,10 +11,9 @@ public class MeridianSystem : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
         gameCore = GameObject.FindGameObjectWithTag("GameCore").GetComponent<GameCore>();
     }
-
     public void CheckBreakthrough(float meditationScore, int meridianIndex)
     {
         if (meditationScore > scoreToOpenMeridian) OpenMeridian(meridianIndex);

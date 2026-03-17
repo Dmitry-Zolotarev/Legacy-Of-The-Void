@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MeditationSystem : MonoBehaviour
 {
+    public static MeditationSystem Instance;
     [SerializeField] private float FlowSpeed, Target = 1f; 
     [SerializeField] private GameObject ButtonPanel;
 

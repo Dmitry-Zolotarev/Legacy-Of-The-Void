@@ -17,7 +17,7 @@ public class CharacterData
     [HideInInspector] public bool FinalBreakReadyFlag = false;
 
     public int Age = 18;
-    public int MinLifeLimit = 50;
+    public int MinLifeLimit = 60;
     public int MaxLifeLimit = 110;
     public int Body = 50;
     public int Spirit = 50;

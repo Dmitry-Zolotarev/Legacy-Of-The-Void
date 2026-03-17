@@ -1,11 +1,12 @@
-
 using UnityEngine;
-
+using UnityEngine.UI;
 public class GameCore : MonoBehaviour
 {
-    public static GameCore Instance;
-    public RunData Run;
     [SerializeField] private StatsPanel statsPanel;
+    [SerializeField] private Sprite YoungMasterSprite, AdultMasterSprite, OldMasterSprite;
+    [SerializeField] private Image MasterSprite;
+    public static GameCore Instance;
+    public RunData Run;   
     void Awake()
     {
         
@@ -23,9 +24,19 @@ public class GameCore : MonoBehaviour
     }
     public void AdvanceTime()
     {
+        
         var master = Run.CurrentMaster;
-        if (master.Age >= master.LifeLimit) master.currentState = CharacterData.States.Dead;
-        statsPanel?.UpdateLabels();
         master.Age++;
+        if (master.Age > master.LifeLimit) 
+        {
+            master.currentState = CharacterData.States.Dead;
+            statsPanel?.UpdateLabels();
+            return;
+        }
+        statsPanel?.UpdateLabels();
+
+        if (master.Age >= 60) MasterSprite.sprite = OldMasterSprite;
+        else if (master.Age >= 40) MasterSprite.sprite = AdultMasterSprite;
+        else MasterSprite.sprite = YoungMasterSprite;
     }
 }
