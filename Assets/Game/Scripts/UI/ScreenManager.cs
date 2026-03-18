@@ -19,7 +19,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void CloseMenus()
     {
-        if (MeditationSystem.Instance.IsMeditating) return;
+        //if (MeditationSystem.Instance.IsMeditating) return;
         foreach (var menu in Menus) menu?.SetActive(false);
     }
     public void CloseMenus(InputAction.CallbackContext context)

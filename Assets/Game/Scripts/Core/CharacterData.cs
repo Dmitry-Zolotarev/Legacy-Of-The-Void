@@ -22,8 +22,8 @@ public class CharacterData
     public int Body = 50;
     public int Spirit = 50;
     public int Rank = 1;
-    public int MaxQi = 100; 
-    
+    public int MaxQi = 100;
+    public int meditationStability = 1;
     public int Silver = 10;
     public int Trophies = 0;
     public int Pills = 0;
