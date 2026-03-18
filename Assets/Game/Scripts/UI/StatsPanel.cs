@@ -3,7 +3,6 @@ using TMPro;
 
 public class StatsPanel : MonoBehaviour
 {
-    private CharacterData Master;
     [SerializeField] private TextMeshProUGUI BodyLabel;
     [SerializeField] private TextMeshProUGUI SpiritLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
@@ -14,8 +13,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI StatusLabel;
     void Awake()
     {
-        var gameCore = FindFirstObjectByType<GameCore>();
-        Master = gameCore?.Run?.CurrentMaster;
+        
     }
     private void Start()
     {
@@ -23,13 +21,15 @@ public class StatsPanel : MonoBehaviour
     }
     public void UpdateLabels()
     {
-        BodyLabel?.SetText("Тело: " + Master.Body);
-        SpiritLabel?.SetText("Дух: " + Master.Spirit);
-        QiLabel?.SetText($"Ци: {Master.Qi} / {Master.MaxQi}");
-        GenLabel?.SetText("Поколение: " + Master.Generation);
-        SilverLabel?.SetText("Серебро: " + Master.Silver);
-        RankLabel?.SetText("Ранг: " + Master.Rank);
-        AgeLabel?.SetText("Возраст: " + Master.Age);
-        StatusLabel?.SetText("Статус: " + Master.currentState.ToString());
+        var master = GameCore.Instance.Run.CurrentMaster;
+
+        BodyLabel?.SetText("Тело: " + master.Body);
+        SpiritLabel?.SetText("Дух: " + master.Spirit);
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+        GenLabel?.SetText("Поколение: " + master.Generation);
+        SilverLabel?.SetText("Серебро: " + master.Silver);
+        RankLabel?.SetText("Ранг: " + master.Rank);
+        AgeLabel?.SetText("Возраст: " + master.Age);
+        StatusLabel?.SetText("Статус: " + master.currentState.ToString());
     }
 }

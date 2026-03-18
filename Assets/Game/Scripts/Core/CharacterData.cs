@@ -5,14 +5,13 @@ using UnityEngine;
 [Serializable]
 public class CharacterData 
 {
-    public enum States { Alive, Injured, Exhausted, Aging, Critical, Dying, Dead, Archived };
     private static System.Random random = new System.Random();
     [HideInInspector] public int ID;
     [HideInInspector] public int Generation = 1;
     [HideInInspector] public readonly int LifeLimit;
     [HideInInspector] public int Qi = 0;
 
-    [HideInInspector] public States currentState = States.Alive;
+    [HideInInspector] public CharacterStates currentState = CharacterStates.Alive;
     [HideInInspector] public bool DiscipleUnlockedFlag = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
 

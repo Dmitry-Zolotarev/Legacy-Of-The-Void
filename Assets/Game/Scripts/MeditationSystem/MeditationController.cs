@@ -3,45 +3,38 @@ using UnityEngine;
 
 public class MeditationController : MonoBehaviour
 {
-    public MeditationSessionState session;
+    public MeditationSession meditationSession;
     public MeditationInputHandler inputHandler;
-
-    public float targetSpeed = 50f;
-    public float sessionDuration = 10f;
+    
 
     private float timer;
-    private RhythmEvaluator rhythmEvaluator = new RhythmEvaluator();
-
-    void StartSession(MeditationMode mode)
+    public static MeditationController Instance;
+    void Awake()
     {
-        session = new MeditationSessionState();
-        session.mode = mode;
-        session.state = SessionState.Running;
+        if (Instance == null) Instance = this;
+    }
+    public void StartSession(int mode)
+    {
+        meditationSession = new MeditationSession();
+        meditationSession.mode = (MeditationMode)mode;
+        meditationSession.state = SessionState.Running;
         timer = 0f;
     }
-
+    public void EndSession() => meditationSession.End();
     void Update()
     {
-        if (session == null || session.state != SessionState.Running) return;
+        if (meditationSession == null || meditationSession.state != SessionState.Running) return;
 
 
         timer += Time.deltaTime;
 
-        session.flowSpeed += inputHandler.GetSpeedDelta();
+        meditationSession.FlowSpeed += inputHandler.GetSpeedDelta();
+        meditationSession.RhythmSpeed += meditationSession.RhytmAccelerationDelta;
 
-        bool inRhythm = rhythmEvaluator.IsInRhythm(session.flowSpeed, targetSpeed, session.rhythmWindow);
-
-        if (inRhythm)
-            session.timeInRhythm += Time.deltaTime;
-        else
-            session.timeOutOfRhythm += Time.deltaTime;
-
-        if (timer >= sessionDuration) EndSession();
-
-    }
-
-    void EndSession()
-    {
-        session.state = SessionState.Success;
-    }
+        if (meditationSession.IsInRhythm())
+        {
+            meditationSession.timeInRhythm += Time.deltaTime;
+        }   
+        if (timer >= meditationSession.Duration) EndSession();
+    }   
 }

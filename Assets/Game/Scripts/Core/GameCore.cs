@@ -8,8 +8,7 @@ public class GameCore : MonoBehaviour
     public static GameCore Instance;
     public RunData Run;   
     void Awake()
-    {
-        
+    {      
         if (Instance == null) Instance = this;
         if (Run == null) StartGame();
         if (statsPanel == null) statsPanel = GameObject.FindGameObjectWithTag("StatsPanel").GetComponent<StatsPanel>();
@@ -29,7 +28,7 @@ public class GameCore : MonoBehaviour
         master.Age++;
         if (master.Age > master.LifeLimit) 
         {
-            master.currentState = CharacterData.States.Dead;
+            master.currentState = CharacterStates.Dead;
             statsPanel?.UpdateLabels();
             return;
         }
