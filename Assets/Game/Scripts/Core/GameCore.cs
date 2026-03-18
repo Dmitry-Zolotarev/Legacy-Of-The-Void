@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+
 public class GameCore : MonoBehaviour
 {
-    [SerializeField] private StatsPanel statsPanel;
     [SerializeField] private Sprite YoungMasterSprite, AdultMasterSprite, OldMasterSprite;
     [SerializeField] private Image MasterSprite;
     public static GameCore Instance;
@@ -11,7 +11,6 @@ public class GameCore : MonoBehaviour
     {      
         if (Instance == null) Instance = this;
         if (Run == null) StartGame();
-        if (statsPanel == null) statsPanel = GameObject.FindGameObjectWithTag("StatsPanel").GetComponent<StatsPanel>();
     }
     public void StartGame()
     {
@@ -21,18 +20,18 @@ public class GameCore : MonoBehaviour
         Run.RunState = "HubActive";
         Run.CurrentMaster = new CharacterData();
     }
-    public void AdvanceTime()
-    {
-        
+    public void AdvanceTime(int yearsAmount)
+    {   
         var master = Run.CurrentMaster;
-        master.Age++;
-        if (master.Age > master.LifeLimit) 
+        master.Age += yearsAmount;
+
+        if (master.Age > Run.CurrentMaster.LifeLimit) 
         {
             master.currentState = CharacterStates.Dead;
-            statsPanel?.UpdateLabels();
+            StatsPanel.Instance.UpdateLabels();
             return;
         }
-        statsPanel?.UpdateLabels();
+        StatsPanel.Instance.UpdateLabels();
 
         if (master.Age >= 60) MasterSprite.sprite = OldMasterSprite;
         else if (master.Age >= 40) MasterSprite.sprite = AdultMasterSprite;

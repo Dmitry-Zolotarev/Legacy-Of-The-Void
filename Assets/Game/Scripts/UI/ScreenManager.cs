@@ -5,6 +5,11 @@ using UnityEngine.InputSystem;
 public class ScreenManager : MonoBehaviour
 {
     public GameObject[] Menus;
+    public static ScreenManager Instance;
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
     public void OpenMenu(int menuID)
     {
         for (int i = 0; i < Menus.Length; i++) Menus[i]?.SetActive(i == menuID);
@@ -19,7 +24,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void CloseMenus()
     {
-        //if (MeditationSystem.Instance.IsMeditating) return;
+        if (MeditationController.Instance.State == MeditationState.Running) return;
         foreach (var menu in Menus) menu?.SetActive(false);
     }
     public void CloseMenus(InputAction.CallbackContext context)

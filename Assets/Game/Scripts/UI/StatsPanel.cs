@@ -11,9 +11,11 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI RankLabel;
     [SerializeField] private TextMeshProUGUI AgeLabel;
     [SerializeField] private TextMeshProUGUI StatusLabel;
+
+    public static StatsPanel Instance;
     void Awake()
     {
-        
+        if (Instance == null) Instance = this;
     }
     private void Start()
     {

@@ -9,7 +9,7 @@ public class TrainingSystem:MonoBehaviour
         if (master.currentState == CharacterStates.Alive)
         {
             master.Body += BodyTrainInrease;
-            GameCore.Instance.AdvanceTime();
+            GameCore.Instance.AdvanceTime(1);
         }
     }
     public void TrainSpirit()
@@ -18,7 +18,7 @@ public class TrainingSystem:MonoBehaviour
         if(master.currentState == CharacterStates.Alive)
         {
             master.Spirit += SpiritTrainInrease;
-            GameCore.Instance.AdvanceTime();
+            GameCore.Instance.AdvanceTime(1);
         }     
     }
     public void TrainQi()
@@ -31,7 +31,7 @@ public class TrainingSystem:MonoBehaviour
         else if (master.currentState == CharacterStates.Alive)
         {
             master.Qi += QiTrainIncrease;
-            GameCore.Instance.AdvanceTime();
+            GameCore.Instance.AdvanceTime(1);
         }      
     }  
 }

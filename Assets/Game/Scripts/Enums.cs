@@ -1,7 +1,7 @@
 
-public enum MeditationMode { Normal, Prep, MeridianBreakthrough }
-public enum SessionState { Idle, Running, Success, Fail }
-public enum SessionQuality { Bad, Normal, Excellent, Disrupted }
+public enum MeditationMode { Normal, Prepare, MeridianBreakthrough }
+public enum MeditationState { Idle, Running }
+public enum MeditationQuality { Bad, Normal, Excellent, Disrupted }
 public enum MeridianState { Hidden, VisibleLocked, Opened }
 public enum BreakthroughPath { Stable, Risky }
 public enum BreakthroughOutcome { CleanSuccess, EdgeSuccess, Fail, Disruption }
