@@ -20,12 +20,12 @@ public class GameCore : MonoBehaviour
         Run.RunState = "HubActive";
         Run.CurrentMaster = new CharacterData();
     }
-    public void AdvanceTime(int months)
+    public void AdvanceTime(int years)
     {   
         var master = Run.CurrentMaster;
-        master.AgeMonths += months;
+        master.Age += years;
 
-        if (master.AgeMonths > Run.CurrentMaster.LifeLimit * 12) 
+        if (master.Age > Run.CurrentMaster.LifeLimit) 
         {
             master.currentState = CharacterStates.Dead;
             StatsPanel.Instance.UpdateLabels();
@@ -33,8 +33,9 @@ public class GameCore : MonoBehaviour
         }
         StatsPanel.Instance.UpdateLabels();
 
-        if (master.AgeMonths >= 60 * 12) MasterSprite.sprite = OldMasterSprite;
-        else if (master.AgeMonths >= 40 * 12) MasterSprite.sprite = AdultMasterSprite;
+        if (master.Age >= 60) MasterSprite.sprite = OldMasterSprite;
+        else if (master.Age >= 40) MasterSprite.sprite = AdultMasterSprite;
         else MasterSprite.sprite = YoungMasterSprite;
     }
+    public void OpenMeridian() => Run.CurrentMaster.OpenMeridian();
 }

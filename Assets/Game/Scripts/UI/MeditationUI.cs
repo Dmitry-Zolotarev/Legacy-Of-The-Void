@@ -5,7 +5,7 @@ using TMPro;
 
 public class MeditationUI : MonoBehaviour
 {
-    
+
     [SerializeField] private TextMeshProUGUI TimeLeftLabel;
     [SerializeField] private TextMeshProUGUI SuccessLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
@@ -32,7 +32,7 @@ public class MeditationUI : MonoBehaviour
     private void Start()
     {
         ResultPanel.SetActive(false);
-        ToggleMeditationVisualisation(false);       
+        ToggleMeditationVisualisation(false);
         meditation = MeditationController.Instance;
         MeditationBar.transform.localScale = new Vector3(meditation.MaxDeviation, 1f);
         UpdateLabels();
@@ -47,7 +47,7 @@ public class MeditationUI : MonoBehaviour
     private IEnumerator ToggleSessionCoroutine()
     {
         yield return new WaitForSeconds(0.5f);
-        meditation.ToggleSession();    
+        meditation.ToggleSession();
         ToggleElements();
     }
     public void ToggleElements()
@@ -70,21 +70,14 @@ public class MeditationUI : MonoBehaviour
     }
 
     public IEnumerator ShowMeditationResult()
-    {              
-        switch(meditation.Mode)
+    {
+        switch (meditation.Mode)
         {
             case MeditationMode.Normal:
                 if (meditation.Quality == MeditationQuality.Disrupted) CompletedLabel.SetText("Медитация прервана");
                 else CompletedLabel.SetText("Медитация завершена");
 
                 QiLabel.SetText("Получено ци: " + MeditationController.Instance.GetQiReward());
-                break;
-            case MeditationMode.Prepare:
-                if (meditation.Quality == MeditationQuality.Disrupted) CompletedLabel.SetText("Подготовка прервана");
-                else CompletedLabel.SetText("Подготовка завершена");
-
-                if (meditation.Quality == MeditationQuality.Excellent) QiLabel.SetText("Получена 1 попытка прорыва ");
-                else QiLabel.SetText("Получено 0 попыток прорыва");
                 break;
         }
         ResultPanel.SetActive(true);
@@ -93,8 +86,15 @@ public class MeditationUI : MonoBehaviour
         SuccessLabel.SetText($"Попадание в ритм: {(int)(meditation.GetSuccessRatio() * 100)}%");
 
         yield return new WaitForSeconds(showResultsTime);
-        
+
         ResultPanel.SetActive(false);
-        if (GameCore.Instance.Run.CurrentMaster.BreakthroughAttempts > 0) ScreenManager.Instance.CloseMenus();
+        var master = GameCore.Instance.Run.CurrentMaster;
+        if (meditation.Mode == MeditationMode.StableBreakthrough || meditation.Mode == MeditationMode.RiskyBreakthrough)
+        {
+            meditation.Mode = MeditationMode.Normal;
+            if (meditation.Quality == MeditationQuality.Excellent) ScreenManager.Instance.OpenMenu(0);           
+        }
+        else if (master.Qi >= master.MaxQi) ScreenManager.Instance.CloseMenus();
+
     }
 }

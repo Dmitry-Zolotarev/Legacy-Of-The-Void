@@ -8,6 +8,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI GenLabel;
     [SerializeField] private TextMeshProUGUI SilverLabel;
+    [SerializeField] private TextMeshProUGUI TrophiesLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
     [SerializeField] private TextMeshProUGUI AgeLabel;
     [SerializeField] private TextMeshProUGUI StatusLabel;
@@ -30,8 +31,9 @@ public class StatsPanel : MonoBehaviour
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         GenLabel?.SetText("Поколение: " + master.Generation);
         SilverLabel?.SetText("Серебро: " + master.Silver);
+        TrophiesLabel?.SetText("Трофеи: " + master.Trophies);
         RankLabel?.SetText("Ранг: " + master.Rank);
-        AgeLabel?.SetText("Возраст: " + master.AgeMonths / 12);
+        AgeLabel?.SetText("Возраст: " + master.Age);
         StatusLabel?.SetText("Статус: " + master.currentState.ToString());
     }
 }

@@ -7,7 +7,8 @@ public class MeditationController : MonoBehaviour
     public MeditationState State = MeditationState.Idle;
     public MeditationQuality Quality = MeditationQuality.Excellent;
 
-    public float RhythmWindow = 1f;
+    public float StartRhythmWindow = 1f;
+    [HideInInspector] public float RhythmWindow = 1f;
     public float RhythmAmplitude = 1.5f;
 
     [SerializeField] private float Duration = 20f;
@@ -20,8 +21,6 @@ public class MeditationController : MonoBehaviour
     public float AccelerationDelta = 1f;
     public float MaxDeviation = 5f;
     public bool InRhythm = true;
-
-    [SerializeField] private MeridiansUI meridiansUI;
     public static MeditationController Instance;
     
     void Awake()
@@ -37,13 +36,15 @@ public class MeditationController : MonoBehaviour
 
     private void StartSession()
     {
-        if (master.BreakthroughAttempts > 0) return;
+        if (master.Qi >= master.MaxQi) return;
+        RhythmWindow = StartRhythmWindow;
+        if (Mode == MeditationMode.RiskyBreakthrough) RhythmWindow /= 2f;
 
         State = MeditationState.Running;
         MeditationUI.Instance.ToggleElements();
         MeditationUI.Instance.ResultPanel.SetActive(false);
         Quality = MeditationQuality.Excellent;      
-
+        
         FlowSpeed = 0f;
         TimeInRhythm = 0f;       
         Timer = 0f;
@@ -68,18 +69,15 @@ public class MeditationController : MonoBehaviour
             if (master.Qi >= master.MaxQi)
             {
                 master.Qi = master.MaxQi;
-                Mode = MeditationMode.Prepare;
             }
         }
-        else if (Mode == MeditationMode.Prepare)
+        else if (Mode == MeditationMode.StableBreakthrough || Mode == MeditationMode.RiskyBreakthrough)
         {
-            if(Quality == MeditationQuality.Excellent)
+            if (InRhythm && Quality == MeditationQuality.Excellent)
             {
-                master.BreakthroughAttempts++;
-                Mode = MeditationMode.Normal;
-                meridiansUI.UpdateLabels();
-            }                
-        }            
+                master.OpenMeridian();
+            }
+        }
         GameCore.Instance.AdvanceTime(1);              
     }
     public float GetSuccessRatio()

@@ -1,10 +1,8 @@
-
-using System.Collections.Generic;
-
+using UnityEngine;
 [System.Serializable]
 public class Meridian
 {
-    public int id;
-    public int tier;
-    public List<int> neighbors;
+    [HideInInspector] public bool isOpened = false;
+    public int MaxQi = 12;
+    public int Spirit = 12;
 }
