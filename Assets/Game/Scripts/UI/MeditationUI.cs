@@ -5,13 +5,15 @@ using TMPro;
 
 public class MeditationUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI ToggleSessionButtonText;
+    
     [SerializeField] private TextMeshProUGUI TimeLeftLabel;
     [SerializeField] private TextMeshProUGUI SuccessLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private TextMeshProUGUI CompletedLabel;
 
     [SerializeField] private float VisulisationScale = 30f;
     [SerializeField] private GameObject BackButton;
+    [SerializeField] private GameObject ToggleSessionButton;
     [SerializeField] private GameObject MeditationVisualisation;
     [SerializeField] private Transform MeditationBar;
     [SerializeField] private Transform RhythmCorridor;
@@ -22,7 +24,6 @@ public class MeditationUI : MonoBehaviour
     private MeditationController meditation;
     public static MeditationUI Instance;
 
-
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -30,7 +31,8 @@ public class MeditationUI : MonoBehaviour
 
     private void Start()
     {
-        ToggleMeditationVisualisation(false);
+        ResultPanel.SetActive(false);
+        ToggleMeditationVisualisation(false);       
         meditation = MeditationController.Instance;
         MeditationBar.transform.localScale = new Vector3(meditation.MaxDeviation, 1f);
         UpdateLabels();
@@ -45,18 +47,14 @@ public class MeditationUI : MonoBehaviour
     private IEnumerator ToggleSessionCoroutine()
     {
         yield return new WaitForSeconds(0.5f);
-        meditation.ToggleSession();
+        meditation.ToggleSession();    
         ToggleElements();
     }
     public void ToggleElements()
     {
-        if (meditation.State == MeditationState.Running)
-        {
-            ToggleSessionButtonText.SetText("Прервать медитацию");
-        }
-        else ToggleSessionButtonText.SetText("Начать медитацию");
-
         BackButton.SetActive(meditation.State == MeditationState.Idle);
+        ToggleSessionButton.SetActive(meditation.State == MeditationState.Idle);
+
         ToggleMeditationVisualisation(meditation.State == MeditationState.Running);
     }
     public void UpdateLabels()
@@ -72,15 +70,31 @@ public class MeditationUI : MonoBehaviour
     }
 
     public IEnumerator ShowMeditationResult()
-    {
-        ResultPanel.SetActive(true);
-        ToggleMeditationVisualisation(false);     
+    {              
+        switch(meditation.Mode)
+        {
+            case MeditationMode.Normal:
+                if (meditation.Quality == MeditationQuality.Disrupted) CompletedLabel.SetText("Медитация прервана");
+                else CompletedLabel.SetText("Медитация завершена");
 
-        int successPercent = (int)(MeditationController.Instance.GetSuccessRatio() * 100);
-        SuccessLabel.SetText($"Попадание в ритм: {successPercent}%");
-        QiLabel.SetText("Получено ци: " + MeditationController.Instance.GetQiReward());
+                QiLabel.SetText("Получено ци: " + MeditationController.Instance.GetQiReward());
+                break;
+            case MeditationMode.Prepare:
+                if (meditation.Quality == MeditationQuality.Disrupted) CompletedLabel.SetText("Подготовка прервана");
+                else CompletedLabel.SetText("Подготовка завершена");
+
+                if (meditation.Quality == MeditationQuality.Excellent) QiLabel.SetText("Получена 1 попытка прорыва ");
+                else QiLabel.SetText("Получено 0 попыток прорыва");
+                break;
+        }
+        ResultPanel.SetActive(true);
+        ToggleMeditationVisualisation(false);
+
+        SuccessLabel.SetText($"Попадание в ритм: {(int)(meditation.GetSuccessRatio() * 100)}%");
 
         yield return new WaitForSeconds(showResultsTime);
+        
         ResultPanel.SetActive(false);
+        if (GameCore.Instance.Run.CurrentMaster.BreakthroughAttempts > 0) ScreenManager.Instance.CloseMenus();
     }
 }

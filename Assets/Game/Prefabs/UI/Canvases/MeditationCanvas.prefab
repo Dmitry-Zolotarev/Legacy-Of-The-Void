@@ -534,7 +534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &718767444712571215
 RectTransform:
   m_ObjectHideFlags: 0
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 7299198411162451261}
   - component: {fileID: 3985779372217491721}
   m_Layer: 5
-  m_Name: Header
+  m_Name: CompletedLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -899,8 +899,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1282,8 +1282,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1481,7 +1481,7 @@ GameObject:
   - component: {fileID: 6615608860401832474}
   m_Layer: 5
   m_Name: MeditationCanvas
-  m_TagString: Untagged
+  m_TagString: MeditationScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1624,12 +1624,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95db965d85181e409c76c5704b4ccde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeditationUI
-  ToggleSessionButtonText: {fileID: 4477407803163894364}
   TimeLeftLabel: {fileID: 5043982674602634643}
   SuccessLabel: {fileID: 2646483523336475248}
   QiLabel: {fileID: 5222253239665004775}
+  CompletedLabel: {fileID: 3985779372217491721}
   VisulisationScale: 30
   BackButton: {fileID: 6101698017277337040}
+  ToggleSessionButton: {fileID: 957045030626035339}
   MeditationVisualisation: {fileID: 7010442567392648363}
   MeditationBar: {fileID: 1387292161486402552}
   RhythmCorridor: {fileID: 236628924113125065}

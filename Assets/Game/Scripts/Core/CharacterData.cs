@@ -10,6 +10,7 @@ public class CharacterData
     [HideInInspector] public int Generation = 1;
     [HideInInspector] public readonly int LifeLimit;
     [HideInInspector] public int Qi = 0;
+    [HideInInspector] public int BreakthroughAttempts = 0;
 
     [HideInInspector] public CharacterStates currentState = CharacterStates.Alive;
     [HideInInspector] public bool DiscipleUnlockedFlag = false;
@@ -21,8 +22,7 @@ public class CharacterData
     public int Body = 50;
     public int Spirit = 50;
     public int Rank = 1;
-    public int MaxQi = 100;
-    public int meditationStability = 1;
+    public int MaxQi = 60;
     public int Silver = 10;
     public int Trophies = 0;
     public int Pills = 0;

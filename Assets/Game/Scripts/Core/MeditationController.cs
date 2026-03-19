@@ -5,30 +5,30 @@ public class MeditationController : MonoBehaviour
 {
     public MeditationMode Mode = MeditationMode.Normal;
     public MeditationState State = MeditationState.Idle;
-    public MeditationQuality meditationQuality = MeditationQuality.Excellent;
+    public MeditationQuality Quality = MeditationQuality.Excellent;
 
     public float RhythmWindow = 1f;
     public float RhythmAmplitude = 1.5f;
 
-    [SerializeField] private int MaxDisruptions = 10;
     [SerializeField] private float Duration = 20f;
-
     [HideInInspector] public float RhythmSpeed = 1f;
     [HideInInspector] public float FlowSpeed = 1f;
 
+    private CharacterData master;
     private float TimeInRhythm = 0f;   
-    private int Disruptions = 0;
     private float Timer = 0f;
     public float AccelerationDelta = 1f;
     public float MaxDeviation = 5f;
     public bool InRhythm = true;
 
+    [SerializeField] private MeridiansUI meridiansUI;
     public static MeditationController Instance;
-
+    
     void Awake()
     {
         if (Instance == null) Instance = this;
     }
+    void Start() => master = GameCore.Instance.Run.CurrentMaster;
     public void ToggleSession()
     {
         if (State != MeditationState.Running) StartSession();
@@ -37,14 +37,15 @@ public class MeditationController : MonoBehaviour
 
     private void StartSession()
     {
+        if (master.BreakthroughAttempts > 0) return;
+
         State = MeditationState.Running;
         MeditationUI.Instance.ToggleElements();
         MeditationUI.Instance.ResultPanel.SetActive(false);
-        meditationQuality = MeditationQuality.Excellent;      
+        Quality = MeditationQuality.Excellent;      
 
         FlowSpeed = 0f;
         TimeInRhythm = 0f;       
-        Disruptions = 0;
         Timer = 0f;
     }
 
@@ -52,34 +53,43 @@ public class MeditationController : MonoBehaviour
     {
         State = MeditationState.Idle;
         MeditationUI.Instance.ToggleElements();
-        var master = GameCore.Instance.Run.CurrentMaster;
 
-        if (Disruptions >= MaxDisruptions)
-        {
-            meditationQuality = MeditationQuality.Disrupted;
-        }
-        else
-        {
-            float ratio = GetSuccessRatio();
-            if (ratio <= 0.4f) meditationQuality = MeditationQuality.Bad;
-            else if (ratio <= 0.7f) meditationQuality = MeditationQuality.Normal;
-            else meditationQuality = MeditationQuality.Excellent;
-        }
-        master.Qi += GetQiReward();
-        master.meditationStability += GetStabilityReward();
+        float ratio = GetSuccessRatio();
 
-        if (master.Qi > master.MaxQi) master.Qi = master.MaxQi;
-        GameCore.Instance.AdvanceTime(1);
+        if (Timer < Duration) Quality = MeditationQuality.Disrupted;
+        else if (ratio <= 0.4f) Quality = MeditationQuality.Bad;
+        else if (ratio <= 0.7f) Quality = MeditationQuality.Normal;
+
         StartCoroutine(MeditationUI.Instance.ShowMeditationResult());
-        
+        if (Mode == MeditationMode.Normal)
+        {
+            master.Qi += GetQiReward();
+
+            if (master.Qi >= master.MaxQi)
+            {
+                master.Qi = master.MaxQi;
+                Mode = MeditationMode.Prepare;
+            }
+        }
+        else if (Mode == MeditationMode.Prepare)
+        {
+            if(Quality == MeditationQuality.Excellent)
+            {
+                master.BreakthroughAttempts++;
+                Mode = MeditationMode.Normal;
+                meridiansUI.UpdateLabels();
+            }                
+        }            
+        GameCore.Instance.AdvanceTime(1);              
     }
-    public float GetSuccessRatio() 
+    public float GetSuccessRatio()
     {
-        return TimeInRhythm / Duration;
+        if (Timer <= 0) return 0;
+        return TimeInRhythm / Timer;
     }
     public int GetQiReward()
     {
-        switch (meditationQuality)
+        switch (Quality)
         {
             case MeditationQuality.Bad: return 1;
             case MeditationQuality.Normal: return 3;
@@ -87,17 +97,6 @@ public class MeditationController : MonoBehaviour
         }
         return 0;
     }
-
-    public int GetStabilityReward()
-    {
-        switch (meditationQuality)
-        {
-            case MeditationQuality.Normal: return 1;
-            case MeditationQuality.Excellent: return 2;
-        }
-        return -1;
-    }
-
     public int SecondsLeft()
     {
         return (int)Mathf.Round(Duration - Timer);
@@ -115,17 +114,16 @@ public class MeditationController : MonoBehaviour
     {
         if (State != MeditationState.Running) return;
 
-        Timer += Time.fixedDeltaTime;
+        var rhythmDelta = RhythmSpeed;
+        RhythmSpeed = Mathf.Sin(Timer) * RhythmAmplitude;
+        rhythmDelta = RhythmSpeed - rhythmDelta;
 
-        FlowSpeed += GetAccelerationDelta() * Time.fixedDeltaTime;
+        FlowSpeed += GetAccelerationDelta() * Time.fixedDeltaTime - rhythmDelta;
         FlowSpeed = Mathf.Clamp(FlowSpeed, -MaxDeviation, MaxDeviation);
+        
+        InRhythm = FlowSpeed > RhythmSpeed - RhythmWindow && FlowSpeed < RhythmSpeed + RhythmWindow;
 
-        RhythmSpeed =  -Mathf.Sin(Timer) * RhythmAmplitude;
-
-        bool inRhythmNow = FlowSpeed > RhythmSpeed - RhythmWindow && FlowSpeed < RhythmSpeed + RhythmWindow;
-        if (InRhythm && !inRhythmNow) Disruptions++;
-        InRhythm = inRhythmNow;
-
+        Timer += Time.fixedDeltaTime;
         if (InRhythm) TimeInRhythm += Time.fixedDeltaTime;
         if (Timer >= Duration) EndSession();
         MeditationUI.Instance.UpdateLabels();

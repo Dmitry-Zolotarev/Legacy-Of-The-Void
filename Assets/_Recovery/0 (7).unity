@@ -479,7 +479,6 @@ MonoBehaviour:
   Quality: 2
   RhythmWindow: 1
   RhythmAmplitude: 3
-  RhythmFrequency: 1
   Duration: 10
   RhythmSpeed: 1
   FlowSpeed: 1

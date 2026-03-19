@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +11,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void OpenMenu(int menuID)
     {
+        if (Menus[menuID].tag == "MeditationScreen" && GameCore.Instance.Run.CurrentMaster.BreakthroughAttempts > 0) return;
         for (int i = 0; i < Menus.Length; i++) Menus[i]?.SetActive(i == menuID);
     }     
     public bool AnyScreenOpened()
