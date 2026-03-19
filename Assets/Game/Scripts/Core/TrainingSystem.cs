@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class TrainingSystem:MonoBehaviour
 {
-    [SerializeField] private int BodyTrainInrease = 1, SpiritTrainInrease = 1, QiTrainIncrease = 10;
+    [SerializeField] private int BodyTrainInrease = 1;
+    [SerializeField] private int SpiritTrainInrease = 1;
     public void TrainBody()
     {
         var master = GameCore.Instance.Run.CurrentMaster;
@@ -20,18 +21,5 @@ public class TrainingSystem:MonoBehaviour
             master.Spirit += SpiritTrainInrease;
             GameCore.Instance.AdvanceTime(1);
         }     
-    }
-    public void TrainQi()
-    {
-        var master = GameCore.Instance.Run.CurrentMaster;
-        if (master.Qi >= master.MaxQi)
-        {
-            master.Qi = master.MaxQi;
-        } 
-        else if (master.currentState == CharacterStates.Alive)
-        {
-            master.Qi += QiTrainIncrease;
-            GameCore.Instance.AdvanceTime(1);
-        }      
-    }  
+    } 
 }

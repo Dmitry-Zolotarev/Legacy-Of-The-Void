@@ -24,8 +24,11 @@ public class ScreenManager : MonoBehaviour
     }
     public void CloseMenus()
     {
-        if (MeditationController.Instance.State == MeditationState.Running) return;
-        foreach (var menu in Menus) menu?.SetActive(false);
+        if (MeditationController.Instance.State == MeditationState.Running)
+        {
+            MeditationUI.Instance.ToggleSession();
+        }
+        else foreach (var menu in Menus) menu?.SetActive(false);
     }
     public void CloseMenus(InputAction.CallbackContext context)
     {

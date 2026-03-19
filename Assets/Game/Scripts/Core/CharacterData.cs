@@ -15,7 +15,7 @@ public class CharacterData
     [HideInInspector] public bool DiscipleUnlockedFlag = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
 
-    public int Age = 18;
+    public int AgeMonths = 18 * 12;
     public int MinLifeLimit = 60;
     public int MaxLifeLimit = 110;
     public int Body = 50;

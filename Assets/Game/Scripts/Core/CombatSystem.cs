@@ -14,7 +14,7 @@ public class CombatSystem:MonoBehaviour
             m.Trophies+=1;
         }
         else m.Qi = Mathf.Max(0, m.Qi - 5);
-        m.Age+=1;
+        m.AgeMonths++;
         return win;
     }
 }

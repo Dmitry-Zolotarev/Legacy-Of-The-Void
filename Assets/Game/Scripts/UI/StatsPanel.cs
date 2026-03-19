@@ -31,7 +31,7 @@ public class StatsPanel : MonoBehaviour
         GenLabel?.SetText("Поколение: " + master.Generation);
         SilverLabel?.SetText("Серебро: " + master.Silver);
         RankLabel?.SetText("Ранг: " + master.Rank);
-        AgeLabel?.SetText("Возраст: " + master.Age);
+        AgeLabel?.SetText("Возраст: " + master.AgeMonths / 12);
         StatusLabel?.SetText("Статус: " + master.currentState.ToString());
     }
 }

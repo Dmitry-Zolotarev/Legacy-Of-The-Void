@@ -8,22 +8,20 @@ public class MeditationController : MonoBehaviour
     public MeditationQuality meditationQuality = MeditationQuality.Excellent;
 
     public float RhythmWindow = 1f;
-    public float RhythmAmplitude = 2f;
+    public float RhythmAmplitude = 1.5f;
 
-    [SerializeField] private float StartFlowSpeed = 3f;
-    [SerializeField] private float StartRhythmSpeed = 3f;   
     [SerializeField] private int MaxDisruptions = 10;
-    [SerializeField] private float Duration = 30f;
+    [SerializeField] private float Duration = 20f;
 
     [HideInInspector] public float RhythmSpeed = 1f;
     [HideInInspector] public float FlowSpeed = 1f;
 
-    private float TimeInRhythm = 0f;
-    private bool InRhythm = true;
+    private float TimeInRhythm = 0f;   
     private int Disruptions = 0;
     private float Timer = 0f;
-
-    public float AccelerationDelta = 5f;
+    public float AccelerationDelta = 1f;
+    public float MaxDeviation = 5f;
+    public bool InRhythm = true;
 
     public static MeditationController Instance;
 
@@ -31,7 +29,6 @@ public class MeditationController : MonoBehaviour
     {
         if (Instance == null) Instance = this;
     }
-
     public void ToggleSession()
     {
         if (State != MeditationState.Running) StartSession();
@@ -40,14 +37,13 @@ public class MeditationController : MonoBehaviour
 
     private void StartSession()
     {
-        meditationQuality = MeditationQuality.Excellent;
         State = MeditationState.Running;
+        MeditationUI.Instance.ToggleElements();
+        MeditationUI.Instance.ResultPanel.SetActive(false);
+        meditationQuality = MeditationQuality.Excellent;      
 
-
-        RhythmSpeed = StartRhythmSpeed;
-        FlowSpeed = StartFlowSpeed;
-
-        TimeInRhythm = 0f;
+        FlowSpeed = 0f;
+        TimeInRhythm = 0f;       
         Disruptions = 0;
         Timer = 0f;
     }
@@ -55,7 +51,7 @@ public class MeditationController : MonoBehaviour
     public void EndSession()
     {
         State = MeditationState.Idle;
-
+        MeditationUI.Instance.ToggleElements();
         var master = GameCore.Instance.Run.CurrentMaster;
 
         if (Disruptions >= MaxDisruptions)
@@ -64,21 +60,26 @@ public class MeditationController : MonoBehaviour
         }
         else
         {
-            float ratio = TimeInRhythm / Duration;
+            float ratio = GetSuccessRatio();
             if (ratio <= 0.4f) meditationQuality = MeditationQuality.Bad;
             else if (ratio <= 0.7f) meditationQuality = MeditationQuality.Normal;
             else meditationQuality = MeditationQuality.Excellent;
         }
-        master.Qi += GetQiReward(meditationQuality);
-        master.meditationStability += GetStabilityReward(meditationQuality);
+        master.Qi += GetQiReward();
+        master.meditationStability += GetStabilityReward();
+
         if (master.Qi > master.MaxQi) master.Qi = master.MaxQi;
         GameCore.Instance.AdvanceTime(1);
-        Debug.Log("Медитация завершена");
+        StartCoroutine(MeditationUI.Instance.ShowMeditationResult());
+        
     }
-
-    private int GetQiReward(MeditationQuality quality)
+    public float GetSuccessRatio() 
     {
-        switch (quality)
+        return TimeInRhythm / Duration;
+    }
+    public int GetQiReward()
+    {
+        switch (meditationQuality)
         {
             case MeditationQuality.Bad: return 1;
             case MeditationQuality.Normal: return 3;
@@ -87,9 +88,9 @@ public class MeditationController : MonoBehaviour
         return 0;
     }
 
-    private int GetStabilityReward(MeditationQuality quality)
+    public int GetStabilityReward()
     {
-        switch (quality)
+        switch (meditationQuality)
         {
             case MeditationQuality.Normal: return 1;
             case MeditationQuality.Excellent: return 2;
@@ -105,27 +106,27 @@ public class MeditationController : MonoBehaviour
     public float GetAccelerationDelta()
     {
         float delta = 0f;
-        if (Input.GetMouseButton(1)) delta += AccelerationDelta * Time.deltaTime;
-        if (Input.GetMouseButton(0)) delta -= AccelerationDelta * Time.deltaTime;
+        if (Input.GetMouseButton(1)) delta += AccelerationDelta;
+        if (Input.GetMouseButton(0)) delta -= AccelerationDelta;
         return delta;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (State != MeditationState.Running) return;
 
-        Timer += Time.deltaTime;
+        Timer += Time.fixedDeltaTime;
 
-        FlowSpeed += GetAccelerationDelta();
-        FlowSpeed = Mathf.Clamp(FlowSpeed, 0f, float.MaxValue);
+        FlowSpeed += GetAccelerationDelta() * Time.fixedDeltaTime;
+        FlowSpeed = Mathf.Clamp(FlowSpeed, -MaxDeviation, MaxDeviation);
 
-        RhythmSpeed = StartRhythmSpeed + Mathf.Sin(Timer) * RhythmAmplitude;
+        RhythmSpeed =  -Mathf.Sin(Timer) * RhythmAmplitude;
 
         bool inRhythmNow = FlowSpeed > RhythmSpeed - RhythmWindow && FlowSpeed < RhythmSpeed + RhythmWindow;
         if (InRhythm && !inRhythmNow) Disruptions++;
         InRhythm = inRhythmNow;
 
-        if (InRhythm) TimeInRhythm += Time.deltaTime;
+        if (InRhythm) TimeInRhythm += Time.fixedDeltaTime;
         if (Timer >= Duration) EndSession();
         MeditationUI.Instance.UpdateLabels();
     }
