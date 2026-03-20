@@ -7,13 +7,23 @@ public class MeridiansUI : MonoBehaviour
     [SerializeField] private RectTransform RiskyWay;
     [SerializeField] private List<Image> MeridianOrbs;
     public static MeridiansUI Instance;
+    private CharacterData master;
+    private Color defaultOrbColor;
     void Awake()
     {
         if (Instance == null) Instance = this;
     }
+    private void Start()
+    {
+        master = GameCore.Instance.Run.CurrentMaster;
+        if(MeridianOrbs.Count > 0) defaultOrbColor = MeridianOrbs[0].color;
+        UpdateUI();
+    }
     public void UpdateUI()
     {
-        var master = GameCore.Instance.Run.CurrentMaster;
+        StableWay.gameObject.SetActive(master.Qi >= master.MaxQi);
+        RiskyWay.gameObject.SetActive(master.Qi >= master.MaxQi / 2);
+
         Debug.Log(master.CurrentMeridian.ToString());
         for(int i = 0; i < MeridianOrbs.Count; i++)
         {
@@ -21,22 +31,20 @@ public class MeridiansUI : MonoBehaviour
             {
                 MeridianOrbs[i].color = Color.yellow;
             }            
-            else MeridianOrbs[i].color = new Color(255, 255, 255, 64);
+            else MeridianOrbs[i].color = defaultOrbColor;
         }
-        StatsPanel.Instance.UpdateLabels();
     }
     public void StartStableBreakthrough()
     {
-        var master = GameCore.Instance.Run.CurrentMaster;
         if (master.Qi < master.MaxQi) return;
         master.Qi = 0;
         MeditationController.Instance.Mode = MeditationMode.StableBreakthrough;
         ScreenManager.Instance.OpenMenu(1);
+        MeditationUI.Instance.Start();
         MeditationUI.Instance.ToggleSession();
     }
     public void StartRiskyBreakthrough()
     {
-        var master = GameCore.Instance.Run.CurrentMaster;
         if (master.Qi < master.MaxQi / 2) return;
         master.Qi -= master.MaxQi / 2;
         MeditationController.Instance.Mode = MeditationMode.RiskyBreakthrough;

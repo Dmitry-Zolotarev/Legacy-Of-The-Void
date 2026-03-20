@@ -28,11 +28,8 @@ public class GameCore : MonoBehaviour
         if (master.Age > Run.CurrentMaster.LifeLimit) 
         {
             master.currentState = CharacterStates.Dead;
-            StatsPanel.Instance.UpdateLabels();
             return;
         }
-        StatsPanel.Instance.UpdateLabels();
-
         if (master.Age >= 60) MasterSprite.sprite = OldMasterSprite;
         else if (master.Age >= 40) MasterSprite.sprite = AdultMasterSprite;
         else MasterSprite.sprite = YoungMasterSprite;

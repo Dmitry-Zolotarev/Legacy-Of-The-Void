@@ -7,6 +7,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI SpiritLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI GenLabel;
+    [SerializeField] private TextMeshProUGUI MeridianLabel;
     [SerializeField] private TextMeshProUGUI SilverLabel;
     [SerializeField] private TextMeshProUGUI TrophiesLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
@@ -14,22 +15,24 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI StatusLabel;
 
     public static StatsPanel Instance;
+    private CharacterData master;
     void Awake()
     {
         if (Instance == null) Instance = this;
     }
-    private void Start()
-    {
+    private void Start() {
+        master = GameCore.Instance.Run.CurrentMaster;
         UpdateLabels();
     }
-    public void UpdateLabels()
-    {
-        var master = GameCore.Instance.Run.CurrentMaster;
 
+    private void FixedUpdate() => UpdateLabels();
+    private void UpdateLabels()
+    {
         BodyLabel?.SetText("Тело: " + master.Body);
         SpiritLabel?.SetText("Дух: " + master.Spirit);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         GenLabel?.SetText("Поколение: " + master.Generation);
+        MeridianLabel?.SetText("Поколение: " + master.CurrentMeridian);
         SilverLabel?.SetText("Серебро: " + master.Silver);
         TrophiesLabel?.SetText("Трофеи: " + master.Trophies);
         RankLabel?.SetText("Ранг: " + master.Rank);

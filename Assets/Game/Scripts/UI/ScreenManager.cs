@@ -13,6 +13,7 @@ public class ScreenManager : MonoBehaviour
     {
         var master = GameCore.Instance.Run.CurrentMaster;
         if (Menus[menuID].tag == "MeditationScreen" && master.Qi >= master.MaxQi) return;
+
         for (int i = 0; i < Menus.Length; i++) Menus[i]?.SetActive(i == menuID);
     }     
     public bool AnyScreenOpened()

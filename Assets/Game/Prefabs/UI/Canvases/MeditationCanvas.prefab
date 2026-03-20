@@ -30,11 +30,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4041897053810970090}
+  m_Father: {fileID: 6569189777759860040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 879, y: -313.3}
+  m_AnchoredPosition: {x: 328.99994, y: 111.7}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6410603590411883330
@@ -507,7 +507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3914990592241862795, guid: 70d0806e570ccc64fb38edb7a72ff0e0, type: 3}
+  m_Sprite: {fileID: 910341406630016700, guid: f58bbccc9aabb074ab00c500d6b94e78, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1167,7 +1167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6569189777759860040
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1180,6 +1180,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5738726670730379962}
   - {fileID: 1387292161486402552}
   - {fileID: 236628924113125065}
   - {fileID: 2585053975994705047}
@@ -1498,7 +1499,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5738726670730379962}
   - {fileID: 5644450141485530093}
   - {fileID: 386705351421913594}
   - {fileID: 2021042368356929794}
@@ -1625,15 +1625,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeditationUI
   TimeLeftLabel: {fileID: 5043982674602634643}
-  SuccessLabel: {fileID: 2646483523336475248}
-  QiLabel: {fileID: 5222253239665004775}
-  CompletedLabel: {fileID: 3985779372217491721}
   VisulisationScale: 30
   BackButton: {fileID: 6101698017277337040}
   ToggleSessionButton: {fileID: 957045030626035339}
   MeditationVisualisation: {fileID: 7010442567392648363}
   MeditationBar: {fileID: 1387292161486402552}
-  RhythmCorridor: {fileID: 236628924113125065}
+  RhythmCorridor: {fileID: 5849285245634107178}
   PlayerOrb: {fileID: 8455456655152121766}
   showResultsTime: 3
   ResultPanel: {fileID: 2789676103491106918}
+  SuccessLabel: {fileID: 2646483523336475248}
+  QiLabel: {fileID: 5222253239665004775}
+  CompletedLabel: {fileID: 3985779372217491721}
+  MeditationBackground: {fileID: -2928212667995565158, guid: 59c264e40e798f8478c08c7ed9ada506, type: 3}
+  BreakthroughBackground: {fileID: -5835720123734458804, guid: faded27acfbb53e45a4d6c34d67d0d8b, type: 3}

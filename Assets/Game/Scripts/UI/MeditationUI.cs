@@ -6,95 +6,126 @@ using TMPro;
 public class MeditationUI : MonoBehaviour
 {
 
-    [SerializeField] private TextMeshProUGUI TimeLeftLabel;
-    [SerializeField] private TextMeshProUGUI SuccessLabel;
-    [SerializeField] private TextMeshProUGUI QiLabel;
-    [SerializeField] private TextMeshProUGUI CompletedLabel;
-
+    [SerializeField] private TextMeshProUGUI TimeLeftLabel;   
     [SerializeField] private float VisulisationScale = 30f;
+
     [SerializeField] private GameObject BackButton;
     [SerializeField] private GameObject ToggleSessionButton;
     [SerializeField] private GameObject MeditationVisualisation;
     [SerializeField] private Transform MeditationBar;
-    [SerializeField] private Transform RhythmCorridor;
+    [SerializeField] private Image RhythmCorridor;
     [SerializeField] private Image PlayerOrb;
 
     [SerializeField] private int showResultsTime = 3;
+
     public GameObject ResultPanel;
-    private MeditationController meditation;
+    [SerializeField] private TextMeshProUGUI SuccessLabel;
+    [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private TextMeshProUGUI CompletedLabel;
+
+    private Color defaultCorridorColor;
+    private MeditationController meditation; 
     public static MeditationUI Instance;
 
+    [SerializeField] private Sprite MeditationBackground;
+    [SerializeField] private Sprite BreakthroughBackground;
+    private Image Background;
     void Awake()
     {
+        defaultCorridorColor = RhythmCorridor.color;
+        Background = GetComponent<Image>();
         if (Instance == null) Instance = this;
     }
 
-    private void Start()
+    public void Start()
     {
         ResultPanel.SetActive(false);
-        ToggleMeditationVisualisation(false);
+        MeditationVisualisation.SetActive(false);
         meditation = MeditationController.Instance;
         MeditationBar.transform.localScale = new Vector3(meditation.MaxDeviation, 1f);
+        ToggleBackground();
+        ToggleElements();
         UpdateLabels();
     }
-
-    private void ToggleMeditationVisualisation(bool value)
+    private void ToggleBackground()
     {
-        TimeLeftLabel.gameObject.SetActive(value);
-        MeditationVisualisation.SetActive(value);
+        if (meditation.IsBreakthrough())
+        {
+            Background.sprite = BreakthroughBackground;
+        }
+        else Background.sprite = MeditationBackground;
     }
-    public void ToggleSession() => StartCoroutine(ToggleSessionCoroutine());
-    private IEnumerator ToggleSessionCoroutine()
+    public void ToggleSession()
     {
-        yield return new WaitForSeconds(0.5f);
         meditation.ToggleSession();
+
+        
+        MeditationVisualisation.SetActive(meditation.State == MeditationState.Running);
+        ToggleBackground();
         ToggleElements();
     }
     public void ToggleElements()
     {
-        BackButton.SetActive(meditation.State == MeditationState.Idle);
-        ToggleSessionButton.SetActive(meditation.State == MeditationState.Idle);
-
-        ToggleMeditationVisualisation(meditation.State == MeditationState.Running);
+        BackButton.SetActive(!meditation.IsBreakthrough() && meditation.State == MeditationState.Idle);
+        ToggleSessionButton.SetActive(!meditation.IsBreakthrough() && meditation.State == MeditationState.Idle);
     }
     public void UpdateLabels()
     {
-        TimeLeftLabel.SetText(meditation.SecondsLeft().ToString());
+        int secondsLeft = meditation.SecondsLeft();
+        TimeLeftLabel.SetText(secondsLeft.ToString());
+
+        if (meditation.IsBreakthrough() && secondsLeft < 1) RhythmCorridor.color = Color.yellow;
+        else RhythmCorridor.color = defaultCorridorColor;
 
         if (meditation.InRhythm) PlayerOrb.color = Color.green;
         else PlayerOrb.color = Color.red;
 
         PlayerOrb.transform.localPosition = new Vector3(meditation.FlowSpeed * VisulisationScale, 0, 0);
-        RhythmCorridor.localPosition = new Vector3(meditation.RhythmSpeed * VisulisationScale, 0, 0);
-        RhythmCorridor.localScale = new Vector3(meditation.RhythmWindow / 1.5f, 1);
+        RhythmCorridor.transform.localPosition = new Vector3(meditation.RhythmSpeed * VisulisationScale, 0, 0);
+        RhythmCorridor.transform.localScale = new Vector3(meditation.RhythmWindow / 1.5f, 1);
     }
-
-    public IEnumerator ShowMeditationResult()
+    public void ShowResult()
     {
-        switch (meditation.Mode)
+        if (meditation.Mode == MeditationMode.Normal)
         {
-            case MeditationMode.Normal:
-                if (meditation.Quality == MeditationQuality.Disrupted) CompletedLabel.SetText("Медитация прервана");
-                else CompletedLabel.SetText("Медитация завершена");
+            StartCoroutine(ShowMeditationResult());
+        }   
+        else if (meditation.IsBreakthrough()) StartCoroutine(ShowBreakthroughResult());
+    }
+    private IEnumerator ShowMeditationResult()
+    {
+        if (meditation.Quality == MeditationQuality.Disrupted)
+        {
+            CompletedLabel.SetText("Медитация прервана");
+        } 
+        else CompletedLabel.SetText("Медитация завершена");
 
-                QiLabel.SetText("Получено ци: " + MeditationController.Instance.GetQiReward());
-                break;
-        }
-        ResultPanel.SetActive(true);
-        ToggleMeditationVisualisation(false);
-
+        MeditationVisualisation.SetActive(false);
+        QiLabel.SetText("Получено ци: " + MeditationController.Instance.GetQiReward());            
         SuccessLabel.SetText($"Попадание в ритм: {(int)(meditation.GetSuccessRatio() * 100)}%");
+        ResultPanel.SetActive(true);       
 
         yield return new WaitForSeconds(showResultsTime);
 
         ResultPanel.SetActive(false);
         var master = GameCore.Instance.Run.CurrentMaster;
-        if (meditation.Mode == MeditationMode.StableBreakthrough || meditation.Mode == MeditationMode.RiskyBreakthrough)
-        {
-            meditation.Mode = MeditationMode.Normal;
-            if (meditation.Quality == MeditationQuality.Excellent) ScreenManager.Instance.OpenMenu(0);           
-        }
-        else if (master.Qi >= master.MaxQi) ScreenManager.Instance.CloseMenus();
+        if (master.Qi >= master.MaxQi) ScreenManager.Instance.CloseMenus();
+    }
+    private IEnumerator ShowBreakthroughResult()
+    {
+        yield return new WaitForSeconds(showResultsTime / 1.5f);
+        if (meditation.InRhythm && meditation.Quality == MeditationQuality.Excellent) CompletedLabel.SetText("Меридиан прорван");
+        else CompletedLabel.SetText("Прорыв не удался");
 
+        QiLabel.SetText("");
+        MeditationVisualisation.SetActive(false);
+        SuccessLabel.SetText($"Попадание в ритм: {(int)(meditation.GetSuccessRatio() * 100)}%");
+        ResultPanel.SetActive(true);
+
+        yield return new WaitForSeconds(showResultsTime * 1.5f);
+        meditation.Mode = MeditationMode.Normal;
+        ResultPanel.SetActive(false);
+        
+        ScreenManager.Instance.OpenMenu(0);
     }
 }

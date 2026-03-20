@@ -45,6 +45,5 @@ public class CharacterData
     {
         ID = Guid.NewGuid().GetHashCode();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit);
-        Debug.Log("Master life limit: " + LifeLimit);
     }   
 }
