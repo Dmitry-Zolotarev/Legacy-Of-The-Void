@@ -7,8 +7,8 @@ public class MeditationController : MonoBehaviour
     public MeditationState State = MeditationState.Idle;
     public MeditationQuality Quality = MeditationQuality.Excellent;
 
-    public float StartRhythmWindow = 1f;
-    [HideInInspector] public float RhythmWindow = 1f;
+    public float StartRhythmCorridor = 1.5f;
+    [HideInInspector] public float RhythmCorridor = 1.5f;
     public float RhythmAmplitude = 1.5f;
 
     [SerializeField] private float Duration = 20f;
@@ -37,9 +37,8 @@ public class MeditationController : MonoBehaviour
     private void StartSession()
     {
         if (master.Qi >= master.MaxQi) return;
-
-        RhythmWindow = StartRhythmWindow;
-        if (Mode == MeditationMode.RiskyBreakthrough) RhythmWindow /= 2f;
+        RhythmCorridor = StartRhythmCorridor / Mathf.Sqrt(master.CurrentMeridian + 1);
+        if (Mode == MeditationMode.RiskyBreakthrough) RhythmCorridor /= 1.5f;
 
         State = MeditationState.Running;
         MeditationUI.Instance.ToggleElements();
@@ -112,7 +111,7 @@ public class MeditationController : MonoBehaviour
         FlowSpeed += GetAccelerationDelta() * Time.deltaTime - rhythmDelta;
         FlowSpeed = Mathf.Clamp(FlowSpeed, -MaxDeviation, MaxDeviation);
         
-        InRhythm = FlowSpeed > RhythmSpeed - RhythmWindow && FlowSpeed < RhythmSpeed + RhythmWindow;
+        InRhythm = FlowSpeed > RhythmSpeed - RhythmCorridor && FlowSpeed < RhythmSpeed + RhythmCorridor;
 
         Timer += Time.deltaTime;
         if (InRhythm) TimeInRhythm += Time.deltaTime;

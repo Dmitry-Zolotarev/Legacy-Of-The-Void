@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-
 public class StatsPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI BodyLabel;
@@ -24,19 +23,19 @@ public class StatsPanel : MonoBehaviour
         master = GameCore.Instance.Run.CurrentMaster;
         UpdateLabels();
     }
-
+    
     private void FixedUpdate() => UpdateLabels();
     private void UpdateLabels()
     {
         BodyLabel?.SetText("Тело: " + master.Body);
         SpiritLabel?.SetText("Дух: " + master.Spirit);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        GenLabel?.SetText("Поколение: " + master.Generation);
         MeridianLabel?.SetText("Меридианы: " + master.CurrentMeridian);
+        GenLabel?.SetText("Поколение: " + master.Generation);       
         SilverLabel?.SetText("Серебро: " + master.Silver);
         TrophiesLabel?.SetText("Трофеи: " + master.Trophies);
-        RankLabel?.SetText("Ранг: " + master.Rank);
+        RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name);
         AgeLabel?.SetText("Возраст: " + master.Age);
-        StatusLabel?.SetText("Статус: " + master.currentState.ToString());
+        StatusLabel?.SetText("Статус: " + GameCore.GetEnumDescription(master.currentState));
     }
 }

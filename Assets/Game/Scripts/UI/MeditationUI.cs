@@ -7,12 +7,11 @@ public class MeditationUI : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI TimeLeftLabel;   
-    [SerializeField] private float VisulisationScale = 30f;
+    [SerializeField] private float VisualisationScale = 30f;
 
     [SerializeField] private GameObject BackButton;
     [SerializeField] private GameObject ToggleSessionButton;
     [SerializeField] private GameObject MeditationVisualisation;
-    [SerializeField] private Transform MeditationBar;
     [SerializeField] private Image RhythmCorridor;
     [SerializeField] private Image PlayerOrb;
 
@@ -42,7 +41,6 @@ public class MeditationUI : MonoBehaviour
         ResultPanel.SetActive(false);
         MeditationVisualisation.SetActive(false);
         meditation = MeditationController.Instance;
-        MeditationBar.transform.localScale = new Vector3(meditation.MaxDeviation, 1f);
         ToggleBackground();
         ToggleElements();
         UpdateLabels();
@@ -57,9 +55,7 @@ public class MeditationUI : MonoBehaviour
     }
     public void ToggleSession()
     {
-        meditation.ToggleSession();
-
-        
+        meditation.ToggleSession();       
         MeditationVisualisation.SetActive(meditation.State == MeditationState.Running);
         ToggleBackground();
         ToggleElements();
@@ -74,15 +70,15 @@ public class MeditationUI : MonoBehaviour
         int secondsLeft = meditation.SecondsLeft();
         TimeLeftLabel.SetText(secondsLeft.ToString());
 
-        if (meditation.IsBreakthrough() && secondsLeft < 1) RhythmCorridor.color = Color.yellow;
+        if (meditation.IsBreakthrough() && secondsLeft < 1) RhythmCorridor.color = Color.orange;
         else RhythmCorridor.color = defaultCorridorColor;
 
         if (meditation.InRhythm) PlayerOrb.color = Color.green;
         else PlayerOrb.color = Color.red;
 
-        PlayerOrb.transform.localPosition = new Vector3(meditation.FlowSpeed * VisulisationScale, 0, 0);
-        RhythmCorridor.transform.localPosition = new Vector3(meditation.RhythmSpeed * VisulisationScale, 0, 0);
-        RhythmCorridor.transform.localScale = new Vector3(meditation.RhythmWindow / 1.5f, 1);
+        PlayerOrb.transform.localPosition = new Vector3(meditation.FlowSpeed * VisualisationScale, -66f, 0);
+        RhythmCorridor.transform.localPosition = new Vector3(meditation.RhythmSpeed * VisualisationScale, -66f, 0);
+        RhythmCorridor.transform.localScale = new Vector3(meditation.RhythmCorridor / 1.5f, 1);
     }
     public void ShowResult()
     {
@@ -124,8 +120,7 @@ public class MeditationUI : MonoBehaviour
 
         yield return new WaitForSeconds(showResultsTime * 1.5f);
         meditation.Mode = MeditationMode.Normal;
-        ResultPanel.SetActive(false);
-        
+        ResultPanel.SetActive(false);      
         ScreenManager.Instance.OpenMenu(0);
     }
 }

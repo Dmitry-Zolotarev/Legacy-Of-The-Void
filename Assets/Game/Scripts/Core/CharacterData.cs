@@ -20,25 +20,24 @@ public class CharacterData
     public int MaxLifeLimit = 110;
     public int Body = 10;
     public int Spirit = 10;
-    public int CurrentMeridian = 0;
-    public int Rank = 1;
+    public int CurrentRank = 0;
+    public int CurrentMeridian = 0;   
     public int MaxQi = 60;
     public int Silver = 10;
     public int Trophies = 0;
     public int Pills = 0;
 
-    public List<Meridian> meridians;
+    public List<Rank> Ranks = new List<Rank>();
+    public List<Meridian> Meridians = new List<Meridian>();  
     public List<string> KnownTechniques = new List<string>();
     public List<string> EquippedTechniques = new List<string>();
 
     public void OpenMeridian()
     {
-        if (CurrentMeridian >= meridians.Count) return;
-        MaxQi = meridians[CurrentMeridian].MaxQi;
-        Spirit = meridians[CurrentMeridian].Spirit;
-        CurrentMeridian++;
-        MeridiansUI.Instance.UpdateUI();
-        
+        if (CurrentMeridian >= Meridians.Count) return;
+        MaxQi = Meridians[CurrentMeridian].MaxQi;
+        Spirit = Meridians[CurrentMeridian].Spirit;
+        CurrentMeridian++;      
     }
 
     public CharacterData()

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.ComponentModel;
+using System.Reflection;
+using System;
 public class GameCore : MonoBehaviour
 {
     [SerializeField] private Sprite YoungMasterSprite, AdultMasterSprite, OldMasterSprite;
@@ -11,6 +13,12 @@ public class GameCore : MonoBehaviour
     {      
         if (Instance == null) Instance = this;
         if (Run == null) StartGame();
+    }
+    public static string GetEnumDescription(Enum value)
+    {
+        var field = value.GetType().GetField(value.ToString());
+        var attr = field.GetCustomAttribute<DescriptionAttribute>();
+        return attr != null ? attr.Description : value.ToString();
     }
     public void StartGame()
     {

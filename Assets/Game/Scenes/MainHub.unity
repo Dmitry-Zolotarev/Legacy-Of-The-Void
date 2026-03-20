@@ -540,46 +540,54 @@ MonoBehaviour:
       MaxLifeLimit: 110
       Body: 10
       Spirit: 10
+      CurrentRank: 0
       CurrentMeridian: 0
-      Rank: 1
       MaxQi: 8
       Silver: 10
       Trophies: 0
       Pills: 0
-      meridians:
+      Ranks:
+      - Name: "\u043E\u0441\u043D\u043E\u0432\u0430"
+      - Name: "\u0442\u0440\u0435\u0442\u0438\u0439 \u0441\u043E\u0440\u0442"
+      - Name: "\u0432\u0442\u043E\u0440\u043E\u0439 \u0441\u043E\u0440\u0442"
+      - Name: "\u043F\u0435\u0440\u0432\u044B\u0439 \u0441\u043E\u0440\u0442"
+      - Name: "\u043C\u0430\u0441\u0442\u0435\u0440 \u043F\u0438\u043A\u0430"
+      - Name: "\u0442\u0440\u0438 \u0446\u0435\u0435\u0442\u043A\u0430"
+      - Name: "\u043F\u044F\u0442\u044C \u0446\u0438"
+      Meridians:
       - isOpened: 0
-        MaxQi: 12
+        MaxQi: 8
         Spirit: 8
       - isOpened: 0
+        MaxQi: 12
+        Spirit: 12
+      - isOpened: 0
         MaxQi: 18
-        Spirit: 11
+        Spirit: 18
       - isOpened: 0
         MaxQi: 24
-        Spirit: 14
+        Spirit: 24
       - isOpened: 0
         MaxQi: 30
-        Spirit: 17
-      - isOpened: 0
-        MaxQi: 36
-        Spirit: 20
-      - isOpened: 0
-        MaxQi: 45
-        Spirit: 25
-      - isOpened: 0
-        MaxQi: 55
         Spirit: 30
       - isOpened: 0
-        MaxQi: 62
+        MaxQi: 36
+        Spirit: 36
+      - isOpened: 0
+        MaxQi: 45
         Spirit: 45
       - isOpened: 0
-        MaxQi: 70
-        Spirit: 60
+        MaxQi: 55
+        Spirit: 55
       - isOpened: 0
-        MaxQi: 78
+        MaxQi: 62
+        Spirit: 62
+      - isOpened: 0
+        MaxQi: 70
         Spirit: 70
       - isOpened: 0
         MaxQi: 85
-        Spirit: 80
+        Spirit: 85
       - isOpened: 0
         MaxQi: 100
         Spirit: 100
@@ -636,8 +644,8 @@ MonoBehaviour:
   Mode: 0
   State: 0
   Quality: 2
-  StartRhythmWindow: 1
-  RhythmWindow: 1
+  StartRhythmCorridor: 1
+  RhythmCorridor: 1
   RhythmAmplitude: 3
   Duration: 10
   RhythmSpeed: 1
@@ -1049,7 +1057,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -119.60003, y: -37.3}
+  m_AnchoredPosition: {x: -119.60003, y: -13.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1468678909
@@ -6671,8 +6679,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 380}
-  m_SizeDelta: {x: 350, y: 150}
+  m_AnchoredPosition: {x: 0, y: 395}
+  m_SizeDelta: {x: 330, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1833978349076117972
 GameObject:
@@ -6774,7 +6782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.627451}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7058824}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7250,7 +7258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43.80001, y: -13.1}
+  m_AnchoredPosition: {x: 47.20002, y: -33.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3389909380421896056
@@ -7480,18 +7488,18 @@ RectTransform:
   - {fileID: 7024773265549713566}
   - {fileID: 8900893153056335724}
   - {fileID: 9139833115479952169}
-  - {fileID: 8728934780557230770}
   - {fileID: 1468678908}
   - {fileID: 6643773852365732177}
   - {fileID: 8623487672895814342}
   - {fileID: 8325246283984666999}
   - {fileID: 7890196023789778193}
+  - {fileID: 8728934780557230770}
   - {fileID: 3201492654629966620}
   m_Father: {fileID: 1698265613114011174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 59.1, y: -15.2}
+  m_AnchoredPosition: {x: 70, y: -31.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3714454689117662803
@@ -8404,7 +8412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -119.60003, y: -60.7}
+  m_AnchoredPosition: {x: -120.7, y: -35.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6743475881088900120
@@ -8909,7 +8917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43.80001, y: 9.999931}
+  m_AnchoredPosition: {x: 47.20002, y: 9.999931}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7983177014088343747
@@ -9084,7 +9092,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43.8, y: 34.6}
+  m_AnchoredPosition: {x: 47.20001, y: 34.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!81 &8373327215604833767
@@ -9148,7 +9156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43.8, y: 60}
+  m_AnchoredPosition: {x: 47.2, y: 60}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8671431443808047290
@@ -9185,7 +9193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -119.4, y: -13.4}
+  m_AnchoredPosition: {x: 47.20001, y: -10.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8811904752330266289
@@ -9406,7 +9414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0420\u0430\u043D\u0433: -1"
+  m_text: "\u0420\u0430\u043D\u0433: \u043E\u0441\u043D\u043E\u0432\u0430\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

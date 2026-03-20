@@ -19,12 +19,12 @@ public class MeridiansUI : MonoBehaviour
         if(MeridianOrbs.Count > 0) defaultOrbColor = MeridianOrbs[0].color;
         UpdateUI();
     }
-    public void UpdateUI()
+    private void FixedUpdate() => UpdateUI();
+
+    private void UpdateUI()
     {
         StableWay.gameObject.SetActive(master.Qi >= master.MaxQi);
         RiskyWay.gameObject.SetActive(master.Qi >= master.MaxQi / 2);
-
-        Debug.Log(master.CurrentMeridian.ToString());
         for(int i = 0; i < MeridianOrbs.Count; i++)
         {
             if (i < master.CurrentMeridian)
