@@ -8121,7 +8121,7 @@ MonoBehaviour:
   SpiritLabel: {fileID: 5121673921870832307}
   QiLabel: {fileID: 2901465909269652556}
   GenLabel: {fileID: 7993765029634576061}
-  MeridianLabel: {fileID: 0}
+  MeridianLabel: {fileID: 1468678909}
   SilverLabel: {fileID: 3481342216285402811}
   TrophiesLabel: {fileID: 7547562863882946439}
   RankLabel: {fileID: 9130003936352786354}
