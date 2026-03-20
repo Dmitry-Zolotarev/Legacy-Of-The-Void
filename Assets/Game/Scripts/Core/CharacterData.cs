@@ -14,14 +14,15 @@ public class CharacterData
     [HideInInspector] public CharacterStates currentState = CharacterStates.Alive;
     [HideInInspector] public bool DiscipleUnlockedFlag = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
-    
+    [HideInInspector] public int OpenedMeridians = 0;
+
     public int Age = 18;
     public int MinLifeLimit = 60;
     public int MaxLifeLimit = 110;
     public int Body = 10;
     public int Spirit = 10;
     public int CurrentRank = 0;
-    public int CurrentMeridian = 0;   
+    
     public int MaxQi = 60;
     public int Silver = 10;
     public int Trophies = 0;
@@ -34,10 +35,10 @@ public class CharacterData
 
     public void OpenMeridian()
     {
-        if (CurrentMeridian >= Meridians.Count) return;
-        MaxQi = Meridians[CurrentMeridian].MaxQi;
-        Spirit = Meridians[CurrentMeridian].Spirit;
-        CurrentMeridian++;      
+        if (OpenedMeridians >= Meridians.Count) return;
+        MaxQi = Meridians[OpenedMeridians].MaxQi;
+        Spirit = Meridians[OpenedMeridians].Spirit;
+        OpenedMeridians++;      
     }
 
     public CharacterData()
@@ -45,4 +46,9 @@ public class CharacterData
         ID = Guid.NewGuid().GetHashCode();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit);
     }   
+    public Rank GetNextRank()
+    {
+        int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
+        return Ranks[i];
+    }
 }

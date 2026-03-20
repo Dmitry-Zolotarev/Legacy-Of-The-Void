@@ -30,7 +30,7 @@ public class StatsPanel : MonoBehaviour
         BodyLabel?.SetText("Тело: " + master.Body);
         SpiritLabel?.SetText("Дух: " + master.Spirit);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        MeridianLabel?.SetText("Меридианы: " + master.CurrentMeridian);
+        MeridianLabel?.SetText("Меридианы: " + master.OpenedMeridians);
         GenLabel?.SetText("Поколение: " + master.Generation);       
         SilverLabel?.SetText("Серебро: " + master.Silver);
         TrophiesLabel?.SetText("Трофеи: " + master.Trophies);

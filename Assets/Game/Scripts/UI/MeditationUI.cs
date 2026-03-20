@@ -70,7 +70,7 @@ public class MeditationUI : MonoBehaviour
         int secondsLeft = meditation.SecondsLeft();
         TimeLeftLabel.SetText(secondsLeft.ToString());
 
-        if (meditation.IsBreakthrough() && secondsLeft < 1) RhythmCorridor.color = Color.orange;
+        if (meditation.IsBreakthrough() && secondsLeft < 1) RhythmCorridor.color = Color.orangeRed;
         else RhythmCorridor.color = defaultCorridorColor;
 
         if (meditation.InRhythm) PlayerOrb.color = Color.green;

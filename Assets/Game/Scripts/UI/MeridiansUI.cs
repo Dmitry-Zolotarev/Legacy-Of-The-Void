@@ -27,7 +27,7 @@ public class MeridiansUI : MonoBehaviour
         RiskyWay.gameObject.SetActive(master.Qi >= master.MaxQi / 2);
         for(int i = 0; i < MeridianOrbs.Count; i++)
         {
-            if (i < master.CurrentMeridian)
+            if (i < master.OpenedMeridians)
             {
                 MeridianOrbs[i].color = Color.yellow;
             }            
@@ -38,7 +38,7 @@ public class MeridiansUI : MonoBehaviour
     {
         if (master.Qi < master.MaxQi) return;
         master.Qi = 0;
-        MeditationController.Instance.Mode = MeditationMode.StableBreakthrough;
+        MeditationController.Instance.Mode = MeditationMode.StableMeridianBreakthrough;
         ScreenManager.Instance.OpenMenu(1);
         MeditationUI.Instance.Start();
         MeditationUI.Instance.ToggleSession();
@@ -47,7 +47,7 @@ public class MeridiansUI : MonoBehaviour
     {
         if (master.Qi < master.MaxQi / 2) return;
         master.Qi -= master.MaxQi / 2;
-        MeditationController.Instance.Mode = MeditationMode.RiskyBreakthrough;
+        MeditationController.Instance.Mode = MeditationMode.RiskyMeridianBreakthrough;
         ScreenManager.Instance.OpenMenu(1);
         MeditationUI.Instance.ToggleSession();
     }
