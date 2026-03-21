@@ -8,11 +8,11 @@ public class GameCore : MonoBehaviour
     [SerializeField] private Sprite YoungMasterSprite, AdultMasterSprite, OldMasterSprite;
     [SerializeField] private Image MasterSprite;
     public static GameCore Instance;
-    public RunData Run;   
+    public CharacterData CurrentMaster;   
     void Awake()
     {      
         if (Instance == null) Instance = this;
-        if (Run == null) StartGame();
+        if (CurrentMaster == null) StartGame();
     }
     public static string GetEnumDescription(Enum value)
     {
@@ -20,20 +20,17 @@ public class GameCore : MonoBehaviour
         var attr = field.GetCustomAttribute<DescriptionAttribute>();
         return attr != null ? attr.Description : value.ToString();
     }
-    public void StartGame()
+    public void StartGame() 
     {
-        Run = new RunData();
-        Run.RunId = System.Guid.NewGuid().ToString();
-        Run.GenerationIndex = 1;
-        Run.RunState = "HubActive";
-        Run.CurrentMaster = new CharacterData();
+        CurrentMaster = new CharacterData();
     }
+    public void OpenMeridian() => CurrentMaster.OpenMeridian();
     public void AdvanceTime(int years)
-    {   
-        var master = Run.CurrentMaster;
+    {
+        var master = CurrentMaster;
         master.Age += years;
 
-        if (master.Age > Run.CurrentMaster.LifeLimit) 
+        if (master.Age > CurrentMaster.LifeLimit) 
         {
             master.currentState = CharacterStates.Dead;
             return;
@@ -42,5 +39,5 @@ public class GameCore : MonoBehaviour
         else if (master.Age >= 40) MasterSprite.sprite = AdultMasterSprite;
         else MasterSprite.sprite = YoungMasterSprite;
     }
-    public void OpenMeridian() => Run.CurrentMaster.OpenMeridian();
+    
 }

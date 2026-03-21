@@ -14,7 +14,7 @@ public class RankSystemUI : MonoBehaviour
     }
     public void Start()
     {
-        master = GameCore.Instance.Run.CurrentMaster;
+        master = GameCore.Instance.CurrentMaster;
         UpdateLabels();
     }
     public void UpdateLabels()

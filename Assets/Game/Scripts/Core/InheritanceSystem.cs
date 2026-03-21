@@ -1,27 +1,6 @@
 
 using UnityEngine;
 
-public class InheritanceSystem:MonoBehaviour
+public class Inheritance : MonoBehaviour
 {
-    public void StartInheritance()
-    {
-        var run=GameCore.Instance.Run;
-        if(run.DiscipleData==null||!run.DiscipleData.DiscipleReadyFlag)return;
-
-        var oldMaster=run.CurrentMaster;
-        run.ArchivedMasters.Add(oldMaster);
-
-        CharacterData newMaster= new CharacterData();
-        newMaster.ID=System.Guid.NewGuid().GetHashCode();
-        newMaster.Generation=run.GenerationIndex + 1;
-        newMaster.Body=oldMaster.Body/2+1;
-        newMaster.Qi=oldMaster.Qi/2+1;
-        newMaster.Spirit=oldMaster.Spirit/2+1;
-        newMaster.MaxQi=oldMaster.MaxQi;
-        newMaster.Qi=newMaster.MaxQi;
-
-        run.GenerationIndex++;
-        run.CurrentMaster=newMaster;
-        run.DiscipleData=null;
-    }
 }

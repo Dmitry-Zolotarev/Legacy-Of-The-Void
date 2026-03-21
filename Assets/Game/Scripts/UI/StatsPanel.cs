@@ -1,17 +1,16 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using TMPro;
 public class StatsPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI BodyLabel;
     [SerializeField] private TextMeshProUGUI SpiritLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
-    [SerializeField] private TextMeshProUGUI GenLabel;
+    [SerializeField] private TextMeshProUGUI GenerationLabel;
     [SerializeField] private TextMeshProUGUI MeridianLabel;
-    [SerializeField] private TextMeshProUGUI SilverLabel;
-    [SerializeField] private TextMeshProUGUI TrophiesLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
     [SerializeField] private TextMeshProUGUI AgeLabel;
     [SerializeField] private TextMeshProUGUI StatusLabel;
+    [SerializeField] private TextMeshProUGUI HasStudentLabel;
 
     public static StatsPanel Instance;
     private CharacterData master;
@@ -19,23 +18,20 @@ public class StatsPanel : MonoBehaviour
     {
         if (Instance == null) Instance = this;
     }
-    private void Start() {
-        master = GameCore.Instance.Run.CurrentMaster;
+    public void Start()
+    {
+        master = GameCore.Instance.CurrentMaster;
         UpdateLabels();
     }
-    
-    private void FixedUpdate() => UpdateLabels();
     private void UpdateLabels()
     {
-        BodyLabel?.SetText("Тело: " + master.Body);
-        SpiritLabel?.SetText("Дух: " + master.Spirit);
-        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        MeridianLabel?.SetText("Меридианы: " + master.OpenedMeridians);
-        GenLabel?.SetText("Поколение: " + master.Generation);       
-        SilverLabel?.SetText("Серебро: " + master.Silver);
-        TrophiesLabel?.SetText("Трофеи: " + master.Trophies);
-        RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name);
-        AgeLabel?.SetText("Возраст: " + master.Age);
-        StatusLabel?.SetText("Статус: " + GameCore.GetEnumDescription(master.currentState));
+        BodyLabel?.SetText("РўРµР»Рѕ: " + master.Body);
+        SpiritLabel?.SetText("Р”СѓС…: " + master.Spirit);
+        QiLabel?.SetText($"Р¦Р: {master.Qi} / {master.MaxQi}");
+        MeridianLabel?.SetText("РћС‚РєСЂС‹С‚Рѕ РјРµСЂРёРґРёР°РЅРѕРІ: " + master.OpenedMeridians);
+        GenerationLabel?.SetText("РџРѕРєРѕР»РµРЅРёРµ: " + master.Generation);
+        RankLabel?.SetText("Р Р°РЅРі: " + master.Ranks[master.CurrentRank].Name);
+        AgeLabel?.SetText("Р’РѕР·СЂР°СЃС‚: " + master.Age);
+        StatusLabel?.SetText("Р Р°РЅРµРЅРёСЏ: " + GameCore.GetEnumDescription(master.currentState));
     }
 }

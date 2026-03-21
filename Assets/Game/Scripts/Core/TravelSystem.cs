@@ -9,7 +9,7 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private int MaxTrophies = 3;
     public void Travel()
     {
-        var master = GameCore.Instance.Run.CurrentMaster;
+        var master = GameCore.Instance.CurrentMaster;
 
         if (master.currentState == CharacterStates.Alive)
         {

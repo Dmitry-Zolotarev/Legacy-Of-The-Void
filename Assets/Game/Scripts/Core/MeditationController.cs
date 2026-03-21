@@ -27,7 +27,7 @@ public class MeditationController : MonoBehaviour
     {
         if (Instance == null) Instance = this;
     }
-    void Start() => master = GameCore.Instance.Run.CurrentMaster;
+    void Start() => master = GameCore.Instance.CurrentMaster;
     public void ToggleSession()
     {
         if (State != MeditationState.Running) StartSession();

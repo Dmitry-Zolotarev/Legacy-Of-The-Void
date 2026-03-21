@@ -68,7 +68,7 @@ public class MeditationUI : MonoBehaviour
     public void UpdateLabels()
     {
         int secondsLeft = meditation.SecondsLeft();
-        TimeLeftLabel.SetText(secondsLeft.ToString());
+        TimeLeftLabel.SetText("Осталось времени: " + secondsLeft.ToString());
 
         if (meditation.IsBreakthrough() && secondsLeft < 1) RhythmCorridor.color = Color.orangeRed;
         else RhythmCorridor.color = defaultCorridorColor;
@@ -104,7 +104,7 @@ public class MeditationUI : MonoBehaviour
         yield return new WaitForSeconds(showResultsTime);
 
         ResultPanel.SetActive(false);
-        var master = GameCore.Instance.Run.CurrentMaster;
+        var master = GameCore.Instance.CurrentMaster;
         if (master.Qi >= master.MaxQi) ScreenManager.Instance.CloseMenus();
     }
     private IEnumerator ShowBreakthroughResult()

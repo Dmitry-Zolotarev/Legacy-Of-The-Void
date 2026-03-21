@@ -15,7 +15,7 @@ public class MeridiansUI : MonoBehaviour
     }
     private void Start()
     {
-        master = GameCore.Instance.Run.CurrentMaster;
+        master = GameCore.Instance.CurrentMaster;
         if(MeridianOrbs.Count > 0) defaultOrbColor = MeridianOrbs[0].color;
         UpdateUI();
     }
