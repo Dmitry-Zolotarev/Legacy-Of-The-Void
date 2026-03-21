@@ -38,7 +38,7 @@ public class MeridiansUI : MonoBehaviour
     {
         if (master.Qi < master.MaxQi) return;
         master.Qi = 0;
-        MeditationController.Instance.Mode = MeditationMode.StableMeridianBreakthrough;
+        MeditationController.Instance.Mode = MeditationMode.StableBreakthrough;
         ScreenManager.Instance.OpenMenu(1);
         MeditationUI.Instance.Start();
         MeditationUI.Instance.ToggleSession();
@@ -47,7 +47,7 @@ public class MeridiansUI : MonoBehaviour
     {
         if (master.Qi < master.MaxQi / 2) return;
         master.Qi -= master.MaxQi / 2;
-        MeditationController.Instance.Mode = MeditationMode.RiskyMeridianBreakthrough;
+        MeditationController.Instance.Mode = MeditationMode.RiskyBreakthrough;
         ScreenManager.Instance.OpenMenu(1);
         MeditationUI.Instance.ToggleSession();
     }

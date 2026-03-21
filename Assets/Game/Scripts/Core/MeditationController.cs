@@ -38,7 +38,7 @@ public class MeditationController : MonoBehaviour
     {
         if (master.Qi >= master.MaxQi) return;
         RhythmCorridor = StartRhythmCorridor / Mathf.Sqrt(master.OpenedMeridians + 1);
-        if (Mode == MeditationMode.RiskyMeridianBreakthrough) RhythmCorridor /= 1.5f;
+        if (Mode == MeditationMode.RiskyBreakthrough) RhythmCorridor /= 1.5f;
 
         State = MeditationState.Running;
         MeditationUI.Instance.ToggleElements();
@@ -51,7 +51,7 @@ public class MeditationController : MonoBehaviour
     }
     public bool IsBreakthrough()
     {
-        return Mode == MeditationMode.StableMeridianBreakthrough || Mode == MeditationMode.RiskyMeridianBreakthrough;
+        return Mode == MeditationMode.StableBreakthrough || Mode == MeditationMode.RiskyBreakthrough;
     }
     public void EndSession()
     {
