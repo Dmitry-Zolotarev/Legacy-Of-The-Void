@@ -13,8 +13,6 @@ public class TravelSystem : MonoBehaviour
 
         if (master.currentState == CharacterStates.Alive)
         {
-            if (master.Qi > 0) master.Qi--;
-            else return;
             master.Silver += Random.Range(MinSilver, MaxSilver);
             master.Trophies += Random.Range(MinTrophies, MaxTrophies);
             GameCore.Instance.AdvanceTime(1);

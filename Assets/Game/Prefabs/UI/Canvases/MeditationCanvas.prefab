@@ -346,7 +346,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -412.99997}
+  m_AnchoredPosition: {x: 0, y: -400}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3797456249949994645
@@ -981,7 +981,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -601, y: -412.99997}
+  m_AnchoredPosition: {x: -600, y: -400}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6348771794394346305
@@ -1561,5 +1561,3 @@ MonoBehaviour:
   SuccessLabel: {fileID: 2646483523336475248}
   QiLabel: {fileID: 5222253239665004775}
   CompletedLabel: {fileID: 3985779372217491721}
-  MeditationBackground: {fileID: -2928212667995565158, guid: 59c264e40e798f8478c08c7ed9ada506, type: 3}
-  BreakthroughBackground: {fileID: -5835720123734458804, guid: faded27acfbb53e45a4d6c34d67d0d8b, type: 3}

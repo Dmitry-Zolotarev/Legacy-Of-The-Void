@@ -25,7 +25,7 @@ public class CharacterData
     public int CurrentRank = 0;
     
     public int MaxQi = 60;
-    public int Silver = 10;
+    public int Silver = 100;
     public int Trophies = 0;
     public int Pills = 0;
 

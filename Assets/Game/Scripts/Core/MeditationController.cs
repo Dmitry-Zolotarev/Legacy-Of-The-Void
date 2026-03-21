@@ -3,7 +3,6 @@ using UnityEngine;
 [System.Serializable]
 public class MeditationController : MonoBehaviour
 {
-    public MeditationMode Mode = MeditationMode.Normal;
     public MeditationState State = MeditationState.Idle;
     public MeditationQuality Quality = MeditationQuality.Excellent;
 
@@ -38,7 +37,6 @@ public class MeditationController : MonoBehaviour
     {
         if (master.Qi >= master.MaxQi) return;
         RhythmCorridor = StartRhythmCorridor / Mathf.Sqrt(master.OpenedMeridians + 1);
-        if (Mode == MeditationMode.RiskyBreakthrough) RhythmCorridor /= 1.5f;
 
         State = MeditationState.Running;
         MeditationUI.Instance.ToggleElements();
@@ -48,10 +46,6 @@ public class MeditationController : MonoBehaviour
         FlowSpeed = 0f;
         TimeInRhythm = 0f;       
         Timer = 0f;
-    }
-    public bool IsBreakthrough()
-    {
-        return Mode == MeditationMode.StableBreakthrough || Mode == MeditationMode.RiskyBreakthrough;
     }
     public void EndSession()
     {
@@ -63,14 +57,10 @@ public class MeditationController : MonoBehaviour
         else if (ratio <= 0.4f) Quality = MeditationQuality.Bad;
         else if (ratio <= 0.7f) Quality = MeditationQuality.Normal;
 
-        MeditationUI.Instance.ShowResult();
-        if (Mode == MeditationMode.Normal)
-        {
-            master.Qi += GetQiReward();
+        master.Qi += GetQiReward();
+        if (master.Qi >= master.MaxQi) master.Qi = master.MaxQi;
 
-            if (master.Qi >= master.MaxQi) master.Qi = master.MaxQi;
-        }
-        else if (IsBreakthrough() && InRhythm && Quality == MeditationQuality.Excellent) master.OpenMeridian();
+        MeditationUI.Instance.ShowResult();  
         GameCore.Instance.AdvanceTime(1);
     }
     public float GetSuccessRatio()
@@ -82,8 +72,8 @@ public class MeditationController : MonoBehaviour
     {
         switch (Quality)
         {
-            case MeditationQuality.Normal: return 3;
-            case MeditationQuality.Excellent: return 5;
+            case MeditationQuality.Normal: return 20;
+            case MeditationQuality.Excellent: return 40;
         }
         return 0;
     }

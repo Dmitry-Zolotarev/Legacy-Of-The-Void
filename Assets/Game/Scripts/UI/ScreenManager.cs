@@ -15,7 +15,8 @@ public class ScreenManager : MonoBehaviour
         if (Menus[menuID].tag == "MeditationScreen" && master.Qi >= master.MaxQi) return;
 
         for (int i = 0; i < Menus.Length; i++) Menus[i]?.SetActive(i == menuID);
-    }     
+    }
+    public void CloseMenu(int menuID) => Menus[menuID].SetActive(false);
     public bool AnyScreenOpened()
     {
         foreach (var menu in Menus)
@@ -32,6 +33,7 @@ public class ScreenManager : MonoBehaviour
         }
         else foreach (var menu in Menus) menu?.SetActive(false);
     }
+    
     public void CloseMenus(InputAction.CallbackContext context)
     {
         if (context.performed) CloseMenus();
