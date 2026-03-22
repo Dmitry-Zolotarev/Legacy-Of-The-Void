@@ -1,21 +1,38 @@
 
-public class MeridianBreakthroughController
+using UnityEngine;
+
+public class MeridianBreakController : MonoBehaviour 
 {
-    public BreakthroughPath chosenPath;
-    public float requiredSpeed;
-    public float rhythmWindow;
-
-    public BreakthroughOutcome Resolve(float speed, bool inRhythm)
+    [SerializeField] private QiOrbController QiOrb;
+    [SerializeField] private BreathingController Breathing;
+    public static MeridianBreakController Instance;
+    private bool IsRunning = false;
+    void Awake()
     {
-        if (!inRhythm)
-            return BreakthroughOutcome.Disruption;
+        if (Instance == null) Instance = this;
+    }
+    public void ToggleSession()
+    {
+        if (IsRunning) EndSession();
+        else StartSession();
+    }
 
-        if (speed >= requiredSpeed)
-            return BreakthroughOutcome.CleanSuccess;
-
-        if (speed >= requiredSpeed * 0.9f)
-            return BreakthroughOutcome.EdgeSuccess;
-
-        return BreakthroughOutcome.Fail;
+    private void StartSession()
+    {
+        IsRunning = true;
+        Breathing.StartBreathing();
+        QiOrb.StartMoving();
+    }
+    public void EndSession()
+    {
+        IsRunning = false;
+        Breathing.StopBreathing();
+        QiOrb.StopMoving();
+        GameCore.Instance.AdvanceTime(1);
+    }
+    void Update()
+    {
+        if (!IsRunning) return;
+        if (!Breathing.InRhythm(QiOrb.GetSpeedDelta())) QiOrb.MinusQi(1);
     }
 }

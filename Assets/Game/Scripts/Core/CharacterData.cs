@@ -1,7 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
+public enum CharacterStates
+{
+    [Description("жив")]
+    Alive,
+    [Description("ранен")]
+    Injured,
+    [Description("мёртв")]
+    Dead
+}
 [Serializable]
 public class CharacterData 
 {
@@ -31,27 +41,32 @@ public class CharacterData
 
     private Student student;
     public List<Rank> Ranks = new List<Rank>();
-    public List<Meridian> Meridians = new List<Meridian>();  
+    public List<MeridianLevel> MeridiansLevels = new List<MeridianLevel>();
     public List<string> KnownTechniques = new List<string>();
     public List<string> EquippedTechniques = new List<string>();
-
-    public void OpenMeridian()
-    {
-        if (OpenedMeridians >= Meridians.Count) return;
-        MaxQi = Meridians[OpenedMeridians].MaxQi;
-        Spirit = Meridians[OpenedMeridians].Spirit;
-        OpenedMeridians++;      
-    }
-
     public CharacterData()
     {
         ID = Guid.NewGuid().GetHashCode();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit);
-    }   
-    public Rank GetNextRank()
+    }
+    public void OpenMeridian()
     {
-        int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
-        return Ranks[i];
+        if (OpenedMeridians >= MeridiansLevels.Count) return;
+
+        MaxQi = MeridiansLevels[OpenedMeridians].MaxQi;
+        Spirit = MeridiansLevels[OpenedMeridians].Spirit;
+
+        OpenedMeridians++;
+    }
+    public void AddQi(int amount)
+    {
+        Qi += amount;
+        if (Qi > MaxQi) Qi = MaxQi;
+    }
+    public void SpendQi(int amount)
+    {
+        if (Qi >= amount) Qi -= amount;
+        
     }
     public string GetStudentName()
     {

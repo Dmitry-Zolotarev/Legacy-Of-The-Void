@@ -1,111 +1,86 @@
 using UnityEngine;
-
+using TMPro;
 [System.Serializable]
 public class MeditationController : MonoBehaviour
 {
-    public MeditationState State = MeditationState.Idle;
-    public MeditationQuality Quality = MeditationQuality.Excellent;
+    [SerializeField] private QiOrbController QiOrb;
+    [SerializeField] private BreathingController Breathing;
+    [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private TextMeshProUGUI TimeLeftLabel;
+    [SerializeField] private TextMeshProUGUI NeedSpeedLabel;
+    [SerializeField] private TextMeshProUGUI OrbSpeedLabel;
+    [SerializeField] private GameObject StartButton;
+    [SerializeField] private GameObject BackButton;
 
-    public float StartRhythmCorridor = 1.5f;
-    [HideInInspector] public float RhythmCorridor = 1.5f;
-    public float RhythmAmplitude = 1.5f;
+    [SerializeField] private float NormalRhytmRatio = 0.4f;
+    [SerializeField] private float GoodRhytmRatio = 0.7f;
 
     [SerializeField] private float Duration = 20f;
-    [HideInInspector] public float RhythmSpeed = 1f;
-    [HideInInspector] public float FlowSpeed = 1f;
-
+    [SerializeField] private int QiBonus = 10;
     private CharacterData master;
-    private float TimeInRhythm = 0f;   
-    private float Timer = 0f;
-    public float AccelerationDelta = 1f;
-    public float MaxDeviation = 5f;
-    public bool InRhythm = true;
-    public static MeditationController Instance;
+    private bool IsRunning = false;
+    private float TimeInRhythm = 0f;
     
+
+    public static MeditationController Instance;
     void Awake()
     {
         if (Instance == null) Instance = this;
     }
-    void Start() => master = GameCore.Instance.CurrentMaster;
-    public void ToggleSession()
+    void Start() 
     {
-        if (State != MeditationState.Running) StartSession();
-        else EndSession();
+        master = GameCore.Instance.CurrentMaster;
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
     }
-    
-    private void StartSession()
+    public void StartSession()
     {
-        if (master.Qi >= master.MaxQi) return;
-        RhythmCorridor = StartRhythmCorridor / Mathf.Sqrt(master.OpenedMeridians + 1);
-
-        State = MeditationState.Running;
-        MeditationUI.Instance.ToggleElements();
-        MeditationUI.Instance.ResultPanel.SetActive(false);
-        Quality = MeditationQuality.Excellent;      
-        
-        FlowSpeed = 0f;
-        TimeInRhythm = 0f;       
-        Timer = 0f;
+        IsRunning = true;
+        QiOrb.gameObject.SetActive(true);
+        TimeLeftLabel.gameObject.SetActive(true);
+        OrbSpeedLabel.gameObject.SetActive(true);
+        NeedSpeedLabel.gameObject.SetActive(true);
+        Cursor.visible = false;
+        BackButton.SetActive(false);
+        Breathing.StartBreathing();
+        QiOrb.StartMoving();
     }
-    public void EndSession()
-    {
-        State = MeditationState.Idle;
-        MeditationUI.Instance.ToggleElements();     
-
-        float ratio = GetSuccessRatio();
-        if (Timer < Duration) Quality = MeditationQuality.Disrupted;
-        else if (ratio <= 0.4f) Quality = MeditationQuality.Bad;
-        else if (ratio <= 0.7f) Quality = MeditationQuality.Normal;
-
-        master.Qi += GetQiReward();
-        if (master.Qi >= master.MaxQi) master.Qi = master.MaxQi;
-
-        MeditationUI.Instance.ShowResult();  
+    private void EndSession()
+    {        
+        IsRunning = false;
+        QiOrb.gameObject.SetActive(false);
+        TimeLeftLabel.gameObject.SetActive(false);
+        OrbSpeedLabel.gameObject.SetActive(false);
+        NeedSpeedLabel.gameObject.SetActive(false);
+        Cursor.visible = true;
+        BackButton.SetActive(true);
+        Breathing.StopBreathing();
+        QiOrb.StopMoving();
+        GetQiReward();
         GameCore.Instance.AdvanceTime(1);
     }
-    public float GetSuccessRatio()
-    {
-        if (Timer <= 0) return 0;
-        return TimeInRhythm / Timer;
+    private void GetQiReward()
+    {        
+        var rhythmRatio = TimeInRhythm / Breathing.SessionTime;
+        if (rhythmRatio >= GoodRhytmRatio) master.AddQi(QiBonus);
+        else if (rhythmRatio >= NormalRhytmRatio) master.AddQi(QiBonus / 2);
+        
     }
-    public int GetQiReward()
+    private int SecondsLeft()
     {
-        switch (Quality)
-        {
-            case MeditationQuality.Normal: return 20;
-            case MeditationQuality.Excellent: return 40;
-        }
-        return 0;
+        return (int)Mathf.Round(Duration - Breathing.SessionTime);
     }
-    public int SecondsLeft()
+    private void FixedUpdate() 
     {
-        return (int)Mathf.Round(Duration - Timer);
-    }
-
-    public float GetAccelerationDelta()
-    {
-        float delta = 0f;
-        if (Input.GetMouseButton(1)) delta += AccelerationDelta;
-        if (Input.GetMouseButton(0)) delta -= AccelerationDelta;
-        return delta;
-    }
-    
+        TimeLeftLabel.SetText("Осталось времени: " + SecondsLeft().ToString());
+        StartButton.SetActive(!IsRunning && master.Qi < master.MaxQi);
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+    } 
     void Update()
     {
-        if (State != MeditationState.Running) return;
-
-        var rhythmDelta = RhythmSpeed;
-        RhythmSpeed = Mathf.Sin(Timer) * RhythmAmplitude;
-        rhythmDelta = RhythmSpeed - rhythmDelta;
-
-        FlowSpeed += GetAccelerationDelta() * Time.deltaTime - rhythmDelta;
-        FlowSpeed = Mathf.Clamp(FlowSpeed, -MaxDeviation, MaxDeviation);
-        
-        InRhythm = FlowSpeed > RhythmSpeed - RhythmCorridor && FlowSpeed < RhythmSpeed + RhythmCorridor;
-
-        Timer += Time.deltaTime;
-        if (InRhythm) TimeInRhythm += Time.deltaTime;
-        if (Timer >= Duration) EndSession();
-        MeditationUI.Instance.UpdateLabels();
+        if (!IsRunning) return;
+        OrbSpeedLabel.SetText("Текущая скорость: " + QiOrb.CurrentSpeed.ToString("F1"));
+        NeedSpeedLabel.SetText("Требуется: " + (QiOrb.StartSpeed + Breathing.CurrentPhase).ToString("F1"));
+        if (Breathing.InRhythm(QiOrb.GetSpeedDelta())) TimeInRhythm += Time.deltaTime;
+        if (Breathing.SessionTime >= Duration) EndSession();
     }
 }
