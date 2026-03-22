@@ -41,7 +41,7 @@ public class CharacterData
 
     private Student student;
     public List<Rank> Ranks = new List<Rank>();
-    public List<MeridianLevel> MeridiansLevels = new List<MeridianLevel>();
+    public List<MeridianLevel> MeridianLevels = new List<MeridianLevel>();
     public List<string> KnownTechniques = new List<string>();
     public List<string> EquippedTechniques = new List<string>();
     public CharacterData()
@@ -51,10 +51,10 @@ public class CharacterData
     }
     public void OpenMeridian()
     {
-        if (OpenedMeridians >= MeridiansLevels.Count) return;
+        if (OpenedMeridians >= MeridianLevels.Count) return;
 
-        MaxQi = MeridiansLevels[OpenedMeridians].MaxQi;
-        Spirit = MeridiansLevels[OpenedMeridians].Spirit;
+        MaxQi = MeridianLevels[OpenedMeridians].MaxQi;
+        Spirit = MeridianLevels[OpenedMeridians].Spirit;
 
         OpenedMeridians++;
     }
@@ -65,8 +65,7 @@ public class CharacterData
     }
     public void SpendQi(int amount)
     {
-        if (Qi >= amount) Qi -= amount;
-        
+        if (Qi >= amount) Qi -= amount; 
     }
     public string GetStudentName()
     {

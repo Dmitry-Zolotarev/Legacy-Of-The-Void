@@ -5,6 +5,7 @@ public class RankBreakController : MonoBehaviour
     [SerializeField] private QiOrbController QiOrb;
     [SerializeField] private BreathingController Breathing;
     public static RankBreakController Instance;
+    [SerializeField] private int LostQi = 2;
 
     private bool IsRunning = false;
     void Awake()
@@ -33,6 +34,9 @@ public class RankBreakController : MonoBehaviour
     void Update()
     {
         if (!IsRunning) return;
-        if (!Breathing.InRhythm(QiOrb.GetSpeedDelta())) QiOrb.MinusQi(1);
+        if (!Breathing.InRhythm(QiOrb.GetSpeedDelta()) && !QiOrb.OnDantian && Breathing.GetSeconds() < Breathing.GetSecondsRounded())
+        {
+            QiOrb.SpendQi(LostQi);
+        }
     }
 }

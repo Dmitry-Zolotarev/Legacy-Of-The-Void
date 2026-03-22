@@ -39,8 +39,8 @@ public class MeditationController : MonoBehaviour
         TimeLeftLabel.gameObject.SetActive(true);
         OrbSpeedLabel.gameObject.SetActive(true);
         NeedSpeedLabel.gameObject.SetActive(true);
-        Cursor.visible = false;
         BackButton.SetActive(false);
+
         Breathing.StartBreathing();
         QiOrb.StartMoving();
     }
@@ -51,8 +51,8 @@ public class MeditationController : MonoBehaviour
         TimeLeftLabel.gameObject.SetActive(false);
         OrbSpeedLabel.gameObject.SetActive(false);
         NeedSpeedLabel.gameObject.SetActive(false);
-        Cursor.visible = true;
         BackButton.SetActive(true);
+
         Breathing.StopBreathing();
         QiOrb.StopMoving();
         GetQiReward();

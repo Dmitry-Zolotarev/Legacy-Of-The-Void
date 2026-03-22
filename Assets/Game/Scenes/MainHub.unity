@@ -373,18 +373,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 79888970}
     - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 7431186073578214679}
+    - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
@@ -392,11 +404,23 @@ PrefabInstance:
       value: OpenMenu
       objectReference: {fileID: 0}
     - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: StartSession
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: ScreenManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MeridianBreakController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1784696583324871232, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2647354798077949136, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
@@ -1004,7 +1028,31 @@ MonoBehaviour:
     - Name: "\u043F\u044F\u0442\u044C \u0446\u0438"
       needBody: 100
       needMeridians: 12
-    MeridiansLevels: []
+    MeridianLevels:
+    - MaxQi: 80
+      Spirit: 80
+    - MaxQi: 100
+      Spirit: 100
+    - MaxQi: 120
+      Spirit: 120
+    - MaxQi: 140
+      Spirit: 140
+    - MaxQi: 160
+      Spirit: 160
+    - MaxQi: 180
+      Spirit: 180
+    - MaxQi: 200
+      Spirit: 200
+    - MaxQi: 220
+      Spirit: 220
+    - MaxQi: 240
+      Spirit: 240
+    - MaxQi: 260
+      Spirit: 260
+    - MaxQi: 280
+      Spirit: 280
+    - MaxQi: 300
+      Spirit: 300
     KnownTechniques: []
     EquippedTechniques: []
 --- !u!4 &617748547
@@ -7576,7 +7624,7 @@ PrefabInstance:
     - target: {fileID: 6350113170621514148, guid: fb8917d4937d6fb49a173347eb2ab906, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 553bf77548363764d975595bffb12009, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8020,6 +8068,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4695749842840424013, guid: da0dc0386784fe344b031c6715bad589, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 79888970}
+    - target: {fileID: 4695749842840424013, guid: da0dc0386784fe344b031c6715bad589, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseMenus
+      objectReference: {fileID: 0}
     - target: {fileID: 5137420045395754176, guid: da0dc0386784fe344b031c6715bad589, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -8133,6 +8189,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2647354798077949136, guid: da0dc0386784fe344b031c6715bad589, type: 3}
   m_PrefabInstance: {fileID: 6046381846817363160}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7431186073578214679 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4329256475384984102, guid: da0dc0386784fe344b031c6715bad589, type: 3}
+  m_PrefabInstance: {fileID: 6046381846817363160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7431186073578214671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5cc1c63d44691743bddedb4d66b521d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeridianBreakController
 --- !u!223 &8145895272283723316
 Canvas:
   m_ObjectHideFlags: 0
