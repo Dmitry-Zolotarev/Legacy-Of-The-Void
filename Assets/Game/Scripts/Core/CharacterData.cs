@@ -5,11 +5,11 @@ using UnityEngine;
 
 public enum CharacterStates
 {
-    [Description("жив")]
+    [Description("Здоров")]
     Alive,
-    [Description("ранен")]
+    [Description("Ранен")]
     Injured,
-    [Description("мёртв")]
+    [Description("Мёртв")]
     Dead
 }
 [Serializable]
