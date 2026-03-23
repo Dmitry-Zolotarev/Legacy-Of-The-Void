@@ -77,7 +77,7 @@ public class QiOrbController : MonoBehaviour
         if (InBreakthroughMode)
         {
             if(OnDantian && Input.GetKeyDown(KeyCode.F)) Shoot();
-            else if (transform.localPosition.magnitude > DantianRadius * 4f) OnDantian = true;
+            else if (transform.localPosition.magnitude > DantianRadius * 6f) OnDantian = true;
         }    
         else
         {
