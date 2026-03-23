@@ -1,42 +1,40 @@
+using TMPro;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class RankBreakController : MonoBehaviour
 {
     [SerializeField] private QiOrbController QiOrb;
-    [SerializeField] private BreathingController Breathing;
-    public static RankBreakController Instance;
-    [SerializeField] private int LostQi = 2;
+    [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private TextMeshProUGUI ShootLabel;
+    [SerializeField] private List<RankNode> RankNodes = new List<RankNode>();
+    private CharacterData master;
 
-    private bool IsRunning = false;
-    void Awake()
+    void Start()
     {
-        if (Instance == null) Instance = this;
-    }
-    public void ToggleSession()
-    {
-        if (IsRunning) EndSession();
-        else StartSession();
-    }
-
-    private void StartSession()
-    {
-        IsRunning = true;
-        Breathing.StartBreathing();
+        master = GameCore.Instance.CurrentMaster;
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         QiOrb.StartMoving();
     }
-    public void EndSession()
+    private void FixedUpdate()
     {
-        IsRunning = false;
-        Breathing.StopBreathing();
-        QiOrb.StopMoving();
-        GameCore.Instance.AdvanceTime(1);
-    }
-    void Update()
-    {
-        if (!IsRunning) return;
-        if (!Breathing.InRhythm(QiOrb.GetSpeedDelta()) && !QiOrb.OnDantian && Breathing.GetSeconds() < Breathing.GetSecondsRounded())
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+
+        if (master.Qi > 0) ShootLabel.SetText("Нажмите F для броска");
+        else ShootLabel.SetText("Недостаточно ци для броска");
+
+        bool allNodesFilled = true;
+        foreach(var node in RankNodes)
         {
-            QiOrb.SpendQi(LostQi);
+            if(!node.isFilled)
+            {
+                allNodesFilled = false;
+                break;
+            }
+        }
+        if(allNodesFilled)
+        {
+            master.UpdateRank();
+            ScreenManager.Instance.OpenMenu(6);
         }
     }
 }

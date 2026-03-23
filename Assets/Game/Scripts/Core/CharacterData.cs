@@ -67,11 +67,14 @@ public class CharacterData
     {
         if (Qi >= amount) Qi -= amount; 
     }
-
     public Rank GetNextRank()
     {
         int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
         return Ranks[i];
+    }
+    public void UpdateRank()
+    {
+        if(CurrentRank < Ranks.Count - 1) CurrentRank++;
     }
     public string GetStudentName()
     {

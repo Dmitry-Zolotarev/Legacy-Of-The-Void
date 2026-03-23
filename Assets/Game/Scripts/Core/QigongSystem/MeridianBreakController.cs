@@ -8,20 +8,11 @@ public class MeridianBreakController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI OpenedMeridiansLabel;
     private CharacterData master;
 
-    public static MeridianBreakController Instance;
-    void Awake()
-    {
-        if (Instance == null) Instance = this;
-    }
     void Start()
     {
         master = GameCore.Instance.CurrentMaster;
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {master.MeridianLevels.Count}");
-        StartSession();
-    }
-    public void StartSession()
-    {
         QiOrb.StartMoving();
     }
     private void FixedUpdate()

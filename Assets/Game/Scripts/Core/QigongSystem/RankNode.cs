@@ -1,18 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RectTransform))]
 public class RankNode : MonoBehaviour
 {
     [HideInInspector] public bool isFilled;
     [HideInInspector] public int Qi = 0;
     public int NeedQi = 10;
-    public List<Transform> ConnectedMeridians = new List<Transform>();
-    public void OnCollisionEnter2D(Collision2D collision)
+    [SerializeField] private RectTransform QiOrb;
+    private RectTransform rectTransform;
+    public void Start()
     {
-        var qiOrb = collision.gameObject.GetComponent<QiOrbController>();
-        if (qiOrb != null)
+        rectTransform = GetComponent<RectTransform>();
+    }
+    private void Update()
+    {
+        var qiOrb = QiOrb.gameObject.GetComponent<QiOrbController>();
+
+        if (!isFilled && IsOverlap(rectTransform, QiOrb))
         {
             AddQi(qiOrb.CarriedQi);
+            qiOrb.OnDantian = true;
             qiOrb.CarriedQi = 0;
         }
     }
@@ -21,5 +29,11 @@ public class RankNode : MonoBehaviour
         if (isFilled) return;
         Qi += amount;
         if (Qi >= NeedQi) isFilled = true;
+    }
+    bool IsOverlap(RectTransform a, RectTransform b)
+    {
+        Rect rectA = new Rect(a.position, a.rect.size);
+        Rect rectB = new Rect(b.position, b.rect.size);
+        return rectA.Overlaps(rectB);
     }
 }

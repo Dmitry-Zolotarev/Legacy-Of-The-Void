@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -7,9 +6,10 @@ public class MeridianNode : MonoBehaviour
     public int SealStrength = 10;
     private CharacterData master;
     private bool isOpened = false;
-    private RectTransform rectTransform;
-    [SerializeField] private RectTransform QiOrb;
     
+    [SerializeField] private RectTransform QiOrb;
+    private RectTransform rectTransform;
+
     public void Start()
     {
         master = GameCore.Instance.CurrentMaster;
@@ -18,7 +18,8 @@ public class MeridianNode : MonoBehaviour
     private void Update()
     {
         var qiOrb = QiOrb.gameObject.GetComponent<QiOrbController>();
-        if (IsOverlap(rectTransform, QiOrb))
+
+        if (!isOpened && IsOverlap(rectTransform, QiOrb))
         {
             SetDamage(qiOrb.CarriedQi);
             qiOrb.OnDantian = true;
