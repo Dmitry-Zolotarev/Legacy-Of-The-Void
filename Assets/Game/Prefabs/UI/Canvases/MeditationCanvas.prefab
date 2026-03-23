@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -103}
+  m_AnchoredPosition: {x: 759.2, y: -78}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6410603590411883330
@@ -344,7 +344,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -385}
+  m_AnchoredPosition: {x: 759.2, y: -405.9}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6275662437713659261
@@ -1237,7 +1237,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -442.10004}
+  m_AnchoredPosition: {x: 759.2, y: -463}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2355549179333980446
@@ -1648,10 +1648,9 @@ MonoBehaviour:
   OrbSpeedLabel: {fileID: 3811542668463870614}
   StartButton: {fileID: 5616641605088018129}
   BackButton: {fileID: 6101698017277337040}
-  NormalRhytmRatio: 0.4
-  GoodRhytmRatio: 0.7
-  Duration: 10
-  QiBonus: 20
+  IsRunning: 0
+  Duration: 20
+  QiBonus: 5
 --- !u!1001 &5047050450154080018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1866,7 +1865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 600
+      value: 620
       objectReference: {fileID: 0}
     - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
       propertyPath: m_LocalPosition.x

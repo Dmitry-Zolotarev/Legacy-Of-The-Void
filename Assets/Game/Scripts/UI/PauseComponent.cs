@@ -15,8 +15,7 @@ public class PauseComponent : MonoBehaviour
         if (pauseMenu.activeSelf && Time.timeScale == 0f)
         {
             pauseMenu?.SetActive(false);
-            Time.timeScale = 1f;
-            
+            Time.timeScale = 1f;  
         }
         else if(Time.timeScale == 1f)
         {

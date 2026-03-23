@@ -13,11 +13,12 @@ public class QiOrbController : MonoBehaviour
     [SerializeField] private bool InBreakthroughMode = false;
     [SerializeField] private int QiAmount = 10;
     public bool OnDantian = true;
+    public float AngleDegrees = 0;
     private bool IsMoving = false;
-    
-    private float AngleDegrees = 0;  
-    
-    
+    private bool InBottom = false;
+    private bool PassedBottom = false;
+
+
     void Awake()
     {
         StartSpeed = (MinSpeed + MaxSpeed) / 2f;
@@ -48,7 +49,7 @@ public class QiOrbController : MonoBehaviour
     {
         if (!IsMoving) return;
 
-        AngleDegrees = (AngleDegrees + CurrentSpeed * Mathf.Deg2Rad) % 360f;
+        AngleDegrees = (AngleDegrees + CurrentSpeed * Time.deltaTime * 10f) % 360f;
         transform.localPosition = new Vector2(-Mathf.Cos(AngleDegrees * Mathf.Deg2Rad), Mathf.Sin(AngleDegrees * Mathf.Deg2Rad)) * DantianRadius;
     }
     public void MoveDirectly()
@@ -58,7 +59,7 @@ public class QiOrbController : MonoBehaviour
             OnDantian = true;
             return;
         } 
-        transform.localPosition += new Vector3(-Mathf.Cos(AngleDegrees * Mathf.Deg2Rad), Mathf.Sin(AngleDegrees * Mathf.Deg2Rad)) * CurrentSpeed * Mathf.Deg2Rad;
+        transform.localPosition += new Vector3(-Mathf.Cos(AngleDegrees * Mathf.Deg2Rad), Mathf.Sin(AngleDegrees * Mathf.Deg2Rad)) * CurrentSpeed * Time.deltaTime * 10f;
     }
     private void Shoot()
     {
@@ -73,21 +74,36 @@ public class QiOrbController : MonoBehaviour
     {
         if (!IsMoving) return;
     
-        if (Input.GetMouseButton(0) && CurrentSpeed < MaxSpeed)
+        if (InBreakthroughMode)
         {
-            CurrentSpeed += AccelerationDelta * Time.deltaTime;
-        }
-        if (Input.GetMouseButton(1) && CurrentSpeed > MinSpeed)
-        {
-            CurrentSpeed -= AccelerationDelta * Time.deltaTime;
-        }
-        if (InBreakthroughMode && OnDantian && Input.GetKeyDown(KeyCode.F))
-        {
-            Shoot();
+            if(OnDantian && Input.GetKeyDown(KeyCode.F)) Shoot();
+            else if (transform.localPosition.magnitude > DantianRadius * 4f) OnDantian = true;
         }    
-        else if(transform.localPosition.magnitude > DantianRadius * 5) OnDantian = true;
-
+        else
+        {
+            if (Input.GetMouseButton(0) && CurrentSpeed < MaxSpeed)
+            {
+                CurrentSpeed += AccelerationDelta * Time.deltaTime;
+            }
+            if (Input.GetMouseButton(1) && CurrentSpeed > MinSpeed)
+            {
+                CurrentSpeed -= AccelerationDelta * Time.deltaTime;
+            }
+        }
         if (OnDantian) MoveAlongDantian();
         else MoveDirectly();
+
+        if (AngleDegrees > 269f) InBottom = true;
+        if (AngleDegrees < 271f)
+        {
+            InBottom = false;
+            PassedBottom = false;
+        }        
+    }
+    public bool PassBottom()
+    {
+        if (!InBottom || PassedBottom) return false;
+        PassedBottom = true;
+        return true;
     }
 }

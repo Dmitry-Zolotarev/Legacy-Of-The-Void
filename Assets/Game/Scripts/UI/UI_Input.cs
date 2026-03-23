@@ -1,15 +1,18 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class UI_Input : MonoBehaviour
 {
     private PauseComponent pauseComponent;
+
     private void Awake()
     {
         pauseComponent = GetComponent<PauseComponent>();
     }
-    public void ToggleEscape(InputAction.CallbackContext context)
+    private void Update()
     {
-        if (context.performed) pauseComponent?.Pause();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseComponent?.Pause();
+        }
     }
 }

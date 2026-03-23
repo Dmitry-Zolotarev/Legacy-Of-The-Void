@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5383820890951621721}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNodes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,9 +191,8 @@ GameObject:
   - component: {fileID: 3469578679994458365}
   - component: {fileID: 1426283233398841815}
   - component: {fileID: 4659844368684418659}
-  - component: {fileID: 8855139116217588558}
   - component: {fileID: 782997246638876158}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,8 +215,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 174.5, y: 184.5}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 175.70001, y: 183.4}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1426283233398841815
 CanvasRenderer:
@@ -257,42 +256,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &8855139116217588558
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593311944971856037}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &782997246638876158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &641680945234014597
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,9 +281,8 @@ GameObject:
   - component: {fileID: 7301880523216526575}
   - component: {fileID: 3410278510627172618}
   - component: {fileID: 7341519968600941748}
-  - component: {fileID: 2122758013384647535}
   - component: {fileID: 7241461482116537894}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 218.4, y: -47}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 219.6, y: -48.10001}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3410278510627172618
 CanvasRenderer:
@@ -383,42 +346,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &2122758013384647535
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641680945234014597}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &7241461482116537894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,7 +358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &1023176403525152167
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,9 +371,8 @@ GameObject:
   - component: {fileID: 9118239113133969171}
   - component: {fileID: 2712622556511369809}
   - component: {fileID: 9206533137306349856}
-  - component: {fileID: 2519373271426083417}
   - component: {fileID: 4433028532723788183}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -468,8 +395,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 60.4, y: 31.5}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 61.6, y: 30.399994}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2712622556511369809
 CanvasRenderer:
@@ -509,42 +436,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &2519373271426083417
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023176403525152167}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &4433028532723788183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,7 +448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &1452995529825401607
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,9 +538,8 @@ GameObject:
   - component: {fileID: 7278891811453502355}
   - component: {fileID: 8027180827229986618}
   - component: {fileID: 4695739770493054684}
-  - component: {fileID: 7809747226985020992}
   - component: {fileID: 3982419460532711964}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,8 +562,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13.9, y: -133}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: -12.700003, y: -134.1}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8027180827229986618
 CanvasRenderer:
@@ -712,42 +603,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &7809747226985020992
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1539895199019409809}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &3982419460532711964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,7 +615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &2237853674604815788
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,12 +785,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7030918700602555854}
-  - {fileID: 3644361995863719197}
   - {fileID: 3494307941497045328}
   - {fileID: 299714503417947364}
   - {fileID: 5383820890951621721}
   - {fileID: 3757620567442038935}
-  - {fileID: 2895690760734772908}
   - {fileID: 6248502805011869773}
   - {fileID: 1830240400322648907}
   m_Father: {fileID: 0}
@@ -1058,14 +912,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianBreakController
   QiOrb: {fileID: 7977781971474927700}
-  Breathing: {fileID: 4975220942247921250}
   QiLabel: {fileID: 6464526808419031258}
   ShootLabel: {fileID: 3805515917891719081}
-  NeedSpeedLabel: {fileID: 1044574523833404128}
-  OrbSpeedLabel: {fileID: 1586882671209165225}
-  NormalRhytmRatio: 0.4
-  GoodRhytmRatio: 0.7
-  LostQi: 2
+  OpenedMeridiansLabel: {fileID: 1044574523833404128}
 --- !u!1 &4237932320929815614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,7 +927,7 @@ GameObject:
   - component: {fileID: 2300858849125957569}
   - component: {fileID: 1044574523833404128}
   m_Layer: 5
-  m_Name: NeedSpeedLabel
+  m_Name: OpenedMeridiansLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1100,7 +949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -107.10004}
+  m_AnchoredPosition: {x: 759.2, y: -77.9}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2300858849125957569
@@ -1131,7 +980,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0422\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F: 10"
+  m_text: "\u041E\u0442\u043A\u0440\u044B\u0442\u043E \u043C\u0435\u0440\u0438\u0434\u0438\u0430\u043D\u043E\u0432:
+    0 / 12"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1214,9 +1064,8 @@ GameObject:
   - component: {fileID: 6893163331184432750}
   - component: {fileID: 6545934695740399797}
   - component: {fileID: 1316021639443532533}
-  - component: {fileID: 4275751497062440386}
   - component: {fileID: 2530834862135785361}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,8 +1088,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 316.6, y: -195.1}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 317.80002, y: -196.20001}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6545934695740399797
 CanvasRenderer:
@@ -1280,42 +1129,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &4275751497062440386
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4384944448094346933}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &2530834862135785361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,7 +1141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &4395244259177108920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,9 +1154,8 @@ GameObject:
   - component: {fileID: 6044220348941738937}
   - component: {fileID: 9132563768855680614}
   - component: {fileID: 6562947597962471201}
-  - component: {fileID: 457412836971967897}
   - component: {fileID: 5081330115198959150}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1365,8 +1178,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 130.7, y: -47}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 126.1, y: -48.1}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9132563768855680614
 CanvasRenderer:
@@ -1406,42 +1219,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &457412836971967897
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4395244259177108920}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &5081330115198959150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &4552349901762229110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,9 +1244,8 @@ GameObject:
   - component: {fileID: 4397755500453376708}
   - component: {fileID: 2008689762469791099}
   - component: {fileID: 5279940842726824134}
-  - component: {fileID: 4923377847797845501}
   - component: {fileID: 4092342952207502028}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1491,8 +1268,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28.7, y: -196.7}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 29.899998, y: -197.8}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2008689762469791099
 CanvasRenderer:
@@ -1532,42 +1309,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &4923377847797845501
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4552349901762229110}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &4092342952207502028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1580,145 +1321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
---- !u!1 &5205446364964586843
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3644361995863719197}
-  - component: {fileID: 1716438940224971107}
-  - component: {fileID: 1586882671209165225}
-  m_Layer: 5
-  m_Name: OrbSpeedLabel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3644361995863719197
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205446364964586843}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7370370073057108201}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -50}
-  m_SizeDelta: {x: 0, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1716438940224971107
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205446364964586843}
-  m_CullTransparentMesh: 1
---- !u!114 &1586882671209165225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5205446364964586843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u0441\u0444\u0435\u0440\u044B:
-    10"
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: -144.70158, y: 0, z: -234.67624, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &5437942938661849495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,9 +1334,8 @@ GameObject:
   - component: {fileID: 3517698561836240378}
   - component: {fileID: 2667034985970308918}
   - component: {fileID: 6172053595099092056}
-  - component: {fileID: 757684524396844366}
   - component: {fileID: 7629696558905493224}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1755,8 +1358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.5, y: -240.5}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: -7.300003, y: -241.6}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2667034985970308918
 CanvasRenderer:
@@ -1796,42 +1399,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &757684524396844366
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5437942938661849495}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &7629696558905493224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1844,7 +1411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &6329772322910186024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,9 +1459,8 @@ GameObject:
   - component: {fileID: 821024664667968699}
   - component: {fileID: 4688248673313851388}
   - component: {fileID: 1888271508793198751}
-  - component: {fileID: 596632707020255962}
   - component: {fileID: 736526910490219130}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1916,8 +1483,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 287, y: 31.5}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 284.8, y: 30.399994}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4688248673313851388
 CanvasRenderer:
@@ -1957,42 +1524,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &596632707020255962
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6455671725517238627}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &736526910490219130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2005,7 +1536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &7481678310705437593
 GameObject:
   m_ObjectHideFlags: 0
@@ -2040,7 +1572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -806}
+  m_AnchoredPosition: {x: 759.2, y: -833}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8882703642474538052
@@ -2155,7 +1687,6 @@ GameObject:
   - component: {fileID: 4032265238214597197}
   - component: {fileID: 824702947786632280}
   - component: {fileID: 7977781971474927700}
-  - component: {fileID: 5514576735520259853}
   m_Layer: 5
   m_Name: QiOrb
   m_TagString: Untagged
@@ -2232,8 +1763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 2
-  MaxSpeed: 10
+  MinSpeed: 50
+  MaxSpeed: 50
   AccelerationDelta: 5
   DantianRadius: 70
   CarriedQi: 0
@@ -2242,42 +1773,7 @@ MonoBehaviour:
   InBreakthroughMode: 1
   QiAmount: 10
   OnDantian: 1
---- !u!58 &5514576735520259853
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7665861656000280129}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 10
+  AngleDegrees: 0
 --- !u!1 &7747116919105151455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,9 +1785,8 @@ GameObject:
   - component: {fileID: 6662207650241218953}
   - component: {fileID: 3258449759783316011}
   - component: {fileID: 1841062386174053893}
-  - component: {fileID: 1035065879035014972}
   - component: {fileID: 2941693350305677693}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2314,8 +1809,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 363.1, y: -130.4}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 359.5, y: -131.5}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3258449759783316011
 CanvasRenderer:
@@ -2355,42 +1850,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &1035065879035014972
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7747116919105151455}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &2941693350305677693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2403,7 +1862,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &7851789626877446187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,9 +1875,8 @@ GameObject:
   - component: {fileID: 7796063214090466839}
   - component: {fileID: 5742128995151682536}
   - component: {fileID: 529570126009736523}
-  - component: {fileID: 151345759155705946}
   - component: {fileID: 5251330572650723143}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2440,8 +1899,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 173.7, y: 24}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 174.90001, y: 22.899994}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5742128995151682536
 CanvasRenderer:
@@ -2481,42 +1940,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &151345759155705946
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7851789626877446187}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &5251330572650723143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2529,7 +1952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &8310191206975476623
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,9 +2177,8 @@ GameObject:
   - component: {fileID: 2130078943646891548}
   - component: {fileID: 3454676054302552778}
   - component: {fileID: 3986279435117537454}
-  - component: {fileID: 989087652864758949}
   - component: {fileID: 9200591911895868315}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MeridianNode (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2778,8 +2201,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 360, y: -242.8}
-  m_SizeDelta: {x: 32, y: 32}
+  m_AnchoredPosition: {x: 357, y: -243.90001}
+  m_SizeDelta: {x: 28, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3454676054302552778
 CanvasRenderer:
@@ -2819,42 +2242,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!58 &989087652864758949
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9004113540381625971}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 16
 --- !u!114 &9200591911895868315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,137 +2254,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 10
---- !u!1001 &6197851412477433769
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 7370370073057108201}
-    m_Modifications:
-    - target: {fileID: 197327970810415647, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_Name
-      value: BreatheRing
-      objectReference: {fileID: 0}
-    - target: {fileID: 1371548482281361867, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: DeltaRadius
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 1371548482281361867, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: RhythmCorridor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1371548482281361867, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: RhythmAmplitude
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1371548482281361867, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: StartRhythmCorridor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6702214107200658028, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 700
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 600
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -3.600006
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
---- !u!224 &2895690760734772908 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 9091851075998505221, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-  m_PrefabInstance: {fileID: 6197851412477433769}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4975220942247921250 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1371548482281361867, guid: af6c21a81026d844698d1a1e06666d22, type: 3}
-  m_PrefabInstance: {fileID: 6197851412477433769}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 330dc92ae11976d4dbceb3eace66fccf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BreathingController
+  SealStrength: 20
+  QiOrb: {fileID: 4027815968977077414}

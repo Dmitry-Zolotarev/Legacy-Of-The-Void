@@ -22,7 +22,7 @@ public class StatsPanel : MonoBehaviour
     private void FixedUpdate() => UpdateLabels();
     private void UpdateLabels()
     {
-        HasStudentLabel?.SetText("Мастер " + master.Name);
+        MasterNameLabel?.SetText("Мастер " + master.Name);
         GenerationLabel?.SetText("Поколение: " + master.Generation);
         AgeLabel?.SetText("Возраст: " + master.Age);
         BodyLabel?.SetText("Тело: " + master.Body);
