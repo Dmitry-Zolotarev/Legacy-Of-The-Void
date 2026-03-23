@@ -1649,7 +1649,7 @@ MonoBehaviour:
   StartButton: {fileID: 5616641605088018129}
   BackButton: {fileID: 6101698017277337040}
   IsRunning: 0
-  Duration: 30
+  Duration: 20
   QiBonus: 5
 --- !u!1001 &5047050450154080018
 PrefabInstance:
