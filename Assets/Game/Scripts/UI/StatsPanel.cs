@@ -28,7 +28,7 @@ public class StatsPanel : MonoBehaviour
         BodyLabel?.SetText("Тело: " + master.Body);
         SpiritLabel?.SetText("Дух: " + master.Spirit);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        MeridiansLabel?.SetText("Меридианы: " + master.OpenedMeridians);
+        MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {master.MeridianLevels.Count}");
         RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name);
         HealthStateLabel?.SetText(GameCore.GetEnumDescription(master.currentState));
         HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());
