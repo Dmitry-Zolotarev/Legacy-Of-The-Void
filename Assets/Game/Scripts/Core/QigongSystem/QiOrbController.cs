@@ -94,7 +94,7 @@ public class QiOrbController : MonoBehaviour
         else MoveDirectly();
 
         if (AngleDegrees > 269f) InBottom = true;
-        if (AngleDegrees < 271f)
+        if (AngleDegrees > 271f)
         {
             InBottom = false;
             PassedBottom = false;

@@ -29,7 +29,7 @@ public class MainHubUI : MonoBehaviour
         GenerationLabel?.SetText("Поколение: " + master.Generation);
         AgeLabel?.SetText("Возраст: " + master.Age);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name);
+        RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name.ToLower());
         HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());
     }
 }

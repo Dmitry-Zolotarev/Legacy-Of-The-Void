@@ -3103,6 +3103,34 @@ PrefabInstance:
       propertyPath: CurrentMaster.OpenedMeridians
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3306654701877046105, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
+      propertyPath: CurrentMaster.Ranks.Array.data[0].Name
+      value: "\u041E\u0441\u043D\u043E\u0432\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306654701877046105, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
+      propertyPath: CurrentMaster.Ranks.Array.data[1].Name
+      value: "\u0422\u0440\u0435\u0442\u0438\u0439 \u0441\u043E\u0440\u0442"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306654701877046105, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
+      propertyPath: CurrentMaster.Ranks.Array.data[2].Name
+      value: "\u0412\u0442\u043E\u0440\u043E\u0439 \u0441\u043E\u0440\u0442"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306654701877046105, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
+      propertyPath: CurrentMaster.Ranks.Array.data[3].Name
+      value: "\u041F\u0435\u0440\u0432\u044B\u0439 \u0441\u043E\u0440\u0442"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306654701877046105, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
+      propertyPath: CurrentMaster.Ranks.Array.data[4].Name
+      value: "\u041C\u0430\u0441\u0442\u0435\u0440 \u043F\u0438\u043A\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306654701877046105, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
+      propertyPath: CurrentMaster.Ranks.Array.data[5].Name
+      value: "\u0422\u0440\u0438 \u0446\u0432\u0435\u0442\u043A\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306654701877046105, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
+      propertyPath: CurrentMaster.Ranks.Array.data[6].Name
+      value: "\u041F\u044F\u0442\u044C \u0446\u0438"
+      objectReference: {fileID: 0}
     - target: {fileID: 4259895403473221712, guid: b006a4dfc9bd1704a90f96656a5cd602, type: 3}
       propertyPath: m_Name
       value: GameCore
