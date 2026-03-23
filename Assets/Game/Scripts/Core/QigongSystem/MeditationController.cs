@@ -73,6 +73,6 @@ public class MeditationController : MonoBehaviour
 
         if (Breathing.InRhythm(QiOrb.GetSpeedDelta()) && QiOrb.PassBottom()) master.AddQi(QiBonus);
         
-        if (Breathing.SessionTime >= Duration) EndSession();
+        if (Breathing.SessionTime >= Duration || master.Qi >= master.MaxQi) EndSession();
     }
 }

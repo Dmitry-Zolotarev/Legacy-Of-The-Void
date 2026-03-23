@@ -6,35 +6,51 @@ public class RankBreakController : MonoBehaviour
     [SerializeField] private QiOrbController QiOrb;
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI ShootLabel;
-    [SerializeField] private List<RankNode> RankNodes = new List<RankNode>();
+    [SerializeField] private TextMeshProUGUI FilledNodesLabel;
+    [SerializeField] private List<RankNode> Nodes = new List<RankNode>();
     private CharacterData master;
-
+    private int nextRank = 1;
     void Start()
     {
         master = GameCore.Instance.CurrentMaster;
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+        UpdateNodes();
         QiOrb.StartMoving();
+        
     }
-    private void FixedUpdate()
+    private void ExitToRankMenu() 
     {
-        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-
+        UpdateNodes();
+        ScreenManager.Instance.OpenMenu(6);
+    } 
+    private void FixedUpdate()
+    {   
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");       
         if (master.Qi > 0) ShootLabel.SetText("Нажмите F для броска");
         else ShootLabel.SetText("Недостаточно ци для броска");
 
-        bool allNodesFilled = true;
-        foreach(var node in RankNodes)
+        int filledNodes = 0;
+        for (int i = 0; i < nextRank; i++) 
         {
-            if(!node.isFilled)
-            {
-                allNodesFilled = false;
-                break;
-            }
+            if (Nodes[i].IsFilled) filledNodes++;
         }
-        if(allNodesFilled)
+        FilledNodesLabel?.SetText($"Заполнено узлов: {filledNodes} / {nextRank}");
+
+        if (filledNodes == nextRank)
         {
-            master.UpdateRank();
-            ScreenManager.Instance.OpenMenu(6);
+            master.UpdateRank();          
+            ExitToRankMenu();
+        }
+        else if (master.Qi <= 0) ExitToRankMenu();
+        
+    }
+    private void UpdateNodes()
+    {
+        nextRank = master.CurrentRank + 1;
+        for (int i = 0; i < Nodes.Count; i++)
+        {
+            Nodes[i].ClearNode();
+            Nodes[i].gameObject.SetActive(i < nextRank);
         }
     }
 }

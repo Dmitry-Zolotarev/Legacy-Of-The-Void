@@ -19,13 +19,13 @@ public class CharacterData
     [HideInInspector] public int ID;
     [HideInInspector] public int Generation = 1;
     [HideInInspector] public readonly int LifeLimit;
-    [HideInInspector] public int Qi = 0;
+ 
 
     [HideInInspector] public CharacterStates healthState = CharacterStates.Normal;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
-    [HideInInspector] public int OpenedMeridians = 0;
 
+    
     public int Age = 18;
     public string Name = "";
     public int MinLifeLimit = 60;
@@ -33,10 +33,11 @@ public class CharacterData
     public int Body = 10;
     public int Spirit = 10;
     public int CurrentRank = 0;
-    
+    public int Qi = 0;
     public int MaxQi = 60;
     public int Silver = 100;
     public int Trophies = 0;
+    public int OpenedMeridians = 0;
     public int Pills = 0;
 
     private Student student;
