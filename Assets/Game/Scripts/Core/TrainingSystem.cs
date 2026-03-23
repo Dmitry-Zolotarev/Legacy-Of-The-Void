@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class TrainingSystem : MonoBehaviour
 {
-    public void TrainBody()
+    public void TrainBody(int amount)
     {
         var master = GameCore.Instance.CurrentMaster;
-        
-        if (master.currentState == CharacterStates.Alive)
+
+        if (master.healthState == CharacterStates.Normal)
         {
-            master.Body++;
-            GameCore.Instance.AdvanceTime(1);
+            master.Body += amount;
+            GameCore.Instance.AdvanceTime(amount);
         }
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PauseComponent))]
 public class UI_Input : MonoBehaviour
 {
     private PauseComponent pauseComponent;
@@ -13,6 +14,7 @@ public class UI_Input : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseComponent?.Pause();
+            Debug.Log("ESC Pressed");
         }
     }
 }

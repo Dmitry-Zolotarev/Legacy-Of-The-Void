@@ -30,7 +30,7 @@ public class StatsPanel : MonoBehaviour
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {master.MeridianLevels.Count}");
         RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name);
-        HealthStateLabel?.SetText(GameCore.GetEnumDescription(master.currentState));
+        HealthStateLabel?.SetText(GameCore.GetEnumDescription(master.healthState));
         HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());
     }
 }

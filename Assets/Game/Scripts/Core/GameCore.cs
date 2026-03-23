@@ -12,7 +12,7 @@ public class GameCore : MonoBehaviour
     void Awake()
     {      
         if (Instance == null) Instance = this;
-        if (CurrentMaster == null) StartGame();
+        else Destroy(gameObject);
     }
     public static string GetEnumDescription(Enum value)
     {
@@ -20,11 +20,14 @@ public class GameCore : MonoBehaviour
         var attr = field.GetCustomAttribute<DescriptionAttribute>();
         return attr != null ? attr.Description : value.ToString();
     }
-    public void StartGame() 
+    public void StartGame() => CurrentMaster = new CharacterData();
+
+    public void SaveGame() => SaveLoadSystem.Save(CurrentMaster);
+    public void LoadGame()
     {
-        CurrentMaster = new CharacterData();
+        CurrentMaster = SaveLoadSystem.Load();
+        if (CurrentMaster == null) StartGame();
     }
-    public void OpenMeridian() => CurrentMaster.OpenMeridian();
     public void AdvanceTime(int years)
     {
         var master = CurrentMaster;
@@ -32,7 +35,7 @@ public class GameCore : MonoBehaviour
 
         if (master.Age > CurrentMaster.LifeLimit) 
         {
-            master.currentState = CharacterStates.Dead;
+            master.healthState = CharacterStates.Dead;
             return;
         }
         if (master.Age >= 60) MasterSprite.sprite = OldMasterSprite;

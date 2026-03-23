@@ -11,7 +11,7 @@ public class TravelSystem : MonoBehaviour
     {
         var master = GameCore.Instance.CurrentMaster;
 
-        if (master.currentState == CharacterStates.Alive)
+        if (master.healthState == CharacterStates.Normal)
         {
             master.Silver += Random.Range(MinSilver, MaxSilver);
             master.Trophies += Random.Range(MinTrophies, MaxTrophies);

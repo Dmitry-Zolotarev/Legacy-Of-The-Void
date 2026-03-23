@@ -1,19 +1,36 @@
-
+using System.IO;
 using UnityEngine;
 
-public class SaveLoadSystem : MonoBehaviour
+public static class SaveLoadSystem
 {
-    public void Save()
+    private static string SavePath => Path.Combine(Application.persistentDataPath, "save.json");
+
+    public static void Save(CharacterData data)
     {
-        string json = JsonUtility.ToJson(GameCore.Instance.CurrentMaster);
-        PlayerPrefs.SetString("save_run", json);
+        string json = JsonUtility.ToJson(data, true);
+        File.WriteAllText(SavePath, json);
     }
-    public void Load()
+
+    public static CharacterData Load()
     {
-        if (PlayerPrefs.HasKey("save_run"))
+        if (!File.Exists(SavePath))
+            return null;
+
+        try
         {
-            string json = PlayerPrefs.GetString("save_run");
-            GameCore.Instance.CurrentMaster = JsonUtility.FromJson<CharacterData>(json);
+            string json = File.ReadAllText(SavePath);
+            return JsonUtility.FromJson<CharacterData>(json);
         }
+        catch
+        {
+            Debug.LogError("Save file corrupted!");
+            return null;
+        }
+    }
+
+    public static void DeleteSave()
+    {
+        if (File.Exists(SavePath)) File.Delete(SavePath);
+
     }
 }

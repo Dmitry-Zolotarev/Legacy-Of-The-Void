@@ -14,13 +14,14 @@ public class PauseComponent : MonoBehaviour
         
         if (pauseMenu.activeSelf && Time.timeScale == 0f)
         {
-            pauseMenu?.SetActive(false);
+            pauseMenu.SetActive(false);
             Time.timeScale = 1f;  
         }
         else if(Time.timeScale == 1f)
         {
-            pauseMenu?.SetActive(true);
+            pauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }
+        Debug.Log("Pause Pressed " + pauseMenu);
     }
 }

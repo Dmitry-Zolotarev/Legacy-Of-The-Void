@@ -6,7 +6,7 @@ using UnityEngine;
 public enum CharacterStates
 {
     [Description("Здоров")]
-    Alive,
+    Normal,
     [Description("Ранен")]
     Injured,
     [Description("Мёртв")]
@@ -21,7 +21,7 @@ public class CharacterData
     [HideInInspector] public readonly int LifeLimit;
     [HideInInspector] public int Qi = 0;
 
-    [HideInInspector] public CharacterStates currentState = CharacterStates.Alive;
+    [HideInInspector] public CharacterStates healthState = CharacterStates.Normal;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
     [HideInInspector] public int OpenedMeridians = 0;
@@ -67,6 +67,7 @@ public class CharacterData
     {
         if (Qi >= amount) Qi -= amount; 
     }
+
     public Rank GetNextRank()
     {
         int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
