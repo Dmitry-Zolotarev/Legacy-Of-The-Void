@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 4368963432811986002}
   - component: {fileID: 5536105150727464687}
   m_Layer: 5
-  m_Name: Meridians
+  m_Name: OpenedMeridians
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
