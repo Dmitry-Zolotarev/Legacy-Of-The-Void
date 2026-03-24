@@ -10,6 +10,7 @@ public class StudentRoomUI : MonoBehaviour
     [SerializeField] private Image StudentSprite;
     [SerializeField] private Sprite YoungStudentSprite, AdultStudentSprite;
     [SerializeField] private GameObject StudyButtons;
+    [SerializeField] private MeridianBreakController StudentMeridianBreakthrough;
     public static StudentRoomUI Instance;
 
     private Student student;
@@ -50,16 +51,22 @@ public class StudentRoomUI : MonoBehaviour
             NameLabel?.SetText("Ученик " + student.Name);
             AgeLabel?.SetText("Возраст: " + student.Age);
             QiLabel?.SetText($"Ци: {student.Qi} / {student.MaxQi}");
-            MeridiansLabel?.SetText($"Меридианы: {student.OpenedMeridians}/{GameCore.Instance.CurrentMaster.OpenedMeridians / 2}");          
+            MeridiansLabel?.SetText($"Меридианы: {student.OpenedMeridians} / {GameCore.Instance.CurrentMaster.OpenedMeridians / 2}");          
         }
         else
         {
             ToggleElements(false);
-            NameLabel?.SetText("Ученик будет назначен после получения ранга «Второй сорт»");
+            NameLabel?.SetText("Ученик будет назначен после получения ранга «Первый сорт»");
             AgeLabel?.SetText("");
             QiLabel?.SetText("");
             MeridiansLabel?.SetText("");
         }       
     }
     public void GiveQi() => student.SeedQI(GameCore.Instance.CurrentMaster);
+
+    public void BreakthroughStudentMeridians()
+    {
+        ScreenManager.Instance.OpenMenu(9);
+        StudentMeridianBreakthrough.StartSession(student, GameCore.Instance.CurrentMaster.OpenedMeridians / 2);
+    }
 }

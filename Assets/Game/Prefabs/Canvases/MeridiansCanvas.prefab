@@ -268,7 +268,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: -560848598
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &641680945234014597
 GameObject:
@@ -358,7 +383,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: 579052880
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &1023176403525152167
 GameObject:
@@ -448,7 +498,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: -648616056
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &1452995529825401607
 GameObject:
@@ -615,7 +690,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: 955397119
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &2237853674604815788
 GameObject:
@@ -915,6 +1015,19 @@ MonoBehaviour:
   QiLabel: {fileID: 6464526808419031258}
   ShootLabel: {fileID: 3805515917891719081}
   OpenedMeridiansLabel: {fileID: 1044574523833404128}
+  Nodes:
+  - {fileID: 5081330115198959150}
+  - {fileID: 4092342952207502028}
+  - {fileID: 7241461482116537894}
+  - {fileID: 5251330572650723143}
+  - {fileID: 782997246638876158}
+  - {fileID: 4433028532723788183}
+  - {fileID: 3982419460532711964}
+  - {fileID: 736526910490219130}
+  - {fileID: 2941693350305677693}
+  - {fileID: 7629696558905493224}
+  - {fileID: 2530834862135785361}
+  - {fileID: 9200591911895868315}
 --- !u!1 &4237932320929815614
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,7 +1062,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -77.9}
+  m_AnchoredPosition: {x: 851, y: -100}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2300858849125957569
@@ -1008,8 +1121,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1047,7 +1160,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -144.70158, y: 0, z: -234.67624, w: 0}
+  m_margin: {x: -345.0116, y: 0, z: -234.67624, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1141,7 +1254,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: -1284781852
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &4395244259177108920
 GameObject:
@@ -1231,7 +1369,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: -1474615822
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &4552349901762229110
 GameObject:
@@ -1321,7 +1484,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: -1649172829
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &5437942938661849495
 GameObject:
@@ -1411,7 +1599,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: 474129923
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &6329772322910186024
 GameObject:
@@ -1536,7 +1749,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: 1385281785
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &7481678310705437593
 GameObject:
@@ -1572,7 +1810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -856}
+  m_AnchoredPosition: {x: 759.2, y: -860}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8882703642474538052
@@ -1763,8 +2001,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 40
-  MaxSpeed: 40
+  MinSpeed: 35
+  MaxSpeed: 35
   AccelerationDelta: 5
   DantianRadius: 70
   CarriedQi: 0
@@ -1862,7 +2100,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: 737977301
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &7851789626877446187
 GameObject:
@@ -1952,7 +2215,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: 1380155672
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &8310191206975476623
 GameObject:
@@ -2254,5 +2542,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda039c461d0bbb4ba4452911bfc7df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
-  SealStrength: 20
+  StartSealStrength: 20
+  master:
+    ID: 1505282218
+    Generation: 1
+    healthState: 0
+    DiscipleUnlocked: 0
+    FinalBreakReadyFlag: 0
+    Age: 18
+    Name: 
+    MinLifeLimit: 65
+    MaxLifeLimit: 95
+    Body: 10
+    Spirit: 10
+    CurrentRank: 0
+    Qi: 0
+    MaxQi: 60
+    Silver: 100
+    Trophies: 0
+    OpenedMeridians: 0
+    BodyPills: 0
+    SpiritPills: 0
+    QiPills: 0
+    Ranks: []
+    MeridianLevels: []
+    KnownTechniques: []
+    EquippedTechniques: []
   QiOrb: {fileID: 4027815968977077414}

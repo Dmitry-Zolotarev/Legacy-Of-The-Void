@@ -3,15 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(RectTransform))]
 public class MeridianNode : MonoBehaviour
 {
-    public int SealStrength = 10;
-    private CharacterData master;
-    private bool isOpened = false;
+    public int StartSealStrength = 20;
+    private int SealStrength;
+    public CharacterData master;
+    private bool IsOpened = false;
     
     [SerializeField] private RectTransform QiOrb;
     private RectTransform rectTransform;
 
     public void Start()
     {
+        SealStrength = StartSealStrength;
         master = GameCore.Instance.CurrentMaster;
         rectTransform = GetComponent<RectTransform>();
     }
@@ -19,21 +21,22 @@ public class MeridianNode : MonoBehaviour
     {
         var qiOrb = QiOrb.gameObject.GetComponent<QiOrbController>();
 
-        if (!isOpened && IsOverlap(rectTransform, QiOrb))
-        {
-            SetDamage(qiOrb.CarriedQi);
+        if (!IsOpened && IsOverlap(rectTransform, QiOrb))
+        {           
             qiOrb.OnDantian = true;
+            int damage = qiOrb.CarriedQi;
             qiOrb.CarriedQi = 0;
+            SetDamage(damage);
         }
     }
     private void SetDamage(int damage)
     {
         SealStrength -= damage;
-        if (!isOpened && SealStrength <= 0)
+        if (!IsOpened && SealStrength <= 0)
         {
-            isOpened = true;
+            IsOpened = true;
             master.OpenMeridian();
-            Destroy(gameObject, 0.1f);      
+            gameObject.SetActive(false);    
         }
     }
     bool IsOverlap(RectTransform a, RectTransform b)
@@ -41,5 +44,10 @@ public class MeridianNode : MonoBehaviour
         Rect rectA = new Rect(a.position, a.rect.size);
         Rect rectB = new Rect(b.position, b.rect.size);
         return rectA.Overlaps(rectB);
+    }
+    public void UpdateNode()
+    {
+        SealStrength = StartSealStrength;
+        IsOpened = false;
     }
 }

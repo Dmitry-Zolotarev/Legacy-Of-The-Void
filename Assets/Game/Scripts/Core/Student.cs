@@ -10,6 +10,7 @@ public class Student : CharacterData
     {
         var amount = Mathf.Min(MaxQi - Qi, master.Qi);
         master.SpendQi(amount);
+        AddQi(amount);
     }
     public void Inherit(CharacterData master)
     {
@@ -19,5 +20,7 @@ public class Student : CharacterData
         BodyPills = master.BodyPills;
         SpiritPills = master.SpiritPills;
         QiPills = master.QiPills;
+        Ranks = master.Ranks;
+        MeridianLevels = master.MeridianLevels;
     }
 }

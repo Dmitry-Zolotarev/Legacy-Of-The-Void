@@ -13,7 +13,7 @@ public enum CharacterStates
     Sick,
 }
 [Serializable]
-public class CharacterData 
+public class CharacterData
 {
     protected static System.Random random = new System.Random();
     [HideInInspector] public int ID;
@@ -28,8 +28,8 @@ public class CharacterData
     
     public int Age = 18;
     public string Name = "";
-    public int MinLifeLimit = 60;
-    public int MaxLifeLimit = 99;
+    public int MinLifeLimit = 65;
+    public int MaxLifeLimit = 95;
     public int Body = 10;
     public int Spirit = 10;
     public int CurrentRank = 0;
@@ -83,7 +83,7 @@ public class CharacterData
     public void UpdateRank()
     {
         if(CurrentRank < Ranks.Count - 1) CurrentRank++;
-        if (CurrentRank == 2) Student = new Student();
+        if (CurrentRank == 3) Student = new Student();
     }
     public string GetStudentName()
     {

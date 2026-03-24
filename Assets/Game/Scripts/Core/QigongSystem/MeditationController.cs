@@ -42,7 +42,6 @@ public class MeditationController : MonoBehaviour
     private void EndSession()
     {         
         ToggleElements(false);
-        Breathing.StopBreathing();
         QiOrb.StopMoving();
         GameCore.Instance.AdvanceTime(1);
     }

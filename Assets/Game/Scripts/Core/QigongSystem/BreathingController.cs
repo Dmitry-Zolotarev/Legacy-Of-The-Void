@@ -39,10 +39,6 @@ public class BreathingController : MonoBehaviour
     {
         SessionTime = 0f;
     }
-    public void StopBreathing()
-    {
-        GameCore.Instance.AdvanceTime(1);
-    }
     public int GetSecondsRounded()
     {
         return (int)Mathf.Round(SessionTime);

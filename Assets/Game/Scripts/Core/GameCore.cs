@@ -26,7 +26,10 @@ public class GameCore : MonoBehaviour
         var attr = field.GetCustomAttribute<DescriptionAttribute>();
         return attr != null ? attr.Description : value.ToString();
     }
-    public void StartGame() => CurrentMaster = new CharacterData();
+    public void StartGame() 
+    {
+        CurrentMaster = new CharacterData();
+    } 
     public void AdvanceTime(int years)
     {
         CurrentMaster.Age += years;
