@@ -20,7 +20,6 @@ public class RankBreakController : MonoBehaviour
     private void ExitToRankMenu() 
     {
         UpdateNodes();
-        GameCore.Instance.AdvanceTime(1);
         ScreenManager.Instance.OpenMenu(6);
     } 
     private void FixedUpdate()

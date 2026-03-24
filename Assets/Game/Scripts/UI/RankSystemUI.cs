@@ -23,7 +23,7 @@ public class RankSystemUI : MonoBehaviour
         nextRankLabel.SetText(master.GetNextRank().Name);
         needBodyLabel.SetText($"Тело: {master.Body} / {master.GetNextRank().needBody}");
         needMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().needMeridians}");
-        needQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 10}");
+        needQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 20}");
     }
     public void Start() 
     {
@@ -31,7 +31,7 @@ public class RankSystemUI : MonoBehaviour
     }   
     public void TryRankBreakthrough()
     {
-        if (master.Body >= master.GetNextRank().needBody && master.OpenedMeridians >= master.GetNextRank().needMeridians && master.Qi >= master.GetNextRankID() * 10)
+        if (master.Body >= master.GetNextRank().needBody && master.OpenedMeridians >= master.GetNextRank().needMeridians && master.Qi >= master.GetNextRankID() * 20)
         {
             if (master.CurrentRank < master.Ranks.Count - 1) ScreenManager.Instance.OpenMenu(7);
         }          
