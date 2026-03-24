@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 public class MainHubUI : MonoBehaviour
 {
@@ -9,19 +10,33 @@ public class MainHubUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
-
+    [SerializeField] private Image MasterSprite;
+    [SerializeField] private Sprite YoungMasterSprite, AdultMasterSprite, OldMasterSprite;
     public static MainHubUI Instance;
     private CharacterData master;
-    void Awake()
+    private void Awake()
     {
         if (Instance == null) Instance = this;
     }
-    private void Start() {
+    private void Start() => FixedUpdate();
+    private void FixedUpdate() 
+    {
         master = GameCore.Instance.CurrentMaster;
         UpdateLabels();
+        UpdateMasterSprite();
+    } 
+    private void UpdateMasterSprite()
+    {
+        if (master.Age >= 60)
+        {
+            MasterSprite.sprite = OldMasterSprite;
+        }
+        else if (master.Age >= 40)
+        {
+            MasterSprite.sprite = AdultMasterSprite;
+        }
+        else MasterSprite.sprite = YoungMasterSprite;
     }
-    
-    private void FixedUpdate() => UpdateLabels();
     private void UpdateLabels()
     {
         SilverAmountLabel?.SetText(master.Silver.ToString());

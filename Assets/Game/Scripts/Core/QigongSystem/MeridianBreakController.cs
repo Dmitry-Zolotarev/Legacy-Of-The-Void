@@ -17,6 +17,7 @@ public class MeridianBreakController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        master = GameCore.Instance.CurrentMaster;
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {master.MeridianLevels.Count}");   
 

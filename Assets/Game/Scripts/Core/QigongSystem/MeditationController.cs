@@ -63,6 +63,7 @@ public class MeditationController : MonoBehaviour
     }
     private void FixedUpdate() 
     {
+        master = GameCore.Instance.CurrentMaster;
         TimeLeftLabel.SetText("Осталось времени: " + SecondsLeft().ToString());
         StartButton.SetActive(!IsRunning && master.Qi < master.MaxQi);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");

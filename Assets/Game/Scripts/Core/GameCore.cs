@@ -1,18 +1,24 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.ComponentModel;
 using System.Reflection;
 using System;
 public class GameCore : MonoBehaviour
-{
-    [SerializeField] private Sprite YoungMasterSprite, AdultMasterSprite, OldMasterSprite;
-    [SerializeField] private Image MasterSprite;
+{  
+    
     public static GameCore Instance;
-    public CharacterData CurrentMaster;   
+    public CharacterData CurrentMaster;
+    [SerializeField] private GameObject GameOverWindow;
+    [SerializeField] private GameObject MainHubUI;
     void Awake()
-    {      
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+    {
+        if (Instance != null && Instance.gameObject != gameObject)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
     public static string GetEnumDescription(Enum value)
     {
@@ -21,13 +27,6 @@ public class GameCore : MonoBehaviour
         return attr != null ? attr.Description : value.ToString();
     }
     public void StartGame() => CurrentMaster = new CharacterData();
-
-    public void SaveGame() => SaveLoadSystem.Save(CurrentMaster);
-    public void LoadGame()
-    {
-        CurrentMaster = SaveLoadSystem.Load();
-        if (CurrentMaster == null) StartGame();
-    }
     public void AdvanceTime(int years)
     {
         CurrentMaster.Age += years;
@@ -36,18 +35,20 @@ public class GameCore : MonoBehaviour
 
         if (CurrentMaster.Age > CurrentMaster.LifeLimit)
         {
-            CurrentMaster.Student.Inherit(CurrentMaster);
-            CurrentMaster = CurrentMaster.Student;
-        }
-        if (CurrentMaster.Age >= 60)
-        {
-            MasterSprite.sprite = OldMasterSprite;
-        }
-        else if (CurrentMaster.Age >= 40)
-        {
-            MasterSprite.sprite = AdultMasterSprite;
-        } 
-        else MasterSprite.sprite = YoungMasterSprite;
+            ScreenManager.Instance.CloseMenus();
+
+            if (CurrentMaster.Student != null)
+            {
+                CurrentMaster.Student.Inherit(CurrentMaster);
+                CurrentMaster = CurrentMaster.Student;
+
+            }
+            else GameOver();
+        }      
     }
-    
+    private void GameOver()
+    {
+        MainHubUI.SetActive(false);
+        GameOverWindow.SetActive(true);
+    }
 }

@@ -4,7 +4,12 @@ public class Student : CharacterData
 {
     public Student()
     {
-        Age = random.Next(4, 10);
+        Age = random.Next(12, 17);
+    }
+    public void SeedQI(CharacterData master)
+    {
+        var amount = Mathf.Min(MaxQi - Qi, master.Qi);
+        master.SpendQi(amount);
     }
     public void Inherit(CharacterData master)
     {

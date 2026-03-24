@@ -17,23 +17,27 @@ public class RankSystemUI : MonoBehaviour
     }
     public void UpdateLabels()
     {
+        master = GameCore.Instance.CurrentMaster;
+
         currentRankLabel.SetText(master.Ranks[master.CurrentRank].Name);
         nextRankLabel.SetText(master.GetNextRank().Name);
         needBodyLabel.SetText($"Тело: {master.Body} / {master.GetNextRank().needBody}");
         needMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().needMeridians}");
-        needQiLabel.SetText($"Текущая ци: {master.Qi} / {master.MaxQi / 2}");
+        needQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 10}");
     }
-    public void Start()
+    public void Start() 
     {
-        master = GameCore.Instance.CurrentMaster;
         UpdateLabels();
-    }
+    }   
     public void TryRankBreakthrough()
     {
-        if (master.Body >= master.GetNextRank().needBody && master.OpenedMeridians >= master.GetNextRank().needMeridians && master.Qi >= master.MaxQi / 2)
+        if (master.Body >= master.GetNextRank().needBody && master.OpenedMeridians >= master.GetNextRank().needMeridians && master.Qi >= master.GetNextRankID() * 10)
         {
             if (master.CurrentRank < master.Ranks.Count - 1) ScreenManager.Instance.OpenMenu(7);
         }          
     }
-    public void FixedUpdate() => UpdateLabels(); 
+    public void FixedUpdate() 
+    {
+        UpdateLabels();
+    }  
 }

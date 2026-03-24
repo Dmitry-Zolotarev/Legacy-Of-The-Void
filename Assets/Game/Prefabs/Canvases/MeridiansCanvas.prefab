@@ -1763,8 +1763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 50
-  MaxSpeed: 50
+  MinSpeed: 40
+  MaxSpeed: 40
   AccelerationDelta: 5
   DantianRadius: 70
   CarriedQi: 0

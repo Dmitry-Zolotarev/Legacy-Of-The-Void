@@ -38,10 +38,10 @@ public class CharacterData
     public int Silver = 100;
     public int Trophies = 0;
     public int OpenedMeridians = 0;
-    public int QiPills = 0;
+    
     public int BodyPills = 0;
     public int SpiritPills = 0;
-
+    public int QiPills = 0;
     public Student Student;
     public List<Rank> Ranks = new List<Rank>();
     public List<MeridianLevel> MeridianLevels = new List<MeridianLevel>();
@@ -72,12 +72,18 @@ public class CharacterData
     }
     public Rank GetNextRank()
     {
-        int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
+        int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;   
         return Ranks[i];
+    }
+    public int GetNextRankID()
+    {
+        int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
+        return i;
     }
     public void UpdateRank()
     {
         if(CurrentRank < Ranks.Count - 1) CurrentRank++;
+        if (CurrentRank == 2) Student = new Student();
     }
     public string GetStudentName()
     {

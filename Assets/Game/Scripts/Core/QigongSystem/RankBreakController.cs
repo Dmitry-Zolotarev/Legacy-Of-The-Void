@@ -15,16 +15,18 @@ public class RankBreakController : MonoBehaviour
         master = GameCore.Instance.CurrentMaster;
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         UpdateNodes();
-        QiOrb.StartMoving();
-        
+        QiOrb.StartMoving();  
     }
     private void ExitToRankMenu() 
     {
         UpdateNodes();
+        GameCore.Instance.AdvanceTime(1);
         ScreenManager.Instance.OpenMenu(6);
     } 
     private void FixedUpdate()
-    {   
+    {
+        master = GameCore.Instance.CurrentMaster;
+
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");       
         if (master.Qi > 0) ShootLabel.SetText("Нажмите F для броска");
         else ShootLabel.SetText("Недостаточно ци для броска");
