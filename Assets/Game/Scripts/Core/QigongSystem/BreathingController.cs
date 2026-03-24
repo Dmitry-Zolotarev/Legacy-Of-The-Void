@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class BreathingController : MonoBehaviour
 {
-    [SerializeField] private float RhythmCorridor = 1f;
+    public float RhythmCorridor = 1f;
     [SerializeField] private float RhythmAmplitude = 1f;
     [SerializeField] private float RhythmFrequency = 1f;
     [SerializeField] private float DeltaRadius = 0.1f;
@@ -56,5 +56,12 @@ public class BreathingController : MonoBehaviour
     {
         inRhythm = deltaSpeed >= CurrentPhase - RhythmCorridor && deltaSpeed <= CurrentPhase + RhythmCorridor;     
         return inRhythm;
+    }
+    public int SlowOrFast(float deltaSpeed)
+    {
+        if (deltaSpeed < CurrentPhase - RhythmCorridor) return -1;
+        if (deltaSpeed > CurrentPhase + RhythmCorridor) return 1;
+        inRhythm = deltaSpeed >= CurrentPhase - RhythmCorridor && deltaSpeed <= CurrentPhase + RhythmCorridor;
+        return 0;
     }
 }

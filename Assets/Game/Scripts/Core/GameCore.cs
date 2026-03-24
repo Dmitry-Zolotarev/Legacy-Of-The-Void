@@ -30,16 +30,23 @@ public class GameCore : MonoBehaviour
     }
     public void AdvanceTime(int years)
     {
-        var master = CurrentMaster;
-        master.Age += years;
+        CurrentMaster.Age += years;
+        
+        if(CurrentMaster.Student != null) CurrentMaster.Student.Age += years;
 
-        if (master.Age > CurrentMaster.LifeLimit) 
+        if (CurrentMaster.Age > CurrentMaster.LifeLimit)
         {
-            master.healthState = CharacterStates.Dead;
-            return;
+            CurrentMaster.Student.Inherit(CurrentMaster);
+            CurrentMaster = CurrentMaster.Student;
         }
-        if (master.Age >= 60) MasterSprite.sprite = OldMasterSprite;
-        else if (master.Age >= 40) MasterSprite.sprite = AdultMasterSprite;
+        if (CurrentMaster.Age >= 60)
+        {
+            MasterSprite.sprite = OldMasterSprite;
+        }
+        else if (CurrentMaster.Age >= 40)
+        {
+            MasterSprite.sprite = AdultMasterSprite;
+        } 
         else MasterSprite.sprite = YoungMasterSprite;
     }
     

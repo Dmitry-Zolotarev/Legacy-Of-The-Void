@@ -3,8 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class QiOrbController : MonoBehaviour
 {
-    [SerializeField]private float MinSpeed = 1f;
-    [SerializeField]private float MaxSpeed = 2f;
+    public float MinSpeed = 1f;
+    public float MaxSpeed = 2f;
     [SerializeField] private float AccelerationDelta = 1f;
     [SerializeField] private float DantianRadius = 45f;
     
@@ -49,7 +49,11 @@ public class QiOrbController : MonoBehaviour
     {
         if (!IsMoving) return;
 
-        AngleDegrees = (AngleDegrees + CurrentSpeed * Time.deltaTime * 10f) % 360f;
+        float deltaSpeed = CurrentSpeed;
+
+        if (!InBreakthroughMode) deltaSpeed *= deltaSpeed;//„тобы ускорение и замедление шара были заметнее
+
+        AngleDegrees = (AngleDegrees + deltaSpeed * Time.deltaTime * 5f) % 360f;
         transform.localPosition = new Vector2(-Mathf.Cos(AngleDegrees * Mathf.Deg2Rad), Mathf.Sin(AngleDegrees * Mathf.Deg2Rad)) * DantianRadius;
     }
     public void MoveDirectly()
@@ -93,8 +97,8 @@ public class QiOrbController : MonoBehaviour
         if (OnDantian) MoveAlongDantian();
         else MoveDirectly();
 
-        if (AngleDegrees > 269f) InBottom = true;
-        if (AngleDegrees > 271f)
+        if (AngleDegrees > 265f) InBottom = true;
+        if (AngleDegrees > 275f)
         {
             InBottom = false;
             PassedBottom = false;

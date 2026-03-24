@@ -9,13 +9,13 @@ public enum CharacterStates
     Normal,
     [Description("Ранен")]
     Injured,
-    [Description("Мёртв")]
-    Dead
+    [Description("Болен")]
+    Sick,
 }
 [Serializable]
 public class CharacterData 
 {
-    private static System.Random random = new System.Random();
+    protected static System.Random random = new System.Random();
     [HideInInspector] public int ID;
     [HideInInspector] public int Generation = 1;
     [HideInInspector] public readonly int LifeLimit;
@@ -38,9 +38,11 @@ public class CharacterData
     public int Silver = 100;
     public int Trophies = 0;
     public int OpenedMeridians = 0;
-    public int Pills = 0;
+    public int QiPills = 0;
+    public int BodyPills = 0;
+    public int SpiritPills = 0;
 
-    private Student student;
+    public Student Student;
     public List<Rank> Ranks = new List<Rank>();
     public List<MeridianLevel> MeridianLevels = new List<MeridianLevel>();
     public List<string> KnownTechniques = new List<string>();
@@ -79,7 +81,7 @@ public class CharacterData
     }
     public string GetStudentName()
     {
-        if (student != null) return student.Name;
+        if (Student != null) return Student.Name;
         return "нет";
     }
 }
