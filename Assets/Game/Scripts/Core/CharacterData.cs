@@ -83,7 +83,12 @@ public class CharacterData
     public void UpdateRank()
     {
         if(CurrentRank < Ranks.Count - 1) CurrentRank++;
-        if (CurrentRank == 3) Student = new Student();
+        if (CurrentRank == 3) 
+        {
+            Student = new Student();
+            Student.MeridianLevels = MeridianLevels;
+        }
+        
     }
     public string GetStudentName()
     {

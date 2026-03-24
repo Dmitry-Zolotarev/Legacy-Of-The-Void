@@ -5,8 +5,7 @@ public class MeridianNode : MonoBehaviour
 {
     public int StartSealStrength = 20;
     private int SealStrength;
-    public CharacterData master;
-    private bool IsOpened = false;
+    public bool IsOpened = false;
     
     [SerializeField] private RectTransform QiOrb;
     private RectTransform rectTransform;
@@ -14,7 +13,6 @@ public class MeridianNode : MonoBehaviour
     public void Start()
     {
         SealStrength = StartSealStrength;
-        master = GameCore.Instance.CurrentMaster;
         rectTransform = GetComponent<RectTransform>();
     }
     private void Update()
@@ -35,7 +33,6 @@ public class MeridianNode : MonoBehaviour
         if (!IsOpened && SealStrength <= 0)
         {
             IsOpened = true;
-            master.OpenMeridian();
             gameObject.SetActive(false);    
         }
     }

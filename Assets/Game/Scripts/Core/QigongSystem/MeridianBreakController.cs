@@ -12,19 +12,14 @@ public class MeridianBreakController : MonoBehaviour
     private CharacterData master;
     [SerializeField] private List<MeridianNode> Nodes = new List<MeridianNode>();
     private int NodesCount;
-
-    void Start()
-    {
-        StartSession(master, 12);
-    }
-
+    private bool[] nodeStates;
     public void StartSession(CharacterData character, int nodesCount)
     {
         
         bool differentPeople = master != character;
         master = character;
         NodesCount = nodesCount;
-
+        nodeStates = new bool[NodesCount];
         if (differentPeople) UpdateNodes();   
         QiOrb.StartMoving();
         UpdateUI();
@@ -32,6 +27,17 @@ public class MeridianBreakController : MonoBehaviour
     private void Update()
     {
         if (master == null) StartSession(GameCore.Instance.CurrentMaster, 12); 
+
+        for(int i = 0; i < NodesCount; i++)
+        {
+            if (Nodes[i].IsOpened && !nodeStates[i]) 
+            {
+                master.OpenMeridian();
+                Debug.Log(master is Student);
+            }
+            
+            nodeStates[i] = Nodes[i].IsOpened;
+        }
     }
     private void FixedUpdate() => UpdateUI();
 
@@ -39,18 +45,13 @@ public class MeridianBreakController : MonoBehaviour
     {
         QiLabel?.SetText($"Ци: {GameCore.Instance.CurrentMaster.Qi} / {GameCore.Instance.CurrentMaster.MaxQi}");
         ShootLabel.SetText(GameCore.Instance.CurrentMaster.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
-        if (master is Student)
-        {
-            OpenedMeridiansLabel?.SetText("");
-        }
-        else OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {NodesCount}");
+        OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {NodesCount}");
     }
     private void UpdateNodes()
     {
         for (int i = 0; i < Nodes.Count; i++)
         {
             Nodes[i].gameObject.SetActive(i < NodesCount);
-            Nodes[i].master = master;
             Nodes[i].UpdateNode();
         }
     }
