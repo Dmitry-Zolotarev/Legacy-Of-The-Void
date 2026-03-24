@@ -20,14 +20,29 @@ public class MeridianBreakController : MonoBehaviour
         master = character;
         NodesCount = nodesCount;
         nodeStates = new bool[NodesCount];
+
+        bool allNodesOpened = true;
+        for (int i = 0; i < NodesCount; i++)
+        {
+            if (!Nodes[i].IsOpened) allNodesOpened = false;
+        }
+        if (allNodesOpened)
+        {
+            if (master is Student)
+            {
+                ScreenManager.Instance.OpenMenu(8);
+            }
+            else ScreenManager.Instance.OpenMenu(4);
+        }
         if (differentPeople) UpdateNodes();   
         QiOrb.StartMoving();
         UpdateUI();
     }
     private void Update()
     {
-        if (master == null) StartSession(GameCore.Instance.CurrentMaster, 12); 
+        if (master == null) StartSession(GameCore.Instance.CurrentMaster, 12);
 
+        bool allNodesOpened = true;
         for(int i = 0; i < NodesCount; i++)
         {
             if (Nodes[i].IsOpened && !nodeStates[i]) 
@@ -35,8 +50,16 @@ public class MeridianBreakController : MonoBehaviour
                 master.OpenMeridian();
                 Debug.Log(master is Student);
             }
-            
+            if (!Nodes[i].IsOpened) allNodesOpened = false;
             nodeStates[i] = Nodes[i].IsOpened;
+        }
+        if(allNodesOpened)
+        {
+            if (master is Student) 
+            {
+                ScreenManager.Instance.OpenMenu(8);
+            } 
+            else ScreenManager.Instance.OpenMenu(4);
         }
     }
     private void FixedUpdate() => UpdateUI();
@@ -45,7 +68,11 @@ public class MeridianBreakController : MonoBehaviour
     {
         QiLabel?.SetText($"Ци: {GameCore.Instance.CurrentMaster.Qi} / {GameCore.Instance.CurrentMaster.MaxQi}");
         ShootLabel.SetText(GameCore.Instance.CurrentMaster.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
-        OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {NodesCount}");
+        if(master is Student)
+        {
+            OpenedMeridiansLabel?.SetText($"Открыто меридианов ученика: {master.OpenedMeridians} / {NodesCount}");
+        }
+        else OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {NodesCount}");
     }
     private void UpdateNodes()
     {

@@ -935,6 +935,19 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1044574523833404128, guid: da0dc0386784fe344b031c6715bad589, type: 3}
+      propertyPath: m_text
+      value: "\u041E\u0442\u043A\u0440\u044B\u0442\u043E \u043C\u0435\u0440\u0438\u0434\u0438\u0430\u043D\u043E\u0432
+        \u0443\u0447\u0435\u043D\u0438\u043A\u0430: 0 / 12"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1044574523833404128, guid: da0dc0386784fe344b031c6715bad589, type: 3}
+      propertyPath: m_fontSize
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1044574523833404128, guid: da0dc0386784fe344b031c6715bad589, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32
+      objectReference: {fileID: 0}
     - target: {fileID: 2647354798077949136, guid: da0dc0386784fe344b031c6715bad589, type: 3}
       propertyPath: m_Name
       value: StudentMeridiansCanvas

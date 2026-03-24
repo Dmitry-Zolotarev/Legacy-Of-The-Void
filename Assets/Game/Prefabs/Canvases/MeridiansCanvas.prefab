@@ -216,7 +216,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 174, y: 183.4}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1426283233398841815
 CanvasRenderer:
@@ -269,31 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: -560848598
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &641680945234014597
 GameObject:
@@ -331,7 +307,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 219.6, y: -48.10001}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3410278510627172618
 CanvasRenderer:
@@ -384,31 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: 579052880
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &1023176403525152167
 GameObject:
@@ -446,7 +398,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 61.6, y: 30.399994}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2712622556511369809
 CanvasRenderer:
@@ -499,31 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: -648616056
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &1452995529825401607
 GameObject:
@@ -638,7 +566,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -12.700003, y: -134.1}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8027180827229986618
 CanvasRenderer:
@@ -691,31 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: 955397119
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &2237853674604815788
 GameObject:
@@ -1202,7 +1106,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 318.9, y: -196.20001}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6545934695740399797
 CanvasRenderer:
@@ -1255,31 +1159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: -1284781852
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &4395244259177108920
 GameObject:
@@ -1317,7 +1197,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 127.9, y: -48.1}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9132563768855680614
 CanvasRenderer:
@@ -1370,31 +1250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: -1474615822
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &4552349901762229110
 GameObject:
@@ -1432,7 +1288,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 29.899998, y: -197.8}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2008689762469791099
 CanvasRenderer:
@@ -1485,31 +1341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: -1649172829
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &5437942938661849495
 GameObject:
@@ -1547,7 +1379,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -7.300003, y: -241.6}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2667034985970308918
 CanvasRenderer:
@@ -1600,31 +1432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: 474129923
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &6329772322910186024
 GameObject:
@@ -1697,7 +1505,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 284.8, y: 30.399994}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4688248673313851388
 CanvasRenderer:
@@ -1750,31 +1558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: 1385281785
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &7481678310705437593
 GameObject:
@@ -2001,8 +1785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 35
-  MaxSpeed: 35
+  MinSpeed: 30
+  MaxSpeed: 30
   AccelerationDelta: 5
   DantianRadius: 70
   CarriedQi: 0
@@ -2048,7 +1832,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 359.5, y: -131.5}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3258449759783316011
 CanvasRenderer:
@@ -2101,31 +1885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: 737977301
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &7851789626877446187
 GameObject:
@@ -2163,7 +1923,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 174.90001, y: 22.899994}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5742128995151682536
 CanvasRenderer:
@@ -2216,31 +1976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: 1380155672
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
 --- !u!1 &8310191206975476623
 GameObject:
@@ -2490,7 +2226,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 358.1, y: -243.90001}
-  m_SizeDelta: {x: 28, y: 28}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3454676054302552778
 CanvasRenderer:
@@ -2543,29 +2279,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeridianNode
   StartSealStrength: 20
-  master:
-    ID: 1505282218
-    Generation: 1
-    healthState: 0
-    DiscipleUnlocked: 0
-    FinalBreakReadyFlag: 0
-    Age: 18
-    Name: 
-    MinLifeLimit: 65
-    MaxLifeLimit: 95
-    Body: 10
-    Spirit: 10
-    CurrentRank: 0
-    Qi: 0
-    MaxQi: 60
-    Silver: 100
-    Trophies: 0
-    OpenedMeridians: 0
-    BodyPills: 0
-    SpiritPills: 0
-    QiPills: 0
-    Ranks: []
-    MeridianLevels: []
-    KnownTechniques: []
-    EquippedTechniques: []
+  IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
