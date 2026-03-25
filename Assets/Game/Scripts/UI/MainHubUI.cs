@@ -1,6 +1,7 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class MainHubUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI SilverAmountLabel;
@@ -9,40 +10,57 @@ public class MainHubUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
+
     [SerializeField] private Image MasterSprite;
-    [SerializeField] private Sprite YoungMasterSprite, AdultMasterSprite, OldMasterSprite;
+    [SerializeField] private Sprite YoungMasterSprite;
+    [SerializeField] private Sprite AdultMasterSprite;
+    [SerializeField] private Sprite OldMasterSprite;
+
     public static MainHubUI Instance;
+
     private CharacterData master;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
     }
-    private void Start() => FixedUpdate();
-    private void FixedUpdate() 
+    private void Start()
     {
-        master = GameCore.Instance.Master;
+        RefreshUI();                   
+    }
+    public void RefreshUI()
+    {
+        if (GameCore.Instance == null || GameCore.Instance.Master == null) return;
+        master = GameCore.Instance.Master;  
+
         UpdateLabels();
         UpdateMasterSprite();
-    } 
-    private void UpdateMasterSprite()
+    }
+    private void FixedUpdate()
     {
+        if (master == null) return;
+        UpdateLabels();
+    }
+    public void UpdateMasterSprite()
+    {
+        if (master == null || MasterSprite == null) return;
+
         if (master.Age >= 60)
-        {
             MasterSprite.sprite = OldMasterSprite;
-        }
         else if (master.Age >= 40)
-        {
             MasterSprite.sprite = AdultMasterSprite;
-        }
-        else MasterSprite.sprite = YoungMasterSprite;
+        else
+            MasterSprite.sprite = YoungMasterSprite;
     }
     private void UpdateLabels()
     {
+        if (master == null) return;
+
         SilverAmountLabel?.SetText(master.Silver.ToString());
-        GenerationLabel?.SetText("Поколение: " + master.Generation);
-        AgeLabel?.SetText("Возраст: " + master.Age);
-        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name.ToLower());
-        HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());
+        GenerationLabel?.SetText("РџРѕРєРѕР»РµРЅРёРµ: " + master.Generation);
+        AgeLabel?.SetText("Р’РѕР·СЂР°СЃС‚: " + master.Age);
+        QiLabel?.SetText($"Р¦Рё: {master.Qi} / {master.MaxQi}");
+        RankLabel?.SetText("Р Р°РЅРі: " + master.Ranks[master.CurrentRank].Name.ToLower());
+        HasStudentLabel?.SetText("РЈС‡РµРЅРёРє: " + master.GetStudentName());
     }
 }

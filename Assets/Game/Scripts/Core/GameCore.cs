@@ -52,11 +52,9 @@ public class GameCore : MonoBehaviour
         if (Master.Age > Master.LifeLimit)
         {
             ScreenManager.Instance.CloseMenus();
-
-            GameOverWindow.SetActive(true);
-
             GameOverHeader?.SetText($"Мастер {Master.Name} умер");
-
+            
+            GameOverWindow.SetActive(true);
             if (Master.Student != null)
             {
                 Master.Student.Inherit(Master);
@@ -69,6 +67,7 @@ public class GameCore : MonoBehaviour
                 Master.Generation++;
                 GameOverDescrption?.SetText("Наследство не передано");
             }
+            MainHubUI.Instance.RefreshUI();
         }
         AgeLabel?.SetText(Master.Age.ToString());
     }

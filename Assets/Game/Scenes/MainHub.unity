@@ -4152,10 +4152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1600, y: 900}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4674,6 +4674,7 @@ MonoBehaviour:
   MeridiansLabel: {fileID: 5760471903556206139}
   RankLabel: {fileID: 5116436968801748197}
   HasStudentLabel: {fileID: 0}
+  DoRegularUpdate: 0
 --- !u!114 &1717118117252902163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4994,7 +4995,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4676919706567171660}
+      - m_Target: {fileID: 1938562993}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

@@ -10,6 +10,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;   
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
+    [SerializeField] private bool DoRegularUpdate = false;
     private CharacterData master;
  
     public void OnEnable()
@@ -18,7 +19,7 @@ public class StatsPanel : MonoBehaviour
     }
     private void FixedUpdate() 
     {
-        UpdateLabels();
+        if(DoRegularUpdate) UpdateLabels();
     }
     
     private void UpdateLabels()

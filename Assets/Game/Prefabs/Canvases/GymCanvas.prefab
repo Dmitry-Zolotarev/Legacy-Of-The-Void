@@ -880,6 +880,7 @@ MonoBehaviour:
   MeridiansLabel: {fileID: 4548740372050744700}
   RankLabel: {fileID: 4021764739911593890}
   HasStudentLabel: {fileID: 0}
+  DoRegularUpdate: 1
 --- !u!1 &3526256666463054005
 GameObject:
   m_ObjectHideFlags: 0
