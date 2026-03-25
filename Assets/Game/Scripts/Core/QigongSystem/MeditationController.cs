@@ -4,36 +4,51 @@ using TMPro;
 public class MeditationController : MonoBehaviour
 {
     [SerializeField] private QiOrbController QiOrb;
-    [SerializeField] private BreathingController Breathing;
-    
+    [SerializeField] private BreathingController Breathing;  
     [SerializeField] private GameObject StartButton;
-    [SerializeField] private GameObject BackButton;
-    [HideInInspector] public bool IsRunning = false;
-
-    [SerializeField] private float Duration = 30f;
-
+    [SerializeField] private GameObject BackButton;     
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI TimeLeftLabel;
     [SerializeField] private TextMeshProUGUI InRhythmLabel;
+    [SerializeField] private TextMeshProUGUI QiElixirsLabel;
+
+    [SerializeField] private GameObject QiElixirsPanel;
     [SerializeField] private GameObject MouseButtonsHint;
     [SerializeField] private GameObject AgeLabel;
-
-    private CharacterData master;
-
+    [SerializeField] private int StartQiBonus = 1;
+    [SerializeField] private int ElixirPower = 2;
+    [SerializeField] private float GiveQiTick = 0.5f;
+    [SerializeField] private float Duration = 30f;
+    [HideInInspector] public bool IsRunning = false;
     public static MeditationController Instance;
+    private CharacterData master;
+    private int QiBonus = 1;
     float lastGiveTime;
-    void Awake()
+
+    private void Awake()
     {
         if (Instance == null) Instance = this;
     }
-    void Start() 
+    private void Start() 
     {
-        master = GameCore.Instance.CurrentMaster;
+        master = GameCore.Instance.Master;
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         ToggleElements(false);
     }
+    private void OnEnable()
+    {
+        if(master == null) master = GameCore.Instance.Master;
+        QiElixirsLabel.SetText(master.QiElixirs.ToString());
+    }
     public void StartSession()
     {
+        QiBonus = StartQiBonus;
+
+        if (master.QiElixirs > 0) 
+        {
+            QiBonus = StartQiBonus * ElixirPower;
+            master.QiElixirs--;
+        }
         ToggleElements(true);
         MouseButtonsHint.SetActive(false);
         Breathing.StartBreathing();
@@ -41,21 +56,23 @@ public class MeditationController : MonoBehaviour
         lastGiveTime = Time.time;
     }
     private void EndSession()
-    {         
+    {
         ToggleElements(false);
+        QiElixirsLabel.SetText(master.QiElixirs.ToString());
         QiOrb.StopMoving();
         GameCore.Instance.AdvanceTime(1);
     }
     private void ToggleElements(bool value)
     {
         IsRunning = value;
-        QiOrb.gameObject.SetActive(value);
-        TimeLeftLabel.gameObject.SetActive(value);
-        InRhythmLabel.gameObject.SetActive(value);
+        QiOrb?.gameObject.SetActive(value);
+        TimeLeftLabel?.gameObject.SetActive(value);
+        InRhythmLabel?.gameObject.SetActive(value);
 
-        AgeLabel.SetActive(!value);
-        MouseButtonsHint.SetActive(!value);
-        BackButton.SetActive(!value);
+        QiElixirsPanel?.SetActive(!value);
+        AgeLabel?.SetActive(!value);
+        MouseButtonsHint?.SetActive(!value);
+        BackButton?.SetActive(!value);
     }
     private int SecondsLeft()
     {
@@ -63,7 +80,7 @@ public class MeditationController : MonoBehaviour
     }
     private void FixedUpdate() 
     {
-        master = GameCore.Instance.CurrentMaster;
+        master = GameCore.Instance.Master;
         TimeLeftLabel.SetText(SecondsLeft().ToString());
         StartButton.SetActive(!IsRunning && master.Qi < master.MaxQi);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
@@ -80,7 +97,6 @@ public class MeditationController : MonoBehaviour
             InRhythmLabel.color = Color.green;
             QiLabel.color = Color.green;
         } 
-
         if (Breathing.SlowOrFast(QiOrb.GetSpeedDelta()) < 0)
         {
             InRhythmLabel.SetText("Быстрее ↑");
@@ -96,9 +112,9 @@ public class MeditationController : MonoBehaviour
         
         if (!IsRunning) return;
         SetRhythmLabelText();
-        if (Breathing.InRhythm(QiOrb.GetSpeedDelta()) && Time.time >= lastGiveTime + 0.5f)
+        if (Breathing.InRhythm(QiOrb.GetSpeedDelta()) && Time.time > lastGiveTime + GiveQiTick)
         {
-            master.AddQi(1);
+            master.AddQi(QiBonus);
             lastGiveTime = Time.time;
         }    
         if (Breathing.SessionTime >= Duration || master.Qi >= master.MaxQi) EndSession();

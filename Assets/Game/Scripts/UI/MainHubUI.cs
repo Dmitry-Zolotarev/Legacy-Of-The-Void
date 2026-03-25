@@ -20,7 +20,7 @@ public class MainHubUI : MonoBehaviour
     private void Start() => FixedUpdate();
     private void FixedUpdate() 
     {
-        master = GameCore.Instance.CurrentMaster;
+        master = GameCore.Instance.Master;
         UpdateLabels();
         UpdateMasterSprite();
     } 
@@ -40,7 +40,7 @@ public class MainHubUI : MonoBehaviour
     {
         SilverAmountLabel?.SetText(master.Silver.ToString());
         GenerationLabel?.SetText("Поколение: " + master.Generation);
-        AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master)}");
+        AgeLabel?.SetText("Возраст: " + master.Age);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name.ToLower());
         HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());

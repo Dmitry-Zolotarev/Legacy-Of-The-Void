@@ -64,7 +64,7 @@ public class QiOrbController : MonoBehaviour
     }
     private void Shoot()
     {
-        var master = GameCore.Instance.CurrentMaster;
+        var master = GameCore.Instance.Master;
         if (master == null || master.Qi < 1) return;
 
         OnDantian = false;     

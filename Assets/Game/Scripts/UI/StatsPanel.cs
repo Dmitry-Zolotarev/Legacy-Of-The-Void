@@ -12,7 +12,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
     private CharacterData master;
  
-    public void Start()
+    public void OnEnable()
     {
         UpdateLabels();
     }
@@ -23,11 +23,11 @@ public class StatsPanel : MonoBehaviour
     
     private void UpdateLabels()
     {
-        master = GameCore.Instance.CurrentMaster;
+        master = GameCore.Instance.Master;
 
         MasterNameLabel?.SetText("Мастер " + master.Name);
         GenerationLabel?.SetText("Поколение: " + master.Generation);
-        AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master)}");
+        AgeLabel?.SetText($"Возраст: " + master.Age);
         BodyLabel?.SetText("Тело: " + master.Body);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {master.MeridianLevels.Count}");

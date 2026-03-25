@@ -6,10 +6,10 @@ using TMPro;
 using System.Collections.Generic;
 
 public class GameCore : MonoBehaviour
-{  
-    
+{
+    [HideInInspector] public int Year = 1;
+    public CharacterData Master;
     public static GameCore Instance;
-    public CharacterData CurrentMaster;
     [SerializeField] private GameObject GameOverWindow;
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
@@ -31,47 +31,46 @@ public class GameCore : MonoBehaviour
         var attr = field.GetCustomAttribute<DescriptionAttribute>();
         return attr != null ? attr.Description : value.ToString();
     }
-    public string GetYearWord(CharacterData master)
+    public string GetYearWord(int years)
     {
-        int age = master.Age;
         var yearWord = "лет";
-        if (age % 10 > 1 && age % 10 < 5) yearWord = "года";
-        if (age % 10 == 1) yearWord = "год";
+        if (years % 10 > 1 && years % 10 < 5) yearWord = "года";
+        if (years % 10 == 1) yearWord = "год";
         return yearWord;
     }
     private void Start()
     {
-        AgeLabel?.SetText(CurrentMaster.Age.ToString());
+        AgeLabel?.SetText(Master.Age.ToString());
     }
 
     public void AdvanceTime(int years)
     {
-        CurrentMaster.Age += years;
-        if(CurrentMaster.Student != null) CurrentMaster.Student.Age += years;
-
-        AgeLabel?.SetText(CurrentMaster.Age.ToString());
-
-        if (CurrentMaster.Age > CurrentMaster.LifeLimit)
+        Year += years;
+        Master.Age += years;
+        if(Master.Student != null) Master.Student.Age += years;
+       
+        if (Master.Age > Master.LifeLimit)
         {
             ScreenManager.Instance.CloseMenus();
 
             GameOverWindow.SetActive(true);
 
-            GameOverHeader?.SetText($"Мастер {CurrentMaster.Name} умер");
+            GameOverHeader?.SetText($"Мастер {Master.Name} умер");
 
-            if (CurrentMaster.Student != null)
+            if (Master.Student != null)
             {
-                CurrentMaster.Student.Inherit(CurrentMaster);
-                CurrentMaster = CurrentMaster.Student;
+                Master.Student.Inherit(Master);
+                Master = Master.Student;
                 GameOverDescrption?.SetText("Наследство передано ученику");
             }
             else
             {
-                CurrentMaster = new CharacterData();
-                CurrentMaster.Generation++;
+                Master = new CharacterData();
+                Master.Generation++;
                 GameOverDescrption?.SetText("Наследство не передано");
             }
-        }      
+        }
+        AgeLabel?.SetText(Master.Age.ToString());
     }
     
 }

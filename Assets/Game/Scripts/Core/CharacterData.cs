@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 [Serializable]
 public class CharacterData
 {
-    protected static System.Random random = new System.Random();
+    protected System.Random random = new System.Random();
     [HideInInspector] public int ID;
     [HideInInspector] public int Generation = 1;
     [HideInInspector] public readonly int LifeLimit;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
-
     
     public int Age = 16;
     public string Name = "";
@@ -25,9 +23,8 @@ public class CharacterData
     public int Silver = 100;
     public int OpenedMeridians = 0;
     
-    public int BodyPills = 0;
-    public int SpiritPills = 0;
-    public int QiPills = 0;
+    public int BodyElixirs = 0;
+    public int QiElixirs = 0;
     public Student Student;
     public List<Rank> Ranks = new List<Rank>();
     public List<MeridianLevel> MeridianLevels = new List<MeridianLevel>();
@@ -36,7 +33,7 @@ public class CharacterData
     public CharacterData()
     {
         ID = Guid.NewGuid().GetHashCode();
-        LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit);
+        LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
     }
     public void OpenMeridian()
     {

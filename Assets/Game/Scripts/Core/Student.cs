@@ -4,7 +4,7 @@ public class Student : CharacterData
 {
     public Student()
     {
-        Age = random.Next(12, 17);
+        Age = Random.Range(12, 17);
     }
     public void SeedQI(CharacterData master)
     {
@@ -16,9 +16,8 @@ public class Student : CharacterData
     {
         Generation = master.Generation + 1;
         Silver = master.Silver;
-        BodyPills = master.BodyPills;
-        SpiritPills = master.SpiritPills;
-        QiPills = master.QiPills;
+        BodyElixirs = master.BodyElixirs;
+        QiElixirs = master.QiElixirs;
         Ranks = master.Ranks;
     }
 }

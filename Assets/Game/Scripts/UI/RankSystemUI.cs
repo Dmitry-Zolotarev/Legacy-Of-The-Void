@@ -5,29 +5,31 @@ public class RankSystemUI : MonoBehaviour
 {
     
     public static RankSystemUI Instance;
-    [SerializeField] private TextMeshProUGUI currentRankLabel;
-    [SerializeField] private TextMeshProUGUI nextRankLabel;
-    [SerializeField] private TextMeshProUGUI needBodyLabel;
-    [SerializeField] private TextMeshProUGUI needMeridiansLabel;
-    [SerializeField] private TextMeshProUGUI needQiLabel;
+    [SerializeField] private TextMeshProUGUI CurrentRankLabel;
+    [SerializeField] private TextMeshProUGUI NextRankLabel;
+    [SerializeField] private TextMeshProUGUI NeedBodyLabel;
+    [SerializeField] private TextMeshProUGUI NeedMeridiansLabel;
+    [SerializeField] private TextMeshProUGUI NeedQiLabel;
+    [SerializeField] private GameObject FinalVoidBreakCanvas;
     private CharacterData master;
-    void Awake()
+    private void Awake()
     {
         if (Instance == null) Instance = this;
     }
+    private void OnEnable()
+    {
+        
+        UpdateLabels();
+        if (master.CurrentRank >= master.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
+    }
     public void UpdateLabels()
     {
-        master = GameCore.Instance.CurrentMaster;
-
-        currentRankLabel.SetText(master.Ranks[master.CurrentRank].Name);
-        nextRankLabel.SetText(master.GetNextRank().Name);
-        needBodyLabel.SetText($"Тело: {master.Body} / {master.GetNextRank().needBody}");
-        needMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().needMeridians}");
-        needQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 20}");
-    }
-    public void Start() 
-    {
-        UpdateLabels();
+        master = GameCore.Instance.Master;
+        CurrentRankLabel.SetText(master.Ranks[master.CurrentRank].Name);
+        NextRankLabel.SetText(master.GetNextRank().Name);
+        NeedBodyLabel.SetText($"Тело: {master.Body} / {master.GetNextRank().needBody}");
+        NeedMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().needMeridians}");
+        NeedQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 20}");
     }   
     public void TryRankBreakthrough()
     {
@@ -36,8 +38,4 @@ public class RankSystemUI : MonoBehaviour
             if (master.CurrentRank < master.Ranks.Count - 1) ScreenManager.Instance.OpenMenu(7);
         }          
     }
-    public void FixedUpdate() 
-    {
-        UpdateLabels();
-    }  
 }

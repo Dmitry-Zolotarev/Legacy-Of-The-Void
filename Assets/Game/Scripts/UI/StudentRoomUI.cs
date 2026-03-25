@@ -43,15 +43,15 @@ public class StudentRoomUI : MonoBehaviour
     }
     private void UpdateLabels()
     {
-        student = GameCore.Instance.CurrentMaster.Student;
+        student = GameCore.Instance.Master.Student;
 
         if (student != null)
         {
             ToggleElements(true);
             NameLabel?.SetText("Ученик " + student.Name);
-            AgeLabel?.SetText("Возраст: " + GameCore.Instance.GetYearWord(student));
+            AgeLabel?.SetText("Возраст: " + student.Age);
             QiLabel?.SetText($"Ци: {student.Qi} / {student.MaxQi}");
-            MeridiansLabel?.SetText($"Меридианы: {student.OpenedMeridians} / {GameCore.Instance.CurrentMaster.OpenedMeridians / 2}");          
+            MeridiansLabel?.SetText($"Меридианы: {student.OpenedMeridians} / {GameCore.Instance.Master.OpenedMeridians / 2}");          
         }
         else
         {
@@ -62,11 +62,11 @@ public class StudentRoomUI : MonoBehaviour
             MeridiansLabel?.SetText("");
         }       
     }
-    public void GiveQi() => student.SeedQI(GameCore.Instance.CurrentMaster);
+    public void GiveQi() => student.SeedQI(GameCore.Instance.Master);
 
     public void BreakthroughStudentMeridians()
     {
         ScreenManager.Instance.OpenMenu(9);
-        StudentMeridianBreakthrough.StartSession(student, GameCore.Instance.CurrentMaster.OpenedMeridians / 2);
+        StudentMeridianBreakthrough.StartSession(student, GameCore.Instance.Master.OpenedMeridians / 2);
     }
 }

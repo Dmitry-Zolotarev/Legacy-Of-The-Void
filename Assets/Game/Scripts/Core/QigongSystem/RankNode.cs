@@ -10,17 +10,26 @@ public class RankNode : MonoBehaviour
     public int NeedQi = 10;
     [SerializeField] private RectTransform QiOrb;
     private RectTransform rectTransform;
-    private Image image;
+    [SerializeField] private Image FillImage;
     public void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        image = GetComponent<Image>();
+        FillImage.color = Color.blue;    
+    }
+    private void OnEnable()
+    {
+        FillImage.gameObject.SetActive(true);
+        FillImage.fillAmount = (float)Qi / NeedQi;
+    }
+    private void OnDisable()
+    {
+        FillImage.gameObject.SetActive(false);
     }
     private void Update()
     {
         var qiOrb = QiOrb.gameObject.GetComponent<QiOrbController>();
 
-        image.color = IsFilled ? Color.aquamarine : Color.white;
+        FillImage.fillAmount = (float)Qi / NeedQi;
         
         if (!IsFilled && IsOverlap(rectTransform, QiOrb))
         {

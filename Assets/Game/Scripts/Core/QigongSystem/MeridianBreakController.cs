@@ -15,7 +15,6 @@ public class MeridianBreakController : MonoBehaviour
     private bool[] nodeStates;
     public void StartSession(CharacterData character, int nodesCount)
     {
-        
         bool differentPeople = master != character;
         master = character;
         NodesCount = nodesCount;
@@ -26,21 +25,14 @@ public class MeridianBreakController : MonoBehaviour
         {
             if (!Nodes[i].IsOpened) allNodesOpened = false;
         }
-        if (allNodesOpened)
-        {
-            if (master is Student)
-            {
-                ScreenManager.Instance.OpenMenu(8);
-            }
-            else ScreenManager.Instance.OpenMenu(4);
-        }
+        if (allNodesOpened) Exit();
         if (differentPeople) UpdateNodes();   
         QiOrb.StartMoving();
         UpdateUI();
     }
     private void Update()
     {
-        if (master == null) StartSession(GameCore.Instance.CurrentMaster, 12);
+        if (master == null) StartSession(GameCore.Instance.Master, 12);
 
         bool allNodesOpened = true;
         for(int i = 0; i < NodesCount; i++)
@@ -59,8 +51,8 @@ public class MeridianBreakController : MonoBehaviour
 
     private void UpdateUI()
     {
-        QiLabel?.SetText($"Ци: {GameCore.Instance.CurrentMaster.Qi} / {GameCore.Instance.CurrentMaster.MaxQi}");
-        ShootLabel.SetText(GameCore.Instance.CurrentMaster.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
+        QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
+        ShootLabel.SetText(GameCore.Instance.Master.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
         if(master is Student)
         {
             OpenedMeridiansLabel?.SetText($"Открыто меридианов ученика: {master.OpenedMeridians} / {NodesCount}");

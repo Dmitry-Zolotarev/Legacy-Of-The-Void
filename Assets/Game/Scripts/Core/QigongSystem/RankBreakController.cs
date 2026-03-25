@@ -12,7 +12,7 @@ public class RankBreakController : MonoBehaviour
     private int nextRank = 1;
     void Start()
     {
-        master = GameCore.Instance.CurrentMaster;
+        master = GameCore.Instance.Master;
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         UpdateNodes();
         QiOrb.StartMoving();  
@@ -24,7 +24,7 @@ public class RankBreakController : MonoBehaviour
     } 
     private void FixedUpdate()
     {
-        master = GameCore.Instance.CurrentMaster;
+        master = GameCore.Instance.Master;
 
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");       
         if (master.Qi > 0) ShootLabel.SetText("Нажмите F для броска");

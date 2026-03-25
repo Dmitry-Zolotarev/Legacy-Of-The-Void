@@ -564,11 +564,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383b22b71fce77645b0f164f04ed659e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RankSystemUI
-  currentRankLabel: {fileID: 8156036201142623210}
-  nextRankLabel: {fileID: 5655425669854837807}
-  needBodyLabel: {fileID: 4303270801768498026}
-  needMeridiansLabel: {fileID: 9077904880175784294}
-  needQiLabel: {fileID: 4411704447257989032}
+  CurrentRankLabel: {fileID: 8156036201142623210}
+  NextRankLabel: {fileID: 5655425669854837807}
+  NeedBodyLabel: {fileID: 4303270801768498026}
+  NeedMeridiansLabel: {fileID: 9077904880175784294}
+  NeedQiLabel: {fileID: 4411704447257989032}
+  FinalVoidBreakCanvas: {fileID: 2647354798077949136, guid: e40f771fbb2a6404ba9176fd90999f92, type: 3}
 --- !u!1 &2858996973063793199
 GameObject:
   m_ObjectHideFlags: 0
