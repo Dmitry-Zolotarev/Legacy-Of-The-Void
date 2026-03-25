@@ -49,7 +49,7 @@ public class StudentRoomUI : MonoBehaviour
         {
             ToggleElements(true);
             NameLabel?.SetText("Ученик " + student.Name);
-            AgeLabel?.SetText("Возраст: " + student.Age);
+            AgeLabel?.SetText("Возраст: " + GameCore.Instance.GetYearWord(student));
             QiLabel?.SetText($"Ци: {student.Qi} / {student.MaxQi}");
             MeridiansLabel?.SetText($"Меридианы: {student.OpenedMeridians} / {GameCore.Instance.CurrentMaster.OpenedMeridians / 2}");          
         }

@@ -1,4 +1,5 @@
 
+using TMPro;
 using UnityEngine;
 
 public class TravelSystem : MonoBehaviour
@@ -7,15 +8,14 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private int MaxSilver = 20;
     [SerializeField] private int MinTrophies = 1;
     [SerializeField] private int MaxTrophies = 3;
+    [SerializeField] private TextMeshProUGUI SilverLabel;
     public void Travel()
     {
-        var master = GameCore.Instance.CurrentMaster;
-
-        if (master.healthState == CharacterStates.Normal)
-        {
-            master.Silver += Random.Range(MinSilver, MaxSilver);
-            master.Trophies += Random.Range(MinTrophies, MaxTrophies);
-            GameCore.Instance.AdvanceTime(1);
-        }
+        GameCore.Instance.CurrentMaster.Silver += Random.Range(MinSilver, MaxSilver);
+        GameCore.Instance.AdvanceTime(1);
+    }
+    private void FixedUpdate()
+    {
+        SilverLabel.SetText(GameCore.Instance.CurrentMaster.Silver.ToString());
     }
 }

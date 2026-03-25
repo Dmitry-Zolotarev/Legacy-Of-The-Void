@@ -4,7 +4,6 @@ using TMPro;
 public class MainHubUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI SilverAmountLabel;
-    [SerializeField] private TextMeshProUGUI TrophiesLabel; 
     [SerializeField] private TextMeshProUGUI GenerationLabel;
     [SerializeField] private TextMeshProUGUI AgeLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
@@ -40,9 +39,8 @@ public class MainHubUI : MonoBehaviour
     private void UpdateLabels()
     {
         SilverAmountLabel?.SetText(master.Silver.ToString());
-        TrophiesLabel?.SetText(master.Trophies.ToString()); 
         GenerationLabel?.SetText("Поколение: " + master.Generation);
-        AgeLabel?.SetText("Возраст: " + master.Age);
+        AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master)}");
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name.ToLower());
         HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());

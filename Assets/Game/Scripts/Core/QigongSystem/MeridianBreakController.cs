@@ -53,14 +53,7 @@ public class MeridianBreakController : MonoBehaviour
             if (!Nodes[i].IsOpened) allNodesOpened = false;
             nodeStates[i] = Nodes[i].IsOpened;
         }
-        if(allNodesOpened)
-        {
-            if (master is Student) 
-            {
-                ScreenManager.Instance.OpenMenu(8);
-            } 
-            else ScreenManager.Instance.OpenMenu(4);
-        }
+        if (allNodesOpened) Exit();
     }
     private void FixedUpdate() => UpdateUI();
 
@@ -81,5 +74,13 @@ public class MeridianBreakController : MonoBehaviour
             Nodes[i].gameObject.SetActive(i < NodesCount);
             Nodes[i].UpdateNode();
         }
+    }
+    public void Exit()
+    {
+        if (master is Student)
+        {
+            ScreenManager.Instance.OpenMenu((int)Canvases.StudentCanvas);
+        }
+        else ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
     }
 }

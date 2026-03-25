@@ -1,5 +1,17 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+public enum Canvases
+{
+    MeridiansCanvas,
+    MeditationCanvas,
+    StatsPanel,
+    MapCanvas,
+    GymCanvas,
+    ShopCanvas,
+    RankCanvas,
+    RankBreakCanvas,
+    StudentCanvas,
+    StudentMeridiansCanvas
+}
 
 public class ScreenManager : MonoBehaviour
 {

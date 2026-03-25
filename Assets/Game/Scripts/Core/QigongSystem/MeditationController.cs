@@ -10,17 +10,18 @@ public class MeditationController : MonoBehaviour
     [SerializeField] private GameObject BackButton;
     [HideInInspector] public bool IsRunning = false;
 
-    [SerializeField] private float Duration = 20f;
-    [SerializeField] private int QiBonus = 1;
+    [SerializeField] private float Duration = 30f;
 
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI TimeLeftLabel;
     [SerializeField] private TextMeshProUGUI InRhythmLabel;
     [SerializeField] private GameObject MouseButtonsHint;
+    [SerializeField] private GameObject AgeLabel;
 
     private CharacterData master;
 
     public static MeditationController Instance;
+    float lastGiveTime;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -34,10 +35,10 @@ public class MeditationController : MonoBehaviour
     public void StartSession()
     {
         ToggleElements(true);
-        
-
+        MouseButtonsHint.SetActive(false);
         Breathing.StartBreathing();
         QiOrb.StartMoving();
+        lastGiveTime = Time.time;
     }
     private void EndSession()
     {         
@@ -51,8 +52,8 @@ public class MeditationController : MonoBehaviour
         QiOrb.gameObject.SetActive(value);
         TimeLeftLabel.gameObject.SetActive(value);
         InRhythmLabel.gameObject.SetActive(value);
-        MouseButtonsHint.SetActive(value);
-        
+
+        AgeLabel.SetActive(!value);
         MouseButtonsHint.SetActive(!value);
         BackButton.SetActive(!value);
     }
@@ -63,30 +64,43 @@ public class MeditationController : MonoBehaviour
     private void FixedUpdate() 
     {
         master = GameCore.Instance.CurrentMaster;
-        TimeLeftLabel.SetText("Осталось времени: " + SecondsLeft().ToString());
+        TimeLeftLabel.SetText(SecondsLeft().ToString());
         StartButton.SetActive(!IsRunning && master.Qi < master.MaxQi);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
     } 
     private void SetRhythmLabelText()
     {
-        if (Breathing.SlowOrFast(QiOrb.GetSpeedDelta()) != 0) InRhythmLabel.color = Color.orangeRed;
-        else InRhythmLabel.color = Color.green;
+        if (Breathing.SlowOrFast(QiOrb.GetSpeedDelta()) != 0)
+        {
+            InRhythmLabel.color = Color.orangeRed;
+            QiLabel.color = Color.white;
+        }
+        else 
+        {
+            InRhythmLabel.color = Color.green;
+            QiLabel.color = Color.green;
+        } 
 
         if (Breathing.SlowOrFast(QiOrb.GetSpeedDelta()) < 0)
         {
-            InRhythmLabel.SetText("Слишком медленно");
+            InRhythmLabel.SetText("Быстрее ↑");
         }
         else if (Breathing.SlowOrFast(QiOrb.GetSpeedDelta()) > 0) 
         {
-            InRhythmLabel.SetText("Слишком быстро");
+            InRhythmLabel.SetText("Медленнее ↓");
         } 
         else InRhythmLabel.SetText("В ритме");
     }
     void Update()
     {
+        
         if (!IsRunning) return;
         SetRhythmLabelText();
-        if (Breathing.InRhythm(QiOrb.GetSpeedDelta()) && QiOrb.PassBottom()) master.AddQi(QiBonus);     
+        if (Breathing.InRhythm(QiOrb.GetSpeedDelta()) && Time.time >= lastGiveTime + 0.5f)
+        {
+            master.AddQi(1);
+            lastGiveTime = Time.time;
+        }    
         if (Breathing.SessionTime >= Duration || master.Qi >= master.MaxQi) EndSession();
     }
 }

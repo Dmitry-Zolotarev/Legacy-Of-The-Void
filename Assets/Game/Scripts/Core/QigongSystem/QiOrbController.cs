@@ -15,9 +15,6 @@ public class QiOrbController : MonoBehaviour
     public bool OnDantian = true;
     public float AngleDegrees = 0;
     private bool IsMoving = false;
-    private bool InBottom = false;
-    private bool PassedBottom = false;
-
 
     void Awake()
     {
@@ -95,19 +92,6 @@ public class QiOrbController : MonoBehaviour
             }
         }
         if (OnDantian) MoveAlongDantian();
-        else MoveDirectly();
-
-        if (AngleDegrees > 265f) InBottom = true;
-        if (AngleDegrees > 275f)
-        {
-            InBottom = false;
-            PassedBottom = false;
-        }        
-    }
-    public bool PassBottom()
-    {
-        if (!InBottom || PassedBottom) return false;
-        PassedBottom = true;
-        return true;
+        else MoveDirectly();  
     }
 }

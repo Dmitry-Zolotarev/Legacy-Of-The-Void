@@ -2,13 +2,18 @@ using UnityEngine;
 using System.ComponentModel;
 using System.Reflection;
 using System;
+using TMPro;
+using System.Collections.Generic;
+
 public class GameCore : MonoBehaviour
 {  
     
     public static GameCore Instance;
     public CharacterData CurrentMaster;
     [SerializeField] private GameObject GameOverWindow;
-    [SerializeField] private GameObject MainHubUI;
+    [SerializeField] private TextMeshProUGUI GameOverHeader;
+    [SerializeField] private TextMeshProUGUI GameOverDescrption;
+    [SerializeField] private TextMeshProUGUI AgeLabel;
     void Awake()
     {
         if (Instance != null && Instance.gameObject != gameObject)
@@ -26,32 +31,47 @@ public class GameCore : MonoBehaviour
         var attr = field.GetCustomAttribute<DescriptionAttribute>();
         return attr != null ? attr.Description : value.ToString();
     }
-    public void StartGame() 
+    public string GetYearWord(CharacterData master)
     {
-        CurrentMaster = new CharacterData();
-    } 
+        int age = master.Age;
+        var yearWord = "лет";
+        if (age % 10 > 1 && age % 10 < 5) yearWord = "года";
+        if (age % 10 == 1) yearWord = "год";
+        return yearWord;
+    }
+    private void Start()
+    {
+        AgeLabel?.SetText(CurrentMaster.Age.ToString());
+    }
+
     public void AdvanceTime(int years)
     {
         CurrentMaster.Age += years;
-        
         if(CurrentMaster.Student != null) CurrentMaster.Student.Age += years;
+
+        AgeLabel?.SetText(CurrentMaster.Age.ToString());
 
         if (CurrentMaster.Age > CurrentMaster.LifeLimit)
         {
             ScreenManager.Instance.CloseMenus();
 
+            GameOverWindow.SetActive(true);
+
+            GameOverHeader?.SetText($"Мастер {CurrentMaster.Name} умер");
+
             if (CurrentMaster.Student != null)
             {
                 CurrentMaster.Student.Inherit(CurrentMaster);
                 CurrentMaster = CurrentMaster.Student;
-
+                GameOverDescrption?.SetText("Наследство передано ученику");
             }
-            else GameOver();
+            else
+            {
+                CurrentMaster = new CharacterData();
+                CurrentMaster.Generation++;
+                GameOverDescrption?.SetText("Наследство не передано");
+            }
         }      
     }
-    private void GameOver()
-    {
-        MainHubUI.SetActive(false);
-        GameOverWindow.SetActive(true);
-    }
+    
 }

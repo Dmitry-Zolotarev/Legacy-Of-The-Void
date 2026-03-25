@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public enum CharacterStates
-{
-    [Description("Здоров")]
-    Normal,
-    [Description("Ранен")]
-    Injured,
-    [Description("Болен")]
-    Sick,
-}
 [Serializable]
 public class CharacterData
 {
@@ -19,24 +10,19 @@ public class CharacterData
     [HideInInspector] public int ID;
     [HideInInspector] public int Generation = 1;
     [HideInInspector] public readonly int LifeLimit;
- 
-
-    [HideInInspector] public CharacterStates healthState = CharacterStates.Normal;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
 
     
-    public int Age = 18;
+    public int Age = 16;
     public string Name = "";
     public int MinLifeLimit = 65;
     public int MaxLifeLimit = 95;
     public int Body = 10;
-    public int Spirit = 10;
     public int CurrentRank = 0;
     public int Qi = 0;
     public int MaxQi = 60;
     public int Silver = 100;
-    public int Trophies = 0;
     public int OpenedMeridians = 0;
     
     public int BodyPills = 0;
@@ -57,7 +43,6 @@ public class CharacterData
         if (OpenedMeridians >= MeridianLevels.Count) return;
 
         MaxQi = MeridianLevels[OpenedMeridians].MaxQi;
-        Spirit = MeridianLevels[OpenedMeridians].Spirit;
 
         OpenedMeridians++;
     }

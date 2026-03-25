@@ -16,11 +16,9 @@ public class Student : CharacterData
     {
         Generation = master.Generation + 1;
         Silver = master.Silver;
-        Trophies = master.Trophies;
         BodyPills = master.BodyPills;
         SpiritPills = master.SpiritPills;
         QiPills = master.QiPills;
         Ranks = master.Ranks;
-        MeridianLevels = master.MeridianLevels;
     }
 }
