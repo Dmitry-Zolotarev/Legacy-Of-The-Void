@@ -9,25 +9,18 @@ public class GameCore : MonoBehaviour
 {
     [HideInInspector] public int Year = 1;
     public CharacterData Master;
-    public static GameCore Instance;
+    
     [SerializeField] private GameObject GameOverWindow;
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
     [SerializeField] private TextMeshProUGUI AgeLabel;
     public List<Techinique> Techniques;
     [SerializeField] private List<string> SurnameList;
-    [SerializeField] private List<string> NameList;    
+    [SerializeField] private List<string> NameList;
+    public static GameCore Instance;
     void Awake()
     {
-        if (Instance != null && Instance.gameObject != gameObject)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-        Master.Name = GenerateFullName();
+        if (Instance == null) Instance = this;
     }
     public string GenerateFullName()
     {

@@ -70,8 +70,7 @@ public class MeditationController : MonoBehaviour
         InRhythmLabel?.gameObject.SetActive(value);
 
         QiElixirsPanel?.SetActive(!value);
-        AgeLabel?.SetActive(!value);
-        MouseButtonsHint?.SetActive(!value);
+        AgeLabel?.SetActive(!value);    
         BackButton?.SetActive(!value);
     }
     private int SecondsLeft()

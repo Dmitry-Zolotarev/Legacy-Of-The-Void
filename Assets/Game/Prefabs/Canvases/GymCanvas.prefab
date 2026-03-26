@@ -1829,6 +1829,7 @@ GameObject:
   - component: {fileID: 9118886118327769118}
   - component: {fileID: 8219888319974425594}
   - component: {fileID: 6140016951379845234}
+  - component: {fileID: 865840910805618065}
   m_Layer: 5
   m_Name: QiElixirs
   m_TagString: Untagged
@@ -1894,6 +1895,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &865840910805618065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7415263223520281909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cc3efb29c6ee94486e3d7df8baf4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipTrigger
+  tooltipText: "\u042D\u043B\u0438\u043A\u0441\u0438\u0440 \u0446\u0438 \u0443\u0434\u0432\u0430\u0438\u0432\u0430\u0435\u0442
+    \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u043C\u0443\u044E \u0446\u0438 \u043F\u0440\u0438
+    \u043C\u0435\u0434\u0438\u0442\u0430\u0446\u0438\u0438"
 --- !u!1 &7826849661330450744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,6 +2058,7 @@ GameObject:
   - component: {fileID: 3349064284157753325}
   - component: {fileID: 4967520879124918426}
   - component: {fileID: 6499956454065585024}
+  - component: {fileID: 8354380547732627989}
   m_Layer: 5
   m_Name: BodyElixirs
   m_TagString: Untagged
@@ -2107,6 +2124,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8354380547732627989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7847649416577469691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cc3efb29c6ee94486e3d7df8baf4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipTrigger
+  tooltipText: "\u042D\u043B\u0438\u043A\u0441\u0438\u0440 \u0442\u0435\u043B\u0430
+    \u0434\u0430\u0435\u0442 x2 \u0431\u043E\u043D\u0443\u0441 \u043F\u0440\u0438
+    \u0442\u0440\u0435\u043D\u0438\u0440\u043E\u0432\u043A\u0435 \u0442\u0435\u043B\u0430"
 --- !u!1 &9195340907291255697
 GameObject:
   m_ObjectHideFlags: 0
