@@ -63,7 +63,7 @@ public class MeridianBreakController : MonoBehaviour
     {
         for (int i = 0; i < Nodes.Count; i++)
         {
-            Nodes[i].gameObject.SetActive(i < NodesCount);
+            Nodes[i].gameObject.SetActive(i >= master.OpenedMeridians && i < NodesCount);
             Nodes[i].UpdateNode();
         }
     }

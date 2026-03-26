@@ -3,25 +3,30 @@ using UnityEngine.InputSystem;
 
 public class PauseComponent : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject PauseMenu;
+    [SerializeField] private GameObject OptionsMenu;
     void Start()
     {
-        if (pauseMenu != null) pauseMenu.SetActive(false);
+        if (PauseMenu != null) PauseMenu.SetActive(false);
     }
     public void Pause()
     {
-        if (pauseMenu == null) return;
-        
-        if (pauseMenu.activeSelf && Time.timeScale == 0f)
+        if (PauseMenu == null) return;
+        OptionsMenu?.SetActive(false);
+        if (PauseMenu.activeSelf && Time.timeScale == 0f)
         {
-            pauseMenu.SetActive(false);
+            PauseMenu.SetActive(false);
             Time.timeScale = 1f;  
         }
         else if(Time.timeScale == 1f)
         {
-            pauseMenu.SetActive(true);
+            PauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }
-        Debug.Log("Pause Pressed " + pauseMenu);
+        Debug.Log("Pause Pressed " + PauseMenu);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) Pause();
     }
 }

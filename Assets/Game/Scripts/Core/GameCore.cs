@@ -14,6 +14,9 @@ public class GameCore : MonoBehaviour
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
     [SerializeField] private TextMeshProUGUI AgeLabel;
+    public List<Techinique> Techniques;
+    [SerializeField] private List<string> SurnameList;
+    [SerializeField] private List<string> NameList;    
     void Awake()
     {
         if (Instance != null && Instance.gameObject != gameObject)
@@ -24,6 +27,16 @@ public class GameCore : MonoBehaviour
         {
             Instance = this;
         }
+        Master.Name = GenerateFullName();
+    }
+    public string GenerateFullName()
+    {
+        var random = new System.Random();
+        var surname = "";
+        surname = SurnameList?[random.Next(0, SurnameList.Count)];
+        var name = "";
+        name = NameList?[random.Next(0, NameList.Count)];
+        return $"{surname} {name}";
     }
     public static string GetEnumDescription(Enum value)
     {
@@ -42,7 +55,7 @@ public class GameCore : MonoBehaviour
     {
         AgeLabel?.SetText(Master.Age.ToString());
     }
-
+    
     public void AdvanceTime(int years)
     {
         Year += years;
@@ -51,6 +64,7 @@ public class GameCore : MonoBehaviour
        
         if (Master.Age > Master.LifeLimit)
         {
+            var oldMaster = Master;
             ScreenManager.Instance.CloseMenus();
             GameOverHeader?.SetText($"Мастер {Master.Name} умер");
             

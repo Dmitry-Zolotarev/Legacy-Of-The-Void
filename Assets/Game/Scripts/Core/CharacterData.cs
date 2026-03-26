@@ -6,12 +6,11 @@ using UnityEngine;
 public class CharacterData
 {
     protected System.Random random = new System.Random();
-    [HideInInspector] public int ID;
     [HideInInspector] public int Generation = 1;
     [HideInInspector] public readonly int LifeLimit;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
-    
+    [HideInInspector] public int EquippedTechnique = 0;
     public int Age = 16;
     public string Name = "";
     public int MinLifeLimit = 65;
@@ -26,13 +25,13 @@ public class CharacterData
     public int BodyElixirs = 0;
     public int QiElixirs = 0;
     public Student Student;
-    public List<Rank> Ranks = new List<Rank>();
-    public List<MeridianLevel> MeridianLevels = new List<MeridianLevel>();
-    public List<string> KnownTechniques = new List<string>();
-    public List<string> EquippedTechniques = new List<string>();
+    public List<Rank> Ranks;
+    public List<MeridianLevel> MeridianLevels;
+    
+
     public CharacterData()
     {
-        ID = Guid.NewGuid().GetHashCode();
+        Name = GameCore.Instance?.GenerateFullName();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
     }
     public void OpenMeridian()

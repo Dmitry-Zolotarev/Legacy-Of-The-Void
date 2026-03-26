@@ -15,9 +15,7 @@ public class MainHubUI : MonoBehaviour
     [SerializeField] private Sprite YoungMasterSprite;
     [SerializeField] private Sprite AdultMasterSprite;
     [SerializeField] private Sprite OldMasterSprite;
-
     public static MainHubUI Instance;
-
     private CharacterData master;
 
     private void Awake()
