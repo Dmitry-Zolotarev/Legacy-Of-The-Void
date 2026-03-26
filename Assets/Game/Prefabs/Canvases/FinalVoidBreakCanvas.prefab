@@ -663,6 +663,7 @@ MonoBehaviour:
   MeridiansLabel: {fileID: 5501475559909121505}
   RankLabel: {fileID: 1723557361205310181}
   HasStudentLabel: {fileID: 0}
+  DoRegularUpdate: 0
 --- !u!1 &4568448312479787117
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,11 +729,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0421\u043E\u0432\u0435\u0440\u0448\u0451\u043D \u043F\u0440\u043E\u0440\u044B\u0432
-    \u043F\u0443\u0441\u0442\u043E\u0442\u044B"
+  m_text: "\u041F\u0440\u043E\u0440\u044B\u0432 \u043F\u0443\u0441\u0442\u043E\u0442\u044B
+    \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3b532f9d2530e2944adaeebc6c4dd83f, type: 2}
+  m_sharedMaterial: {fileID: 4041680305039466951, guid: 3b532f9d2530e2944adaeebc6c4dd83f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

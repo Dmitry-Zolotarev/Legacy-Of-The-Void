@@ -29,7 +29,7 @@ public class StatsPanel : MonoBehaviour
         MasterNameLabel?.SetText("Мастер " + master.Name);
         GenerationLabel?.SetText("Поколение: " + master.Generation);
         AgeLabel?.SetText($"Возраст: " + master.Age);
-        BodyLabel?.SetText("Тело: " + master.Body);
+        BodyLabel?.SetText("Телосложение: " + master.Body);
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {master.MeridianLevels.Count}");
         RankLabel?.SetText("Ранг: " + master.Ranks[master.CurrentRank].Name.ToLower());

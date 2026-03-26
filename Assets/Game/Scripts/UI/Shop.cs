@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Shop : MonoBehaviour
 {
@@ -13,9 +14,14 @@ public class Shop : MonoBehaviour
     [SerializeField] private TextMeshProUGUI QiElixirPriceLabel;
     [SerializeField] private Image Merchant;
     [SerializeField] private Sprite[] MerchantSprites;
+    [SerializeField] private List<GameObject> TechniqueLots;
+    [SerializeField] private List<TextMeshProUGUI> TechniqueNameLabels;
+    [SerializeField] private List<TextMeshProUGUI> TechniquePriceLabels;
     private CharacterData master;
+
     private void OnEnable()
     {
+        
         UpdateUI();
     }
     private void Update()
@@ -31,6 +37,14 @@ public class Shop : MonoBehaviour
     private void UpdateUI()
     {
         master = GameCore.Instance.Master;
+
+        for (int i = 0; i < TechniqueNameLabels.Count; i++)
+        {
+            var technique = GameCore.Instance.Techniques[i + 1];
+            TechniqueNameLabels[i].SetText(technique.Name);
+            TechniquePriceLabels[i].SetText(technique.Price.ToString());
+            TechniqueLots[i].gameObject.SetActive(master.CurrentRank >= technique.RequiredRank && !master.KnownTechniques.Contains(technique));       
+        }   
         SilverAmountLabel?.SetText(master.Silver.ToString());
         BodyElixirsLabel?.SetText(master.BodyElixirs.ToString());
         QiElixirsLabel?.SetText(master.QiElixirs.ToString());
@@ -52,6 +66,16 @@ public class Shop : MonoBehaviour
         {
             master.Silver -= BodyElixirPrice;
             master.BodyElixirs++;
+        }
+        UpdateUI();
+    }
+    public void BuyTechnique(int i)
+    {
+        var technique = GameCore.Instance.Techniques[i];
+        if(master.CurrentRank >= technique.RequiredRank && master.Silver >= technique.Price)
+        {
+            master.Silver -= technique.Price;
+            master.KnownTechniques.Add(technique);
         }
         UpdateUI();
     }

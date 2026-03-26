@@ -10,7 +10,8 @@ public class CharacterData
     [HideInInspector] public readonly int LifeLimit;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
-    [HideInInspector] public int EquippedTechnique = 0;
+    [HideInInspector] public List<Technique> KnownTechniques;
+
     public int Age = 16;
     public string Name = "";
     public int MinLifeLimit = 65;
@@ -28,11 +29,12 @@ public class CharacterData
     public List<Rank> Ranks;
     public List<MeridianLevel> MeridianLevels;
     
+    [HideInInspector] public Technique EquippedTechnique;
 
     public CharacterData()
     {
         Name = GameCore.Instance?.GenerateFullName();
-        LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
+        LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1); 
     }
     public void OpenMeridian()
     {
@@ -75,5 +77,9 @@ public class CharacterData
     {
         if (Student != null) return Student.Name;
         return "нет";
+    }
+    public string GetRankName(int i)
+    {
+        return Ranks[i].Name;
     }
 }

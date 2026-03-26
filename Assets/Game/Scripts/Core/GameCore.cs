@@ -14,13 +14,22 @@ public class GameCore : MonoBehaviour
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
     [SerializeField] private TextMeshProUGUI AgeLabel;
-    public List<Techinique> Techniques;
+    public List<Technique> Techniques;
     [SerializeField] private List<string> SurnameList;
     [SerializeField] private List<string> NameList;
     public static GameCore Instance;
     void Awake()
     {
         if (Instance == null) Instance = this;
+    }
+    void Start()
+    {
+        if (Techniques.Count > 0)
+        {
+            Master.KnownTechniques.Add(Instance.Techniques[0]);
+            Master.EquippedTechnique = Instance.Techniques[0];
+        }
+        AgeLabel?.SetText(Master.Age.ToString());
     }
     public string GenerateFullName()
     {
@@ -43,12 +52,7 @@ public class GameCore : MonoBehaviour
         if (years % 10 > 1 && years % 10 < 5) yearWord = "года";
         if (years % 10 == 1) yearWord = "год";
         return yearWord;
-    }
-    private void Start()
-    {
-        AgeLabel?.SetText(Master.Age.ToString());
-    }
-    
+    }   
     public void AdvanceTime(int years)
     {
         Year += years;

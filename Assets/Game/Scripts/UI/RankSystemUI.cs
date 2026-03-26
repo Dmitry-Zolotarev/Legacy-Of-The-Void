@@ -18,7 +18,6 @@ public class RankSystemUI : MonoBehaviour
     }
     private void OnEnable()
     {
-        
         UpdateLabels();
         if (master.CurrentRank >= master.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
     }

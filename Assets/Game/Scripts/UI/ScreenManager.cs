@@ -10,7 +10,8 @@ public enum Canvases
     RankCanvas,
     RankBreakCanvas,
     StudentCanvas,
-    StudentMeridiansCanvas
+    StudentMeridiansCanvas,
+    TechniquesWindow
 }
 
 public class ScreenManager : MonoBehaviour
