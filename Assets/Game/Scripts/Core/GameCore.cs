@@ -29,6 +29,9 @@ public class GameCore : MonoBehaviour
             Master.KnownTechniques.Add(Instance.Techniques[0]);
             Master.EquippedTechnique = Instance.Techniques[0];
         }
+        Master.Name = GenerateFullName();
+        var random = new System.Random();
+        Master.Age += random.Next(0, 15);
         AgeLabel?.SetText(Master.Age.ToString());
     }
     public string GenerateFullName()
@@ -69,7 +72,7 @@ public class GameCore : MonoBehaviour
             if (Master.Student != null)
             {
                 Master.Student.Inherit(Master);
-                Master = Master.Student;
+                Master = new CharacterData(Master.Student);
                 GameOverDescrption?.SetText("Наследство передано ученику");
             }
             else
@@ -82,5 +85,4 @@ public class GameCore : MonoBehaviour
         }
         AgeLabel?.SetText(Master.Age.ToString());
     }
-    
 }

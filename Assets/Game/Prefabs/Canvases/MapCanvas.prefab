@@ -446,8 +446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371f969c306ee1e459824dd4c00f0d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TravelSystem
-  MinSilver: 60
-  MaxSilver: 220
+  MinSilver: 160
+  MaxSilver: 420
   MinYears: 1
   MaxYears: 3
   SilverLabel: {fileID: 2797090504181547172}

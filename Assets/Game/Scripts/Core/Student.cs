@@ -4,7 +4,7 @@ public class Student : CharacterData
 {
     public Student()
     {
-        Age = Random.Range(12, 17);
+        Age = Random.Range(10, 15);
     }
     public void SeedQI(CharacterData master)
     {

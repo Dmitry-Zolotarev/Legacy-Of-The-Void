@@ -16,10 +16,14 @@ public class QiOrbController : MonoBehaviour
     public float AngleDegrees = 0;
     private bool IsMoving = false;
 
-    void Awake()
+    private void Awake()
     {
         StartSpeed = (MinSpeed + MaxSpeed) / 2f;
         transform.localPosition = new Vector3(0, DantianRadius);
+    }
+    private void OnDisable()
+    {
+        OnDantian = true;
     }
     public float GetSpeedDelta()
     {
@@ -78,7 +82,7 @@ public class QiOrbController : MonoBehaviour
         if (InBreakthroughMode)
         {
             if(OnDantian && Input.GetKeyDown(KeyCode.F)) Shoot();
-            else if (transform.localPosition.magnitude > DantianRadius * 8f) OnDantian = true;
+            else if (transform.localPosition.magnitude > DantianRadius * 7f) OnDantian = true;
         }    
         else
         {

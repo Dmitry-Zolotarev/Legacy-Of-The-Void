@@ -7,7 +7,7 @@ public class RankNode : MonoBehaviour
 {
     [HideInInspector] public bool IsFilled = false;
     [HideInInspector] public int Qi = 0;
-    public int NeedQi = 10;
+    public int NeedQi = 15;
     [SerializeField] private RectTransform QiOrb;
     private RectTransform rectTransform;
     [SerializeField] private Image FillImage;

@@ -29,16 +29,12 @@ public class MeditationController : MonoBehaviour
     {
         if (Instance == null) Instance = this;
     }
-    private void Start() 
+    private void OnEnable()
     {
         master = GameCore.Instance.Master;
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        ToggleElements(false);
-    }
-    private void OnEnable()
-    {
-        if(master == null) master = GameCore.Instance.Master;
         QiElixirsLabel.SetText(master.QiElixirs.ToString());
+        ToggleElements(false);
     }
     public void StartSession()
     {
@@ -58,9 +54,10 @@ public class MeditationController : MonoBehaviour
     private void EndSession()
     {
         ToggleElements(false);
-        QiElixirsLabel.SetText(master.QiElixirs.ToString());
-        QiOrb.StopMoving();
+        QiElixirsLabel.SetText(master.QiElixirs.ToString()); 
         GameCore.Instance.AdvanceTime(1);
+        QiLabel.color = Color.white;
+        QiOrb.StopMoving();
     }
     private void ToggleElements(bool value)
     {

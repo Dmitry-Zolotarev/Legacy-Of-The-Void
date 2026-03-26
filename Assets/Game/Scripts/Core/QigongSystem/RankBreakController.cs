@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+
 public class RankBreakController : MonoBehaviour
 {
     [SerializeField] private QiOrbController QiOrb;
@@ -8,50 +9,64 @@ public class RankBreakController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ShootLabel;
     [SerializeField] private TextMeshProUGUI FilledNodesLabel;
     [SerializeField] private List<RankNode> Nodes = new List<RankNode>();
+
     private CharacterData master;
+    private CharacterData lastMaster;
+
     private int nextRank = 1;
+
     void Start()
     {
         master = GameCore.Instance.Master;
-        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+        lastMaster = master;
         UpdateNodes();
-        QiOrb.StartMoving();  
+        QiOrb.StartMoving();
+        UpdateUI();
     }
-    private void ExitToRankMenu() 
-    {
-        UpdateNodes();
-        ScreenManager.Instance.OpenMenu(6);
-    } 
+
     private void FixedUpdate()
     {
         master = GameCore.Instance.Master;
-
-        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");       
-        if (master.Qi > 0) ShootLabel.SetText("Нажмите F для броска");
-        else ShootLabel.SetText("Недостаточно ци для броска");
-
+        if (master != lastMaster)
+        {
+            UpdateNodes();
+            lastMaster = master;
+        }
+        UpdateUI();
         int filledNodes = 0;
-        for (int i = 0; i < nextRank; i++) 
+        for (int i = 0; i < nextRank; i++)
         {
             if (Nodes[i].IsFilled) filledNodes++;
         }
         FilledNodesLabel?.SetText($"Заполнено узлов: {filledNodes} / {nextRank}");
 
-        if (filledNodes == nextRank)
+        if (filledNodes == nextRank && nextRank > 0)
         {
-            master.UpdateRank();          
+            master.UpdateRank();
+            GameCore.Instance.AdvanceTime(1);
             ExitToRankMenu();
+            return;
         }
-        else if (master.Qi <= 0) ExitToRankMenu();
-        
+        if (master.Qi <= 0 && QiOrb.OnDantian) ExitToRankMenu();
+    }
+    private void UpdateUI()
+    {
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+        ShootLabel?.SetText(master.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
     }
     private void UpdateNodes()
     {
         nextRank = master.CurrentRank + 1;
+
         for (int i = 0; i < Nodes.Count; i++)
         {
-            Nodes[i].ClearNode();
+            Nodes[i].ClearNode(); 
             Nodes[i].gameObject.SetActive(i < nextRank);
         }
+    }
+    private void ExitToRankMenu()
+    {
+        UpdateNodes();
+        ScreenManager.Instance.OpenMenu((int)Canvases.RankCanvas);
     }
 }

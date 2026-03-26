@@ -1,15 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
 public class MeridianNode : MonoBehaviour
 {
     public int StartSealStrength = 20;
     private int SealStrength;
-    public bool IsOpened = false;
-    
+    public bool IsOpened = false;  
     [SerializeField] private RectTransform QiOrb;
     private RectTransform rectTransform;
-
     public void Start()
     {
         SealStrength = StartSealStrength;
@@ -18,7 +17,6 @@ public class MeridianNode : MonoBehaviour
     private void Update()
     {
         var qiOrb = QiOrb.gameObject.GetComponent<QiOrbController>();
-
         if (!IsOpened && IsOverlap(rectTransform, QiOrb))
         {           
             qiOrb.OnDantian = true;

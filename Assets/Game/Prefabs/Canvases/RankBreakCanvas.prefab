@@ -211,7 +211,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 247.3, y: -13.1}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3410278510627172618
 CanvasRenderer:
@@ -265,10 +265,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankNode
   IsFilled: 0
   Qi: 0
-  NeedQi: 10
+  NeedQi: 15
   QiOrb: {fileID: 4027815968977077414}
   FillImage: {fileID: 5400569028979315774}
-  QiColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 0.5019608}
+  QiColor: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.5882353}
 --- !u!1 &1452995529825401607
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +381,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 34, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7727818586831492025
 CanvasRenderer:
@@ -626,7 +626,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 34, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5539048656510855422
 CanvasRenderer:
@@ -701,7 +701,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 34, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4555964623165946858
 CanvasRenderer:
@@ -776,7 +776,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 34, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5979632255535807369
 CanvasRenderer:
@@ -991,7 +991,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 441, y: -196.20001}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6545934695740399797
 CanvasRenderer:
@@ -1045,10 +1045,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankNode
   IsFilled: 0
   Qi: 0
-  NeedQi: 10
+  NeedQi: 15
   QiOrb: {fileID: 4027815968977077414}
   FillImage: {fileID: 885507788553279005}
-  QiColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 0.5019608}
+  QiColor: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.5882353}
 --- !u!1 &4395244259177108920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1086,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 111.3, y: -11.2}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9132563768855680614
 CanvasRenderer:
@@ -1140,10 +1140,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankNode
   IsFilled: 0
   Qi: 0
-  NeedQi: 10
+  NeedQi: 15
   QiOrb: {fileID: 4027815968977077414}
   FillImage: {fileID: 3279287308854786948}
-  QiColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 0.5019608}
+  QiColor: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.5882353}
 --- !u!1 &4552349901762229110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,7 +1181,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -97.5, y: -197.8}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2008689762469791099
 CanvasRenderer:
@@ -1235,10 +1235,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankNode
   IsFilled: 0
   Qi: 0
-  NeedQi: 10
+  NeedQi: 15
   QiOrb: {fileID: 4027815968977077414}
   FillImage: {fileID: 3956037212486184786}
-  QiColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 0.5019608}
+  QiColor: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.5882353}
 --- !u!1 &5351737685754763455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,7 +1274,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 34, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &431223275609562472
 CanvasRenderer:
@@ -1351,7 +1351,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 53, y: -246}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2667034985970308918
 CanvasRenderer:
@@ -1405,10 +1405,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankNode
   IsFilled: 0
   Qi: 0
-  NeedQi: 10
+  NeedQi: 15
   QiOrb: {fileID: 4027815968977077414}
   FillImage: {fileID: 3305260109965117266}
-  QiColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 0.5019608}
+  QiColor: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.5882353}
 --- !u!1 &5997633800428931876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1444,7 +1444,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 34, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6419595627530007640
 CanvasRenderer:
@@ -1744,8 +1744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 40
-  MaxSpeed: 40
+  MinSpeed: 30
+  MaxSpeed: 30
   AccelerationDelta: 5
   DantianRadius: 70
   CarriedQi: 0
@@ -1792,7 +1792,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 304.4, y: -252.8}
-  m_SizeDelta: {x: 32, y: 32}
+  m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3454676054302552778
 CanvasRenderer:
@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RankNode
   IsFilled: 0
   Qi: 0
-  NeedQi: 10
+  NeedQi: 15
   QiOrb: {fileID: 4027815968977077414}
   FillImage: {fileID: 6145733347455560173}
-  QiColor: {r: 0.4980392, g: 1, b: 0.8313726, a: 0.5019608}
+  QiColor: {r: 0.5882353, g: 0.78431374, b: 1, a: 0.5882353}

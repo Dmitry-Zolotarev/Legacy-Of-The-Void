@@ -27,7 +27,6 @@ public class BreathingController : MonoBehaviour
     }
     private void Update()
     {
-
         CurrentPhase = Mathf.Sin(SessionTime * RhythmFrequency) * RhythmAmplitude; 
         SessionTime += Time.deltaTime;
         transform.localScale = DefaultBreathRingSize + Mathf.Sin(SessionTime * RhythmFrequency) * new Vector2(DeltaRadius, DeltaRadius);

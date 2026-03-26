@@ -1,4 +1,4 @@
-using TMPro;
+п»їusing TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -13,66 +13,89 @@ public class MeridianBreakController : MonoBehaviour
     [SerializeField] private List<MeridianNode> Nodes = new List<MeridianNode>();
     private int NodesCount;
     private bool[] nodeStates;
+
+    private void OnEnable()
+    {
+        StartSession(GameCore.Instance.Master, 12);
+    }
+
     public void StartSession(CharacterData character, int nodesCount)
     {
-        bool differentPeople = master != character;
         master = character;
         NodesCount = nodesCount;
         nodeStates = new bool[NodesCount];
-
-        bool allNodesOpened = true;
-        for (int i = 0; i < NodesCount; i++)
-        {
-            if (!Nodes[i].IsOpened) allNodesOpened = false;
-        }
-        if (allNodesOpened) Exit();
-        if (differentPeople) UpdateNodes();   
+        ResetNodes();
+        UpdateNodes();
         QiOrb.StartMoving();
         UpdateUI();
     }
-    private void Update()
-    {
-        if (master == null) StartSession(GameCore.Instance.Master, 12);
 
-        bool allNodesOpened = true;
-        for(int i = 0; i < NodesCount; i++)
-        {
-            if (Nodes[i].IsOpened && !nodeStates[i]) 
-            {
-                master.OpenMeridian();
-                Debug.Log(master is Student);
-            }
-            if (!Nodes[i].IsOpened) allNodesOpened = false;
-            nodeStates[i] = Nodes[i].IsOpened;
-        }
-        if (allNodesOpened) Exit();
-    }
-    private void FixedUpdate() => UpdateUI();
-
-    private void UpdateUI()
+    private void ResetNodes()
     {
-        QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
-        ShootLabel.SetText(GameCore.Instance.Master.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
-        if(master is Student)
+        for (int i = 0; i < Nodes.Count; i++)
         {
-            OpenedMeridiansLabel?.SetText($"Открыто меридианов ученика: {master.OpenedMeridians} / {NodesCount}");
+            Nodes[i].IsOpened = false;
+            Nodes[i].gameObject.SetActive(false);
+            Nodes[i].UpdateNode();
         }
-        else OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {NodesCount}");
     }
+
     private void UpdateNodes()
     {
         for (int i = 0; i < Nodes.Count; i++)
         {
-            Nodes[i].gameObject.SetActive(i >= master.OpenedMeridians && i < NodesCount);
+            bool active = i >= master.OpenedMeridians && i < NodesCount;
+            Nodes[i].gameObject.SetActive(active);
+            if (active) Nodes[i].IsOpened = false;
             Nodes[i].UpdateNode();
         }
     }
+
+    private void FixedUpdate()
+    {
+        if (master == null) StartSession(GameCore.Instance.Master, 12);
+        CheckNodes();
+        UpdateUI();
+    }
+
+    private void CheckNodes()
+    {
+        for (int i = 0; i < NodesCount; i++)
+        {
+            if (Nodes[i].IsOpened && !nodeStates[i])
+            {
+                master.OpenMeridian();
+            }
+            nodeStates[i] = Nodes[i].IsOpened;
+        }
+
+        if (master.OpenedMeridians == NodesCount) Exit();
+    }
+
+    private void UpdateUI()
+    {
+        QiLabel?.SetText($"Р¦Рё: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
+        ShootLabel?.SetText(GameCore.Instance.Master.Qi > 0 ? "РќР°Р¶РјРёС‚Рµ F РґР»СЏ Р±СЂРѕСЃРєР°" : "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ С†Рё РґР»СЏ Р±СЂРѕСЃРєР°");
+
+        if (master is Student)
+        {
+            OpenedMeridiansLabel?.SetText($"РћС‚РєСЂС‹С‚Рѕ РјРµСЂРёРґРёР°РЅРѕРІ СѓС‡РµРЅРёРєР°: {master.OpenedMeridians} / {NodesCount}");
+        }
+        else
+        {
+            OpenedMeridiansLabel?.SetText($"РћС‚РєСЂС‹С‚Рѕ РјРµСЂРёРґРёР°РЅРѕРІ: {master.OpenedMeridians} / {NodesCount}");
+        }
+    }
+
     public void Exit()
     {
         if (master is Student)
         {
             ScreenManager.Instance.OpenMenu((int)Canvases.StudentCanvas);
         }
-        else ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
+        else
+        {
+            ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
+        }
     }
 }

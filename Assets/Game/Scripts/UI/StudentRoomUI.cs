@@ -66,7 +66,8 @@ public class StudentRoomUI : MonoBehaviour
 
     public void BreakthroughStudentMeridians()
     {
-        ScreenManager.Instance.OpenMenu(9);
+        if (student.OpenedMeridians == GameCore.Instance.Master.OpenedMeridians / 2) return;
+        ScreenManager.Instance.OpenMenu((int)Canvases.StudentMeridiansCanvas);
         StudentMeridianBreakthrough.StartSession(student, GameCore.Instance.Master.OpenedMeridians / 2);
     }
 }

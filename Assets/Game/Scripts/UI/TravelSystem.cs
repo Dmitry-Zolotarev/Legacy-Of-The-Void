@@ -1,7 +1,5 @@
-
-using System.Collections;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class TravelSystem : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private GameObject TravelResultsWindow;
     public void OnEnable()
     {
+        TravelResultsWindow.SetActive(false);
         UpdateLabels();
     }
     public void Travel()
@@ -32,7 +31,6 @@ public class TravelSystem : MonoBehaviour
     }
     private void UpdateLabels()
     {
-        
         SilverLabel.SetText(GameCore.Instance.Master.Silver.ToString()); 
     }
 }
