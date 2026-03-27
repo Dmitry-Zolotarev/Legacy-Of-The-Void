@@ -34,16 +34,19 @@ public class RankNode : MonoBehaviour
         
         if (!IsFilled && IsOverlap(rectTransform, QiOrb))
         {
-            AddQi(qiOrb.CarriedQi);
+            AddQi(qiOrb.QiAmount);
             qiOrb.OnDantian = true;
-            qiOrb.CarriedQi = 0;
         }
     }
     private void AddQi(int amount)
     {
         if (IsFilled) return;
         Qi += amount;
-        if (Qi >= NeedQi) IsFilled = true;
+        if (Qi >= NeedQi)
+        {
+            Qi = NeedQi;
+            IsFilled = true;
+        }
     }
     bool IsOverlap(RectTransform a, RectTransform b)
     {

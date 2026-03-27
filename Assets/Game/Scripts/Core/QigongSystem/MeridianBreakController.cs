@@ -76,7 +76,7 @@ public class MeridianBreakController : MonoBehaviour
     private void UpdateUI()
     {
         QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
-        ShootLabel?.SetText(GameCore.Instance.Master.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
+        ShootLabel?.SetText(GameCore.Instance.Master.Qi >= QiOrb.QiAmount ? "Нажмите F для броска" : "Недостаточно ци для броска");
         QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
         if (master is Student)
         {

@@ -15,7 +15,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;   
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
-    public bool DoRegularUpdate = false;
+    [SerializeField] private bool DoRegularUpdate = false;
     private CharacterData master;
  
     public void OnEnable()
@@ -36,10 +36,10 @@ public class StatsPanel : MonoBehaviour
         AgeLabel?.SetText($"Возраст: " + master.Age);
 
         BodyLabel?.SetText($"Телосложение: {master.Body} / {master.MaxBody}");
-        BodyBar.value = (float)master.Body / master.MaxBody;
+        if (BodyBar != null) BodyBar.value = (float)master.Body / master.MaxBody;
 
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        QiBar.value = (float)master.Qi / master.MaxQi;
+        if(QiBar != null) QiBar.value = (float)master.Qi / master.MaxQi;
 
         MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
         RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());

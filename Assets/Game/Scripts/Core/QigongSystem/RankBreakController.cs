@@ -55,7 +55,7 @@ public class RankBreakController : MonoBehaviour
     {
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
-        ShootLabel?.SetText(master.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
+        ShootLabel?.SetText(master.Qi >= QiOrb.QiAmount ? "Нажмите F для броска" : "Недостаточно ци для броска");
     }
     private void UpdateNodes()
     {
