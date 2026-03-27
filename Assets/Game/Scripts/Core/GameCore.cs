@@ -25,16 +25,20 @@ public class GameCore : MonoBehaviour
         if (Instance == null) Instance = this;
     }
     void Start()
+    { 
+        Master.Name = GenerateFullName();
+        var random = new System.Random();
+        Master.Age += random.Next(0, 15);
+        AgeLabel?.SetText(Master.Age.ToString());
+        AddBaseTechnique();
+    }
+    public void AddBaseTechnique()
     {
         if (Techniques.Count > 0)
         {
             Master.KnownTechniques.Add(Instance.Techniques[0]);
             Master.EquippedTechnique = Instance.Techniques[0];
         }
-        Master.Name = GenerateFullName();
-        var random = new System.Random();
-        Master.Age += random.Next(0, 15);
-        AgeLabel?.SetText(Master.Age.ToString());
     }
     public string GenerateFullName()
     {

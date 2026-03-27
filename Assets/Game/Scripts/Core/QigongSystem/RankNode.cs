@@ -11,11 +11,9 @@ public class RankNode : MonoBehaviour
     [SerializeField] private RectTransform QiOrb;
     private RectTransform rectTransform;
     [SerializeField] private Image FillImage;
-    [SerializeField] private Color QiColor = Color.aquamarine;
     public void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        FillImage.color = QiColor;
     }
     private void OnEnable()
     {
