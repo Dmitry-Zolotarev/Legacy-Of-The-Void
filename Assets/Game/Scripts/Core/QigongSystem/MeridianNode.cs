@@ -20,9 +20,7 @@ public class MeridianNode : MonoBehaviour
         if (!IsOpened && IsOverlap(rectTransform, QiOrb))
         {           
             qiOrb.OnDantian = true;
-            int damage = qiOrb.CarriedQi;
-            qiOrb.CarriedQi = 0;
-            SetDamage(damage);
+            SetDamage(qiOrb.QiAmount);
         }
     }
     private void SetDamage(int damage)

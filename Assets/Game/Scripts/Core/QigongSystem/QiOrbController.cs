@@ -8,13 +8,12 @@ public class QiOrbController : MonoBehaviour
     [SerializeField] private float AccelerationDelta = 1f;
     [SerializeField] private float DantianRadius = 45f;
     
-    [HideInInspector] public int CarriedQi = 0;
     [HideInInspector] public float StartSpeed, CurrentSpeed;
     [SerializeField] private bool InBreakthroughMode = false;
-    [SerializeField] private int QiAmount = 10;
     public bool OnDantian = true;
     public float AngleDegrees = 0;
     private bool IsMoving = false;
+    public int QiAmount = 5;
 
     private void Awake()
     {
@@ -39,13 +38,6 @@ public class QiOrbController : MonoBehaviour
         IsMoving = false;
         CurrentSpeed = 0;
     }
-    public void AddQi(int amount) => CarriedQi += amount;
-
-    public void SpendQi(int amount) 
-    {
-        CarriedQi -= amount;
-        if (CarriedQi < 0) CarriedQi = 0;
-    }
     public void MoveAlongDantian()
     {
         if (!IsMoving) return;
@@ -68,12 +60,11 @@ public class QiOrbController : MonoBehaviour
     }
     private void Shoot()
     {
-        var master = GameCore.Instance.Master;
-        if (master == null || master.Qi < 1) return;
-
-        OnDantian = false;     
-        CarriedQi = Mathf.Min(master.Qi, QiAmount);
-        master.SpendQi(CarriedQi);
+        if (GameCore.Instance.Master.Qi >= QiAmount)
+        {
+            OnDantian = false;
+            GameCore.Instance.Master.SpendQi(QiAmount);
+        }       
     }
     private void Update()
     {
