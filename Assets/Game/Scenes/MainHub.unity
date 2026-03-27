@@ -7508,7 +7508,7 @@ MonoBehaviour:
     DiscipleUnlocked: 0
     FinalBreakReadyFlag: 0
     KnownTechniques: []
-    Age: 60
+    Age: 16
     Name: 
     MinLifeLimit: 65
     MaxLifeLimit: 95

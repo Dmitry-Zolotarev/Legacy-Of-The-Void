@@ -992,7 +992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 441, y: -196.20001}
+  m_AnchoredPosition: {x: 432.5, y: -177.3}
   m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6545934695740399797
@@ -1182,7 +1182,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -97.5, y: -197.8}
+  m_AnchoredPosition: {x: -81.6, y: -168.2}
   m_SizeDelta: {x: 36, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2008689762469791099
@@ -1825,13 +1825,12 @@ MonoBehaviour:
   MaxSpeed: 30
   AccelerationDelta: 5
   DantianRadius: 70
-  CarriedQi: 0
   StartSpeed: 0
   CurrentSpeed: 0
   InBreakthroughMode: 1
-  QiAmount: 5
   OnDantian: 1
   AngleDegrees: 0
+  QiAmount: 5
 --- !u!1 &9004113540381625971
 GameObject:
   m_ObjectHideFlags: 0

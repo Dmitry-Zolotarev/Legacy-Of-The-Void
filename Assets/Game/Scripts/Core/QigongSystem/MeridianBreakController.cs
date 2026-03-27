@@ -77,8 +77,8 @@ public class MeridianBreakController : MonoBehaviour
     {
         QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
         ShootLabel?.SetText(GameCore.Instance.Master.Qi >= QiOrb.QiAmount ? "Нажмите F для броска" : "Недостаточно ци для броска");
-        QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
-        if (master is Student)
+        QiFluid.fillAmount = (float)GameCore.Instance.Master.Qi / GameCore.Instance.Master.MaxQi;
+        if (master != GameCore.Instance.Master)
         {
             OpenedMeridiansLabel?.SetText($"Открыто меридианов ученика: {master.OpenedMeridians} / {NodesCount}");
         }
@@ -90,7 +90,7 @@ public class MeridianBreakController : MonoBehaviour
 
     public void Exit()
     {
-        if (master is Student)
+        if (master != GameCore.Instance.Master)
         {
             ScreenManager.Instance.OpenMenu((int)Canvases.StudentCanvas);
         }
