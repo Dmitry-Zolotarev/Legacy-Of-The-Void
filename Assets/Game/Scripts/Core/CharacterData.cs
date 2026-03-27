@@ -16,11 +16,11 @@ public class CharacterData
     public string Name = "";
     public int MinLifeLimit = 65;
     public int MaxLifeLimit = 95;
-    public int Body = 5;
-    public int MaxBody = 10;
+    public int Body = 10;
+    public int MaxBody = 40;
     public int Qi = 0;
     public int MaxQi = 60;
-    public int Silver = 100;
+    public int Silver = 20;
     public int OpenedMeridians = 0;
     public int CurrentRank = 0;
     public int BodyElixirs = 0;
@@ -34,20 +34,6 @@ public class CharacterData
     {
         Name = GameCore.Instance?.GenerateFullName();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1); 
-    }
-    public CharacterData(Student student)
-    {
-        Age = student.Age;
-        Name = student.Name;
-        LifeLimit = student.LifeLimit;
-        OpenedMeridians = student.OpenedMeridians;
-        MaxQi = student.MaxQi;
-        Qi = student.Qi;
-        Silver = student.Silver;
-        BodyElixirs = student.BodyElixirs;
-        QiElixirs = student.QiElixirs;
-        
-        LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
     }
     public void OpenMeridian()
     {

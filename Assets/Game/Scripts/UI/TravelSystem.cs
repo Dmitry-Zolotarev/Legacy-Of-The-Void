@@ -11,6 +11,7 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TimeSpentLabel;
     [SerializeField] private TextMeshProUGUI LootedSilverLabel;
     [SerializeField] private GameObject TravelResultsWindow;
+    private int SelectedPlace;
     public void OnEnable()
     {
         TravelResultsWindow.SetActive(false);

@@ -73,13 +73,14 @@ public class GameCore : MonoBehaviour
             if (Master.Student != null)
             {
                 Master.Student.Inherit(Master);
-                Master = new CharacterData(Master.Student);
+                Master = Master.Student;
                 GameOverDescrption?.SetText("Наследство передано ученику");
             }
             else
             {
+                var newGeneration = Master.Generation + 1;
                 Master = new CharacterData();
-                Master.Generation++;
+                Master.Generation = newGeneration;
                 GameOverDescrption?.SetText("Наследство не передано");
             }
             MainHubUI.Instance.RefreshUI();
