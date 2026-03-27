@@ -20,7 +20,6 @@ public class MainHubUI : MonoBehaviour
     }
     private void Start()
     {
-        MiniStatsPanel.DoRegularUpdate = false;
         RefreshUI();                   
     }
     public void RefreshUI()

@@ -46,8 +46,7 @@ public class CharacterData
         Silver = student.Silver;
         BodyElixirs = student.BodyElixirs;
         QiElixirs = student.QiElixirs;
-        
-        LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
+        LifeLimit = student.LifeLimit;
     }
     public void OpenMeridian()
     {

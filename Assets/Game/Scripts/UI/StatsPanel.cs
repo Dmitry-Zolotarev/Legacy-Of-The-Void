@@ -15,7 +15,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;   
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
-    public bool DoRegularUpdate = false;
+    [SerializeField] private bool DoRegularUpdate = false;
     private CharacterData master;
  
     public void OnEnable()
@@ -41,7 +41,7 @@ public class StatsPanel : MonoBehaviour
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         if (QiBar != null) QiBar.value = (float)master.Qi / master.MaxQi;
 
-        MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
+        MeridiansLabel.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
         RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());
         HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());
     }
