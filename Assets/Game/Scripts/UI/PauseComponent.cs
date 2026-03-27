@@ -5,6 +5,7 @@ public class PauseComponent : MonoBehaviour
 {
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject OptionsMenu;
+    [SerializeField] private GameObject ConfirmExitMenu;
     void Start()
     {
         if (PauseMenu != null) PauseMenu.SetActive(false);
@@ -12,6 +13,7 @@ public class PauseComponent : MonoBehaviour
     public void Pause()
     {
         if (PauseMenu == null) return;
+        ConfirmExitMenu?.SetActive(false);
         OptionsMenu?.SetActive(false);
         if (PauseMenu.activeSelf && Time.timeScale == 0f)
         {

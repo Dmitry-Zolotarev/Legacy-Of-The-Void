@@ -3,7 +3,6 @@ using TMPro;
 
 public class RankSystemUI : MonoBehaviour
 {
-    
     public static RankSystemUI Instance;
     [SerializeField] private TextMeshProUGUI CurrentRankLabel;
     [SerializeField] private TextMeshProUGUI NextRankLabel;
@@ -19,14 +18,14 @@ public class RankSystemUI : MonoBehaviour
     private void OnEnable()
     {
         UpdateLabels();
-        if (master.CurrentRank >= master.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
+        if (master.CurrentRank >= GameCore.Instance.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
     }
     public void UpdateLabels()
     {
         master = GameCore.Instance.Master;
-        CurrentRankLabel.SetText(master.Ranks[master.CurrentRank].Name);
+        CurrentRankLabel.SetText(GameCore.Instance.Ranks[master.CurrentRank].Name);
         NextRankLabel.SetText(master.GetNextRank().Name);
-        NeedBodyLabel.SetText($"Тело: {master.Body} / {master.GetNextRank().needBody}");
+        NeedBodyLabel.SetText($"Телосложение: {master.Body} / {master.GetNextRank().needBody}");
         NeedMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().needMeridians}");
         NeedQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 20}");
     }   
@@ -34,7 +33,7 @@ public class RankSystemUI : MonoBehaviour
     {
         if (master.Body >= master.GetNextRank().needBody && master.OpenedMeridians >= master.GetNextRank().needMeridians && master.Qi >= master.GetNextRankID() * 20)
         {
-            if (master.CurrentRank < master.Ranks.Count - 1) ScreenManager.Instance.OpenMenu(7);
+            if (master.CurrentRank < GameCore.Instance.Ranks.Count - 1) ScreenManager.Instance.OpenMenu(7);
         }          
     }
 }

@@ -1,14 +1,16 @@
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class RankBreakController : MonoBehaviour
 {
-    [SerializeField] private QiOrbController QiOrb;
-    [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private QiOrbController QiOrb;  
     [SerializeField] private TextMeshProUGUI ShootLabel;
     [SerializeField] private TextMeshProUGUI FilledNodesLabel;
     [SerializeField] private List<RankNode> Nodes = new List<RankNode>();
+    [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private Image QiFluid;
 
     private CharacterData master;
     private CharacterData lastMaster;
@@ -52,6 +54,7 @@ public class RankBreakController : MonoBehaviour
     private void UpdateUI()
     {
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+        QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
         ShootLabel?.SetText(master.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
     }
     private void UpdateNodes()

@@ -1,19 +1,20 @@
 ﻿using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MeridianBreakController : MonoBehaviour
 {
     [SerializeField] private QiOrbController QiOrb;
-    [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI ShootLabel;
     [SerializeField] private TextMeshProUGUI OpenedMeridiansLabel;
+    [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private Image QiFluid;   
 
     private CharacterData master;
     [SerializeField] private List<MeridianNode> Nodes = new List<MeridianNode>();
     private int NodesCount;
     private bool[] nodeStates;
-
     private void OnEnable()
     {
         StartSession(GameCore.Instance.Master, 12);
@@ -76,7 +77,7 @@ public class MeridianBreakController : MonoBehaviour
     {
         QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
         ShootLabel?.SetText(GameCore.Instance.Master.Qi > 0 ? "Нажмите F для броска" : "Недостаточно ци для броска");
-
+        QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
         if (master is Student)
         {
             OpenedMeridiansLabel?.SetText($"Открыто меридианов ученика: {master.OpenedMeridians} / {NodesCount}");

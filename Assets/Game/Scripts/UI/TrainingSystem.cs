@@ -19,15 +19,19 @@ public class TrainingSystem : MonoBehaviour
     }
     public void TrainBody()
     {
+        var master = GameCore.Instance.Master;
         BodyBonus = StartBodyBonus;
-
-        if (GameCore.Instance.Master.BodyElixirs > 0)
+        
+        if(master.Body < master.MaxBody)
         {
-            BodyBonus = StartBodyBonus * ElixirPower;
-            GameCore.Instance.Master.BodyElixirs--;
-        }
-        GameCore.Instance.Master.Body += BodyBonus;
-        GameCore.Instance.AdvanceTime(1);
-        UpdateLabels();
+            if (master.BodyElixirs > 0)
+            {
+                BodyBonus = StartBodyBonus * ElixirPower;
+                master.BodyElixirs--;
+                UpdateLabels();
+            }
+            master.TrainBody(BodyBonus);
+            GameCore.Instance.AdvanceTime(1); 
+        }       
     }
 }

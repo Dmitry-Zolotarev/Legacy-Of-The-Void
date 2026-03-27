@@ -3,9 +3,8 @@ using UnityEngine;
 
 public class ToolTip : MonoBehaviour
 {
-    [SerializeField] private GameObject tooltipObject;
     [SerializeField] private TextMeshProUGUI tooltipText;
-
+    [SerializeField] private GameObject toolTipImage;
     public static ToolTip Instance;
     void Awake()
     {
@@ -13,11 +12,11 @@ public class ToolTip : MonoBehaviour
     }
     public void ShowTooltip(string text)
     {
-        tooltipObject.SetActive(true);
+        toolTipImage.SetActive(true);
         tooltipText.text = text;
     }
     public void HideTooltip()
     {
-        tooltipObject.SetActive(false);
+        toolTipImage.SetActive(false);
     }
 }

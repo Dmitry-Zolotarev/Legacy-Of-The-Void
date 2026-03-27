@@ -16,19 +16,18 @@ public class CharacterData
     public string Name = "";
     public int MinLifeLimit = 65;
     public int MaxLifeLimit = 95;
-    public int Body = 10;
-    public int CurrentRank = 0;
+    public int Body = 5;
+    public int MaxBody = 10;
     public int Qi = 0;
     public int MaxQi = 60;
     public int Silver = 100;
     public int OpenedMeridians = 0;
-    
+    public int CurrentRank = 0;
     public int BodyElixirs = 0;
     public int QiElixirs = 0;
     public Student Student;
-    public List<Rank> Ranks;
-    public List<MeridianLevel> MeridianLevels;
-    
+    public int RankForBecomeTeacher = 3;
+
     [HideInInspector] public Technique EquippedTechnique;
 
     public CharacterData()
@@ -41,8 +40,6 @@ public class CharacterData
         Age = student.Age;
         Name = student.Name;
         LifeLimit = student.LifeLimit;
-        MeridianLevels = student.MeridianLevels;
-        Ranks = student.Ranks;
         OpenedMeridians = student.OpenedMeridians;
         MaxQi = student.MaxQi;
         Qi = student.Qi;
@@ -54,11 +51,16 @@ public class CharacterData
     }
     public void OpenMeridian()
     {
-        if (OpenedMeridians >= MeridianLevels.Count) return;
+        if (OpenedMeridians >= GameCore.Instance.MeridianLevels.Count) return;
 
-        MaxQi = MeridianLevels[OpenedMeridians].MaxQi;
-
+        MaxQi = GameCore.Instance.MeridianLevels[OpenedMeridians].MaxQi;
+        MaxBody = GameCore.Instance.MeridianLevels[OpenedMeridians].MaxBody;
         OpenedMeridians++;
+    }
+    public void TrainBody(int amount)
+    {
+        Body += amount;
+        if (Body > MaxBody) Body = MaxBody;
     }
     public void AddQi(int amount)
     {
@@ -71,23 +73,18 @@ public class CharacterData
     }
     public Rank GetNextRank()
     {
-        int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;   
-        return Ranks[i];
+        int i = CurrentRank < GameCore.Instance.Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;   
+        return GameCore.Instance.Ranks[i];
     }
     public int GetNextRankID()
     {
-        int i = CurrentRank < Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
+        int i = CurrentRank < GameCore.Instance.Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;
         return i;
     }
     public void UpdateRank()
     {
-        if(CurrentRank < Ranks.Count - 1) CurrentRank++;
-        if (CurrentRank == 3) 
-        {
-            Student = new Student();
-            Student.MeridianLevels = MeridianLevels;
-        }
-        
+        if(CurrentRank < GameCore.Instance.Ranks.Count - 1) CurrentRank++;
+        if (CurrentRank == RankForBecomeTeacher) Student = new Student();      
     }
     public string GetStudentName()
     {
@@ -96,6 +93,6 @@ public class CharacterData
     }
     public string GetRankName(int i)
     {
-        return Ranks[i].Name;
+        return GameCore.Instance.Ranks[i].Name;
     }
 }

@@ -18,6 +18,8 @@ public class GameCore : MonoBehaviour
     [SerializeField] private List<string> SurnameList;
     [SerializeField] private List<string> NameList;
     public static GameCore Instance;
+    public List<Rank> Ranks;
+    public List<MeridianLevel> MeridianLevels;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -64,7 +66,6 @@ public class GameCore : MonoBehaviour
        
         if (Master.Age > Master.LifeLimit)
         {
-            var oldMaster = Master;
             ScreenManager.Instance.CloseMenus();
             GameOverHeader?.SetText($"Мастер {Master.Name} умер");
             

@@ -32,5 +32,6 @@ public class ScreenManager : MonoBehaviour
     public void CloseMenus()
     {
         foreach (var menu in Menus) menu?.SetActive(false);
+        MainHubUI.Instance.RefreshUI();
     }
 }

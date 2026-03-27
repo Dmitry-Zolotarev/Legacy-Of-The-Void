@@ -18,6 +18,5 @@ public class Student : CharacterData
         Silver = master.Silver;
         BodyElixirs = master.BodyElixirs;
         QiElixirs = master.QiElixirs;
-        Ranks = master.Ranks;
     }
 }
