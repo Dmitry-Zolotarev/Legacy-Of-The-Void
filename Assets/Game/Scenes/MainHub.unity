@@ -5953,6 +5953,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4456732504501225228, guid: 97c3c6aaf2d3c8f4bae1f6bdf577f9c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456732504501225228, guid: 97c3c6aaf2d3c8f4bae1f6bdf577f9c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 79888970}
+    - target: {fileID: 4456732504501225228, guid: 97c3c6aaf2d3c8f4bae1f6bdf577f9c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456732504501225228, guid: 97c3c6aaf2d3c8f4bae1f6bdf577f9c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScreenManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4456732504501225228, guid: 97c3c6aaf2d3c8f4bae1f6bdf577f9c1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6047958492377593190, guid: 97c3c6aaf2d3c8f4bae1f6bdf577f9c1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6041,7 +6061,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7238123113085426662, guid: 97c3c6aaf2d3c8f4bae1f6bdf577f9c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

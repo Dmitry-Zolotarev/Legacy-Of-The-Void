@@ -54,11 +54,11 @@ public class MeditationController : MonoBehaviour
         lastGiveTime = Time.time;
     }
     private void EndSession()
-    {
-        ToggleElements(false);
+    {      
         QiElixirsLabel.SetText(master.QiElixirs.ToString());
         master.AddQi((int)QiGained);
         GameCore.Instance.AdvanceTime(1);
+        ToggleElements(false);
         QiOrb.StopMoving();
         QiGained = 0f;
     }
