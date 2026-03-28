@@ -19,16 +19,7 @@ public class TravelSystem : MonoBehaviour
     }
     public void Travel()
     {
-        int looterSilver = Random.Range(MinSilver, MaxSilver + 1);
-        int timeSpent = Random.Range(MinYears, MaxYears + 1);
-
-        GameCore.Instance.Master.Silver += looterSilver;
-        GameCore.Instance.AdvanceTime(timeSpent);
-
-        TimeSpentLabel?.SetText($"Затрачено времени: {timeSpent} {GameCore.Instance.GetYearWord(timeSpent)}");
-        LootedSilverLabel?.SetText(looterSilver.ToString());
-        TravelResultsWindow.SetActive(true);
-        UpdateLabels();
+        GameCore.Instance.StartFight();
     }
     private void UpdateLabels()
     {

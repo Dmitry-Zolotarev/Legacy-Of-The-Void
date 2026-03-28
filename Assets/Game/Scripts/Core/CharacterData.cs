@@ -28,13 +28,11 @@ public class CharacterData
     public Student Student;
     public int RankForBecomeTeacher = 3;
 
-    [HideInInspector] public Technique EquippedTechnique;
-
     public CharacterData()
     {
         Name = GameCore.Instance?.GenerateFullName();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
-        GameCore.Instance?.AddBaseTechnique();
+        GameCore.Instance?.AddTechnique(0);
     }
     public void OpenMeridian()
     {
@@ -81,5 +79,13 @@ public class CharacterData
     public string GetRankName(int i)
     {
         return GameCore.Instance.Ranks[i].Name;
+    }
+    public bool IsTechniqueUnlocked(int techniqueType)
+    {
+        foreach(var technique in KnownTechniques)
+        {
+            if (technique.Type == techniqueType) return true;
+        }
+        return false;
     }
 }

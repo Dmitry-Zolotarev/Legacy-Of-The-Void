@@ -17,11 +17,4 @@ public class TechniquePanel : MonoBehaviour
         Rank.SetText("Ранг: " + GameCore.Instance.Master.GetRankName(Technique.RequiredRank).ToLower());
         if(Technique.Icon != null)Icon.sprite = Technique.Icon;
     }
-    public void EquipTechnique()
-    {
-        if (GameCore.Instance.Master.KnownTechniques.Contains(Technique))
-        {
-            GameCore.Instance.Master.EquippedTechnique = Technique;
-        }
-    }
 }

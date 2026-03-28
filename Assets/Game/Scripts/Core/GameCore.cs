@@ -9,7 +9,7 @@ public class GameCore : MonoBehaviour
 {
     [HideInInspector] public int Year = 1;
     public CharacterData Master;
-    
+
     [SerializeField] private GameObject GameOverWindow;
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
@@ -20,25 +20,23 @@ public class GameCore : MonoBehaviour
     public static GameCore Instance;
     public List<Rank> Ranks;
     public List<MeridianLevel> MeridianLevels;
+    public GameObject CombatSystem;
+    public GameObject MainHub;
     void Awake()
     {
         if (Instance == null) Instance = this;
     }
     void Start()
-    { 
+    {
         Master.Name = GenerateFullName();
         var random = new System.Random();
         Master.Age += random.Next(0, 15);
         AgeLabel?.SetText(Master.Age.ToString());
-        AddBaseTechnique();
+        AddTechnique(0);
     }
-    public void AddBaseTechnique()
+    public void AddTechnique(int i)
     {
-        if (Techniques.Count > 0)
-        {
-            Master.KnownTechniques.Add(Instance.Techniques[0]);
-            Master.EquippedTechnique = Instance.Techniques[0];
-        }
+        if (Techniques.Count > 0) Master.KnownTechniques.Add(Instance.Techniques[i]);
     }
     public string GenerateFullName()
     {
@@ -61,18 +59,18 @@ public class GameCore : MonoBehaviour
         if (years % 10 > 1 && years % 10 < 5) yearWord = "года";
         if (years % 10 == 1) yearWord = "год";
         return yearWord;
-    }   
+    }
     public void AdvanceTime(int years)
     {
         Year += years;
         Master.Age += years;
-        if(Master.Student != null) Master.Student.Age += years;
-       
+        if (Master.Student != null) Master.Student.Age += years;
+
         if (Master.Age > Master.LifeLimit)
         {
             ScreenManager.Instance.CloseMenus();
             GameOverHeader?.SetText($"Мастер {Master.Name} умер");
-            
+
             GameOverWindow.SetActive(true);
             if (Master.Student != null)
             {
@@ -90,5 +88,15 @@ public class GameCore : MonoBehaviour
             MainHubUI.Instance.RefreshUI();
         }
         AgeLabel?.SetText(Master.Age.ToString());
+    }
+    public void StartFight()
+    {
+        MainHub?.SetActive(false);
+        CombatSystem?.SetActive(true);
+    }
+    public void EndFight()
+    {
+        CombatSystem?.SetActive(false);
+        MainHub?.SetActive(true);
     }
 }
