@@ -38,6 +38,8 @@ public class FighterCombatStats : MonoBehaviour
     public int CurrentHP { get; protected set; }
     public int CurrentQi { get; protected set; }
 
+    public int Rank = 0;
+
     public virtual void ResetForBattle()
     {
         CurrentHP = MaxHP;
@@ -61,6 +63,9 @@ public class FighterCombatStats : MonoBehaviour
 
     public virtual bool IsTechniqueUnlocked(TechniqueType techniqueType)
     {
+        int i = (int)techniqueType;
+        if (GameCore.Instance.Techniques[i].RequiredRank > Rank) return false;
+
         switch (techniqueType)
         {
             case TechniqueType.DragonFist: return unlockedDragonFist;

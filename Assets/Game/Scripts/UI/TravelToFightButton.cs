@@ -6,7 +6,6 @@ public class TravelToFightButton : MonoBehaviour
 {
     
     
-    [SerializeField] private int RequiredRank = 0;
     [SerializeField] private TextMeshProUGUI RequiredRankLabel;
     [SerializeField] private GameObject nextFightLevel;
     private EnemyCombatStats enemy;
@@ -18,16 +17,15 @@ public class TravelToFightButton : MonoBehaviour
         tooltip = GetComponent<TooltipTrigger>();
         try
         {
-            tooltip.tooltipText = "Минимальный ранг: " + GameCore.Instance.Ranks[RequiredRank].Name.ToLower();
+            tooltip.tooltipText = "Минимальный ранг: " + GameCore.Instance.Ranks[enemy.Rank].Name.ToLower();
             nextFightLevel.SetActive(false);
         }
         catch { } 
     }
     public void Travel()
     {
-        if (GameCore.Instance.Master.CurrentRank < RequiredRank) return;
+        if (GameCore.Instance.Master.CurrentRank < enemy.Rank) return;
         GameCore.Instance.SelectedEnemy = enemy;
-        TravelSystem.Instance.RequiredRank = RequiredRank;
         TravelSystem.Instance.TravelSystemCanvas.SetActive(true);
     }
     public void Update()

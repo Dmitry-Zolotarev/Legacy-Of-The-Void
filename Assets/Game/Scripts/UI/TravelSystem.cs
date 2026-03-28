@@ -9,8 +9,6 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI SilverLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
     [HideInInspector] public int LootedSilver = 0;
-    [HideInInspector] public int RequiredRank = 0;
-
     public GameObject TravelSystemCanvas;
     public static TravelSystem Instance;
 
@@ -25,7 +23,7 @@ public class TravelSystem : MonoBehaviour
     }
     public void Travel()
     {
-        if(GameCore.Instance.Master.CurrentRank >= RequiredRank) GameCore.Instance.StartFight();
+        if(GameCore.Instance.Master.CurrentRank >= GameCore.Instance.SelectedEnemy.Rank) GameCore.Instance.StartFight();
     }
     private void UpdateLabels()
     {

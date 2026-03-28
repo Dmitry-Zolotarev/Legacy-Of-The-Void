@@ -10,12 +10,10 @@ public class PlayerCombatStats : FighterCombatStats
     public override void ResetForBattle()
     {
         var master = GameCore.Instance.Master;
-
-        bodyLevel = GameCore.Instance.Master.Body;
-
+        bodyLevel = master.Body;
         CurrentHP = MaxHP;
-
-        maxQi = GameCore.Instance.Master.MaxQi;
+        Rank = master.CurrentRank;
+        maxQi = master.MaxQi;
         CurrentQi = Mathf.Clamp(master.Qi, 0, MaxQi);
     }
     public override bool IsTechniqueUnlocked(TechniqueType techniqueType)

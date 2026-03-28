@@ -46,6 +46,10 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private TMP_Text enemyHpBarText;
     [SerializeField] private TMP_Text playerQiBarText;
     [SerializeField] private TMP_Text enemyQiBarText;
+    [SerializeField] private TMP_Text playerRankLabel;
+    [SerializeField] private TMP_Text enemyRankLabel;
+
+
 
     [Header("Floating Damage (optional)")]
     [SerializeField] private RectTransform floatingDamageRoot;
@@ -1227,20 +1231,22 @@ public class AutoBattleController : MonoBehaviour
         {
             SetBar(playerHpFillImage, playerStats.CurrentHP, playerStats.MaxHP);
             SetBar(playerQiFillImage, playerStats.CurrentQi, playerStats.MaxQi);
-            SetText(playerHpText, $"HP Игрока: {playerStats.CurrentHP}/{playerStats.MaxHP}");
-            SetText(playerQiText, $"Qi Игрока: {playerStats.CurrentQi}/{playerStats.MaxQi}");
+            SetText(playerHpText, $"HP игрока: {playerStats.CurrentHP}/{playerStats.MaxHP}");
+            SetText(playerQiText, $"Ци игрока: {playerStats.CurrentQi}/{playerStats.MaxQi}");
             SetText(playerHpBarText, $"{playerStats.CurrentHP}/{playerStats.MaxHP}");
             SetText(playerQiBarText, $"{playerStats.CurrentQi}/{playerStats.MaxQi}");
+            SetText(playerRankLabel, $"Ранг: {GameCore.Instance.Ranks[playerStats.Rank].Name.ToLower()}");
         }
 
         if (EnemyStats != null)
         {
             SetBar(enemyHpFillImage, EnemyStats.CurrentHP, EnemyStats.MaxHP);
             SetBar(enemyQiFillImage, EnemyStats.CurrentQi, EnemyStats.MaxQi);
-            SetText(enemyHpText, $"HP Врага: {EnemyStats.CurrentHP}/{EnemyStats.MaxHP}");
-            SetText(enemyQiText, $"Qi Врага: {EnemyStats.CurrentQi}/{EnemyStats.MaxQi}");
+            SetText(enemyHpText, $"HP врага: {EnemyStats.CurrentHP}/{EnemyStats.MaxHP}");
+            SetText(enemyQiText, $"Ци врага: {EnemyStats.CurrentQi}/{EnemyStats.MaxQi}");
             SetText(enemyHpBarText, $"{EnemyStats.CurrentHP}/{EnemyStats.MaxHP}");
             SetText(enemyQiBarText, $"{EnemyStats.CurrentQi}/{EnemyStats.MaxQi}");
+            SetText(enemyRankLabel, $"Ранг {GameCore.Instance.Ranks[EnemyStats.Rank].Name.ToLower()}");
         }
     }
 
