@@ -18,8 +18,9 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private CombatStage combatStage;
 
     [Header("Fighters")]
-    [SerializeField] private FighterCombatStats playerStats;
-    [SerializeField] private FighterCombatStats enemyStats;
+    public FighterCombatStats EnemyStats;
+    [SerializeField] private PlayerCombatStats playerStats;
+
     [SerializeField] private FighterAnimator playerAnimator;
     [SerializeField] private FighterAnimator enemyAnimator;
     [SerializeField] private FighterMover playerMover;
@@ -187,7 +188,7 @@ public class AutoBattleController : MonoBehaviour
     private Coroutine shakeRoutine;
     private Coroutine hitStopRoutine;
     private Vector3 cameraBaseLocalPos;
-
+    public  static AutoBattleController Instance;
     private void Awake()
     {
         if (playerQiText != null) playerQiBaseColor = playerQiText.color;
@@ -204,11 +205,13 @@ public class AutoBattleController : MonoBehaviour
             enemyQiPopupBasePos = rt.anchoredPosition;
             enemyQiSpendPopupText.gameObject.SetActive(false);
         }
-        if (cameraShakeTarget != null)
-            cameraBaseLocalPos = cameraShakeTarget.localPosition;
+        if (cameraShakeTarget != null) cameraBaseLocalPos = cameraShakeTarget.localPosition;
+
+        if (Instance == null) Instance = this;
+
     }
 
-    private void Start()
+    private void OnEnable()
     {
         BindButtons();
         ResetBattle();
@@ -261,7 +264,8 @@ public class AutoBattleController : MonoBehaviour
         GenerateEnemyQueue();
 
         if (playerStats != null) playerStats.ResetForBattle();
-        if (enemyStats != null) enemyStats.ResetForBattle();
+        EnemyStats = GameCore.Instance.SelectedEnemy;
+        if (EnemyStats != null) EnemyStats.ResetForBattle();
 
         if (resultPanel != null) resultPanel.SetActive(false);
         if (resultTitleText != null) resultTitleText.text = string.Empty;
@@ -338,7 +342,7 @@ public class AutoBattleController : MonoBehaviour
 
     private void TryStartBattle()
     {
-        if (isBusy || battleFinished || rules == null || playerStats == null || enemyStats == null) return;
+        if (isBusy || battleFinished || rules == null || playerStats == null || EnemyStats == null) return;
         if (playerQueue.Count < rules.slotCount)
         {
             if (statusText != null) statusText.text = "Нужно собрать 5 ходов";
@@ -359,22 +363,22 @@ public class AutoBattleController : MonoBehaviour
         if (playerAnimator != null) playerAnimator.PlayIdle();
         if (enemyAnimator != null) enemyAnimator.PlayIdle();
 
-        BattleResolution resolution = BattleResolver.Resolve(playerQueue, enemyQueue, rules, playerStats, enemyStats);
+        BattleResolution resolution = BattleResolver.Resolve(playerQueue, enemyQueue, rules, playerStats, EnemyStats);
 
         for (int i = 0; i < resolution.slots.Count; i++)
         {
             SlotResolution slot = resolution.slots[i];
             if (statusText != null) statusText.text = BuildSlotStatus(slot);
             yield return PlaySlot(slot);
-            if (playerStats.CurrentHP <= 0 || enemyStats.CurrentHP <= 0)
+            if (playerStats.CurrentHP <= 0 || EnemyStats.CurrentHP <= 0)
                 break;
         }
 
-        bool hasWinner = playerStats.CurrentHP <= 0 || enemyStats.CurrentHP <= 0;
+        bool hasWinner = playerStats.CurrentHP <= 0 || EnemyStats.CurrentHP <= 0;
         if (hasWinner)
         {
             battleFinished = true;
-            if (playerStats.CurrentHP <= 0 && enemyStats.CurrentHP <= 0)
+            if (playerStats.CurrentHP <= 0 && EnemyStats.CurrentHP <= 0)
             {
                 if (statusText != null) statusText.text = "Оба выбыли";
                 if (playerAnimator != null) playerAnimator.PlayDefeat();
@@ -382,7 +386,7 @@ public class AutoBattleController : MonoBehaviour
                 PlayOneShot(defeatSfx);
                 ShowResultPanel("Ничья");
             }
-            else if (enemyStats.CurrentHP <= 0)
+            else if (EnemyStats.CurrentHP <= 0)
             {
                 if (statusText != null) statusText.text = "Победа игрока";
                 if (playerAnimator != null) playerAnimator.PlayVictory();
@@ -508,7 +512,7 @@ public class AutoBattleController : MonoBehaviour
         playerPendingDamageFx = PendingDamageFxKind.None;
         enemyPendingDamageFx = PendingDamageFxKind.None;
 
-        if (playerStats.CurrentHP > 0 && enemyStats.CurrentHP > 0)
+        if (playerStats.CurrentHP > 0 && EnemyStats.CurrentHP > 0)
         {
             if (playerAnimator != null) playerAnimator.PlayIdle();
             if (enemyAnimator != null) enemyAnimator.PlayIdle();
@@ -747,12 +751,12 @@ public class AutoBattleController : MonoBehaviour
         }
 
         int playerDamageTaken = playerStats != null ? Mathf.Max(0, playerStats.CurrentHP - currentSlot.playerHpAfter) : 0;
-        int enemyDamageTaken = enemyStats != null ? Mathf.Max(0, enemyStats.CurrentHP - currentSlot.enemyHpAfter) : 0;
+        int enemyDamageTaken = EnemyStats != null ? Mathf.Max(0, EnemyStats.CurrentHP - currentSlot.enemyHpAfter) : 0;
 
         if (playerStats != null) playerStats.ApplyHp(currentSlot.playerHpAfter);
-        if (enemyStats != null) enemyStats.ApplyHp(currentSlot.enemyHpAfter);
+        if (EnemyStats != null) EnemyStats.ApplyHp(currentSlot.enemyHpAfter);
         if (playerStats != null) playerStats.ApplyQi(currentSlot.playerQiAfter);
-        if (enemyStats != null) enemyStats.ApplyQi(currentSlot.enemyQiAfter);
+        if (EnemyStats != null) EnemyStats.ApplyQi(currentSlot.enemyQiAfter);
         RefreshStatsUi();
 
         if (playerDamageTaken > 0)
@@ -1214,21 +1218,21 @@ public class AutoBattleController : MonoBehaviour
             SetText(playerQiBarText, $"{playerStats.CurrentQi}/{playerStats.MaxQi}");
         }
 
-        if (enemyStats != null)
+        if (EnemyStats != null)
         {
-            SetBar(enemyHpFillImage, enemyStats.CurrentHP, enemyStats.MaxHP);
-            SetBar(enemyQiFillImage, enemyStats.CurrentQi, enemyStats.MaxQi);
-            SetText(enemyHpText, $"HP Врага: {enemyStats.CurrentHP}/{enemyStats.MaxHP}");
-            SetText(enemyQiText, $"Qi Врага: {enemyStats.CurrentQi}/{enemyStats.MaxQi}");
-            SetText(enemyHpBarText, $"{enemyStats.CurrentHP}/{enemyStats.MaxHP}");
-            SetText(enemyQiBarText, $"{enemyStats.CurrentQi}/{enemyStats.MaxQi}");
+            SetBar(enemyHpFillImage, EnemyStats.CurrentHP, EnemyStats.MaxHP);
+            SetBar(enemyQiFillImage, EnemyStats.CurrentQi, EnemyStats.MaxQi);
+            SetText(enemyHpText, $"HP Врага: {EnemyStats.CurrentHP}/{EnemyStats.MaxHP}");
+            SetText(enemyQiText, $"Qi Врага: {EnemyStats.CurrentQi}/{EnemyStats.MaxQi}");
+            SetText(enemyHpBarText, $"{EnemyStats.CurrentHP}/{EnemyStats.MaxHP}");
+            SetText(enemyQiBarText, $"{EnemyStats.CurrentQi}/{EnemyStats.MaxQi}");
         }
     }
 
     private void RefreshSlots()
     {
         List<AttackPlan> playerPreview = BattleResolver.BuildPreviewPlans(playerQueue, playerStats != null ? playerStats.CurrentQi : 0, playerStats, rules);
-        List<AttackPlan> enemyPreview = BattleResolver.BuildPreviewPlans(enemyQueue, enemyStats != null ? enemyStats.CurrentQi : 0, enemyStats, rules);
+        List<AttackPlan> enemyPreview = BattleResolver.BuildPreviewPlans(enemyQueue, EnemyStats != null ? EnemyStats.CurrentQi : 0, EnemyStats, rules);
 
         if (playerSlots != null)
         {

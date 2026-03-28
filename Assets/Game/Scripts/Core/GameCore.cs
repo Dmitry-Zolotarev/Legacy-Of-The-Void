@@ -22,6 +22,7 @@ public class GameCore : MonoBehaviour
     public List<MeridianLevel> MeridianLevels;
     public GameObject CombatSystem;
     public GameObject MainHub;
+    public EnemyCombatStats SelectedEnemy = new EnemyCombatStats();
     void Awake()
     {
         if (Instance == null) Instance = this;

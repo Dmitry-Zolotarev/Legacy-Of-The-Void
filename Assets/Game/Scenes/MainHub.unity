@@ -8809,7 +8809,7 @@ Transform:
   m_GameObject: {fileID: 387405765}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.18183, y: 2.25741, z: -4.52267}
+  m_LocalPosition: {x: -4.1818438, y: 2.2574186, z: -4.52267}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8829,8 +8829,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MurimAutoBattle.AutoBattleController
   rules: {fileID: 11400000, guid: 591b1a32ed5e5834cafcd77211e19fab, type: 2}
   combatStage: {fileID: 342908960}
+  EnemyStats: {fileID: 0}
   playerStats: {fileID: 550101361}
-  enemyStats: {fileID: 1760341338}
   playerAnimator: {fileID: 550101360}
   enemyAnimator: {fileID: 1760341337}
   playerMover: {fileID: 550101359}
@@ -8930,7 +8930,7 @@ MonoBehaviour:
   landingBackSfx: {fileID: 0}
   victorySfx: {fileID: 8300000, guid: 01f6bfe2eff65a849b22863baf77f24d, type: 3}
   defeatSfx: {fileID: 8300000, guid: 0f1476f6a44d847438d1a9fd02b7f762, type: 3}
-  cameraShakeTarget: {fileID: 1865231411}
+  cameraShakeTarget: {fileID: 0}
   qiFlashColor: {r: 0.4, g: 1, b: 1, a: 1}
   qiFlashDuration: 0.22
   qiPopupDuration: 0.55
@@ -10046,10 +10046,10 @@ PrefabInstance:
       addedObject: {fileID: 550101360}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 550101361}
+      addedObject: {fileID: 550101359}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 550101359}
+      addedObject: {fileID: 550101361}
   m_SourcePrefab: {fileID: 100100000, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
 --- !u!1 &550101352 stripped
 GameObject:
@@ -10153,17 +10153,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 550101352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bc3dd89d7cf1c9479810d2710b4e1f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9bf1eba53db20b94383f90ca5e663b0d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FighterCombatStats
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombatStats
   bodyLevel: 0
-  baseHp: 100
+  baseHp: 0
   hpPerBodyLevel: 10
-  baseDamage: 10
-  damagePerBodyLevel: 5
+  baseDamage: 0
+  damagePerBodyLevel: 1
   partialDamageMultiplier: 0.5
   maxQi: 20
-  currentQi: 20
+  currentQi: 0
   unlockedDragonFist: 1
   unlockedCraneKick: 1
   unlockedMoonSlash: 1
@@ -21489,10 +21489,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 213254803}
+  - {fileID: 387405766}
   - {fileID: 1395094344}
   - {fileID: 1760341335}
   - {fileID: 550101358}
-  - {fileID: 387405766}
   - {fileID: 342908959}
   - {fileID: 848893491}
   - {fileID: 512795980}
@@ -27011,7 +27011,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 1865231412}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -36048,9 +36048,6 @@ PrefabInstance:
       addedObject: {fileID: 1760341337}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1760341338}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1760341336}
   m_SourcePrefab: {fileID: 100100000, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
 --- !u!1 &1760341329 stripped
@@ -36146,30 +36143,6 @@ MonoBehaviour:
   techFullBlockReactState: TechFullBlockReact
   techBlockReactFallbackState: TechBlockReact
   defaultBlend: 0.05
---- !u!114 &1760341338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760341329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bc3dd89d7cf1c9479810d2710b4e1f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FighterCombatStats
-  bodyLevel: 0
-  baseHp: 100
-  hpPerBodyLevel: 10
-  baseDamage: 10
-  damagePerBodyLevel: 5
-  partialDamageMultiplier: 0.5
-  maxQi: 20
-  currentQi: 20
-  unlockedDragonFist: 1
-  unlockedCraneKick: 1
-  unlockedMoonSlash: 1
-  unlockedVoidPalm: 1
 --- !u!1 &1767261197
 GameObject:
   m_ObjectHideFlags: 0
@@ -40525,6 +40498,7 @@ MonoBehaviour:
     MaxBody: 100
   CombatSystem: {fileID: 1330720106}
   MainHub: {fileID: 1934468469}
+  SelectedEnemy: {fileID: 0}
 --- !u!222 &745340331660997630
 CanvasRenderer:
   m_ObjectHideFlags: 0
