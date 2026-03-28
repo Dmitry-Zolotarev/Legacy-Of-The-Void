@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dc9a91000a598f64c8d59c271ae06575
+guid: 13f27edac5718744582f6071c51639cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7347480179970749778
-    second: TreasureIcon_0
+      213: -4857576141395538451
+    second: FightLevelButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TreasureIcon_0
+      name: FightLevelButton_0
       rect:
         serializedVersion: 2
         x: 0
@@ -121,15 +121,15 @@ TextureImporter:
         width: 232
         height: 280
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 25531698b4e77f560800000000000000
-      internalID: 7347480179970749778
+      spriteID: dedc4b66c3c669cb0800000000000000
+      internalID: -4857576141395538451
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2564956b56a477d4ebaaaf48f54f3ae3
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TreasureIcon_0: 7347480179970749778
+      FightLevelButton_0: -4857576141395538451
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

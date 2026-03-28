@@ -400,6 +400,7 @@ public class AutoBattleController : MonoBehaviour
                 PlayOneShot(victorySfx);
                 EnemyStats.AddSilverToPlayer();
                 ShowResultPanel($"Вы победили и получили {EnemyStats.lootedSilver} серебра");
+                EnemyStats.IsDefeated = true;
             }
             else
             {

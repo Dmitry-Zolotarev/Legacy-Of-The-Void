@@ -15,7 +15,7 @@ public class TravelToFightButton : MonoBehaviour
         GameCore.Instance.SelectedEnemy = enemy;
         TravelSystem.Instance.TravelSystemCanvas.SetActive(true);
     }
-    public void FixedUpdate()
+    public void Update()
     {
         if(enemy != null && enemy.IsDefeated)
         {
