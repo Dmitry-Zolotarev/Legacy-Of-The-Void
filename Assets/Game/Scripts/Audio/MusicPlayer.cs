@@ -8,15 +8,7 @@ public class MusicPlayer : MonoBehaviour
     public int volume;
     private void Awake()
     {
-        if (Instance != null && Instance.gameObject != gameObject)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        if (Instance != null) Instance = this;
         AudioSource = GetComponent<AudioSource>();
     }
 }
