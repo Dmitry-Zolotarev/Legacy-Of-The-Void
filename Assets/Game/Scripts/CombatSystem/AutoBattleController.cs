@@ -18,7 +18,7 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private CombatStage combatStage;
 
     [Header("Fighters")]
-    public FighterCombatStats EnemyStats;
+    public EnemyCombatStats EnemyStats;
     [SerializeField] private PlayerCombatStats playerStats;
 
     [SerializeField] private FighterAnimator playerAnimator;
@@ -163,12 +163,16 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private float qiFlashDuration = 0.22f;
     [SerializeField] private float qiPopupDuration = 0.55f;
     [SerializeField] private float qiPopupRise = 28f;
+    [SerializeField] private int MinYearSpent = 1;
+    [SerializeField] private int MaxYearSpent = 3;
+    [SerializeField] private int ShowResultsTime = 5;
 
     private readonly List<MoveType> playerQueue = new List<MoveType>();
     private readonly List<MoveType> enemyQueue = new List<MoveType>();
 
     private bool isBusy;
     private bool battleFinished;
+    private bool buttonsWasBinded = false;
 
     private SlotResolution currentSlot;
     private bool currentSlotActive;
@@ -210,7 +214,6 @@ public class AutoBattleController : MonoBehaviour
         if (Instance == null) Instance = this;
 
     }
-
     private void OnEnable()
     {
         BindButtons();
@@ -226,6 +229,8 @@ public class AutoBattleController : MonoBehaviour
 
     private void BindButtons()
     {
+        if (buttonsWasBinded) return;
+        
         if (handButton != null) handButton.onClick.AddListener(() => AddPlayerMove(MoveType.Hand));
         if (legButton != null) legButton.onClick.AddListener(() => AddPlayerMove(MoveType.Leg));
         if (swordButton != null) swordButton.onClick.AddListener(() => AddPlayerMove(MoveType.Sword));
@@ -233,7 +238,7 @@ public class AutoBattleController : MonoBehaviour
         if (clearButton != null) clearButton.onClick.AddListener(ClearPlayerQueue);
         if (fightButton != null) fightButton.onClick.AddListener(TryStartBattle);
         if (rerollEnemyButton != null) rerollEnemyButton.onClick.AddListener(RerollEnemy);
-        if (restartButton != null) restartButton.onClick.AddListener(ResetBattle);
+        buttonsWasBinded = true;
     }
 
     private void UnbindButtons()
@@ -245,7 +250,6 @@ public class AutoBattleController : MonoBehaviour
         if (clearButton != null) clearButton.onClick.RemoveAllListeners();
         if (fightButton != null) fightButton.onClick.RemoveAllListeners();
         if (rerollEnemyButton != null) rerollEnemyButton.onClick.RemoveAllListeners();
-        if (restartButton != null) restartButton.onClick.RemoveAllListeners();
     }
 
     private void ResetBattle()
@@ -378,6 +382,8 @@ public class AutoBattleController : MonoBehaviour
         if (hasWinner)
         {
             battleFinished = true;
+            int timeSpent = GameCore.Instance.random.Next(MinYearSpent, MaxYearSpent + 1);        
+            GameCore.Instance.AdvanceTime(timeSpent);
             if (playerStats.CurrentHP <= 0 && EnemyStats.CurrentHP <= 0)
             {
                 if (statusText != null) statusText.text = "Оба выбыли";
@@ -392,7 +398,8 @@ public class AutoBattleController : MonoBehaviour
                 if (playerAnimator != null) playerAnimator.PlayVictory();
                 if (enemyAnimator != null) enemyAnimator.PlayDefeat();
                 PlayOneShot(victorySfx);
-                ShowResultPanel("Вы победили");
+                EnemyStats.AddSilverToPlayer();
+                ShowResultPanel($"Вы победили и получили {EnemyStats.lootedSilver} серебра");
             }
             else
             {
@@ -402,10 +409,11 @@ public class AutoBattleController : MonoBehaviour
                 PlayOneShot(defeatSfx);
                 ShowResultPanel("Вы проиграли");
             }
-
+            
             isBusy = false;
             RefreshButtonStates();
-            yield break;
+            yield return new WaitForSeconds(ShowResultsTime);
+            GameCore.Instance.EndFight();
         }
 
         playerQueue.Clear();
@@ -1378,7 +1386,7 @@ public class AutoBattleController : MonoBehaviour
         SetButton(palmButton, canAddMoves);
         SetButton(clearButton, inputAllowed && hasAnyMoves);
         SetButton(fightButton, queueReady);
-        SetButton(rerollEnemyButton, inputAllowed);
+        SetButton(rerollEnemyButton, true);
     }
 
     private void ShowResultPanel(string title)

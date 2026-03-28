@@ -4,13 +4,14 @@ using TMPro;
 
 public class TravelSystem : MonoBehaviour
 {
-    [SerializeField] private int MinSilver = 20;
-    [SerializeField] private int MaxSilver = 220;
+    
     [SerializeField] private int MinYears = 1;
     [SerializeField] private int MaxYears = 3;
     [SerializeField] private TextMeshProUGUI SilverLabel;
     public GameObject TravelSystemCanvas;
     public static TravelSystem Instance;
+    [HideInInspector] public int LootedSilver = 0;
+    private System.Random random = new System.Random();
     private void Awake()
     {
         if (Instance == null) Instance = this;

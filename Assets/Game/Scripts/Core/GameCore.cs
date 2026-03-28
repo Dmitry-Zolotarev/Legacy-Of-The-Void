@@ -13,6 +13,7 @@ public class GameCore : MonoBehaviour
     [SerializeField] private GameObject GameOverWindow;
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
+    [HideInInspector] public EnemyCombatStats SelectedEnemy = new EnemyCombatStats();
     [SerializeField] private TextMeshProUGUI AgeLabel;
     public List<Technique> Techniques;
     [SerializeField] private List<string> SurnameList;
@@ -22,7 +23,7 @@ public class GameCore : MonoBehaviour
     public List<MeridianLevel> MeridianLevels;
     public GameObject CombatSystem;
     public GameObject MainHub;
-    public EnemyCombatStats SelectedEnemy = new EnemyCombatStats();
+    [HideInInspector] public System.Random random = new System.Random();
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -30,7 +31,6 @@ public class GameCore : MonoBehaviour
     void Start()
     {
         Master.Name = GenerateFullName();
-        var random = new System.Random();
         Master.Age += random.Next(0, 15);
         AgeLabel?.SetText(Master.Age.ToString());
         AddTechnique(0);
@@ -99,5 +99,6 @@ public class GameCore : MonoBehaviour
     {
         CombatSystem?.SetActive(false);
         MainHub?.SetActive(true);
+        
     }
 }
