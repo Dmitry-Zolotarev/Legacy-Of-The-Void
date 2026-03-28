@@ -33,11 +33,6 @@ public class GameCore : MonoBehaviour
         Master.Name = GenerateFullName();
         Master.Age += random.Next(0, 15);
         AgeLabel?.SetText(Master.Age.ToString());
-        AddTechnique(0);
-    }
-    public void AddTechnique(int i)
-    {
-        if (Techniques.Count > 0) Master.KnownTechniques.Add(Instance.Techniques[i]);
     }
     public string GenerateFullName()
     {
@@ -61,44 +56,42 @@ public class GameCore : MonoBehaviour
         if (years % 10 == 1) yearWord = "год";
         return yearWord;
     }
+    public void KillMaster()
+    {
+        ScreenManager.Instance.CloseMenus();
+        GameOverHeader?.SetText($"Мастер {Master.Name} умер");
+
+        GameOverWindow.SetActive(true);
+        if (Master.Student != null)
+        {
+            Master.Student.Inherit(Master);
+            Master = Master.Student;
+            GameOverDescrption?.SetText("Наследство передано ученику");
+        }
+        else
+        {
+            var newGeneration = Master.Generation + 1;
+            Master = new CharacterData();
+            Master.Generation = newGeneration;
+            GameOverDescrption?.SetText("Наследство не передано");
+        }
+        MainHubUI.Instance.RefreshUI();
+    }
     public void AdvanceTime(int years)
     {
         Year += years;
         Master.Age += years;
         if (Master.Student != null) Master.Student.Age += years;
 
-        if (Master.Age > Master.LifeLimit)
-        {
-            ScreenManager.Instance.CloseMenus();
-            GameOverHeader?.SetText($"Мастер {Master.Name} умер");
+        if (Master.Age > Master.LifeLimit) KillMaster();
 
-            GameOverWindow.SetActive(true);
-            if (Master.Student != null)
-            {
-                Master.Student.Inherit(Master);
-                Master = Master.Student;
-                GameOverDescrption?.SetText("Наследство передано ученику");
-            }
-            else
-            {
-                var newGeneration = Master.Generation + 1;
-                Master = new CharacterData();
-                Master.Generation = newGeneration;
-                GameOverDescrption?.SetText("Наследство не передано");
-            }
-            MainHubUI.Instance.RefreshUI();
-        }
         AgeLabel?.SetText(Master.Age.ToString());
     }
+    
     public void StartFight()
     {
         MainHub?.SetActive(false);
         CombatSystem?.SetActive(true);
-    }
-    public void EndFight()
-    {
-        CombatSystem?.SetActive(false);
-        MainHub?.SetActive(true);
-        
+        MusicPlayer.Instance.PlayCombatMusic();
     }
 }

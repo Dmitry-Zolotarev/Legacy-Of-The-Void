@@ -15,6 +15,7 @@ TagManager:
   - PerkButton
   - StatsPanel
   - MeditationScreen
+  - SFXPlayer
   layers:
   - Default
   - TransparentFX

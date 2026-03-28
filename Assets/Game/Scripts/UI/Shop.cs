@@ -21,17 +21,13 @@ public class Shop : MonoBehaviour
 
     private void OnEnable()
     {
-        
         UpdateUI();
-    }
-    private void Update()
-    { 
         var merchantGeneration = GameCore.Instance.Year / 30 % MerchantSprites.Length;
-        Debug.Log(merchantGeneration);
-        if (Merchant.sprite != MerchantSprites[merchantGeneration]) 
+
+        if (Merchant.sprite != MerchantSprites[merchantGeneration])
         {
             Merchant.sprite = MerchantSprites[merchantGeneration];
-        } 
+        }
     }
     
     private void UpdateUI()
@@ -40,7 +36,7 @@ public class Shop : MonoBehaviour
 
         for (int i = 0; i < TechniqueNameLabels.Count; i++)
         {
-            var technique = GameCore.Instance.Techniques[i + 1];
+            var technique = GameCore.Instance.Techniques[i];
             TechniqueNameLabels[i].SetText(technique.Name);
             TechniquePriceLabels[i].SetText(technique.Price.ToString());
             TechniqueLots[i].gameObject.SetActive(master.CurrentRank >= technique.RequiredRank && !master.KnownTechniques.Contains(technique));       

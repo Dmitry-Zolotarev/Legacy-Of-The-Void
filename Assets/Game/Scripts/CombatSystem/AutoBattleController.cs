@@ -111,7 +111,7 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private GameObject techniqueDamageFxPrefab;
 
     [Header("SFX")]
-    [SerializeField] private AudioSource sfxSource;
+    private AudioSource sfxSource;
 
     [Header("Move Swing SFX")]
     [SerializeField] private AudioClip handSwingSfx;
@@ -212,7 +212,7 @@ public class AutoBattleController : MonoBehaviour
         if (cameraShakeTarget != null) cameraBaseLocalPos = cameraShakeTarget.localPosition;
 
         if (Instance == null) Instance = this;
-
+        sfxSource = SFXPlayer.Instance.AudioSource;
     }
     private void OnEnable()
     {
@@ -382,11 +382,12 @@ public class AutoBattleController : MonoBehaviour
         if (hasWinner)
         {
             battleFinished = true;
+            bool hasWon = false;
             int timeSpent = GameCore.Instance.random.Next(MinYearSpent, MaxYearSpent + 1);        
             GameCore.Instance.AdvanceTime(timeSpent);
             if (playerStats.CurrentHP <= 0 && EnemyStats.CurrentHP <= 0)
             {
-                if (statusText != null) statusText.text = "Оба выбыли";
+                if (statusText != null) statusText.text = "Взаимное убийство - ничья";
                 if (playerAnimator != null) playerAnimator.PlayDefeat();
                 if (enemyAnimator != null) enemyAnimator.PlayDefeat();
                 PlayOneShot(defeatSfx);
@@ -394,6 +395,7 @@ public class AutoBattleController : MonoBehaviour
             }
             else if (EnemyStats.CurrentHP <= 0)
             {
+                hasWon = true;
                 if (statusText != null) statusText.text = "Победа игрока";
                 if (playerAnimator != null) playerAnimator.PlayVictory();
                 if (enemyAnimator != null) enemyAnimator.PlayDefeat();
@@ -414,7 +416,11 @@ public class AutoBattleController : MonoBehaviour
             isBusy = false;
             RefreshButtonStates();
             yield return new WaitForSeconds(ShowResultsTime);
-            GameCore.Instance.EndFight();
+
+            MusicPlayer.Instance.PlayMainMusic();
+            GameCore.Instance.MainHub?.SetActive(true);
+            if (!hasWon) GameCore.Instance.KillMaster();
+            GameCore.Instance.CombatSystem?.SetActive(false);
         }
 
         playerQueue.Clear();

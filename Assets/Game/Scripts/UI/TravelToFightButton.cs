@@ -1,18 +1,33 @@
 using UnityEngine;
-
+using TMPro;
 [RequireComponent(typeof(EnemyCombatStats))]
+[RequireComponent(typeof(TooltipTrigger))]
 public class TravelToFightButton : MonoBehaviour
 {
-    public GameObject nextFightLevel;
+    
+    
+    [SerializeField] private int RequiredRank = 0;
+    [SerializeField] private TextMeshProUGUI RequiredRankLabel;
+    [SerializeField] private GameObject nextFightLevel;
     private EnemyCombatStats enemy;
+    private TooltipTrigger tooltip;
     public void Start()
     {
+        
         enemy = GetComponent<EnemyCombatStats>();
-        nextFightLevel.SetActive(false); 
+        tooltip = GetComponent<TooltipTrigger>();
+        try
+        {
+            tooltip.tooltipText = "Минимальный ранг: " + GameCore.Instance.Ranks[RequiredRank].Name.ToLower();
+            nextFightLevel.SetActive(false);
+        }
+        catch { } 
     }
     public void Travel()
     {
+        if (GameCore.Instance.Master.CurrentRank < RequiredRank) return;
         GameCore.Instance.SelectedEnemy = enemy;
+        TravelSystem.Instance.RequiredRank = RequiredRank;
         TravelSystem.Instance.TravelSystemCanvas.SetActive(true);
     }
     public void Update()

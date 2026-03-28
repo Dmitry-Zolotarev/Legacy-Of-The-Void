@@ -8,6 +8,7 @@ public class LoadSceneComponent : MonoBehaviour
     public void LoadScene()
     {
         Time.timeScale = 1f;
+        MusicPlayer.Instance?.PlayMainMusic();
         SceneManager.LoadScene(sceneName);
     }
 }

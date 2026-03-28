@@ -32,7 +32,6 @@ public class CharacterData
     {
         Name = GameCore.Instance?.GenerateFullName();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
-        GameCore.Instance?.AddTechnique(0);
     }
     public void OpenMeridian()
     {
