@@ -6,6 +6,7 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] private AudioClip mainMusic;
     [SerializeField] private AudioClip combatMusic;
     [SerializeField] private AudioClip meditationMusic;
+    [SerializeField] private AudioClip startMusic;
     [HideInInspector] public static MusicPlayer Instance;
     [HideInInspector] public AudioSource AudioSource;
     private void Awake()
@@ -27,6 +28,10 @@ public class MusicPlayer : MonoBehaviour
         if (AudioSource.clip == clip && AudioSource.isPlaying) return;
         AudioSource.clip = clip;
         AudioSource.Play();
+    }
+    public void PlayStartMusic()
+    {
+        PlayMusic(startMusic);
     }
     public void PlayMainMusic()
     {

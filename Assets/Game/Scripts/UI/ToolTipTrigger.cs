@@ -5,20 +5,23 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     public string tooltipText;
     [SerializeField] private Vector3 offset = Vector3.zero;
+    [SerializeField] private float fontSize = 16f;
     private bool hasShown = false;
     
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (!string.IsNullOrEmpty(tooltipText) && !hasShown)
-        {
-            ToolTip.Instance.transform.position = transform.position + offset;
-            ToolTip.Instance.ShowTooltip(tooltipText);
-            hasShown = true;
-        }     
-    }
+    public void OnPointerEnter(PointerEventData eventData) => ShowTooltip(tooltipText);
     public void OnPointerExit(PointerEventData eventData)
     {
         ToolTip.Instance.HideTooltip();
         hasShown = false;
+    }
+    public void ShowTooltip(string text)
+    {
+        
+        if (hasShown || string.IsNullOrEmpty(text)) return;
+
+        ToolTip.Instance.transform.position = transform.position + offset;
+        ToolTip.Instance.SetFontSize(fontSize);
+        ToolTip.Instance.ShowTooltip(text);
+        hasShown = true;
     }
 }

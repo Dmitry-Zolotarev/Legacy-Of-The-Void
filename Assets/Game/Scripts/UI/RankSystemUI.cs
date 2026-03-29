@@ -18,7 +18,7 @@ public class RankSystemUI : MonoBehaviour
     private void OnEnable()
     {
         UpdateLabels();
-        //if (master.CurrentRank >= GameCore.Instance.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
+        if (master.CurrentRank >= GameCore.Instance.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
     }
     public void UpdateLabels()
     {

@@ -10,10 +10,11 @@ public class GameCore : MonoBehaviour
     [HideInInspector] public int Year = 1;
     public CharacterData Master;
 
+    [SerializeField] private GameObject ComicsCanvas;
     [SerializeField] private GameObject GameOverWindow;
+
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
-    [HideInInspector] public EnemyCombatStats SelectedEnemy = new EnemyCombatStats();
     [SerializeField] private TextMeshProUGUI AgeLabel;
     public List<Technique> Techniques;
     [SerializeField] private List<string> SurnameList;
@@ -23,24 +24,25 @@ public class GameCore : MonoBehaviour
     public List<MeridianLevel> MeridianLevels;
     public GameObject CombatSystem;
     public GameObject MainHub;
+
+    
     [HideInInspector] public System.Random random = new System.Random();
+
     void Awake()
     {
         if (Instance == null) Instance = this;
+        
     }
     void Start()
     {
-        Master.Name = GenerateFullName();
-        Master.Age += random.Next(0, 15);
         AgeLabel?.SetText(Master.Age.ToString());
+        ComicsCanvas?.SetActive(true);
     }
     public string GenerateFullName()
     {
         var random = new System.Random();
-        var surname = "";
-        surname = SurnameList?[random.Next(0, SurnameList.Count)];
-        var name = "";
-        name = NameList?[random.Next(0, NameList.Count)];
+        string surname = SurnameList?[random.Next(0, SurnameList.Count)];
+        string name = NameList?[random.Next(0, NameList.Count)];
         return $"{surname} {name}";
     }
     public static string GetEnumDescription(Enum value)
@@ -56,7 +58,7 @@ public class GameCore : MonoBehaviour
         if (years % 10 == 1) yearWord = "год";
         return yearWord;
     }
-    public void KillMaster()
+    private void KillMaster()
     {
         ScreenManager.Instance.CloseMenus();
         GameOverHeader?.SetText($"Мастер {Master.Name} умер");
@@ -87,11 +89,15 @@ public class GameCore : MonoBehaviour
 
         AgeLabel?.SetText(Master.Age.ToString());
     }
-    
-    public void StartFight()
+    public string GetRankLabelRu(MasterRank rank)
     {
-        MainHub?.SetActive(false);
-        CombatSystem?.SetActive(true);
-        MusicPlayer.Instance.PlayCombatMusic();
+        return Ranks[(int)rank].Name.ToLower();
+    }
+    public void EndFight()
+    {
+        MusicPlayer.Instance.PlayMainMusic();
+        Instance.MainHub?.SetActive(true);
+        Instance.CombatSystem?.SetActive(false);
+        AdvanceTime(1);
     }
 }

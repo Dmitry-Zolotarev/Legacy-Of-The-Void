@@ -13,7 +13,7 @@ public class CharacterData
     [HideInInspector] public List<Technique> KnownTechniques = new List<Technique>();
 
     public int Age = 16;
-    public string Name = "";
+    public string Name = "Со Мин";
     public int MinLifeLimit = 65;
     public int MaxLifeLimit = 95;
     public int Body = 10;
@@ -79,11 +79,11 @@ public class CharacterData
     {
         return GameCore.Instance.Ranks[i].Name;
     }
-    public bool IsTechniqueUnlocked(int techniqueType)
+    public bool IsTechniqueUnlocked(TechniqueType techniqueType)
     {
         foreach(var technique in KnownTechniques)
         {
-            if (technique.Type == techniqueType) return true;
+            if (technique.Type == (int)techniqueType) return true;
         }
         return false;
     }

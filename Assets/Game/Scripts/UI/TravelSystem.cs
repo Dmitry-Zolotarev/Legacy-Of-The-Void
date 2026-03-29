@@ -8,27 +8,37 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private int MaxYears = 3;
     [SerializeField] private TextMeshProUGUI SilverLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
-    [HideInInspector] public int LootedSilver = 0;
+    [SerializeField] private TextMeshProUGUI BattleDescriptionLabel;
+    [HideInInspector] public int SilverBonus = 0;
+    [HideInInspector] public TravelToFightButton SelectedLevel;
+    public BattleLaunchButton BattleLaunchButton;
     public GameObject TravelSystemCanvas;
     public static TravelSystem Instance;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
+        TravelSystemCanvas.SetActive(false);
     }
     public void OnEnable()
     {
-        TravelSystemCanvas.SetActive(false);
+        
         UpdateLabels();
     }
-    public void Travel()
+    public void ShowFightDialog(string battleDescription)
     {
-        if(GameCore.Instance.Master.CurrentRank >= GameCore.Instance.SelectedEnemy.Rank) GameCore.Instance.StartFight();
+        BattleDescriptionLabel.SetText(battleDescription);
+        TravelSystemCanvas.SetActive(true);       
     }
     private void UpdateLabels()
     {
         SilverLabel?.SetText(GameCore.Instance.Master.Silver.ToString());
         var rankName = GameCore.Instance.Ranks[GameCore.Instance.Master.CurrentRank].Name;
         RankLabel?.SetText("Ранг: " + rankName.ToLower());
+    }
+    public void AddSilverToPlayer()
+    {
+        SelectedLevel.enemyDefeated = true;
+        GameCore.Instance.Master.Silver += SilverBonus;
     }
 }

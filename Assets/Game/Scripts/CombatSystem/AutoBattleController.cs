@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,9 +19,8 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private CombatStage combatStage;
 
     [Header("Fighters")]
-    public EnemyCombatStats EnemyStats;
-    [SerializeField] private PlayerCombatStats playerStats;
-
+    [SerializeField] private FighterCombatStats playerStats;
+    [SerializeField] private FighterCombatStats enemyStats;
     [SerializeField] private FighterAnimator playerAnimator;
     [SerializeField] private FighterAnimator enemyAnimator;
     [SerializeField] private FighterMover playerMover;
@@ -36,6 +36,8 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private TMP_Text statusText;
     [SerializeField] private TMP_Text playerQiSpendPopupText;
     [SerializeField] private TMP_Text enemyQiSpendPopupText;
+    [SerializeField] private TMP_Text playerRankText;
+    [SerializeField] private TMP_Text enemyRankText;
 
     [Header("HP / Qi Bars (optional)")]
     [SerializeField] private Image playerHpFillImage;
@@ -46,10 +48,6 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private TMP_Text enemyHpBarText;
     [SerializeField] private TMP_Text playerQiBarText;
     [SerializeField] private TMP_Text enemyQiBarText;
-    [SerializeField] private TMP_Text playerRankLabel;
-    [SerializeField] private TMP_Text enemyRankLabel;
-
-
 
     [Header("Floating Damage (optional)")]
     [SerializeField] private RectTransform floatingDamageRoot;
@@ -66,14 +64,26 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private MoveSlotView[] playerSlots;
     [SerializeField] private MoveSlotView[] enemySlots;
 
-    [Header("Buttons")]
+    [Header("Legacy Buttons")]
     [SerializeField] private Button handButton;
     [SerializeField] private Button legButton;
     [SerializeField] private Button swordButton;
     [SerializeField] private Button palmButton;
+
+    [Header("Round Choice Buttons")]
+    [SerializeField] private Button choiceLeftButton;
+    [SerializeField] private Button choiceRightButton;
+    [SerializeField] private MoveSlotView choiceLeftView;
+    [SerializeField] private MoveSlotView choiceRightView;
+
+    [Header("Round Controls")]
     [SerializeField] private Button clearButton;
     [SerializeField] private Button fightButton;
     [SerializeField] private Button rerollEnemyButton;
+
+    [Header("Enemy Round Behavior")]
+    [SerializeField] private EnemyArchetype enemyArchetype = EnemyArchetype.Aggressor;
+    [SerializeField] private MoveType enemyPreferredStyle = MoveType.Sword;
 
     [Header("UI SFX")]
     [SerializeField] private AudioClip uiClickSfx;
@@ -99,23 +109,35 @@ public class AutoBattleController : MonoBehaviour
     [Header("Normal Damage VFX")]
     [SerializeField] private GameObject hitTargetFxPrefab;
 
-    [Header("Technique Cast VFX")]
+    [Header("Technique Cast VFX - Player")]
     [SerializeField] private GameObject dragonFistCastFxPrefab;
     [SerializeField] private GameObject craneKickCastFxPrefab;
     [SerializeField] private GameObject moonSlashCastFxPrefab;
     [SerializeField] private GameObject voidPalmCastFxPrefab;
 
-    [Header("Technique Hit VFX")]
+    [Header("Technique Cast VFX - Enemy (optional)")]
+    [SerializeField] private GameObject enemyDragonFistCastFxPrefab;
+    [SerializeField] private GameObject enemyCraneKickCastFxPrefab;
+    [SerializeField] private GameObject enemyMoonSlashCastFxPrefab;
+    [SerializeField] private GameObject enemyVoidPalmCastFxPrefab;
+
+    [Header("Technique Hit VFX - Player")]
     [SerializeField] private GameObject dragonFistHitFxPrefab;
     [SerializeField] private GameObject craneKickHitFxPrefab;
     [SerializeField] private GameObject moonSlashHitFxPrefab;
     [SerializeField] private GameObject voidPalmHitFxPrefab;
 
+    [Header("Technique Hit VFX - Enemy (optional)")]
+    [SerializeField] private GameObject enemyDragonFistHitFxPrefab;
+    [SerializeField] private GameObject enemyCraneKickHitFxPrefab;
+    [SerializeField] private GameObject enemyMoonSlashHitFxPrefab;
+    [SerializeField] private GameObject enemyVoidPalmHitFxPrefab;
+
     [Header("Technique Common VFX")]
     [SerializeField] private GameObject techniqueDamageFxPrefab;
 
     [Header("SFX")]
-    private AudioSource sfxSource;
+    [SerializeField] private AudioSource sfxSource;
 
     [Header("Move Swing SFX")]
     [SerializeField] private AudioClip handSwingSfx;
@@ -167,17 +189,22 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private float qiFlashDuration = 0.22f;
     [SerializeField] private float qiPopupDuration = 0.55f;
     [SerializeField] private float qiPopupRise = 28f;
-    [SerializeField] private int MinYearSpent = 1;
-    [SerializeField] private int MaxYearSpent = 3;
     [SerializeField] private int ShowResultsTime = 5;
 
     private readonly List<MoveType> playerQueue = new List<MoveType>();
     private readonly List<MoveType> enemyQueue = new List<MoveType>();
+    private readonly List<MoveType> playerRoundPool = new List<MoveType>();
+    private readonly List<MoveType> originalPlayerRoundPool = new List<MoveType>();
+    private readonly List<MoveType> currentOffer = new List<MoveType>();
 
+    private bool clearUsedThisRound;
+    private int offersShownThisRound;
+    private int meaningfulOffersShownInProtectedWindow;
+    
     private bool isBusy;
     private bool battleFinished;
-    private bool buttonsWasBinded = false;
-
+    private bool revealEnemyFullQueue;
+    private bool buttonsHasBinded;
     private SlotResolution currentSlot;
     private bool currentSlotActive;
     private bool currentImpactResolved;
@@ -196,7 +223,7 @@ public class AutoBattleController : MonoBehaviour
     private Coroutine shakeRoutine;
     private Coroutine hitStopRoutine;
     private Vector3 cameraBaseLocalPos;
-    public  static AutoBattleController Instance;
+    public static AutoBattleController Instance;
     private void Awake()
     {
         if (playerQiText != null) playerQiBaseColor = playerQiText.color;
@@ -216,44 +243,59 @@ public class AutoBattleController : MonoBehaviour
         if (cameraShakeTarget != null) cameraBaseLocalPos = cameraShakeTarget.localPosition;
 
         if (Instance == null) Instance = this;
-        sfxSource = SFXPlayer.Instance.AudioSource;
+    }
+
+    private void Start()
+    {
+        BindButtons();
+        if (SFXPlayer.Instance != null) sfxSource = SFXPlayer.Instance.AudioSource;
     }
     private void OnEnable()
     {
         BindButtons();
         ResetBattle();
-    }
+    } 
 
     private void OnDestroy()
     {
         UnbindButtons();
-        if (Time.timeScale != 1f)
-            Time.timeScale = 1f;
+        if (Time.timeScale != 1f) Time.timeScale = 1f;
     }
+    private Button GetChoiceLeftButton() => choiceLeftButton != null ? choiceLeftButton : handButton;
+    private Button GetChoiceRightButton() => choiceRightButton != null ? choiceRightButton : legButton;
 
     private void BindButtons()
     {
-        if (buttonsWasBinded) return;
-        
-        if (handButton != null) handButton.onClick.AddListener(() => AddPlayerMove(MoveType.Hand));
-        if (legButton != null) legButton.onClick.AddListener(() => AddPlayerMove(MoveType.Leg));
-        if (swordButton != null) swordButton.onClick.AddListener(() => AddPlayerMove(MoveType.Sword));
-        if (palmButton != null) palmButton.onClick.AddListener(() => AddPlayerMove(MoveType.Palm));
+        if (buttonsHasBinded) return;
+
+        Button left = GetChoiceLeftButton();
+        Button right = GetChoiceRightButton();
+
+        if (left != null) left.onClick.AddListener(() => PickCurrentOffer(0));
+        if (right != null) right.onClick.AddListener(() => PickCurrentOffer(1));
+
         if (clearButton != null) clearButton.onClick.AddListener(ClearPlayerQueue);
         if (fightButton != null) fightButton.onClick.AddListener(TryStartBattle);
-        if (rerollEnemyButton != null) rerollEnemyButton.onClick.AddListener(RerollEnemy);
-        buttonsWasBinded = true;
+        if (restartButton != null) restartButton.onClick.AddListener(ResetBattle);
+
+        buttonsHasBinded = true;
     }
 
     private void UnbindButtons()
     {
-        if (handButton != null) handButton.onClick.RemoveAllListeners();
-        if (legButton != null) legButton.onClick.RemoveAllListeners();
-        if (swordButton != null) swordButton.onClick.RemoveAllListeners();
-        if (palmButton != null) palmButton.onClick.RemoveAllListeners();
+        if (!buttonsHasBinded) return;
+
+        Button left = GetChoiceLeftButton();
+        Button right = GetChoiceRightButton();
+
+        if (left != null) left.onClick.RemoveAllListeners();
+        if (right != null) right.onClick.RemoveAllListeners();
+
         if (clearButton != null) clearButton.onClick.RemoveAllListeners();
         if (fightButton != null) fightButton.onClick.RemoveAllListeners();
-        if (rerollEnemyButton != null) rerollEnemyButton.onClick.RemoveAllListeners();
+        if (restartButton != null) restartButton.onClick.RemoveAllListeners();
+
+        buttonsHasBinded = false;
     }
 
     private void ResetBattle()
@@ -267,13 +309,19 @@ public class AutoBattleController : MonoBehaviour
         playerPendingDamageFx = PendingDamageFxKind.None;
         enemyPendingDamageFx = PendingDamageFxKind.None;
         Time.timeScale = 1f;
+        ClearFloatingCombatTexts();
 
         playerQueue.Clear();
-        GenerateEnemyQueue();
+        enemyQueue.Clear();
+        playerRoundPool.Clear();
+        currentOffer.Clear();
+        revealEnemyFullQueue = false;
+        clearUsedThisRound = false;
+        offersShownThisRound = 0;
+        meaningfulOffersShownInProtectedWindow = 0;
 
         if (playerStats != null) playerStats.ResetForBattle();
-        EnemyStats = GameCore.Instance.SelectedEnemy;
-        if (EnemyStats != null) EnemyStats.ResetForBattle();
+        if (enemyStats != null) enemyStats.ResetForBattle();
 
         if (resultPanel != null) resultPanel.SetActive(false);
         if (resultTitleText != null) resultTitleText.text = string.Empty;
@@ -304,59 +352,441 @@ public class AutoBattleController : MonoBehaviour
         if (playerAnimator != null) playerAnimator.PlayIdle();
         if (enemyAnimator != null) enemyAnimator.PlayIdle();
 
+        PrepareNewRoundState();
         RefreshUI();
-        if (statusText != null) statusText.text = "Собери 5 ходов и нажми Бой";
+        if (statusText != null) statusText.text = "Выбери 1 из 2 и собери цепочку из 5 ходов";
         RefreshButtonStates();
+    }
+
+    private void PrepareNewRoundState()
+    {
+        playerQueue.Clear();
+        enemyQueue.Clear();
+        playerRoundPool.Clear();
+        currentOffer.Clear();
+        revealEnemyFullQueue = false;
+        clearUsedThisRound = false;
+        offersShownThisRound = 0;
+        meaningfulOffersShownInProtectedWindow = 0;
+
+        GeneratePlayerRoundPool();
+        GenerateEnemyQueue();
+        BuildNextPlayerOffer(true);
+    }
+
+    private void GeneratePlayerRoundPool()
+    {
+        playerRoundPool.Clear();
+        originalPlayerRoundPool.Clear();
+
+        int[] shape = PickPoolShape(EnemyArchetype.Chaotic, false);
+        MoveType[] types = ShuffleMoves(new[] { MoveType.Hand, MoveType.Leg, MoveType.Sword, MoveType.Palm });
+
+        for (int i = 0; i < shape.Length && i < types.Length; i++)
+        {
+            for (int k = 0; k < shape[i]; k++)
+                playerRoundPool.Add(types[i]);
+        }
+
+        originalPlayerRoundPool.AddRange(playerRoundPool);
     }
 
     private void GenerateEnemyQueue()
     {
         enemyQueue.Clear();
-        if (rules == null) return;
-        for (int i = 0; i < rules.slotCount; i++)
-            enemyQueue.Add((MoveType)Random.Range(0, 4));
+
+        List<MoveType> enemyPool = GenerateEnemyRoundPool();
+        if (enemyPool.Count == 0 || rules == null)
+            return;
+
+        MoveType hotStyle = enemyPreferredStyle;
+        if (enemyArchetype != EnemyArchetype.Master)
+        {
+            hotStyle = enemyPool.GroupBy(m => m).OrderByDescending(g => g.Count()).First().Key;
+        }
+
+        MoveType supportStyle = GetMasterCoverStyle(enemyPreferredStyle);
+
+        while (enemyQueue.Count < rules.slotCount && enemyPool.Count > 0)
+        {
+            List<MoveType> options = enemyPool.Distinct().ToList();
+            List<int> weights = new List<int>();
+
+            for (int i = 0; i < options.Count; i++)
+            {
+                MoveType move = options[i];
+                int weight = 1;
+
+                switch (enemyArchetype)
+                {
+                    case EnemyArchetype.Aggressor:
+                        if (move == hotStyle) weight += 4;
+                        if (enemyQueue.Count > 0 && enemyQueue[enemyQueue.Count - 1] == move) weight += 4;
+                        if (enemyPool.Count(x => x == move) >= 2) weight += 2;
+                        break;
+
+                    case EnemyArchetype.Chaotic:
+                        if (enemyQueue.Count > 0 && enemyQueue[enemyQueue.Count - 1] != move) weight += 4;
+                        if (enemyQueue.Count == 0 || enemyQueue.Count(x => x == move) < 2) weight += 2;
+                        if (enemyQueue.Count > 0 && enemyQueue[enemyQueue.Count - 1] == move) weight = Mathf.Max(1, weight - 2);
+                        break;
+
+                    case EnemyArchetype.Master:
+                        if (move == enemyPreferredStyle) weight += 5;
+                        if (move == supportStyle) weight += 3;
+                        if (enemyQueue.Count > 0 && enemyQueue[enemyQueue.Count - 1] == move) weight += 2;
+                        break;
+                }
+
+                weights.Add(Mathf.Max(1, weight));
+            }
+
+            MoveType picked = PickWeightedMove(options, weights);
+            enemyQueue.Add(picked);
+            RemoveFirstOccurrence(enemyPool, picked);
+        }
     }
 
-    private void RerollEnemy()
+    private List<MoveType> GenerateEnemyRoundPool()
     {
-        if (isBusy || battleFinished) return;
-        PlayOneShot(uiClickSfx);
-        GenerateEnemyQueue();
-        RefreshSlots();
-        RefreshButtonStates();
-        if (statusText != null) statusText.text = "Ходы врага перемешаны";
+        List<MoveType> result = new List<MoveType>();
+        int[] shape = PickPoolShape(enemyArchetype, true);
+
+        MoveType[] orderedTypes;
+        switch (enemyArchetype)
+        {
+            case EnemyArchetype.Aggressor:
+            {
+                MoveType hotStyle = (MoveType)Random.Range(0, 4);
+                List<MoveType> rest = new List<MoveType> { MoveType.Hand, MoveType.Leg, MoveType.Sword, MoveType.Palm };
+                rest.Remove(hotStyle);
+                rest = rest.OrderBy(_ => Random.value).ToList();
+                orderedTypes = new[] { hotStyle, rest[0], rest[1], rest[2] };
+                break;
+            }
+
+            case EnemyArchetype.Master:
+            {
+                MoveType coverStyle = GetMasterCoverStyle(enemyPreferredStyle);
+                List<MoveType> rest = new List<MoveType> { MoveType.Hand, MoveType.Leg, MoveType.Sword, MoveType.Palm };
+                rest.Remove(enemyPreferredStyle);
+                rest.Remove(coverStyle);
+                rest = rest.OrderBy(_ => Random.value).ToList();
+                orderedTypes = new[] { enemyPreferredStyle, coverStyle, rest[0], rest[1] };
+                break;
+            }
+
+            default:
+                orderedTypes = ShuffleMoves(new[] { MoveType.Hand, MoveType.Leg, MoveType.Sword, MoveType.Palm });
+                break;
+        }
+
+        for (int i = 0; i < shape.Length && i < orderedTypes.Length; i++)
+        {
+            for (int k = 0; k < shape[i]; k++)
+                result.Add(orderedTypes[i]);
+        }
+
+        return result;
     }
 
-    private void AddPlayerMove(MoveType move)
+    private int[] PickPoolShape(EnemyArchetype archetype, bool enemy)
+    {
+        int w4222 = Mathf.Max(0, rules.shape4222Weight);
+        int w3322 = Mathf.Max(0, rules.shape3322Weight);
+        int w3331 = Mathf.Max(0, rules.shape3331Weight);
+
+        if (enemy)
+        {
+            switch (archetype)
+            {
+                case EnemyArchetype.Aggressor:
+                    w4222 += 25;
+                    w3322 += 10;
+                    break;
+                case EnemyArchetype.Chaotic:
+                    w3331 += 25;
+                    break;
+                case EnemyArchetype.Master:
+                    w3322 += 20;
+                    w4222 += 10;
+                    break;
+            }
+        }
+
+        int total = Mathf.Max(1, w4222 + w3322 + w3331);
+        int roll = Random.Range(0, total);
+
+        if (roll < w4222) return new[] { 4, 2, 2, 2 };
+        if (roll < w4222 + w3322) return new[] { 3, 3, 2, 2 };
+        return new[] { 3, 3, 3, 1 };
+    }
+
+    private void PickCurrentOffer(int offerIndex)
     {
         if (isBusy || battleFinished || rules == null) return;
+        if (offerIndex < 0 || offerIndex >= currentOffer.Count) return;
         if (playerQueue.Count >= rules.slotCount) return;
+
         PlayOneShot(uiClickSfx);
-        playerQueue.Add(move);
-        RefreshSlots();
+
+        MoveType selected = currentOffer[offerIndex];
+
+        // New round rule:
+        // after choosing 1 of 2, both offered cards leave the round pool.
+        // only the chosen card is added to the player's final queue.
+        for (int i = 0; i < currentOffer.Count; i++)
+            RemoveFirstOccurrence(playerRoundPool, currentOffer[i]);
+
+        playerQueue.Add(selected);
+        currentOffer.Clear();
+
+        if (playerQueue.Count < rules.slotCount)
+            BuildNextPlayerOffer(false);
+
+        RefreshUI();
         RefreshButtonStates();
-        if (statusText != null) statusText.text = $"Выбран ход {playerQueue.Count}/{rules.slotCount}: {ToRu(move)}";
+
+        if (statusText != null)
+        {
+            if (playerQueue.Count < rules.slotCount)
+                statusText.text = $"Выбран ход {playerQueue.Count}/{rules.slotCount}: {ToRu(selected)}";
+            else
+                statusText.text = "Цепочка готова. Нажми Бой";
+        }
+    }
+
+    private void BuildNextPlayerOffer(bool forceMeaningfulAfterReset)
+    {
+        currentOffer.Clear();
+
+        if (playerQueue.Count >= rules.slotCount || playerRoundPool.Count <= 0 || rules == null)
+            return;
+
+        bool mustGuaranteeMeaningful = forceMeaningfulAfterReset;
+
+        if (!mustGuaranteeMeaningful && offersShownThisRound < rules.protectedOfferCount)
+        {
+            if (offersShownThisRound < rules.minimumMeaningfulOffersInProtectedWindow)
+                mustGuaranteeMeaningful = true;
+            else if (offersShownThisRound == rules.protectedOfferCount - 1 && meaningfulOffersShownInProtectedWindow < rules.minimumMeaningfulOffersInProtectedWindow)
+                mustGuaranteeMeaningful = true;
+        }
+
+        int firstIndex = Random.Range(0, playerRoundPool.Count);
+        MoveType first = playerRoundPool[firstIndex];
+
+        List<MoveType> candidateMoves = new List<MoveType>();
+        List<int> candidateWeights = new List<int>();
+        bool hasDifferentTypeAlternative = false;
+
+        for (int i = 0; i < playerRoundPool.Count; i++)
+        {
+            if (i == firstIndex)
+                continue;
+
+            MoveType candidate = playerRoundPool[i];
+            if (candidate != first)
+                hasDifferentTypeAlternative = true;
+        }
+
+        for (int i = 0; i < playerRoundPool.Count; i++)
+        {
+            if (i == firstIndex)
+                continue;
+
+            MoveType candidate = playerRoundPool[i];
+
+            // Better UX rule:
+            // avoid identical pairs like Hand/Hand unless there is literally no other type left.
+            if (hasDifferentTypeAlternative && candidate == first)
+                continue;
+
+            if (mustGuaranteeMeaningful && !IsMeaningfulChoice(candidate) && !IsMeaningfulChoice(first))
+                continue;
+
+            candidateMoves.Add(candidate);
+            candidateWeights.Add(GetOfferWeight(candidate));
+        }
+
+        MoveType second;
+        if (candidateMoves.Count == 0)
+        {
+            second = FindFallbackSecond(firstIndex, mustGuaranteeMeaningful, first, hasDifferentTypeAlternative);
+        }
+        else
+        {
+            bool randomSecond = !mustGuaranteeMeaningful && Random.value < rules.pairSecondRandomChance;
+            second = randomSecond
+                ? candidateMoves[Random.Range(0, candidateMoves.Count)]
+                : PickWeightedMove(candidateMoves, candidateWeights);
+        }
+
+        currentOffer.Add(first);
+        currentOffer.Add(second);
+
+        offersShownThisRound++;
+        if (IsMeaningfulChoice(first) || IsMeaningfulChoice(second))
+            meaningfulOffersShownInProtectedWindow++;
+    }
+
+    private MoveType FindFallbackSecond(int excludedIndex, bool mustGuaranteeMeaningful, MoveType firstMove, bool hasDifferentTypeAlternative)
+    {
+        List<MoveType> fallback = new List<MoveType>();
+        for (int i = 0; i < playerRoundPool.Count; i++)
+        {
+            if (i == excludedIndex)
+                continue;
+
+            MoveType move = playerRoundPool[i];
+
+            if (hasDifferentTypeAlternative && move == firstMove)
+                continue;
+
+            if (!mustGuaranteeMeaningful || IsMeaningfulChoice(move))
+                fallback.Add(move);
+        }
+
+        if (fallback.Count > 0)
+            return fallback[Random.Range(0, fallback.Count)];
+
+        for (int i = 0; i < playerRoundPool.Count; i++)
+        {
+            if (i == excludedIndex)
+                continue;
+
+            MoveType move = playerRoundPool[i];
+            if (!hasDifferentTypeAlternative || move != firstMove)
+                return move;
+        }
+
+        for (int i = 0; i < playerRoundPool.Count; i++)
+        {
+            if (i != excludedIndex)
+                return playerRoundPool[i];
+        }
+
+        return playerRoundPool[Mathf.Clamp(excludedIndex, 0, playerRoundPool.Count - 1)];
+    }
+
+    private int GetOfferWeight(MoveType move)
+    {
+        int weight = Mathf.Max(0, rules.pairNeutralWeight);
+
+        if (ContinuesCurrentSeries(move))
+            weight += Mathf.Max(0, rules.pairSeriesWeight);
+
+        if (CountersVisibleEnemy(move))
+            weight += Mathf.Max(0, rules.pairCounterEnemyWeight);
+
+        if (MatchesPlayerDominantStyle(move))
+            weight += Mathf.Max(0, rules.pairStyleWeight);
+
+        return Mathf.Max(1, weight);
+    }
+
+    private bool IsMeaningfulChoice(MoveType move)
+    {
+        return ContinuesCurrentSeries(move)
+            || CountersVisibleEnemy(move)
+            || HelpsPotentialTriple(move);
+    }
+
+    private bool ContinuesCurrentSeries(MoveType move)
+    {
+        if (playerQueue.Count == 0)
+            return false;
+
+        int streak = GetCurrentSeriesLength(playerQueue);
+        return streak > 0 && playerQueue[playerQueue.Count - 1] == move;
+    }
+
+    private bool CountersVisibleEnemy(MoveType move)
+    {
+        int visibleCount = Mathf.Min(enemyQueue.Count, rules != null ? rules.enemyVisibleMoves : 3);
+        for (int i = 0; i < visibleCount; i++)
+        {
+            if (BattleResolver.Beats(move, enemyQueue[i]))
+                return true;
+        }
+        return false;
+    }
+
+    private bool MatchesPlayerDominantStyle(MoveType move)
+    {
+        if (playerQueue.Count == 0)
+            return false;
+
+        MoveType dominant = playerQueue.GroupBy(x => x).OrderByDescending(g => g.Count()).ThenBy(g => g.Key).First().Key;
+        return dominant == move;
+    }
+
+    private bool HelpsPotentialTriple(MoveType move)
+    {
+        int alreadyChosen = playerQueue.Count(x => x == move);
+        int remaining = playerRoundPool.Count(x => x == move);
+        return alreadyChosen > 0 && (alreadyChosen + remaining) >= 3;
+    }
+
+    private int GetCurrentSeriesLength(List<MoveType> queue)
+    {
+        if (queue == null || queue.Count == 0)
+            return 0;
+
+        MoveType tail = queue[queue.Count - 1];
+        int length = 1;
+        for (int i = queue.Count - 2; i >= 0; i--)
+        {
+            if (queue[i] != tail)
+                break;
+            length++;
+        }
+        return length;
     }
 
     private void ClearPlayerQueue()
     {
-        if (isBusy || battleFinished) return;
+        if (isBusy || battleFinished || clearUsedThisRound) return;
+        if (playerQueue.Count <= 0) return;
+
         PlayOneShot(uiClickSfx);
+
+        // New clear rule:
+        // restore the same original 10-card round pool snapshot,
+        // do NOT generate a new round, and do NOT lose cards that were shown earlier.
+        playerRoundPool.Clear();
+        playerRoundPool.AddRange(originalPlayerRoundPool);
+
         playerQueue.Clear();
-        RefreshSlots();
+        currentOffer.Clear();
+
+        clearUsedThisRound = true;
+        offersShownThisRound = 0;
+        meaningfulOffersShownInProtectedWindow = 0;
+
+        BuildNextPlayerOffer(true);
+        RefreshUI();
         RefreshButtonStates();
-        if (statusText != null) statusText.text = "Цепочка очищена";
+
+        if (statusText != null) statusText.text = "Цепочка очищена. Выбери новую пару";
+    }
+
+    private void RerollEnemy()
+    {
+        // Legacy button: new round system no longer rerolls enemy manually.
     }
 
     private void TryStartBattle()
     {
-        if (isBusy || battleFinished || rules == null || playerStats == null || EnemyStats == null) return;
+        if (isBusy || battleFinished || rules == null || playerStats == null || enemyStats == null) return;
         if (playerQueue.Count < rules.slotCount)
         {
             if (statusText != null) statusText.text = "Нужно собрать 5 ходов";
             return;
         }
         PlayOneShot(uiConfirmSfx != null ? uiConfirmSfx : uiClickSfx);
+        revealEnemyFullQueue = true;
+        RefreshSlots();
         StartCoroutine(BattleRoutine());
     }
 
@@ -371,25 +801,22 @@ public class AutoBattleController : MonoBehaviour
         if (playerAnimator != null) playerAnimator.PlayIdle();
         if (enemyAnimator != null) enemyAnimator.PlayIdle();
 
-        BattleResolution resolution = BattleResolver.Resolve(playerQueue, enemyQueue, rules, playerStats, EnemyStats);
+        BattleResolution resolution = BattleResolver.Resolve(playerQueue, enemyQueue, rules, playerStats, enemyStats);
 
         for (int i = 0; i < resolution.slots.Count; i++)
         {
             SlotResolution slot = resolution.slots[i];
             if (statusText != null) statusText.text = BuildSlotStatus(slot);
             yield return PlaySlot(slot);
-            if (playerStats.CurrentHP <= 0 || EnemyStats.CurrentHP <= 0)
+            if (playerStats.CurrentHP <= 0 || enemyStats.CurrentHP <= 0)
                 break;
         }
 
-        bool hasWinner = playerStats.CurrentHP <= 0 || EnemyStats.CurrentHP <= 0;
+        bool hasWinner = playerStats.CurrentHP <= 0 || enemyStats.CurrentHP <= 0;
         if (hasWinner)
         {
             battleFinished = true;
-            bool hasWon = false;
-            int timeSpent = GameCore.Instance.random.Next(MinYearSpent, MaxYearSpent + 1);        
-            GameCore.Instance.AdvanceTime(timeSpent);
-            if (playerStats.CurrentHP <= 0 && EnemyStats.CurrentHP <= 0)
+            if (playerStats.CurrentHP <= 0 && enemyStats.CurrentHP <= 0)
             {
                 if (statusText != null) statusText.text = "Взаимное убийство - ничья";
                 if (playerAnimator != null) playerAnimator.PlayDefeat();
@@ -397,16 +824,14 @@ public class AutoBattleController : MonoBehaviour
                 PlayOneShot(defeatSfx);
                 ShowResultPanel("Ничья");
             }
-            else if (EnemyStats.CurrentHP <= 0)
+            else if (enemyStats.CurrentHP <= 0)
             {
-                hasWon = true;
                 if (statusText != null) statusText.text = "Победа игрока";
                 if (playerAnimator != null) playerAnimator.PlayVictory();
                 if (enemyAnimator != null) enemyAnimator.PlayDefeat();
                 PlayOneShot(victorySfx);
-                EnemyStats.AddSilverToPlayer();
-                ShowResultPanel($"Вы победили и получили {EnemyStats.lootedSilver} серебра");
-                EnemyStats.IsDefeated = true;
+                TravelSystem.Instance.AddSilverToPlayer();
+                ShowResultPanel($"Вы победили и получили {TravelSystem.Instance.SilverBonus} серебра");
             }
             else
             {
@@ -416,25 +841,17 @@ public class AutoBattleController : MonoBehaviour
                 PlayOneShot(defeatSfx);
                 ShowResultPanel("Вы проиграли");
             }
-            
             isBusy = false;
             RefreshButtonStates();
             yield return new WaitForSeconds(ShowResultsTime);
-
-            MusicPlayer.Instance.PlayMainMusic();
-            GameCore.Instance.MainHub?.SetActive(true);
-            if (!hasWon) GameCore.Instance.KillMaster();
-            GameCore.Instance.CombatSystem?.SetActive(false);
+            GameCore.Instance.EndFight();
         }
-
-        playerQueue.Clear();
-        GenerateEnemyQueue();
-        RefreshSlots();
+        PrepareNewRoundState();
+        RefreshUI();
         isBusy = false;
         RefreshButtonStates();
-        if (statusText != null) statusText.text = "Следующий раунд: собери 5 новых ходов";
+        if (statusText != null) statusText.text = "Следующий раунд: выбери 1 из 2 и собери цепочку";
     }
-
     private IEnumerator PlaySlot(SlotResolution slot)
     {
         currentSlot = slot;
@@ -531,7 +948,7 @@ public class AutoBattleController : MonoBehaviour
         playerPendingDamageFx = PendingDamageFxKind.None;
         enemyPendingDamageFx = PendingDamageFxKind.None;
 
-        if (playerStats.CurrentHP > 0 && EnemyStats.CurrentHP > 0)
+        if (playerStats.CurrentHP > 0 && enemyStats.CurrentHP > 0)
         {
             if (playerAnimator != null) playerAnimator.PlayIdle();
             if (enemyAnimator != null) enemyAnimator.PlayIdle();
@@ -571,7 +988,7 @@ public class AutoBattleController : MonoBehaviour
     {
         if (!currentSlotActive || source == null || !IsTechniqueFor(source)) return;
         TechniqueType type = GetTechniqueTypeFor(source);
-        SpawnFxAt(GetTechniqueCastPrefab(type), source.AttackFxPoint);
+        SpawnFxAt(GetTechniqueCastPrefab(type, source), source.AttackFxPoint);
         PlayOneShot(GetTechniqueReleaseSfx(type));
     }
 
@@ -621,7 +1038,7 @@ public class AutoBattleController : MonoBehaviour
 
         if (sourceIsTechnique)
         {
-            SpawnFxAt(GetTechniqueHitPrefab(GetTechniqueTypeFor(source)), source.AttackFxPoint);
+            SpawnFxAt(GetTechniqueHitPrefab(GetTechniqueTypeFor(source), source), source.AttackFxPoint);
         }
         else
         {
@@ -770,12 +1187,12 @@ public class AutoBattleController : MonoBehaviour
         }
 
         int playerDamageTaken = playerStats != null ? Mathf.Max(0, playerStats.CurrentHP - currentSlot.playerHpAfter) : 0;
-        int enemyDamageTaken = EnemyStats != null ? Mathf.Max(0, EnemyStats.CurrentHP - currentSlot.enemyHpAfter) : 0;
+        int enemyDamageTaken = enemyStats != null ? Mathf.Max(0, enemyStats.CurrentHP - currentSlot.enemyHpAfter) : 0;
 
         if (playerStats != null) playerStats.ApplyHp(currentSlot.playerHpAfter);
-        if (EnemyStats != null) EnemyStats.ApplyHp(currentSlot.enemyHpAfter);
+        if (enemyStats != null) enemyStats.ApplyHp(currentSlot.enemyHpAfter);
         if (playerStats != null) playerStats.ApplyQi(currentSlot.playerQiAfter);
-        if (EnemyStats != null) EnemyStats.ApplyQi(currentSlot.enemyQiAfter);
+        if (enemyStats != null) enemyStats.ApplyQi(currentSlot.enemyQiAfter);
         RefreshStatsUi();
 
         if (playerDamageTaken > 0)
@@ -1178,27 +1595,41 @@ public class AutoBattleController : MonoBehaviour
         }
     }
 
-    private GameObject GetTechniqueCastPrefab(TechniqueType type)
+    private GameObject GetTechniqueCastPrefab(TechniqueType type, FighterAnimator source)
     {
+        bool isEnemy = source != null && source == enemyAnimator;
+
         switch (type)
         {
-            case TechniqueType.DragonFist: return dragonFistCastFxPrefab;
-            case TechniqueType.CraneKick: return craneKickCastFxPrefab;
-            case TechniqueType.MoonSlash: return moonSlashCastFxPrefab;
-            case TechniqueType.VoidPalm: return voidPalmCastFxPrefab;
-            default: return null;
+            case TechniqueType.DragonFist:
+                return isEnemy && enemyDragonFistCastFxPrefab != null ? enemyDragonFistCastFxPrefab : dragonFistCastFxPrefab;
+            case TechniqueType.CraneKick:
+                return isEnemy && enemyCraneKickCastFxPrefab != null ? enemyCraneKickCastFxPrefab : craneKickCastFxPrefab;
+            case TechniqueType.MoonSlash:
+                return isEnemy && enemyMoonSlashCastFxPrefab != null ? enemyMoonSlashCastFxPrefab : moonSlashCastFxPrefab;
+            case TechniqueType.VoidPalm:
+                return isEnemy && enemyVoidPalmCastFxPrefab != null ? enemyVoidPalmCastFxPrefab : voidPalmCastFxPrefab;
+            default:
+                return null;
         }
     }
 
-    private GameObject GetTechniqueHitPrefab(TechniqueType type)
+    private GameObject GetTechniqueHitPrefab(TechniqueType type, FighterAnimator source)
     {
+        bool isEnemy = source != null && source == enemyAnimator;
+
         switch (type)
         {
-            case TechniqueType.DragonFist: return dragonFistHitFxPrefab;
-            case TechniqueType.CraneKick: return craneKickHitFxPrefab;
-            case TechniqueType.MoonSlash: return moonSlashHitFxPrefab;
-            case TechniqueType.VoidPalm: return voidPalmHitFxPrefab;
-            default: return null;
+            case TechniqueType.DragonFist:
+                return isEnemy && enemyDragonFistHitFxPrefab != null ? enemyDragonFistHitFxPrefab : dragonFistHitFxPrefab;
+            case TechniqueType.CraneKick:
+                return isEnemy && enemyCraneKickHitFxPrefab != null ? enemyCraneKickHitFxPrefab : craneKickHitFxPrefab;
+            case TechniqueType.MoonSlash:
+                return isEnemy && enemyMoonSlashHitFxPrefab != null ? enemyMoonSlashHitFxPrefab : moonSlashHitFxPrefab;
+            case TechniqueType.VoidPalm:
+                return isEnemy && enemyVoidPalmHitFxPrefab != null ? enemyVoidPalmHitFxPrefab : voidPalmHitFxPrefab;
+            default:
+                return null;
         }
     }
 
@@ -1231,29 +1662,29 @@ public class AutoBattleController : MonoBehaviour
         {
             SetBar(playerHpFillImage, playerStats.CurrentHP, playerStats.MaxHP);
             SetBar(playerQiFillImage, playerStats.CurrentQi, playerStats.MaxQi);
-            SetText(playerHpText, $"HP игрока: {playerStats.CurrentHP}/{playerStats.MaxHP}");
-            SetText(playerQiText, $"Ци игрока: {playerStats.CurrentQi}/{playerStats.MaxQi}");
+            SetText(playerHpText, $"HP Игрока: {playerStats.CurrentHP}/{playerStats.MaxHP}");
+            SetText(playerQiText, $"Qi Игрока: {playerStats.CurrentQi}/{playerStats.MaxQi}");
             SetText(playerHpBarText, $"{playerStats.CurrentHP}/{playerStats.MaxHP}");
             SetText(playerQiBarText, $"{playerStats.CurrentQi}/{playerStats.MaxQi}");
-            SetText(playerRankLabel, $"Ранг: {GameCore.Instance.Ranks[playerStats.Rank].Name.ToLower()}");
+            SetText(playerRankText, $"Ранг: {GameCore.Instance.GetRankLabelRu(playerStats.Rank)}");
         }
 
-        if (EnemyStats != null)
+        if (enemyStats != null)
         {
-            SetBar(enemyHpFillImage, EnemyStats.CurrentHP, EnemyStats.MaxHP);
-            SetBar(enemyQiFillImage, EnemyStats.CurrentQi, EnemyStats.MaxQi);
-            SetText(enemyHpText, $"HP врага: {EnemyStats.CurrentHP}/{EnemyStats.MaxHP}");
-            SetText(enemyQiText, $"Ци врага: {EnemyStats.CurrentQi}/{EnemyStats.MaxQi}");
-            SetText(enemyHpBarText, $"{EnemyStats.CurrentHP}/{EnemyStats.MaxHP}");
-            SetText(enemyQiBarText, $"{EnemyStats.CurrentQi}/{EnemyStats.MaxQi}");
-            SetText(enemyRankLabel, $"Ранг {GameCore.Instance.Ranks[EnemyStats.Rank].Name.ToLower()}");
+            SetBar(enemyHpFillImage, enemyStats.CurrentHP, enemyStats.MaxHP);
+            SetBar(enemyQiFillImage, enemyStats.CurrentQi, enemyStats.MaxQi);
+            SetText(enemyHpText, $"HP Врага: {enemyStats.CurrentHP}/{enemyStats.MaxHP}");
+            SetText(enemyQiText, $"Qi Врага: {enemyStats.CurrentQi}/{enemyStats.MaxQi}");
+            SetText(enemyHpBarText, $"{enemyStats.CurrentHP}/{enemyStats.MaxHP}");
+            SetText(enemyQiBarText, $"{enemyStats.CurrentQi}/{enemyStats.MaxQi}");
+            SetText(enemyRankText, $"Ранг: {GameCore.Instance.GetRankLabelRu(enemyStats.Rank)}");
         }
     }
 
     private void RefreshSlots()
     {
         List<AttackPlan> playerPreview = BattleResolver.BuildPreviewPlans(playerQueue, playerStats != null ? playerStats.CurrentQi : 0, playerStats, rules);
-        List<AttackPlan> enemyPreview = BattleResolver.BuildPreviewPlans(enemyQueue, EnemyStats != null ? EnemyStats.CurrentQi : 0, EnemyStats, rules);
+        List<AttackPlan> enemyPreview = BattleResolver.BuildPreviewPlans(enemyQueue, enemyStats != null ? enemyStats.CurrentQi : 0, enemyStats, rules);
 
         if (playerSlots != null)
         {
@@ -1261,30 +1692,117 @@ public class AutoBattleController : MonoBehaviour
             {
                 if (playerSlots[i] == null) continue;
                 if (i < playerQueue.Count && i < playerPreview.Count)
-                {
                     playerSlots[i].SetMove(playerQueue[i], playerPreview[i].attackKind, playerPreview[i].techniqueType);
-                }
                 else
-                {
                     playerSlots[i].SetMove(null);
-                }
             }
         }
+
+        int visibleEnemy = revealEnemyFullQueue
+            ? enemyQueue.Count
+            : (rules != null ? Mathf.Clamp(rules.enemyVisibleMoves, 0, rules.slotCount) : 3);
 
         if (enemySlots != null)
         {
             for (int i = 0; i < enemySlots.Length; i++)
             {
                 if (enemySlots[i] == null) continue;
+
                 if (i < enemyQueue.Count && i < enemyPreview.Count)
                 {
-                    enemySlots[i].SetMove(enemyQueue[i], enemyPreview[i].attackKind, enemyPreview[i].techniqueType);
+                    if (i < visibleEnemy)
+                        enemySlots[i].SetMove(enemyQueue[i], enemyPreview[i].attackKind, enemyPreview[i].techniqueType);
+                    else
+                        enemySlots[i].SetHidden();
                 }
                 else
                 {
                     enemySlots[i].SetMove(null);
                 }
             }
+        }
+
+        RefreshOfferViews();
+    }
+
+    private void RefreshOfferViews()
+    {
+        MoveType? left = currentOffer.Count > 0 ? currentOffer[0] : (MoveType?)null;
+        MoveType? right = currentOffer.Count > 1 ? currentOffer[1] : (MoveType?)null;
+
+        if (choiceLeftView != null)
+            choiceLeftView.SetMove(left);
+        else
+            SetChoiceButtonLabel(GetChoiceLeftButton(), left);
+
+        if (choiceRightView != null)
+            choiceRightView.SetMove(right);
+        else
+            SetChoiceButtonLabel(GetChoiceRightButton(), right);
+    }
+
+    private void SetChoiceButtonLabel(Button button, MoveType? move)
+    {
+        if (button == null)
+            return;
+
+        TMP_Text text = button.GetComponentInChildren<TMP_Text>();
+        if (text != null)
+            text.text = move.HasValue ? ToRu(move.Value) : "-";
+    }
+
+    private static void RemoveFirstOccurrence(List<MoveType> list, MoveType move)
+    {
+        if (list == null)
+            return;
+
+        int index = list.IndexOf(move);
+        if (index >= 0)
+            list.RemoveAt(index);
+    }
+
+    private static MoveType[] ShuffleMoves(MoveType[] array)
+    {
+        for (int i = 0; i < array.Length; i++)
+        {
+            int j = Random.Range(i, array.Length);
+            MoveType tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+        }
+        return array;
+    }
+
+    private static MoveType PickWeightedMove(List<MoveType> moves, List<int> weights)
+    {
+        if (moves == null || moves.Count == 0)
+            return MoveType.Hand;
+
+        int total = 0;
+        for (int i = 0; i < weights.Count; i++)
+            total += Mathf.Max(1, weights[i]);
+
+        int roll = Random.Range(0, Mathf.Max(1, total));
+        int cumulative = 0;
+        for (int i = 0; i < moves.Count; i++)
+        {
+            cumulative += Mathf.Max(1, weights[i]);
+            if (roll < cumulative)
+                return moves[i];
+        }
+
+        return moves[moves.Count - 1];
+    }
+
+    private MoveType GetMasterCoverStyle(MoveType preferred)
+    {
+        switch (preferred)
+        {
+            case MoveType.Hand: return MoveType.Sword;
+            case MoveType.Leg: return MoveType.Palm;
+            case MoveType.Sword: return MoveType.Hand;
+            case MoveType.Palm: return MoveType.Leg;
+            default: return MoveType.Hand;
         }
     }
 
@@ -1293,6 +1811,17 @@ public class AutoBattleController : MonoBehaviour
         if (slots == null || index < 0 || index >= slots.Length || slots[index] == null)
             return;
         slots[index].PlayTechniqueFlash();
+    }
+
+    private void ClearFloatingCombatTexts()
+    {
+        if (floatingDamageRoot == null)
+            return;
+
+        for (int i = floatingDamageRoot.childCount - 1; i >= 0; i--)
+        {
+            Destroy(floatingDamageRoot.GetChild(i).gameObject);
+        }
     }
 
     private void SetBar(Image fillImage, int current, int max)
@@ -1386,20 +1915,36 @@ public class AutoBattleController : MonoBehaviour
         if (button != null) button.interactable = value;
     }
 
+    private void SetButtonVisible(Button button, bool visible)
+    {
+        if (button != null && button.gameObject.activeSelf != visible)
+            button.gameObject.SetActive(visible);
+    }
+
     private void RefreshButtonStates()
     {
         bool inputAllowed = !isBusy && !battleFinished && rules != null;
-        bool canAddMoves = inputAllowed && playerQueue.Count < rules.slotCount;
-        bool hasAnyMoves = playerQueue.Count > 0;
+        bool canPick = inputAllowed && playerQueue.Count < rules.slotCount && currentOffer.Count > 0;
         bool queueReady = inputAllowed && playerQueue.Count >= rules.slotCount;
+        bool canClear = inputAllowed && playerQueue.Count > 0 && !clearUsedThisRound;
 
-        SetButton(handButton, canAddMoves);
-        SetButton(legButton, canAddMoves);
-        SetButton(swordButton, canAddMoves);
-        SetButton(palmButton, canAddMoves);
-        SetButton(clearButton, inputAllowed && hasAnyMoves);
+        Button leftChoice = GetChoiceLeftButton();
+        Button rightChoice = GetChoiceRightButton();
+
+        SetButtonVisible(leftChoice, canPick && currentOffer.Count > 0);
+        SetButtonVisible(rightChoice, canPick && currentOffer.Count > 1);
+
+        SetButton(leftChoice, canPick && currentOffer.Count > 0);
+        SetButton(rightChoice, canPick && currentOffer.Count > 1);
+
+        SetButtonVisible(handButton != leftChoice && handButton != rightChoice ? handButton : null, false);
+        SetButtonVisible(legButton != leftChoice && legButton != rightChoice ? legButton : null, false);
+        SetButtonVisible(swordButton, false);
+        SetButtonVisible(palmButton, false);
+
+        SetButton(clearButton, canClear);
         SetButton(fightButton, queueReady);
-        SetButton(rerollEnemyButton, true);
+        SetButton(rerollEnemyButton, false);
     }
 
     private void ShowResultPanel(string title)
@@ -1420,6 +1965,47 @@ public class AutoBattleController : MonoBehaviour
         if (slot.enemyAttackKind == AttackKind.Technique)
             enemyLabel += $" ({slot.enemyTechniqueType})";
         return $"Слот {slot.slotIndex + 1}: {playerLabel} vs {enemyLabel}";
+    }
+
+
+    public void SetupExternalBattle(BattleLaunchData data)
+    {
+        if (data == null)
+            return;
+
+        if (playerStats != null)
+            playerStats.ApplyExternalConfig(data.Player);
+
+        if (enemyStats != null)
+            enemyStats.ApplyExternalConfig(data.Enemy);
+
+        ResetBattle();
+    }
+
+    public void StopBattleForHub()
+    {
+        StopAllCoroutines();
+
+        isBusy = false;
+        battleFinished = false;
+        currentSlotActive = false;
+        currentImpactResolved = false;
+        currentBlockCenterSpawned = false;
+        revealEnemyFullQueue = false;
+
+        playerQueue.Clear();
+        enemyQueue.Clear();
+        playerRoundPool.Clear();
+        originalPlayerRoundPool.Clear();
+        currentOffer.Clear();
+
+        ClearFloatingCombatTexts();
+
+        if (resultPanel != null)
+            resultPanel.SetActive(false);
+
+        RefreshUI();
+        RefreshButtonStates();
     }
 
 }

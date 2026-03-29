@@ -30,7 +30,6 @@ public class StatsPanel : MonoBehaviour
     public void UpdateLabels()
     {
         master = GameCore.Instance.Master;
-
         MasterNameLabel?.SetText("Мастер " + master.Name);
         GenerationLabel?.SetText("Поколение: " + master.Generation);
         AgeLabel?.SetText($"Возраст: " + master.Age);
