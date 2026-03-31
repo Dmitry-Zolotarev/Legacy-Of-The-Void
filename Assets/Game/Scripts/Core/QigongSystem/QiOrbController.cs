@@ -3,8 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(Transform))]
 public class QiOrbController : MonoBehaviour
 {
-    public float MinSpeed = 1f;
-    public float MaxSpeed = 2f;
+    public float MinSpeed = 25f;
+    public float MaxSpeed = 25f;
     [SerializeField] private float AccelerationDelta = 1f;
     [SerializeField] private float DantianRadius = 45f;
     
@@ -12,13 +12,13 @@ public class QiOrbController : MonoBehaviour
     [SerializeField] private bool InBreakthroughMode = false;
     public bool OnDantian = true;
     public float AngleDegrees = 0;
-    private bool IsMoving = false;
     public int QiAmount = 5;
 
-    private void Awake()
+    private void OnEnable()
     {
         StartSpeed = (MinSpeed + MaxSpeed) / 2f;
         transform.localPosition = new Vector3(0, DantianRadius);
+        CurrentSpeed = StartSpeed;
     }
     private void OnDisable()
     {
@@ -28,20 +28,8 @@ public class QiOrbController : MonoBehaviour
     {
         return CurrentSpeed - StartSpeed;
     }
-    public void StartMoving()
-    {
-        IsMoving = true;
-        CurrentSpeed = StartSpeed;
-    }
-    public void StopMoving()
-    {
-        IsMoving = false;
-        CurrentSpeed = 0;
-    }
     public void MoveAlongDantian()
     {
-        if (!IsMoving) return;
-
         float deltaSpeed = CurrentSpeed;
 
         if (!InBreakthroughMode) deltaSpeed *= deltaSpeed;//„тобы ускорение и замедление шара были заметнее
@@ -51,11 +39,6 @@ public class QiOrbController : MonoBehaviour
     }
     public void MoveDirectly()
     {
-        if (!IsMoving) 
-        {
-            OnDantian = true;
-            return;
-        } 
         transform.localPosition += new Vector3(-Mathf.Cos(AngleDegrees * Mathf.Deg2Rad), Mathf.Sin(AngleDegrees * Mathf.Deg2Rad)) * CurrentSpeed * Time.deltaTime * 10f;
     }
     private void Shoot()
@@ -67,9 +50,7 @@ public class QiOrbController : MonoBehaviour
         }       
     }
     private void Update()
-    {
-        if (!IsMoving) return;
-    
+    {   
         if (InBreakthroughMode)
         {
             if(OnDantian && Input.GetKeyDown(KeyCode.F)) Shoot();

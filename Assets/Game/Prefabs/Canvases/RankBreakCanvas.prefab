@@ -588,7 +588,6 @@ MonoBehaviour:
   - {fileID: 3084796177723880475}
   - {fileID: 4273353076627200492}
   - {fileID: 3827894703289222503}
-  - {fileID: 0}
   QiLabel: {fileID: 6464526808419031258}
   QiFluid: {fileID: 8355079884796979188}
 --- !u!1 &2828043893166685973
@@ -1740,8 +1739,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 30
-  MaxSpeed: 30
+  MinSpeed: 25
+  MaxSpeed: 25
   AccelerationDelta: 5
   DantianRadius: 70
   StartSpeed: 0

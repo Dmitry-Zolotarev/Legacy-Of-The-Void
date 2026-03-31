@@ -2073,9 +2073,9 @@ MonoBehaviour:
   QiElixirsPanel: {fileID: 1410133471536349785}
   MouseButtonsHint: {fileID: 2900520730542872983}
   AgeLabel: {fileID: 0}
-  StartQiBonus: 2
+  StartQiBonus: 3
   ElixirPower: 3
-  Duration: 20
+  Duration: 15
   RhythmCorridor: 1
   RhythmAmplitude: 2
   RhythmFrequency: 1

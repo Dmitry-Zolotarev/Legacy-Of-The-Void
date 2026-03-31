@@ -35,10 +35,6 @@ public class MeridianBreakController : MonoBehaviour
 
         ResetNodes();
         UpdateNodes();
-
-        if (QiOrb != null)
-            QiOrb.StartMoving();
-
         UpdateUI();
     }
 

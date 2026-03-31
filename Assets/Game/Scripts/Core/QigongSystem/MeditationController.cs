@@ -62,7 +62,6 @@ public class MeditationController : MonoBehaviour
 
         ToggleElements(true);
         MouseButtonsHint.SetActive(false);
-        QiOrb.StartMoving();
         SessionTime = 0f;
     }
 
@@ -73,7 +72,6 @@ public class MeditationController : MonoBehaviour
         GameCore.Instance.AdvanceTime(1);
 
         ToggleElements(false);
-        QiOrb.StopMoving();
         QiGained = 0f;
     }
 

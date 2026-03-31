@@ -26,6 +26,7 @@ Thumbs.db
 # Unity-specific folders
 Library/
 Temp/
+Build/
 Obj/
 Logs/
 MemoryCaptures/

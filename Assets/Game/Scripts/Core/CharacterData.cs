@@ -75,11 +75,6 @@ public class CharacterData
     {
         return $"{Name}, {Age} {GameCore.Instance.GetYearWord(Age)}";
     }
-    public string GetStudentName()
-    {
-        if (Student != null) return Student.GetFullName();
-        return "нет";
-    }
     public string GetRankName(int i)
     {
         return GameCore.Instance.Ranks[i].Name;

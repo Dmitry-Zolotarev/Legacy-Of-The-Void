@@ -17,12 +17,11 @@ public class RankBreakController : MonoBehaviour
 
     private int nextRank = 1;
 
-    void Start()
+    void OnEnable()
     {
         master = GameCore.Instance.Master;
         lastMaster = master;
         UpdateNodes();
-        QiOrb.StartMoving();
         UpdateUI();
     }
 
@@ -49,7 +48,7 @@ public class RankBreakController : MonoBehaviour
             ExitToRankMenu();
             return;
         }
-        if (master.Qi <= 0 && QiOrb.OnDantian) ExitToRankMenu();
+        if (master.Qi < QiOrb.QiAmount && QiOrb.OnDantian) ExitToRankMenu();
     }
     private void UpdateUI()
     {
