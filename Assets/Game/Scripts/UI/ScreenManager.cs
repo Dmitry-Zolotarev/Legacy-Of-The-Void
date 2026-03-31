@@ -27,6 +27,7 @@ public class ScreenManager : MonoBehaviour
     {
         var master = GameCore.Instance.Master;
         if (Menus[menuID].tag == "MeditationScreen" && master.Qi >= master.MaxQi) return;
+        if (Menus[menuID].tag == "MeridianScreen" && master.OpenedMeridians >= 12) return;
         for (int i = 0; i < Menus.Length; i++) Menus[i]?.SetActive(i == menuID);
     }
     public void CloseMenus()

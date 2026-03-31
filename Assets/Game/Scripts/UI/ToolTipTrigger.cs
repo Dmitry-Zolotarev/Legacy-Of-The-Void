@@ -3,20 +3,26 @@ using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private string tooltipText;
-    private bool hasShown = false;
-    public void OnPointerEnter(PointerEventData eventData)
+    public string tooltipText;
+    [SerializeField] private Vector3 offset = Vector3.zero;
+    [SerializeField] private float fontSize = 16f;
+    
+    public void OnPointerEnter(PointerEventData eventData) => ShowTooltip(tooltipText);
+    public void OnPointerExit(PointerEventData eventData) => ToolTip.Instance.HideTooltip();
+    public void ShowTooltip(string text)
     {
-        if (!string.IsNullOrEmpty(tooltipText) && !hasShown)
-        {
-            ToolTip.Instance.transform.position = transform.position;
-            ToolTip.Instance.ShowTooltip(tooltipText);
-            hasShown = true;
-        }     
+        if (string.IsNullOrEmpty(text)) return;
+
+        ToolTip.Instance.transform.position = transform.position + offset;
+        ToolTip.Instance.SetFontSize(fontSize);
+        ToolTip.Instance.ShowTooltip(text);
     }
-    public void OnPointerExit(PointerEventData eventData)
+    public void ShowTooltip()
     {
-        ToolTip.Instance.HideTooltip();
-        hasShown = false;
+        if (string.IsNullOrEmpty(tooltipText)) return;
+
+        ToolTip.Instance.transform.position = transform.position + offset;
+        ToolTip.Instance.SetFontSize(fontSize);
+        ToolTip.Instance.ShowTooltip(tooltipText);
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 public class OptionsMenu : MonoBehaviour
 {
     [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider sfxVolumeSlider;
     public static OptionsMenu Instance;
 
     private void Awake()
@@ -11,10 +12,28 @@ public class OptionsMenu : MonoBehaviour
     }
     private void OnEnable()
     {
-        musicVolumeSlider.value = MusicPlayer.Instance.AudioSource.volume;
+        try
+        {
+            musicVolumeSlider.value = MusicPlayer.Instance.AudioSource.volume;
+            sfxVolumeSlider.value = SFXPlayer.Instance.AudioSource.volume;
+        }
+        catch { }     
     }
     public void ChangleMusicVolume()
     {
-        MusicPlayer.Instance.AudioSource.volume = musicVolumeSlider.value;
+        try
+        {
+            MusicPlayer.Instance.AudioSource.volume = musicVolumeSlider.value;
+        }
+        catch { }
+        
+    }
+    public void ChangleSoundVolume()
+    {
+        try
+        {
+            SFXPlayer.Instance.AudioSource.volume = sfxVolumeSlider.value;
+        }
+        catch { }    
     }
 }

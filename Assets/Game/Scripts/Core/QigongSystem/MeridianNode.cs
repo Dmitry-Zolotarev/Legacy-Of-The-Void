@@ -2,17 +2,24 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
+[RequireComponent(typeof(Image))]
 public class MeridianNode : MonoBehaviour
 {
-    public int StartSealStrength = 20;
+    public int StartSealStrength = 15;
     private int SealStrength;
     public bool IsOpened = false;  
     [SerializeField] private RectTransform QiOrb;
     private RectTransform rectTransform;
+    [SerializeField] private Sprite NodeBreakStrong;
+    [SerializeField] private Sprite NodeBreakWeak;
+    [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private Image nodeImage;
     public void Start()
     {
         SealStrength = StartSealStrength;
         rectTransform = GetComponent<RectTransform>();
+        nodeImage = GetComponent<Image>();
+        defaultSprite = nodeImage.sprite;
     }
     private void Update()
     {
@@ -22,10 +29,12 @@ public class MeridianNode : MonoBehaviour
             qiOrb.OnDantian = true;
             SetDamage(qiOrb.QiAmount);
         }
+        if (SealStrength <= StartSealStrength * 2f / 3f) nodeImage.sprite = NodeBreakStrong;
+        if (SealStrength <= StartSealStrength / 3f) nodeImage.sprite = NodeBreakWeak;
     }
     private void SetDamage(int damage)
     {
-        SealStrength -= damage;
+        SealStrength -= damage;       
         if (!IsOpened && SealStrength <= 0)
         {
             IsOpened = true;
@@ -40,6 +49,8 @@ public class MeridianNode : MonoBehaviour
     }
     public void UpdateNode()
     {
+        
+        nodeImage.sprite = defaultSprite;
         SealStrength = StartSealStrength;
         IsOpened = false;
     }

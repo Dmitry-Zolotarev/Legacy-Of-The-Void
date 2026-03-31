@@ -19,4 +19,5 @@ public class ToolTip : MonoBehaviour
     {
         toolTipImage.SetActive(false);
     }
+    public void SetFontSize(float value) => tooltipText.fontSize = value;
 }

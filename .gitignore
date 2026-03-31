@@ -14,6 +14,8 @@
 *.booproj
 *.svd
 *.pdb
+*.rar
+*.zip
 *.opendb
 *.VC.db
 
@@ -26,6 +28,7 @@ Library/
 Temp/
 Obj/
 Logs/
+Build/
 MemoryCaptures/
 UserSettings/
 

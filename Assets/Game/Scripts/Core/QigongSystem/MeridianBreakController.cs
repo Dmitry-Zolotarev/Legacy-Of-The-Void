@@ -9,25 +9,36 @@ public class MeridianBreakController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ShootLabel;
     [SerializeField] private TextMeshProUGUI OpenedMeridiansLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
-    [SerializeField] private Image QiFluid;   
+    [SerializeField] private Image QiFluid;
 
     private CharacterData master;
+
     [SerializeField] private List<MeridianNode> Nodes = new List<MeridianNode>();
     private int NodesCount;
     private bool[] nodeStates;
+
     private void OnEnable()
     {
-        StartSession(GameCore.Instance.Master, 12);
+        if (GameCore.Instance != null && GameCore.Instance.Master != null)
+        {
+            StartSession(GameCore.Instance.Master, 12);
+        }
     }
 
     public void StartSession(CharacterData character, int nodesCount)
     {
         master = character;
         NodesCount = nodesCount;
-        nodeStates = new bool[NodesCount];
+
+        int count = Mathf.Min(NodesCount, Nodes.Count);
+        nodeStates = new bool[count];
+
         ResetNodes();
         UpdateNodes();
-        QiOrb.StartMoving();
+
+        if (QiOrb != null)
+            QiOrb.StartMoving();
+
         UpdateUI();
     }
 
@@ -37,7 +48,6 @@ public class MeridianBreakController : MonoBehaviour
         {
             Nodes[i].IsOpened = false;
             Nodes[i].gameObject.SetActive(false);
-            Nodes[i].UpdateNode();
         }
     }
 
@@ -45,39 +55,67 @@ public class MeridianBreakController : MonoBehaviour
     {
         for (int i = 0; i < Nodes.Count; i++)
         {
-            bool active = i >= master.OpenedMeridians && i < NodesCount;
+            bool active = i < NodesCount && i >= master.OpenedMeridians;
+
             Nodes[i].gameObject.SetActive(active);
-            if (active) Nodes[i].IsOpened = false;
-            Nodes[i].UpdateNode();
+
+            if (active)
+            {
+                Nodes[i].IsOpened = false;
+                Nodes[i].UpdateNode();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        if (master == null) StartSession(GameCore.Instance.Master, 12);
+        if (master == null && GameCore.Instance != null)
+        {
+            StartSession(GameCore.Instance.Master, 12);
+        }
+
         CheckNodes();
         UpdateUI();
     }
 
     private void CheckNodes()
     {
-        for (int i = 0; i < NodesCount; i++)
+        int count = Mathf.Min(NodesCount, Nodes.Count);
+
+        for (int i = 0; i < count; i++)
         {
             if (Nodes[i].IsOpened && !nodeStates[i])
             {
                 master.OpenMeridian();
             }
+
             nodeStates[i] = Nodes[i].IsOpened;
         }
 
-        if (master.OpenedMeridians == NodesCount) Exit();
+        if (master.OpenedMeridians >= NodesCount)
+        {
+            Exit();
+        }
     }
 
     private void UpdateUI()
     {
-        QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
-        ShootLabel?.SetText(GameCore.Instance.Master.Qi >= QiOrb.QiAmount ? "Нажмите F для броска" : "Недостаточно ци для броска");
-        QiFluid.fillAmount = (float)GameCore.Instance.Master.Qi / GameCore.Instance.Master.MaxQi;
+        if (master == null) return;
+
+        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+
+        if (QiOrb != null)
+        {
+            ShootLabel?.SetText(master.Qi >= QiOrb.QiAmount
+                ? "Нажмите F для броска"
+                : "Недостаточно ци для броска");
+        }
+
+        if (QiFluid != null)
+        {
+            QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
+        }
+
         if (master != GameCore.Instance.Master)
         {
             OpenedMeridiansLabel?.SetText($"Открыто меридианов ученика: {master.OpenedMeridians} / {NodesCount}");

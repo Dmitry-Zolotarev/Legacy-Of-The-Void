@@ -7,17 +7,17 @@ public class CharacterData
 {
     protected System.Random random = new System.Random();
     [HideInInspector] public int Generation = 1;
-    [HideInInspector] public readonly int LifeLimit;
+    [HideInInspector] public int LifeLimit;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
     [HideInInspector] public List<Technique> KnownTechniques = new List<Technique>();
 
-    public int Age = 16;
-    public string Name = "";
+    public int Age = 14;
+    public string Name = "Со Мин";
     public int MinLifeLimit = 65;
-    public int MaxLifeLimit = 95;
-    public int Body = 10;
-    public int MaxBody = 40;
+    public int MaxLifeLimit = 85;
+    public int Body = 5;
+    public int MaxBody = 5;
     public int Qi = 0;
     public int MaxQi = 60;
     public int Silver = 20;
@@ -26,20 +26,19 @@ public class CharacterData
     public int BodyElixirs = 0;
     public int QiElixirs = 0;
     public Student Student;
-    public int RankForBecomeTeacher = 3;
+    public MasterRank RankForBecomeTeacher = MasterRank.PeakMaster;
 
     public CharacterData()
     {
         Name = GameCore.Instance?.GenerateFullName();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
-        GameCore.Instance?.AddTechnique(0);
     }
     public void OpenMeridian()
     {
         if (OpenedMeridians >= GameCore.Instance.MeridianLevels.Count) return;
 
         MaxQi = GameCore.Instance.MeridianLevels[OpenedMeridians].MaxQi;
-        MaxBody = GameCore.Instance.MeridianLevels[OpenedMeridians].MaxBody;
+        
         OpenedMeridians++;
     }
     public void TrainBody(int amount)
@@ -69,22 +68,27 @@ public class CharacterData
     public void UpdateRank()
     {
         if(CurrentRank < GameCore.Instance.Ranks.Count - 1) CurrentRank++;
-        if (CurrentRank == RankForBecomeTeacher) Student = new Student();      
+        if (CurrentRank == (int)RankForBecomeTeacher) Student = new Student();
+        MaxBody = GameCore.Instance.Ranks[CurrentRank].MaxBody;
+    }
+    public string GetFullName()
+    {
+        return $"{Name}, {Age} {GameCore.Instance.GetYearWord(Age)}";
     }
     public string GetStudentName()
     {
-        if (Student != null) return Student.Name;
+        if (Student != null) return Student.GetFullName();
         return "нет";
     }
     public string GetRankName(int i)
     {
         return GameCore.Instance.Ranks[i].Name;
     }
-    public bool IsTechniqueUnlocked(int techniqueType)
+    public bool IsTechniqueUnlocked(TechniqueType techniqueType)
     {
         foreach(var technique in KnownTechniques)
         {
-            if (technique.Type == techniqueType) return true;
+            if (technique.Type == (int)techniqueType) return true;
         }
         return false;
     }

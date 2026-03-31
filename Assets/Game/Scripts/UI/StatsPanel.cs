@@ -30,10 +30,8 @@ public class StatsPanel : MonoBehaviour
     public void UpdateLabels()
     {
         master = GameCore.Instance.Master;
-
-        MasterNameLabel?.SetText("Мастер " + master.Name);
         GenerationLabel?.SetText("Поколение: " + master.Generation);
-        AgeLabel?.SetText($"Возраст: " + master.Age);
+        MasterNameLabel?.SetText($"Мастер {master.Name}, {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
 
         BodyLabel?.SetText($"Телосложение: {master.Body} / {master.MaxBody}");
         if (BodyBar != null) BodyBar.value = (float)master.Body / master.MaxBody;
@@ -43,6 +41,7 @@ public class StatsPanel : MonoBehaviour
 
         MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
         RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());
-        HasStudentLabel?.SetText("Ученик: " + master.GetStudentName());
+
+        HasStudentLabel?.SetText(master.Student == null ? "Нет ученика" : $"Ученик: {master.Student.GetFullName()}");
     }
 }

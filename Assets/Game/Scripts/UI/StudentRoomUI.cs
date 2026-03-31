@@ -4,7 +4,6 @@ using TMPro;
 public class StudentRoomUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI NameLabel;
-    [SerializeField] private TextMeshProUGUI AgeLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
     [SerializeField] private Image StudentSprite;
@@ -44,26 +43,24 @@ public class StudentRoomUI : MonoBehaviour
     private void UpdateLabels()
     {
         student = GameCore.Instance.Master.Student;
-
+        
         if (student != null)
         {
             ToggleElements(true);
-            NameLabel?.SetText("Ученик " + student.Name);
-            AgeLabel?.SetText("Возраст: " + student.Age);
+            NameLabel?.SetText("Ученик " + student.GetFullName());
             QiLabel?.SetText($"Ци: {student.Qi} / {student.MaxQi}");
             MeridiansLabel?.SetText($"Меридианы: {student.OpenedMeridians} / {GameCore.Instance.Master.OpenedMeridians / 2}");          
         }
         else
         {
             ToggleElements(false);
-            NameLabel?.SetText("Ученик будет назначен после получения ранга «Первый сорт»");
-            AgeLabel?.SetText("");
+            NameLabel?.SetText($"Ученик будет назначен после получения ранга «{GameCore.Instance.GetRankForBecomeTeacher()}»");
             QiLabel?.SetText("");
             MeridiansLabel?.SetText("");
         }       
     }
     public void GiveQi() => student.SeedQI(GameCore.Instance.Master);
-
+    
     public void BreakthroughStudentMeridians()
     {
         if (student.OpenedMeridians == GameCore.Instance.Master.OpenedMeridians / 2) return;

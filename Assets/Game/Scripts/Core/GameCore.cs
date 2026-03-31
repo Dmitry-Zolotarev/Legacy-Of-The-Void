@@ -1,50 +1,55 @@
 using UnityEngine;
 using System.ComponentModel;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using System.Reflection;
 using System;
 using TMPro;
-using System.Collections.Generic;
+
 
 public class GameCore : MonoBehaviour
 {
     [HideInInspector] public int Year = 1;
-    public CharacterData Master;
-
-    [SerializeField] private GameObject GameOverWindow;
+    [HideInInspector] public Demons SelectedDemon = Demons.NoDemon;    
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
     [SerializeField] private TextMeshProUGUI AgeLabel;
-    public List<Technique> Techniques;
+
+    [SerializeField] private GameObject ToolTipCanvas;
+    [SerializeField] private GameObject GameOverWindow;
+    [SerializeField] private GameObject AgeCanvas;
     [SerializeField] private List<string> SurnameList;
     [SerializeField] private List<string> NameList;
-    public static GameCore Instance;
+    
+    public GameObject ComicsCanvas;
     public List<Rank> Ranks;
+    public List<Demon> Enemies;
+    public List<Technique> Techniques;
     public List<MeridianLevel> MeridianLevels;
     public GameObject CombatSystem;
     public GameObject MainHub;
+    public CharacterData Master;
+    public static GameCore Instance;
+    [HideInInspector] public System.Random random = new System.Random();
+    public bool StartComicShown = false;
     void Awake()
     {
         if (Instance == null) Instance = this;
+        if (SaveManager.NeedLoad)
+        {
+            SaveManager.Load(this);
+        }
     }
     void Start()
     {
-        Master.Name = GenerateFullName();
-        var random = new System.Random();
-        Master.Age += random.Next(0, 15);
         AgeLabel?.SetText(Master.Age.ToString());
-        AddTechnique(0);
-    }
-    public void AddTechnique(int i)
-    {
-        if (Techniques.Count > 0) Master.KnownTechniques.Add(Instance.Techniques[i]);
+        ComicsCanvas?.SetActive(!StartComicShown);
     }
     public string GenerateFullName()
     {
         var random = new System.Random();
-        var surname = "";
-        surname = SurnameList?[random.Next(0, SurnameList.Count)];
-        var name = "";
-        name = NameList?[random.Next(0, NameList.Count)];
+        string surname = SurnameList?[random.Next(0, SurnameList.Count)];
+        string name = NameList?[random.Next(0, NameList.Count)];
         return $"{surname} {name}";
     }
     public static string GetEnumDescription(Enum value)
@@ -56,9 +61,36 @@ public class GameCore : MonoBehaviour
     public string GetYearWord(int years)
     {
         var yearWord = "лет";
+        if(years > 4 && years < 21) return yearWord;
+
         if (years % 10 > 1 && years % 10 < 5) yearWord = "года";
         if (years % 10 == 1) yearWord = "год";
         return yearWord;
+    }
+    private void KillMaster()
+    {
+        ScreenManager.Instance.CloseMenus();
+        GameOverHeader?.SetText($"Мастер {Master.Name} умер");
+        
+        GameOverWindow.SetActive(true);
+        if (Master.CurrentRank >= (int)MasterRank.FirstRate)
+        {
+            if (Master.Student == null) Master.Student = new Student();
+            Master.Student.Inherit(Master);
+            Master = Master.Student;
+            GameOverDescrption?.SetText("Наследство передано ученику");
+        }
+        else
+        {
+            var newGeneration = Master.Generation + 1;
+            Master = new CharacterData();
+            Master.Generation = newGeneration;
+            GameOverDescrption?.SetText("Ученик не подготовлен");
+            MainHubUI.Instance.gameObject.SetActive(false);
+            AgeCanvas.SetActive(false);
+            ToolTipCanvas.SetActive(false);
+        }
+        MainHubUI.Instance.RefreshUI();
     }
     public void AdvanceTime(int years)
     {
@@ -66,37 +98,42 @@ public class GameCore : MonoBehaviour
         Master.Age += years;
         if (Master.Student != null) Master.Student.Age += years;
 
-        if (Master.Age > Master.LifeLimit)
-        {
-            ScreenManager.Instance.CloseMenus();
-            GameOverHeader?.SetText($"Мастер {Master.Name} умер");
+        if (Master.Age > Master.LifeLimit) KillMaster();
 
-            GameOverWindow.SetActive(true);
-            if (Master.Student != null)
-            {
-                Master.Student.Inherit(Master);
-                Master = Master.Student;
-                GameOverDescrption?.SetText("Наследство передано ученику");
-            }
-            else
-            {
-                var newGeneration = Master.Generation + 1;
-                Master = new CharacterData();
-                Master.Generation = newGeneration;
-                GameOverDescrption?.SetText("Наследство не передано");
-            }
-            MainHubUI.Instance.RefreshUI();
-        }
         AgeLabel?.SetText(Master.Age.ToString());
     }
-    public void StartFight()
+    public string GetRankLabelRu(MasterRank rank)
     {
-        MainHub?.SetActive(false);
-        CombatSystem?.SetActive(true);
+        try
+        {
+            return Ranks[(int)rank].Name.ToLower();
+        }
+        catch { return "основа"; }        
     }
     public void EndFight()
     {
-        CombatSystem?.SetActive(false);
-        MainHub?.SetActive(true);
+        MusicPlayer.Instance.PlayMainMusic();
+        Instance.MainHub?.SetActive(true);
+        Instance.CombatSystem?.SetActive(false);
+
+        var demon = Enemies[(int)SelectedDemon];
+             
+        AdvanceTime(1);
+        if (SelectedDemon != Demons.NoDemon && demon.IsDead) 
+        {
+            demon.SetComicSprite();
+            ComicsCanvas.SetActive(true);
+            MusicPlayer.Instance.PlayStartMusic();
+        } 
+        ScreenManager.Instance.OpenMenu((int)Canvases.MapCanvas);
+    }
+    public void SaveGame() 
+    {
+        SaveManager.Save(this);
+        SceneManager.LoadScene(0);
+    }
+    public string GetRankForBecomeTeacher()
+    {
+        return Ranks[(int)Master.RankForBecomeTeacher].Name;
     }
 }

@@ -271,6 +271,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 4659844368684418659}
 --- !u!1 &641680945234014597
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +366,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 7341519968600941748}
 --- !u!1 &1023176403525152167
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,10 +440,10 @@ MonoBehaviour:
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 2
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 3
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &4433028532723788183
@@ -453,6 +461,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 9206533137306349856}
 --- !u!1 &1452995529825401607
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +634,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 4695739770493054684}
 --- !u!1 &2237853674604815788
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +788,7 @@ GameObject:
   - component: {fileID: 4329256475384984102}
   m_Layer: 5
   m_Name: MeridiansCanvas
-  m_TagString: Untagged
+  m_TagString: MeridianScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1163,6 +1179,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 1316021639443532533}
 --- !u!1 &4395244259177108920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1274,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 4659844368684418659}
 --- !u!1 &4552349901762229110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,6 +1369,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 5279940842726824134}
 --- !u!1 &5140835116445334827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1539,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 6172053595099092056}
 --- !u!1 &6329772322910186024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,6 +1669,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 1888271508793198751}
 --- !u!1 &7481678310705437593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,6 +1999,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 1841062386174053893}
 --- !u!1 &7851789626877446187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2054,6 +2094,10 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 529570126009736523}
 --- !u!1 &8310191206975476623
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,3 +2401,7 @@ MonoBehaviour:
   StartSealStrength: 15
   IsOpened: 0
   QiOrb: {fileID: 4027815968977077414}
+  NodeBreakStrong: {fileID: -231738700833148731, guid: ff9ba8b76b7c03d4b9b422f72e25bdf6, type: 3}
+  NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
+  defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
+  nodeImage: {fileID: 3986279435117537454}

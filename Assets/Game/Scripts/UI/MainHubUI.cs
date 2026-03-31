@@ -11,6 +11,12 @@ public class MainHubUI : MonoBehaviour
     [SerializeField] private Sprite AdultMasterSprite;
     [SerializeField] private Sprite OldMasterSprite;
     [SerializeField] private StatsPanel MiniStatsPanel;
+    [SerializeField] private GameObject AgeNotification;
+    [SerializeField] private TextMeshProUGUI RankLabel;
+    [SerializeField] private TooltipTrigger RankPanel;
+    [SerializeField] private int BecomeAdultAge = 25;
+    [SerializeField] private int NotificationAge = 40;
+    [SerializeField] private int BecomeOldAge = 60;
     public static MainHubUI Instance;
     private CharacterData master;
 
@@ -22,22 +28,29 @@ public class MainHubUI : MonoBehaviour
     {
         RefreshUI();                   
     }
+    private void FixedUpdate()
+    {
+        RefreshUI();
+    }
     public void RefreshUI()
     {
         if (GameCore.Instance == null || GameCore.Instance.Master == null) return;
-        master = GameCore.Instance.Master;  
+        master = GameCore.Instance.Master;
+
+        AgeNotification.SetActive(master != null && master.Age >= NotificationAge && master.CurrentRank < (int)master.RankForBecomeTeacher);
 
         UpdateLabels();
         UpdateMasterSprite();
     }
     public void UpdateMasterSprite()
     {
-        if (master == null || MasterSprite == null) return;
-        if (master.Age >= 60)
+        if (master == null || MasterSprite == null) return;    
+
+        if (master.Age >= BecomeOldAge)
         {
             MasterSprite.sprite = OldMasterSprite;
         }
-        else if (master.Age >= 40)
+        else if (master.Age >= BecomeAdultAge)
         {
             MasterSprite.sprite = AdultMasterSprite;
         }
@@ -45,8 +58,12 @@ public class MainHubUI : MonoBehaviour
     }
     private void UpdateLabels()
     {
-        if (master == null) return;
+        if (master == null) return;  
         MiniStatsPanel.UpdateLabels();
         SilverAmountLabel?.SetText(master.Silver.ToString());
+
+        var rankName = GameCore.Instance.Ranks[GameCore.Instance.Master.CurrentRank].Name;
+        RankPanel.tooltipText = "Ранг игрока:\n" + rankName;
+        RankLabel?.SetText(rankName);
     }
 }

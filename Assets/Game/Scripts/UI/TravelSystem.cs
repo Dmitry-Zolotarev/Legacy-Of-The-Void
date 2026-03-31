@@ -1,28 +1,102 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TravelSystem : MonoBehaviour
 {
-    [SerializeField] private int MinSilver = 20;
-    [SerializeField] private int MaxSilver = 220;
-    [SerializeField] private int MinYears = 1;
-    [SerializeField] private int MaxYears = 3;
+    
+    [SerializeField] private int MinSilverBonus = 160;
+    [SerializeField] private int MaxSilverBonus = 420;
     [SerializeField] private TextMeshProUGUI SilverLabel;
-    [SerializeField] private TextMeshProUGUI TimeSpentLabel;
-    [SerializeField] private TextMeshProUGUI LootedSilverLabel;
-    [SerializeField] private GameObject TravelResultsWindow;
-    private int SelectedPlace;
+    [SerializeField] private TextMeshProUGUI RankLabel;
+    [SerializeField] private TextMeshProUGUI BattleDescriptionLabel;
+    [SerializeField] private TooltipTrigger RankPanel;
+    [SerializeField] private GameObject ChonMaButton;
+    [HideInInspector] public int SilverBonus = 0;
+    [HideInInspector] public TravelToFightButton SelectedLevel;
+    public BattleLaunchButton BattleLaunchButton;
+    public GameObject TravelSystemCanvas;
+    public GameObject TravelFightDialog;
+    public GameObject TravelResultsWindow;
+    public TextMeshProUGUI TravelResultText;
+    public TextMeshProUGUI LootedSilverText;
+    
+    public Image EnemyImage;
+
+    public static TravelSystem Instance;
+    [SerializeField] private GameObject[] demonButtons;
+
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        TravelSystemCanvas.SetActive(false);
+
+        for(int i = 0; i < demonButtons.Length; i++)
+        {
+            demonButtons[i].SetActive(!GameCore.Instance.Enemies[i].IsDead);
+        }
+    }
+    private void TryActivateChonMa()
+    {
+        bool allDemonsMurdered = true;
+        
+        for(int i = 0; i < 3; i++)
+        {
+            if (!GameCore.Instance.Enemies[i].IsDead) allDemonsMurdered = false;
+        }
+        ChonMaButton.gameObject.SetActive(allDemonsMurdered);
+    }
     public void OnEnable()
     {
+        TravelFightDialog.SetActive(false);
         TravelResultsWindow.SetActive(false);
+        TravelSystemCanvas.SetActive(false);
+        TryActivateChonMa();
         UpdateLabels();
     }
-    public void Travel()
+    public void ShowFightDialog(string battleDescription)
     {
-        GameCore.Instance.StartFight();
+        BattleDescriptionLabel.SetText(battleDescription);
+        TravelSystemCanvas.SetActive(true);
+        TravelResultsWindow.SetActive(false);
+        TravelFightDialog.SetActive(true);
     }
     private void UpdateLabels()
     {
-        SilverLabel.SetText(GameCore.Instance.Master.Silver.ToString()); 
+        SilverLabel?.SetText(GameCore.Instance.Master.Silver.ToString());
+
+        var rankName = GameCore.Instance.Ranks[GameCore.Instance.Master.CurrentRank].Name;
+
+        RankPanel.tooltipText = "Ранг игрока:\n" + rankName;
+        RankLabel?.SetText(rankName);
+    }
+    public void AddSilverToPlayer()
+    {
+        GameCore.Instance.Master.Silver += SilverBonus;
+        UpdateLabels();
+    }
+    public void LootKorovan()
+    {
+        SilverBonus = GameCore.Instance.random.Next(MinSilverBonus, MaxSilverBonus + 1);
+        AddSilverToPlayer();
+        TravelResultText?.SetText("Корован ограблен");
+        LootedSilverText?.SetText(SilverBonus.ToString());
+        TravelSystemCanvas.SetActive(true);
+        TravelFightDialog.SetActive(false);
+        TravelResultsWindow.SetActive(true);
+        GameCore.Instance.AdvanceTime(1);       
+    }
+    public void ProtectShop()
+    {
+        SilverBonus = GameCore.Instance.random.Next(MinSilverBonus, MaxSilverBonus + 1);
+        AddSilverToPlayer();
+        TravelResultText?.SetText("Охрана лавки завершена");
+        LootedSilverText?.SetText(SilverBonus.ToString());
+        TravelSystemCanvas.SetActive(true);
+        TravelFightDialog.SetActive(false);
+        TravelResultsWindow.SetActive(true);
+        GameCore.Instance.AdvanceTime(1);
+        
     }
 }
