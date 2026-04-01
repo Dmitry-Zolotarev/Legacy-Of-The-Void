@@ -32,6 +32,7 @@ public class StatsPanel : MonoBehaviour
         master = GameCore.Instance.Master;
         GenerationLabel?.SetText("Поколение: " + master.Generation);
         MasterNameLabel?.SetText($"Мастер {master.Name}, {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
+        AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
 
         BodyLabel?.SetText($"Телосложение: {master.Body} / {master.MaxBody}");
         if (BodyBar != null) BodyBar.value = (float)master.Body / master.MaxBody;

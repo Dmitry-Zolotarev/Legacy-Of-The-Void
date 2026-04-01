@@ -19,12 +19,16 @@ public class RankBreakController : MonoBehaviour
 
     void OnEnable()
     {
+        Cursor.visible = false;
         master = GameCore.Instance.Master;
         lastMaster = master;
         UpdateNodes();
         UpdateUI();
     }
-
+    private void OnDisable()
+    {
+        Cursor.visible = true;
+    }
     private void FixedUpdate()
     {
         master = GameCore.Instance.Master;

@@ -12,7 +12,6 @@ public class RankSystemUI : MonoBehaviour
     [SerializeField] private GameObject FinalVoidBreakCanvas;
     [SerializeField] private GameObject StudentUnlockedWindow;
     [SerializeField] private TextMeshProUGUI StudentNameLabel;
-    private bool StudentMessageShown = false;
     private CharacterData master;
     private void Awake()
     {
@@ -22,11 +21,10 @@ public class RankSystemUI : MonoBehaviour
     {
         UpdateLabels();
         if (master.CurrentRank >= GameCore.Instance.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
-        if(master.CurrentRank == (int)master.RankForBecomeTeacher && !StudentMessageShown)
+        if(master.CurrentRank == (int)master.RankForBecomeTeacher)
         {
             StudentUnlockedWindow.SetActive(true);
             StudentNameLabel.SetText(master.Student.GetFullName());
-            StudentMessageShown = true;
         }
     }
     private void OnDisable()
@@ -35,8 +33,6 @@ public class RankSystemUI : MonoBehaviour
     }
     public void UpdateLabels()
     {
-        if(master != GameCore.Instance.Master) StudentMessageShown = false;
-
         master = GameCore.Instance.Master;
         CurrentRankLabel.SetText(GameCore.Instance.Ranks[master.CurrentRank].Name);
         NextRankLabel.SetText(master.GetNextRank().Name);

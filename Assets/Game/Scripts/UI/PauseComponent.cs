@@ -12,6 +12,7 @@ public class PauseComponent : MonoBehaviour
     public void Pause()
     {
         if (PauseMenu == null) return;
+        
         OptionsMenu?.SetActive(false);
         if (PauseMenu.activeSelf && Time.timeScale == 0f)
         {
@@ -20,6 +21,7 @@ public class PauseComponent : MonoBehaviour
         }
         else if(Time.timeScale == 1f)
         {
+            Cursor.visible = true;
             PauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }

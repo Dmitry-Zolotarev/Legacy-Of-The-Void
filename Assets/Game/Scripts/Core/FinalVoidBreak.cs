@@ -8,10 +8,10 @@ public class FinalVoidBreak : MonoBehaviour
     [SerializeField] private TextMeshProUGUI chonMaKilledLabel;
     void OnEnable()
     {
-
         if (GameCore.Instance.Enemies[(int)Demons.ChonMa].IsDead)
         {
             chonMaKilledLabel.SetText("Чхон Ма убит");
+            GameCore.Instance.StartComicShown = false; 
             ComicsBook.Instance.Image.sprite = finalVoidBreakComics;
             ComicsBook.Instance.BackgroundImage.sprite = finalVoidBreakBackround;
             ComicsBook.Instance.BackgroundImage.color = Color.white;

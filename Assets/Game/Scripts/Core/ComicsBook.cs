@@ -16,23 +16,21 @@ public class ComicsBook : MonoBehaviour
     void Awake()
     {
         if (Instance == null) Instance = this;
-        if (comicsPages.Count > 0) Image.sprite = comicsPages[0];
         BackgroundImage = GetComponent<Image>();
     }
-    private void Start()
+    private void OnEnable()
     {
         MusicPlayer.Instance.PlayStartMusic();
-        if (GameCore.Instance.StartComicShown) currentPage = comicsPages.Count;
-        previousButton.SetActive(currentPage > 0 && comicsPages.Contains(Image.sprite));
-
+        GameCore.Instance.StartComicShown = comicsPages.Contains(Image.sprite);
+        previousButton.SetActive(currentPage > 0 && GameCore.Instance.StartComicShown);
     }
     private void FixedUpdate()
     {
-        previousButton.SetActive(currentPage > 0 && comicsPages.Contains(Image.sprite));
+        previousButton.SetActive(currentPage > 0 && GameCore.Instance.StartComicShown);
     }
     public void NextPage()
     {
-        if (currentPage < comicsPages.Count - 1)
+        if (currentPage < comicsPages.Count - 1 && GameCore.Instance.StartComicShown)
         {
             currentPage++;
             Image.sprite = comicsPages[currentPage];
@@ -46,7 +44,7 @@ public class ComicsBook : MonoBehaviour
     }
     public void PreviousPage()
     {
-        if (currentPage > 0)
+        if (currentPage > 0 && GameCore.Instance.StartComicShown)
         {
             currentPage--;
             Image.sprite = comicsPages[currentPage];

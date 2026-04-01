@@ -4,7 +4,16 @@ public class Student : CharacterData
 {
     public Student()
     {
-        Age = Random.Range(9, 13);
+        Age = Random.Range(9, 12);
+    }
+    public Student(SaveData data)
+    {
+        Age = data.StudentAge;
+        LifeLimit = data.StudentLifeLimit;
+        Name = data.StudentName;
+        Qi = data.StudentQi;
+        MaxQi = data.StudentMaxQi;
+        OpenedMeridians = data.StudentOpenedMeridians;       
     }
     public void SeedQI(CharacterData master)
     {

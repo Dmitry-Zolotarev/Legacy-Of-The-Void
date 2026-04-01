@@ -84,44 +84,27 @@ public class MeridianBreakController : MonoBehaviour
             {
                 master.OpenMeridian();
             }
-
             nodeStates[i] = Nodes[i].IsOpened;
         }
-
-        if (master.OpenedMeridians >= NodesCount)
-        {
-            Exit();
-        }
+        if (master.OpenedMeridians >= NodesCount) Exit();
     }
 
     private void UpdateUI()
     {
         if (master == null) return;
 
-        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+        QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
 
-        if (QiOrb != null)
-        {
-            ShootLabel?.SetText(master.Qi >= QiOrb.QiAmount
-                ? "Нажмите F для броска"
-                : "Недостаточно ци для броска");
-        }
+        ShootLabel?.SetText(GameCore.Instance.Master.Qi >= QiOrb.QiAmount ? "Нажмите F для броска" : "Недостаточно ци для броска");
 
-        if (QiFluid != null)
-        {
-            QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
-        }
+        QiFluid.fillAmount = (float)GameCore.Instance.Master.Qi / GameCore.Instance.Master.MaxQi;
 
         if (master != GameCore.Instance.Master)
         {
             OpenedMeridiansLabel?.SetText($"Открыто меридианов ученика: {master.OpenedMeridians} / {NodesCount}");
         }
-        else
-        {
-            OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {NodesCount}");
-        }
+        else OpenedMeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {NodesCount}");
     }
-
     public void Exit()
     {
         if (master != GameCore.Instance.Master)

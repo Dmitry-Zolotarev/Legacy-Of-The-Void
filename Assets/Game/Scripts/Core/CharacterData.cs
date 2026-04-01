@@ -33,6 +33,24 @@ public class CharacterData
         Name = GameCore.Instance?.GenerateFullName();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
     }
+    public CharacterData(SaveData data)
+    {
+        Age = data.Age;
+        LifeLimit = data.LifeLimit;
+        Name = data.Name;
+        Generation = data.Generation;
+        MaxBody = data.MaxBody;
+        Body = data.Body;
+        MaxQi = data.MaxQi;
+        OpenedMeridians = data.OpenedMeridians;
+        Qi = data.Qi;
+        if (data.HasStudent) Student = new Student(data);
+
+        Silver = data.Silver;
+        BodyElixirs = data.BodyElixirs;
+        QiElixirs = data.QiElixirs;
+        CurrentRank = data.CurrentRank;
+    }
     public void OpenMeridian()
     {
         if (OpenedMeridians >= GameCore.Instance.MeridianLevels.Count) return;

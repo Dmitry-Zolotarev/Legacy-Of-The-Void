@@ -82,6 +82,7 @@ public class MeditationController : MonoBehaviour
         QiOrb?.gameObject.SetActive(value);
         TimeLeftLabel?.gameObject.SetActive(value);
 
+        Cursor.visible = !value;
         QiElixirsPanel?.SetActive(!value);
         AgeLabel?.SetActive(!value);
         BackButton?.SetActive(!value);

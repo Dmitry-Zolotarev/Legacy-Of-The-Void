@@ -35,10 +35,7 @@ public class GameCore : MonoBehaviour
     void Awake()
     {
         if (Instance == null) Instance = this;
-        if (SaveManager.NeedLoad)
-        {
-            SaveManager.Load(this);
-        }
+        if (SaveManager.NeedLoad) SaveManager.Load(this);
     }
     void Start()
     {
@@ -117,10 +114,12 @@ public class GameCore : MonoBehaviour
         Instance.CombatSystem?.SetActive(false);
 
         var demon = Enemies[(int)SelectedDemon];
-             
+        demon.IsDead = true;
+
         AdvanceTime(1);
-        if (SelectedDemon != Demons.NoDemon && demon.IsDead) 
+        if (SelectedDemon != Demons.NoDemon) 
         {
+            StartComicShown = false;
             demon.SetComicSprite();
             ComicsCanvas.SetActive(true);
             MusicPlayer.Instance.PlayStartMusic();

@@ -14,11 +14,24 @@ public class SaveData
     public int Body;
     public int MaxBody;
     public int Qi;
+    public int MaxQi;
+
     public int Silver;
+    public int BodyElixirs;
+    public int QiElixirs;
 
     public int OpenedMeridians;
     public int CurrentRank;
     public bool StartComicShown;
+    public bool HasStudent;
 
-    public List<bool> DemonStates = new List<bool>();
+    public string StudentName;
+    public int StudentAge;
+    public int StudentLifeLimit;
+
+    public int StudentQi;
+    public int StudentMaxQi;
+    public int StudentOpenedMeridians;
+
+    public List<bool> DemonStates = new List<bool>();   
 }

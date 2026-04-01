@@ -25,6 +25,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void OpenMenu(int menuID)
     {
+        Time.timeScale = 1f;
         var master = GameCore.Instance.Master;
         if (Menus[menuID].tag == "MeditationScreen" && master.Qi >= master.MaxQi) return;
         if (Menus[menuID].tag == "MeridianScreen" && master.OpenedMeridians >= 12) return;

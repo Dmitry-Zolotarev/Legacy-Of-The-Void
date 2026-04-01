@@ -27,10 +27,27 @@ public static class SaveManager
         data.Body = master.Body;
         data.MaxBody = master.MaxBody;
         data.Qi = master.Qi;
+        data.MaxQi = master.MaxQi;
+
         data.Silver = master.Silver;
+        data.BodyElixirs = master.BodyElixirs;
+        data.QiElixirs = master.QiElixirs;     
 
         data.OpenedMeridians = master.OpenedMeridians;
         data.CurrentRank = master.CurrentRank;
+
+        data.HasStudent = master.Student != null;
+        
+        if(data.HasStudent)
+        {
+            data.StudentName = master.Student.Name;
+            data.StudentAge = master.Student.Age;
+            data.StudentLifeLimit = master.Student.LifeLimit;
+            
+            data.StudentQi = master.Student.Qi;
+            data.StudentMaxQi = master.Student.MaxQi;
+            data.StudentOpenedMeridians = master.Student.OpenedMeridians;
+        }
 
         data.StartComicShown = game.StartComicShown;
         data.DemonStates.Clear();
@@ -53,24 +70,11 @@ public static class SaveManager
             Debug.LogWarning("Save file not found");
             return;
         }
-
         string json = File.ReadAllText(Path);
         SaveData data = JsonUtility.FromJson<SaveData>(json);
-
+        game.Master = new CharacterData(data);
         game.Year = data.Year;
-        game.StartComicShown = data.StartComicShown;
-        var master = game.Master;
-
-        master.Age = data.Age;
-        master.Name = data.Name;
-        master.Generation = data.Generation;
-        master.MaxBody = data.MaxBody;
-        master.Body = data.Body;
-        master.Qi = data.Qi;
-        master.Silver = data.Silver;
-
-        master.OpenedMeridians = data.OpenedMeridians;
-        master.CurrentRank = data.CurrentRank;
+        game.StartComicShown = data.StartComicShown;   
 
         for (int i = 0; i < data.DemonStates.Count; i++)
         {
