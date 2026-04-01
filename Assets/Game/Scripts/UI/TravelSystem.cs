@@ -3,10 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class TravelSystem : MonoBehaviour
-{
-    
-    [SerializeField] private int MinSilverBonus = 160;
-    [SerializeField] private int MaxSilverBonus = 420;
+{   
     [SerializeField] private TextMeshProUGUI SilverLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
     [SerializeField] private TextMeshProUGUI BattleDescriptionLabel;
@@ -75,28 +72,5 @@ public class TravelSystem : MonoBehaviour
     {
         GameCore.Instance.Master.Silver += SilverBonus;
         UpdateLabels();
-    }
-    public void LootKorovan()
-    {
-        SilverBonus = GameCore.Instance.random.Next(MinSilverBonus, MaxSilverBonus + 1);
-        AddSilverToPlayer();
-        TravelResultText?.SetText("Корован ограблен");
-        LootedSilverText?.SetText(SilverBonus.ToString());
-        TravelSystemCanvas.SetActive(true);
-        TravelFightDialog.SetActive(false);
-        TravelResultsWindow.SetActive(true);
-        GameCore.Instance.AdvanceTime(1);       
-    }
-    public void ProtectShop()
-    {
-        SilverBonus = GameCore.Instance.random.Next(MinSilverBonus, MaxSilverBonus + 1);
-        AddSilverToPlayer();
-        TravelResultText?.SetText("Охрана лавки завершена");
-        LootedSilverText?.SetText(SilverBonus.ToString());
-        TravelSystemCanvas.SetActive(true);
-        TravelFightDialog.SetActive(false);
-        TravelResultsWindow.SetActive(true);
-        GameCore.Instance.AdvanceTime(1);
-        
     }
 }
