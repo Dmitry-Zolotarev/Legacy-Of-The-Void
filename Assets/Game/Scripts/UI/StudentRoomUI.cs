@@ -6,12 +6,11 @@ public class StudentRoomUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI NameLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
-    [SerializeField] private Image StudentSprite;
-    [SerializeField] private Sprite YoungStudentSprite, AdultStudentSprite;
     [SerializeField] private GameObject StudyButtons;
     [SerializeField] private MeridianBreakController StudentMeridianBreakthrough;
+    [SerializeField] private GameObject StudentSprite;
     public static StudentRoomUI Instance;
-
+    
     private Student student;
     void Awake()
     {
@@ -25,20 +24,11 @@ public class StudentRoomUI : MonoBehaviour
     private void FixedUpdate() 
     {
         UpdateLabels();
-        if(student != null) UpdateStudentrSprite();
     } 
-    private void UpdateStudentrSprite()
-    {
-        if (student.Age >= 30)
-        {
-            StudentSprite.sprite = AdultStudentSprite;
-        }
-        else StudentSprite.sprite = YoungStudentSprite;
-    }
     private void ToggleElements(bool value)
     {
         StudyButtons.SetActive(value);
-        StudentSprite.gameObject.SetActive(value);  
+        StudentSprite.SetActive(value);  
     }
     private void UpdateLabels()
     {

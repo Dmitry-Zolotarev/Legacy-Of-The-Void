@@ -654,7 +654,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -67436354190651672, guid: fb81a8d761d30294997eb6fcd93f5730, type: 3}
+  m_Sprite: {fileID: -67436354190651672, guid: 27f53c3a00d0cde48a57f76599712b2e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -826,11 +826,9 @@ MonoBehaviour:
   NameLabel: {fileID: 7468243024547858864}
   QiLabel: {fileID: 6376590785345865280}
   MeridiansLabel: {fileID: 9093983432275803989}
-  StudentSprite: {fileID: 5368937808781352052}
-  YoungStudentSprite: {fileID: -67436354190651672, guid: fb81a8d761d30294997eb6fcd93f5730, type: 3}
-  AdultStudentSprite: {fileID: -8968671075551924894, guid: 308058e2ea2dbae4b879a25e5a13cf2e, type: 3}
   StudyButtons: {fileID: 5477856832486410199}
   StudentMeridianBreakthrough: {fileID: 0}
+  StudentSprite: {fileID: 1785131588051183641}
 --- !u!1 &3474193239835161867
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +994,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5619025417391970924, guid: d9997f51b3eea1b4881b0847d3b7f069, type: 3}
+  m_Sprite: {fileID: -5619025417391970924, guid: 92af0bf0d00ff3c4a8dd56c52fea3b0d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

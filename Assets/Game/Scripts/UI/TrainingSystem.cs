@@ -35,11 +35,11 @@ public class TrainingSystem : MonoBehaviour
                 BodyBonus *= ElixirPower;
                 master.BodyElixirs--;          
                 UpdateLabels();
+                spawner.Spawn(BodyElixirsLabel.transform, $"-1", Color.red);
             }
             int bodyTrained = master.TrainBody(BodyBonus);
             spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
-
-            spawner.Spawn(BodyElixirsLabel.transform, $"-1", Color.red);
+            
             GameCore.Instance.AdvanceTime(1); 
         }       
     }

@@ -797,8 +797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrainingSystem
   BodyElixirsLabel: {fileID: 1255337903380530000}
-  QiElixirsLabel: {fileID: 0}
-  BodyLabel: {fileID: 1463351447735409886}
+  BodyLabel: {fileID: 2356405778097929512}
   StartBodyBonus: 1
   ElixirPower: 2
 --- !u!114 &8638916977195883152
