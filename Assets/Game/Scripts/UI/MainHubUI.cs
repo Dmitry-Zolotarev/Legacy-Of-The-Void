@@ -34,11 +34,10 @@ public class MainHubUI : MonoBehaviour
     }
     public void RefreshUI()
     {
+        Time.timeScale = 1f;
         if (GameCore.Instance == null || GameCore.Instance.Master == null) return;
         master = GameCore.Instance.Master;
-
         AgeNotification.SetActive(master != null && master.Age >= NotificationAge && master.CurrentRank < (int)master.RankForBecomeTeacher);
-
         UpdateLabels();
         UpdateMasterSprite();
     }

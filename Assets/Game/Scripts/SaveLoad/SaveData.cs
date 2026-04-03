@@ -33,5 +33,6 @@ public class SaveData
     public int StudentMaxQi;
     public int StudentOpenedMeridians;
 
-    public List<bool> DemonStates = new List<bool>();   
+    public List<bool> DemonStates = new List<bool>();
+    public List<int> KnownTechniques = new List<int>();
 }

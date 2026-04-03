@@ -11,12 +11,10 @@ public class FinalVoidBreak : MonoBehaviour
         if (GameCore.Instance.Enemies[(int)Demons.ChonMa].IsDead)
         {
             chonMaKilledLabel.SetText("Чхон Ма убит");
-            GameCore.Instance.StartComicShown = false; 
+            GameCore.Instance.ComicsCanvas.SetActive(true);
             ComicsBook.Instance.Image.sprite = finalVoidBreakComics;
             ComicsBook.Instance.BackgroundImage.sprite = finalVoidBreakBackround;
             ComicsBook.Instance.BackgroundImage.color = Color.white;
-            GameCore.Instance.ComicsCanvas.SetActive(true);
-
         }
         else chonMaKilledLabel.SetText("Чхон Ма не убит");
 

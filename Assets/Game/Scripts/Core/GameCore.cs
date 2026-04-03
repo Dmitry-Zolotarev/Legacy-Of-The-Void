@@ -6,7 +6,7 @@ using System.Reflection;
 using System;
 using TMPro;
 
-
+[RequireComponent(typeof(ParticleSpawner))]
 public class GameCore : MonoBehaviour
 {
     [HideInInspector] public int Year = 1;
@@ -32,10 +32,13 @@ public class GameCore : MonoBehaviour
     public static GameCore Instance;
     [HideInInspector] public System.Random random = new System.Random();
     public bool StartComicShown = false;
+    private ParticleSpawner spawner;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
         if (SaveManager.NeedLoad) SaveManager.Load(this);
+        spawner = GetComponent<ParticleSpawner>();
     }
     void Start()
     {
@@ -89,6 +92,40 @@ public class GameCore : MonoBehaviour
         }
         MainHubUI.Instance.RefreshUI();
     }
+    
+    public string GetRankLabelRu(MasterRank rank)
+    {
+        try
+        {
+            return Ranks[(int)rank].Name.ToLower();
+        }
+        catch { return "основа"; }        
+    }
+    public void SaveGame()
+    {
+        SaveManager.Save(this);
+        SceneManager.LoadScene(0);
+    }
+    public string GetRankForBecomeTeacher()
+    {
+        return Ranks[(int)Master.RankForBecomeTeacher].Name;
+    }
+    public void EndFight()
+    {
+        MusicPlayer.Instance.PlayMainMusic();
+        Instance.MainHub?.SetActive(true);
+        Instance.CombatSystem?.SetActive(false);
+
+        var demon = Enemies[(int)SelectedDemon];
+
+        AdvanceTime(1);
+        if (SelectedDemon != Demons.NoDemon && demon.IsDead) 
+        {           
+            ComicsCanvas.SetActive(true);
+            demon.SetComicSprite();
+        } 
+        ScreenManager.Instance.OpenMenu((int)Canvases.MapCanvas);
+    }
     public void AdvanceTime(int years)
     {
         Year += years;
@@ -98,41 +135,6 @@ public class GameCore : MonoBehaviour
         if (Master.Age > Master.LifeLimit) KillMaster();
 
         AgeLabel?.SetText(Master.Age.ToString());
-    }
-    public string GetRankLabelRu(MasterRank rank)
-    {
-        try
-        {
-            return Ranks[(int)rank].Name.ToLower();
-        }
-        catch { return "основа"; }        
-    }
-    public void EndFight()
-    {
-        MusicPlayer.Instance.PlayMainMusic();
-        Instance.MainHub?.SetActive(true);
-        Instance.CombatSystem?.SetActive(false);
-
-        var demon = Enemies[(int)SelectedDemon];
-        demon.IsDead = true;
-
-        AdvanceTime(1);
-        if (SelectedDemon != Demons.NoDemon) 
-        {
-            StartComicShown = false;
-            demon.SetComicSprite();
-            ComicsCanvas.SetActive(true);
-            MusicPlayer.Instance.PlayStartMusic();
-        } 
-        ScreenManager.Instance.OpenMenu((int)Canvases.MapCanvas);
-    }
-    public void SaveGame() 
-    {
-        SaveManager.Save(this);
-        SceneManager.LoadScene(0);
-    }
-    public string GetRankForBecomeTeacher()
-    {
-        return Ranks[(int)Master.RankForBecomeTeacher].Name;
+        spawner.Spawn(AgeLabel.transform, $"+{years}", Color.red);
     }
 }

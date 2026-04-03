@@ -14,7 +14,6 @@ public class TravelSystem : MonoBehaviour
     public BattleLaunchButton BattleLaunchButton;
     public GameObject TravelSystemCanvas;
     public GameObject TravelFightDialog;
-    public GameObject TravelResultsWindow;
     public TextMeshProUGUI TravelResultText;
     public TextMeshProUGUI LootedSilverText;
     
@@ -44,19 +43,21 @@ public class TravelSystem : MonoBehaviour
         }
         ChonMaButton.gameObject.SetActive(allDemonsMurdered);
     }
-    public void OnEnable()
+    private void OnEnable()
     {
         TravelFightDialog.SetActive(false);
-        TravelResultsWindow.SetActive(false);
         TravelSystemCanvas.SetActive(false);
         TryActivateChonMa();
         UpdateLabels();
+    }
+    private void OnDisable()
+    {
+        ToolTip.Instance.HideTooltip();
     }
     public void ShowFightDialog(string battleDescription)
     {
         BattleDescriptionLabel.SetText(battleDescription);
         TravelSystemCanvas.SetActive(true);
-        TravelResultsWindow.SetActive(false);
         TravelFightDialog.SetActive(true);
     }
     private void UpdateLabels()

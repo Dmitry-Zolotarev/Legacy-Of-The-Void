@@ -13,24 +13,22 @@ public class ComicsBook : MonoBehaviour
     private int currentPage = 0;
 
     public static ComicsBook Instance;
-    void Awake()
-    {
-        if (Instance == null) Instance = this;
-        BackgroundImage = GetComponent<Image>();
-    }
+
     private void OnEnable()
     {
+        Instance = this;
+        BackgroundImage = GetComponent<Image>();
         MusicPlayer.Instance.PlayStartMusic();
-        GameCore.Instance.StartComicShown = comicsPages.Contains(Image.sprite);
-        previousButton.SetActive(currentPage > 0 && GameCore.Instance.StartComicShown);
+        previousButton.SetActive(currentPage > 0 && comicsPages.Contains(Image.sprite));
+        Time.timeScale = 1f;
     }
     private void FixedUpdate()
     {
-        previousButton.SetActive(currentPage > 0 && GameCore.Instance.StartComicShown);
+        previousButton.SetActive(currentPage > 0 && comicsPages.Contains(Image.sprite));
     }
     public void NextPage()
     {
-        if (currentPage < comicsPages.Count - 1 && GameCore.Instance.StartComicShown)
+        if (currentPage < comicsPages.Count - 1 && comicsPages.Contains(Image.sprite))
         {
             currentPage++;
             Image.sprite = comicsPages[currentPage];
@@ -39,12 +37,12 @@ public class ComicsBook : MonoBehaviour
         {
             MusicPlayer.Instance.PlayMainMusic();
             GameCore.Instance.StartComicShown = true;
-            comicsCanvas.SetActive(false);         
+            comicsCanvas.SetActive(false);       
         } 
     }
     public void PreviousPage()
     {
-        if (currentPage > 0 && GameCore.Instance.StartComicShown)
+        if (currentPage > 0 && comicsPages.Contains(Image.sprite))
         {
             currentPage--;
             Image.sprite = comicsPages[currentPage];

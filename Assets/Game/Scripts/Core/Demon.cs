@@ -13,7 +13,6 @@ public enum Demons
 public class Demon
 {
     [HideInInspector] public bool IsDead;
-    public Sprite Sprite;
     [SerializeField] Sprite ComicSprite;
     
     public void SetComicSprite()

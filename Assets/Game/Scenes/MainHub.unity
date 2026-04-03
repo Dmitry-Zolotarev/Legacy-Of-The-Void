@@ -42217,19 +42217,14 @@ MonoBehaviour:
     MaxBody: 100
   Enemies:
   - IsDead: 0
-    Sprite: {fileID: -1077899705994753781, guid: 029a2133c83e1534e90055b40b9dfeed, type: 3}
     ComicSprite: {fileID: 3465286685962602723, guid: cf15c1ffb42f70949b8050e903ce784d, type: 3}
   - IsDead: 0
-    Sprite: {fileID: 1846839944994339974, guid: 8b27b9306d0e16b4ea6a48a0d60feaa5, type: 3}
     ComicSprite: {fileID: 7028616704906629411, guid: 48814e92ba9182e49884daac9893d3c4, type: 3}
   - IsDead: 0
-    Sprite: {fileID: 1057282125501588832, guid: b2a10982225bb334bac17726eeb7474e, type: 3}
     ComicSprite: {fileID: 8288426215254106694, guid: 0f4620451bcf2284cb5a429c46b14715, type: 3}
   - IsDead: 0
-    Sprite: {fileID: -9197656131353888254, guid: 3da9c75fbd8b81945ab9dab41e0774d9, type: 3}
     ComicSprite: {fileID: 4113829005332862926, guid: e86a9252927ae554389a94af91a6f47c, type: 3}
   - IsDead: 0
-    Sprite: {fileID: -1897662275881480441, guid: 49f5d3b41cb847d44b379535d6f86a26, type: 3}
     ComicSprite: {fileID: 0}
   Techniques:
   - Type: 0
@@ -42593,6 +42588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7216678341364607150}
   - component: {fileID: 732060958781261622}
+  - component: {fileID: 7216678341364607151}
   - component: {fileID: 4977427096360615752}
   m_Layer: 0
   m_Name: GameCore
@@ -44033,6 +44029,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1934468470}
     m_Modifications:
+    - target: {fileID: 1143277613683094090, guid: 101c4b09de1652848a1a8158cce74ef0, type: 3}
+      propertyPath: SecondsBeforeClose
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2786636456977516394, guid: 101c4b09de1652848a1a8158cce74ef0, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -44798,6 +44798,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7216678341364607151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077678069027460159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c06f750b893e19408704a520032179b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
+  objectToSpawn: {fileID: 1558020293674316438, guid: 15fe694bfda1c8146a64082ed2d29786, type: 3}
 --- !u!1 &7226730323331034138
 GameObject:
   m_ObjectHideFlags: 0

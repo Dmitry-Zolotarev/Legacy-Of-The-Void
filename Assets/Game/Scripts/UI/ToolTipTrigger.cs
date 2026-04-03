@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public string tooltipText;
+    [TextArea] public string tooltipText;
     [SerializeField] private Vector3 offset = Vector3.zero;
     [SerializeField] private float fontSize = 16f;
     
@@ -25,4 +25,5 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         ToolTip.Instance.SetFontSize(fontSize);
         ToolTip.Instance.ShowTooltip(tooltipText);
     }
+    public void HideToolTip() => ToolTip.Instance.HideTooltip();
 }

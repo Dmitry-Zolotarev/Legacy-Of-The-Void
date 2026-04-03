@@ -17,9 +17,9 @@ public class MeditationController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TimeLeftLabel;
     [SerializeField] private TextMeshProUGUI QiElixirsLabel;
     [SerializeField] private GameObject QiElixirsPanel;
-    [SerializeField] private GameObject MouseButtonsHint;
+    [SerializeField] private GameObject MouseButtonsHint;    
     [SerializeField] private GameObject AgeLabel;
-
+    [SerializeField] private Transform Dantian;
 
     [SerializeField] private int StartQiBonus = 2;
     [SerializeField] private int ElixirPower = 2;
@@ -27,6 +27,7 @@ public class MeditationController : MonoBehaviour
     public float RhythmCorridor = 1f;
     [SerializeField] private float RhythmAmplitude = 2f;
     [SerializeField] private float RhythmFrequency = 1f;
+    [SerializeField] private float BreathingAmplitude = 0.03f;
 
     [HideInInspector] public bool IsRunning = false;
     public static MeditationController Instance;
@@ -103,17 +104,16 @@ public class MeditationController : MonoBehaviour
 
     private void UpdateUI()
     {
-        TimeLeftLabel.SetText(SecondsLeft().ToString());
-        StartButton.SetActive(!IsRunning && master.Qi < master.MaxQi);
-
+        TimeLeftLabel?.SetText(SecondsLeft().ToString());
         float currentQi = master.Qi + QiGained;
         QiFluid.fillAmount = currentQi / master.MaxQi;
+        Dantian.localScale = Vector3.one * (1 + CurrentPhase * BreathingAmplitude);
     }
 
     private void SetRhythmLabelText()
     {
         int state = SlowOrFast(QiOrb.GetSpeedDelta());
-
+        
         if (state < 0)
         {
             QiLabel.SetText("Быстрее ↑");
@@ -145,6 +145,8 @@ public class MeditationController : MonoBehaviour
 
     private void Update()
     {
+        
+
         if (!IsRunning) return;
         CurrentPhase = Mathf.Sin(SessionTime * RhythmFrequency) * RhythmAmplitude;
         SessionTime += Time.deltaTime;
@@ -153,8 +155,8 @@ public class MeditationController : MonoBehaviour
         if (InRhythm(QiOrb.GetSpeedDelta()))
         {
             QiGained += QiBonus * Time.deltaTime;
-        }
-        UpdateUI();
+        }    
         if (SessionTime >= Duration || (int)(master.Qi + QiGained) >= master.MaxQi) EndSession();
+        UpdateUI();
     }
 }

@@ -10,6 +10,7 @@ public class RankBreakController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI FilledNodesLabel;
     [SerializeField] private List<RankNode> Nodes = new List<RankNode>();
     [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private GameObject MouseIcon;
     [SerializeField] private Image QiFluid;
 
     private CharacterData master;
@@ -58,7 +59,8 @@ public class RankBreakController : MonoBehaviour
     {
         QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
         QiFluid.fillAmount = (float)master.Qi / master.MaxQi;
-        ShootLabel?.SetText(master.Qi >= QiOrb.QiAmount ? "Нажмите F для броска" : "Недостаточно ци для броска");
+        ShootLabel?.SetText(master.Qi >= QiOrb.QiAmount ? "Нажмите    для броска" : "Недостаточно ци для броска");
+        MouseIcon?.SetActive(GameCore.Instance.Master.Qi >= QiOrb.QiAmount);
     }
     private void UpdateNodes()
     {
@@ -73,6 +75,9 @@ public class RankBreakController : MonoBehaviour
     private void ExitToRankMenu()
     {
         UpdateNodes();
+
+        if(master.CurrentRank == (int)master.RankForBecomeTeacher)RankSystemUI.Instance.ShowStudentWindow = true; 
+
         ScreenManager.Instance.OpenMenu((int)Canvases.RankCanvas);
     }
 }

@@ -50,6 +50,11 @@ public class CharacterData
         BodyElixirs = data.BodyElixirs;
         QiElixirs = data.QiElixirs;
         CurrentRank = data.CurrentRank;
+
+        foreach(int i in data.KnownTechniques)
+        {
+            KnownTechniques.Add(GameCore.Instance.Techniques[i]);
+        }
     }
     public void OpenMeridian()
     {
@@ -59,10 +64,12 @@ public class CharacterData
         
         OpenedMeridians++;
     }
-    public void TrainBody(int amount)
+    public int TrainBody(int amount)
     {
+        int startBody = Body;
         Body += amount;
         if (Body > MaxBody) Body = MaxBody;
+        return Body - startBody;
     }
     public void AddQi(int amount)
     {

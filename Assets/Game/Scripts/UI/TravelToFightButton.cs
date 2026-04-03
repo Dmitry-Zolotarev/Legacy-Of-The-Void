@@ -6,24 +6,21 @@ public class TravelToFightButton : MonoBehaviour
 {
     [SerializeField] private int minSilverBonus = 800;
     [SerializeField] private int maxSilverBonus = 2200;
-    [SerializeField] private Demons demon;
+    
     [SerializeField] private BattleFighterConfig enemy;
-    [SerializeField] public string basicToolTipText;
+    [SerializeField] private Sprite enemySprite;
+    [SerializeField] private Demons demon;
+
     private TooltipTrigger tooltip;
     
-    public void Start()
+    public void Awake()
     {
         tooltip = GetComponent<TooltipTrigger>();
-
-        SetRankToolTIp();
+        tooltip.tooltipText = $"{tooltip.tooltipText}\nРанг: " + GameCore.Instance.Ranks[(int)enemy.Rank].Name.ToLower();
     }
     private void OnEnable()
     {
         if((int)demon < 4) gameObject.SetActive(!GameCore.Instance.Enemies[(int)demon].IsDead);
-    }
-    private void SetRankToolTIp()
-    {
-        tooltip.tooltipText = $"{basicToolTipText}\nРанг: " + GameCore.Instance.Ranks[(int)enemy.Rank].Name.ToLower();
     }
     private IEnumerator NotEnoughRank()
     {
@@ -44,7 +41,7 @@ public class TravelToFightButton : MonoBehaviour
 
             BattleLaunchData launchData = new BattleLaunchData(enemy);
 
-            TravelSystem.Instance.EnemyImage.sprite = GameCore.Instance.Enemies[(int)demon].Sprite;
+            TravelSystem.Instance.EnemyImage.sprite = enemySprite;
             TravelSystem.Instance.SelectedLevel = this;
             TravelSystem.Instance.SilverBonus = GameCore.Instance.random.Next(minSilverBonus, maxSilverBonus + 1);
             TravelSystem.Instance.BattleLaunchButton.BattleData = launchData;

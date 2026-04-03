@@ -9,6 +9,7 @@ public class MeridianBreakController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ShootLabel;
     [SerializeField] private TextMeshProUGUI OpenedMeridiansLabel;
     [SerializeField] private TextMeshProUGUI QiLabel;
+    [SerializeField] private GameObject MouseIcon;
     [SerializeField] private Image QiFluid;
 
     private CharacterData master;
@@ -95,7 +96,8 @@ public class MeridianBreakController : MonoBehaviour
 
         QiLabel?.SetText($"Ци: {GameCore.Instance.Master.Qi} / {GameCore.Instance.Master.MaxQi}");
 
-        ShootLabel?.SetText(GameCore.Instance.Master.Qi >= QiOrb.QiAmount ? "Нажмите F для броска" : "Недостаточно ци для броска");
+        ShootLabel?.SetText(GameCore.Instance.Master.Qi >= QiOrb.QiAmount ? "Нажмите    для броска" : "Недостаточно ци для броска");
+        MouseIcon?.SetActive(GameCore.Instance.Master.Qi >= QiOrb.QiAmount);
 
         QiFluid.fillAmount = (float)GameCore.Instance.Master.Qi / GameCore.Instance.Master.MaxQi;
 

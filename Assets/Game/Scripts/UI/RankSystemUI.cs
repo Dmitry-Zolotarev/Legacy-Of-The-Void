@@ -3,7 +3,7 @@ using TMPro;
 
 public class RankSystemUI : MonoBehaviour
 {
-    public static RankSystemUI Instance;
+    
     [SerializeField] private TextMeshProUGUI CurrentRankLabel;
     [SerializeField] private TextMeshProUGUI NextRankLabel;
     [SerializeField] private TextMeshProUGUI NeedBodyLabel;
@@ -12,7 +12,10 @@ public class RankSystemUI : MonoBehaviour
     [SerializeField] private GameObject FinalVoidBreakCanvas;
     [SerializeField] private GameObject StudentUnlockedWindow;
     [SerializeField] private TextMeshProUGUI StudentNameLabel;
+    [HideInInspector] public bool ShowStudentWindow = false;
+    public static RankSystemUI Instance;
     private CharacterData master;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -20,16 +23,14 @@ public class RankSystemUI : MonoBehaviour
     private void OnEnable()
     {
         UpdateLabels();
+
         if (master.CurrentRank >= GameCore.Instance.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
-        if(master.CurrentRank == (int)master.RankForBecomeTeacher)
-        {
-            StudentUnlockedWindow.SetActive(true);
-            StudentNameLabel.SetText(master.Student.GetFullName());
-        }
-    }
-    private void OnDisable()
-    {
-        StudentUnlockedWindow.SetActive(false);
+
+        StudentUnlockedWindow.SetActive(ShowStudentWindow);
+
+        if(ShowStudentWindow) StudentNameLabel.SetText(master.Student.GetFullName());
+
+        ShowStudentWindow = false;
     }
     public void UpdateLabels()
     {

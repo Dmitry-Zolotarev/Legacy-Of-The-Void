@@ -1,13 +1,20 @@
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(ParticleSpawner))]
 public class TrainingSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI BodyElixirsLabel;
-    [SerializeField] private TextMeshProUGUI QiElixirsLabel;
+    [SerializeField] private TextMeshProUGUI BodyLabel;
     [SerializeField] private int StartBodyBonus = 1;
     [SerializeField] private int ElixirPower = 2;
+    private ParticleSpawner spawner;
     private int BodyBonus = 1;
+
+    private void Awake()
+    {
+        spawner = GetComponent<ParticleSpawner>();
+    }
     private void OnEnable()
     {
         UpdateLabels();
@@ -15,7 +22,6 @@ public class TrainingSystem : MonoBehaviour
     private void UpdateLabels()
     {
         BodyElixirsLabel?.SetText(GameCore.Instance.Master.BodyElixirs.ToString());
-        QiElixirsLabel?.SetText(GameCore.Instance.Master.QiElixirs.ToString());
     }
     public void TrainBody()
     {
@@ -26,11 +32,14 @@ public class TrainingSystem : MonoBehaviour
         {
             if (master.BodyElixirs > 0)
             {
-                BodyBonus = StartBodyBonus * ElixirPower;
-                master.BodyElixirs--;
+                BodyBonus *= ElixirPower;
+                master.BodyElixirs--;          
                 UpdateLabels();
             }
-            master.TrainBody(BodyBonus);
+            int bodyTrained = master.TrainBody(BodyBonus);
+            spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
+
+            spawner.Spawn(BodyElixirsLabel.transform, $"-1", Color.red);
             GameCore.Instance.AdvanceTime(1); 
         }       
     }

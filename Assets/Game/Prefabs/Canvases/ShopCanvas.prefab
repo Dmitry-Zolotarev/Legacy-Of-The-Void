@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 802880743678593171}
   - component: {fileID: 7338719037398591157}
   - component: {fileID: 2558463002869219745}
+  - component: {fileID: 8638916977195883152}
   m_Layer: 5
   m_Name: ShopCanvas
   m_TagString: Untagged
@@ -1164,9 +1165,9 @@ MonoBehaviour:
   QiElixirPriceLabel: {fileID: 3966904318337483225}
   Merchant: {fileID: 4606890838406788455}
   MerchantSprites:
-  - {fileID: 3152068580308729511, guid: 5954aced217f77849a748ef860ddcc99, type: 3}
-  - {fileID: -2121057083755026298, guid: 698994eeb16a5f04abff592a452500b1, type: 3}
-  - {fileID: 1430534645335204922, guid: 971fdadeac95d404c96926f8bf6d7740, type: 3}
+  - {fileID: 3152068580308729511, guid: 2d0d1338bc035014ba8d75f405b2e554, type: 3}
+  - {fileID: -2121057083755026298, guid: 1625af6fe646a9a44beae7158798ea20, type: 3}
+  - {fileID: 1430534645335204922, guid: 7f22c498589aead49a4d66e98efba61a, type: 3}
   TechniqueLots:
   - {fileID: 2712008209103818484}
   - {fileID: 6999555618019423535}
@@ -1182,6 +1183,19 @@ MonoBehaviour:
   - {fileID: 262185820913249663}
   - {fileID: 2829230799483682511}
   - {fileID: 4648876892713979846}
+--- !u!114 &8638916977195883152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647354798077949136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c06f750b893e19408704a520032179b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
+  objectToSpawn: {fileID: 1558020293674316438, guid: 15fe694bfda1c8146a64082ed2d29786, type: 3}
 --- !u!1 &2712008209103818484
 GameObject:
   m_ObjectHideFlags: 0
@@ -2520,6 +2534,7 @@ GameObject:
   - component: {fileID: 7190580306489052938}
   - component: {fileID: 5589723217376977524}
   - component: {fileID: 4606890838406788455}
+  - component: {fileID: 785234977605185097}
   m_Layer: 5
   m_Name: Merchant
   m_TagString: Untagged
@@ -2574,7 +2589,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3152068580308729511, guid: 5954aced217f77849a748ef860ddcc99, type: 3}
+  m_Sprite: {fileID: 3152068580308729511, guid: 2d0d1338bc035014ba8d75f405b2e554, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2584,6 +2599,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &785234977605185097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6287999002402684213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cc3efb29c6ee94486e3d7df8baf4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipTrigger
+  tooltipText: "\u041F\u0440\u0438\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E,
+    \u043C\u0430\u0441\u0442\u0435\u0440"
+  offset: {x: 0, y: 200, z: 0}
+  fontSize: 16
 --- !u!1 &6949781299672251842
 GameObject:
   m_ObjectHideFlags: 0

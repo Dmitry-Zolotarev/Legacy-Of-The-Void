@@ -38,6 +38,11 @@ public static class SaveManager
 
         data.HasStudent = master.Student != null;
         
+        foreach(var technique in master.KnownTechniques)
+        {
+            data.KnownTechniques.Add(technique.Type);
+        }
+
         if(data.HasStudent)
         {
             data.StudentName = master.Student.Name;
@@ -76,14 +81,10 @@ public static class SaveManager
         game.Year = data.Year;
         game.StartComicShown = data.StartComicShown;   
 
-        for (int i = 0; i < data.DemonStates.Count; i++)
+        for (int i = 0; i < game.Enemies.Count; i++)
         {
-            if (i < game.Enemies.Count)
-            {
-                game.Enemies[i].IsDead = data.DemonStates[i];
-            }
+            game.Enemies[i].IsDead = data.DemonStates[i];
         }
-
         Debug.Log("Game Loaded");
     }
     public static void DeleteSave()
