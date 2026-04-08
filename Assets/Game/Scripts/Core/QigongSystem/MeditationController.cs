@@ -62,7 +62,7 @@ public class MeditationController : MonoBehaviour
         }
 
         ToggleElements(true);
-        MouseButtonsHint.SetActive(false);
+        
         SessionTime = 0f;
     }
 
@@ -85,6 +85,7 @@ public class MeditationController : MonoBehaviour
 
         Cursor.visible = !value;
         QiElixirsPanel?.SetActive(!value);
+        MouseButtonsHint.SetActive(!value);
         AgeLabel?.SetActive(!value);
         BackButton?.SetActive(!value);
 
