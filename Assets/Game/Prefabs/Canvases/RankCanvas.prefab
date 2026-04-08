@@ -572,7 +572,7 @@ MonoBehaviour:
   NeedQiLabel: {fileID: 4411704447257989032}
   FinalVoidBreakCanvas: {fileID: 2647354798077949136, guid: e40f771fbb2a6404ba9176fd90999f92, type: 3}
   StudentUnlockedWindow: {fileID: 6961570950586352483}
-  StudentNameLabel: {fileID: 0}
+  StudentNameLabel: {fileID: 3036131905676756954}
   ShowStudentWindow: 0
 --- !u!1 &2858996973063793199
 GameObject:
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0427\u0445\u043E\u043D \u0425\u0443\u0439, 10 \u043B\u0435\u0442"
+  m_text: "\u041C\u0438\u043D \u041C\u0438\u043D, 10 \u043B\u0435\u0442"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b532f9d2530e2944adaeebc6c4dd83f, type: 2}
   m_sharedMaterial: {fileID: 4041680305039466951, guid: 3b532f9d2530e2944adaeebc6c4dd83f, type: 2}
@@ -1865,7 +1865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7074341968462804555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1931,7 +1931,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &4193693256241855717
 MonoBehaviour:
   m_ObjectHideFlags: 0
