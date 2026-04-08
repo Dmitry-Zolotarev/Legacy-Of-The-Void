@@ -4,6 +4,7 @@ using TMPro;
 
 [System.Serializable]
 [RequireComponent(typeof(Transform))]
+[RequireComponent(typeof(ParticleSpawner))]
 public class MeditationController : MonoBehaviour
 {
     [Header("External Controllers")]
@@ -37,10 +38,12 @@ public class MeditationController : MonoBehaviour
     private float QiGained = 0f;
     private float SessionTime = 0f;
     private float CurrentPhase = 0;
+    private ParticleSpawner spawner;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
+        spawner = GetComponent<ParticleSpawner>();
     }
     private void OnEnable()
     {
@@ -74,6 +77,7 @@ public class MeditationController : MonoBehaviour
 
         ToggleElements(false);
         QiGained = 0f;
+        spawner.Spawn(QiElixirsLabel.transform, "-1", Color.red);
     }
 
     private void ToggleElements(bool value)

@@ -1916,6 +1916,7 @@ GameObject:
   - component: {fileID: 4781118286610487306}
   - component: {fileID: 7465413694918757386}
   - component: {fileID: 215595513050068779}
+  - component: {fileID: 3013153892008050433}
   m_Layer: 5
   m_Name: MeditationCanvas
   m_TagString: MeditationScreen
@@ -2074,14 +2075,27 @@ MonoBehaviour:
   MouseButtonsHint: {fileID: 2900520730542872983}
   AgeLabel: {fileID: 0}
   Dantian: {fileID: 2517906251855682269}
-  StartQiBonus: 3
+  StartQiBonus: 4
   ElixirPower: 3
-  Duration: 15
+  Duration: 10.5
   RhythmCorridor: 1
   RhythmAmplitude: 2
   RhythmFrequency: 1
   BreathingAmplitude: 0.02
   IsRunning: 0
+--- !u!114 &3013153892008050433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153955318930762589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c06f750b893e19408704a520032179b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
+  objectToSpawn: {fileID: 1558020293674316438, guid: 15fe694bfda1c8146a64082ed2d29786, type: 3}
 --- !u!1001 &2557730815747594148
 PrefabInstance:
   m_ObjectHideFlags: 0
