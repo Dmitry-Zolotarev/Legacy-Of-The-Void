@@ -111,7 +111,10 @@ public class GameCore : MonoBehaviour
     }
     public void SaveGame()
     {
-        SaveManager.Save(this);
+        if (Year > 0) 
+        {
+            SaveManager.Save(this);
+        }
         SceneManager.LoadScene(0);
     }
     public string GetRankForBecomeTeacher()
