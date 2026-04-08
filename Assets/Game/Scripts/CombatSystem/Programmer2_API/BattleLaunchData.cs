@@ -42,7 +42,7 @@ public class BattleLaunchData
         Player.useManualStats = true;
         Player.overrideStartQi = true;
         Player.startQi = master.Qi;
-        Player.qiLevel = master.MaxQi / 10 + 2;
+        Player.qiLevel = master.MaxQi / 5 - 4;
         Player.bodyLevel = master.Body;
 
         Player.dragonFist = GameCore.Instance.Master.IsTechniqueUnlocked(TechniqueType.DragonFist);

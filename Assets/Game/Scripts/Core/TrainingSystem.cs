@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class TrainingSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI BodyElixirsLabel;
+    [SerializeField] private TextMeshProUGUI QiElixirsLabel;
     [SerializeField] private TextMeshProUGUI BodyLabel;
     [SerializeField] private int StartBodyBonus = 1;
     [SerializeField] private int ElixirPower = 2;
@@ -30,6 +31,7 @@ public class TrainingSystem : MonoBehaviour
     private void UpdateLabels()
     {
         BodyElixirsLabel?.SetText(GameCore.Instance.Master.BodyElixirs.ToString());
+        QiElixirsLabel?.SetText(GameCore.Instance.Master.QiElixirs.ToString());
     }
     public void TrainBody()
     {
@@ -55,11 +57,13 @@ public class TrainingSystem : MonoBehaviour
             if (master.BodyElixirs > 0)
             {
                 BodyBonus *= ElixirPower;
-                master.BodyElixirs--;
                 UpdateLabels();
                 spawner.Spawn(BodyElixirsLabel.transform, $"-1", Color.red);
             }
             int bodyTrained = master.TrainBody(BodyBonus);
+
+            if(bodyTrained > StartBodyBonus) master.BodyElixirs--;
+
             spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
 
             GameCore.Instance.AdvanceTime(1);

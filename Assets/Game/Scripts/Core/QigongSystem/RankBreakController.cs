@@ -49,7 +49,6 @@ public class RankBreakController : MonoBehaviour
         if (filledNodes == nextRank && nextRank > 0)
         {
             master.UpdateRank();
-            GameCore.Instance.AdvanceTime(1);
             ExitToRankMenu();
             return;
         }

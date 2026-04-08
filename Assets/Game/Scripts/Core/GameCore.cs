@@ -17,6 +17,8 @@ public class GameCore : MonoBehaviour
 
     [SerializeField] private GameObject ToolTipCanvas;
     [SerializeField] private GameObject GameOverWindow;
+    [SerializeField] private GameObject StartHelpCanvas;
+    [SerializeField] private GameObject CombatHelpCanvas;
     [SerializeField] private GameObject AgeCanvas;
     [SerializeField] private List<string> SurnameList;
     [SerializeField] private List<string> NameList;
@@ -36,8 +38,14 @@ public class GameCore : MonoBehaviour
 
     void Awake()
     {
+        StartHelpCanvas.SetActive(true);
         if (Instance == null) Instance = this;
-        if (SaveManager.NeedLoad) SaveManager.Load(this);
+        if (SaveManager.NeedLoad) 
+        {
+            SaveManager.Load(this);
+            StartHelpCanvas.SetActive(false);
+            CombatHelpCanvas.SetActive(false);
+        }   
         spawner = GetComponent<ParticleSpawner>();
     }
     void Start()

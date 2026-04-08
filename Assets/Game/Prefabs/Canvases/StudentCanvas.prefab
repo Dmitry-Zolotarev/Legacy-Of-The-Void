@@ -623,7 +623,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44, y: -278}
+  m_AnchoredPosition: {x: 44, y: -275}
   m_SizeDelta: {x: 150, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3968221634814135318
@@ -828,7 +828,9 @@ MonoBehaviour:
   MeridiansLabel: {fileID: 9093983432275803989}
   StudyButtons: {fileID: 5477856832486410199}
   StudentMeridianBreakthrough: {fileID: 0}
-  StudentSprite: {fileID: 1785131588051183641}
+  YoungStudent: {fileID: -67436354190651672, guid: 27f53c3a00d0cde48a57f76599712b2e, type: 3}
+  AdultStudent: {fileID: -8968671075551924894, guid: d900e5a758e44c64983ca41cb8271b19, type: 3}
+  StudentGameObject: {fileID: 1785131588051183641}
 --- !u!1 &3474193239835161867
 GameObject:
   m_ObjectHideFlags: 0

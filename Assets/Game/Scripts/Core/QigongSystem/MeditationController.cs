@@ -23,7 +23,7 @@ public class MeditationController : MonoBehaviour
 
     [SerializeField] private int StartQiBonus = 2;
     [SerializeField] private int ElixirPower = 2;
-    [SerializeField] private float Duration = 30f;
+    [SerializeField] private float Duration = 15f;
     public float RhythmCorridor = 1f;
     [SerializeField] private float RhythmAmplitude = 2f;
     [SerializeField] private float RhythmFrequency = 1f;
@@ -70,7 +70,7 @@ public class MeditationController : MonoBehaviour
     {
         QiElixirsLabel.SetText(master.QiElixirs.ToString());
         master.AddQi((int)QiGained);
-        GameCore.Instance.AdvanceTime(1);
+        if(SessionTime > Duration / 2f) GameCore.Instance.AdvanceTime(1);
 
         ToggleElements(false);
         QiGained = 0f;

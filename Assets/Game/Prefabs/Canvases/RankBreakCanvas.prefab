@@ -454,6 +454,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3494307941497045328}
   - {fileID: 299714503417947364}
   - {fileID: 5383820890951621721}
   - {fileID: 3757620567442038935}
@@ -849,8 +850,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33.4, y: 5.25}
-  m_SizeDelta: {x: 25, y: 35}
+  m_AnchoredPosition: {x: 33.4, y: 3}
+  m_SizeDelta: {x: 30, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1282165080418038660
 CanvasRenderer:
@@ -920,11 +921,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 299714503417947364}
+  m_Father: {fileID: 7370370073057108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -90.10004, y: 715.80005}
+  m_AnchoredPosition: {x: 669.10004, y: -109.19995}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2300858849125957569
@@ -1619,13 +1620,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3494307941497045328}
   - {fileID: 6167844440511356512}
   m_Father: {fileID: 7370370073057108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -850}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -40, y: -400}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8882703642474538052
@@ -1683,8 +1683,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1816,8 +1816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 30
-  MaxSpeed: 30
+  MinSpeed: 25
+  MaxSpeed: 25
   AccelerationDelta: 5
   DantianRadius: 70
   StartSpeed: 0

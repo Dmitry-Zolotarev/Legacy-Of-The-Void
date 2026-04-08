@@ -985,8 +985,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 33.5, y: 6.8}
-  m_SizeDelta: {x: 25, y: 35}
+  m_AnchoredPosition: {x: 33.5, y: 2.9}
+  m_SizeDelta: {x: 30, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2484443707875876029
 CanvasRenderer:
@@ -1782,9 +1782,9 @@ RectTransform:
   - {fileID: 8995480173661993125}
   m_Father: {fileID: 7370370073057108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 759.2, y: -851.55}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -40, y: -400}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8882703642474538052
@@ -1842,8 +1842,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1975,8 +1975,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d50a341fbf222428c475db176c1ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::QiOrbController
-  MinSpeed: 40
-  MaxSpeed: 40
+  MinSpeed: 30
+  MaxSpeed: 30
   AccelerationDelta: 5
   DantianRadius: 70
   StartSpeed: 0
