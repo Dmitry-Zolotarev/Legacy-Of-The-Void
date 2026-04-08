@@ -4,7 +4,7 @@ public class Student : CharacterData
 {
     public Student()
     {
-        Age = Random.Range(9, 12);
+        Age = Random.Range(10, 13);
     }
     public Student(SaveData data)
     {
