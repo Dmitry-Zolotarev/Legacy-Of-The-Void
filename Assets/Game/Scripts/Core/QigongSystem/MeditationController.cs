@@ -30,7 +30,7 @@ public class MeditationController : MonoBehaviour
     [SerializeField] private float RhythmFrequency = 1f;
     [SerializeField] private float BreathingAmplitude = 0.03f;
 
-    [HideInInspector] public bool IsRunning = false;
+    private bool isRunning = false, elixirUsed;
     public static MeditationController Instance;
 
     private CharacterData master;
@@ -62,6 +62,7 @@ public class MeditationController : MonoBehaviour
         {
             QiBonus = StartQiBonus * ElixirPower;
             master.QiElixirs--;
+            elixirUsed = true;
         }
 
         ToggleElements(true);
@@ -77,12 +78,16 @@ public class MeditationController : MonoBehaviour
 
         ToggleElements(false);
         QiGained = 0f;
-        spawner.Spawn(QiElixirsLabel.transform, "-1", Color.red);
-    }
 
+        if(elixirUsed)
+        {
+            spawner.Spawn(QiElixirsLabel.transform, "-1", Color.red);
+            elixirUsed = false;
+        }  
+    }
     private void ToggleElements(bool value)
     {
-        IsRunning = value;
+        isRunning = value;
 
         QiOrb?.gameObject.SetActive(value);
         TimeLeftLabel?.gameObject.SetActive(value);
@@ -95,7 +100,7 @@ public class MeditationController : MonoBehaviour
 
         StartButton?.SetActive(!value && master.Qi < master.MaxQi);
 
-        if (!IsRunning)
+        if (!isRunning)
         {
             QiLabel.SetText($"Ци: {master.Qi} / {master.MaxQi}");
             QiLabel.color = Color.white;
@@ -150,9 +155,7 @@ public class MeditationController : MonoBehaviour
 
     private void Update()
     {
-        
-
-        if (!IsRunning) return;
+        if (!isRunning) return;
         CurrentPhase = Mathf.Sin(SessionTime * RhythmFrequency) * RhythmAmplitude;
         SessionTime += Time.deltaTime;
         SetRhythmLabelText();
