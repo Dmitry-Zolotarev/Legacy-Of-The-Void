@@ -76,10 +76,11 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private MoveSlotView choiceLeftView;
     [SerializeField] private MoveSlotView choiceRightView;
 
-    [Header("Round Controls")]
+    [Header("Right Buttons")]
     [SerializeField] private Button clearButton;
     [SerializeField] private Button fightButton;
     [SerializeField] private Button rerollEnemyButton;
+    [SerializeField] private Button helpButton;
 
     [Header("Enemy Round Behavior")]
     [SerializeField] private EnemyArchetype enemyArchetype = EnemyArchetype.Aggressor;
@@ -1946,6 +1947,7 @@ public class AutoBattleController : MonoBehaviour
         SetButton(clearButton, canClear);
         SetButton(fightButton, queueReady);
         SetButton(rerollEnemyButton, false);
+        SetButton(helpButton, inputAllowed);
     }
 
     private void ShowResultPanel(string title)
