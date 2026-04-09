@@ -29,20 +29,24 @@ public class StatsPanel : MonoBehaviour
     
     public void UpdateLabels()
     {
-        master = GameCore.Instance.Master;
-        GenerationLabel?.SetText("Поколение: " + master.Generation);
-        MasterNameLabel?.SetText($"Мастер {master.Name}, {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
-        AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
+        try
+        {
+            master = GameCore.Instance.Master;
+            GenerationLabel?.SetText("Поколение: " + master.Generation);
+            MasterNameLabel?.SetText($"Мастер {master.Name}, {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
+            AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
 
-        BodyLabel?.SetText($"Телосложение: {master.Body} / {master.MaxBody}");
-        if (BodyBar != null) BodyBar.value = (float)master.Body / master.MaxBody;
+            BodyLabel?.SetText($"Телосложение: {master.Body} / {master.MaxBody}");
+            if (BodyBar != null) BodyBar.value = (float)master.Body / master.MaxBody;
 
-        QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
-        if(QiBar != null) QiBar.value = (float)master.Qi / master.MaxQi;
+            QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
+            if (QiBar != null) QiBar.value = (float)master.Qi / master.MaxQi;
 
-        MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
-        RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());
+            MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
+            RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());
 
-        HasStudentLabel?.SetText(master.Student == null ? "Нет ученика" : $"Ученик: {master.Student.GetFullName()}");
+            HasStudentLabel?.SetText(master.Student == null ? "Нет ученика" : $"Ученик: {master.Student.GetFullName()}");
+        }
+        catch { }       
     }
 }

@@ -93,7 +93,6 @@ public class AutoBattleController : MonoBehaviour
     [Header("Result Panel")]
     [SerializeField] private GameObject resultPanel;
     [SerializeField] private TMP_Text resultTitleText;
-    [SerializeField] private TMP_Text resultInfoText;
     [SerializeField] private Button restartButton;
 
     [Header("Normal VFX Prefabs")]
@@ -326,7 +325,6 @@ public class AutoBattleController : MonoBehaviour
 
         if (resultPanel != null) resultPanel.SetActive(false);
         if (resultTitleText != null) resultTitleText.text = string.Empty;
-        if (resultInfoText != null) resultInfoText.text = string.Empty;
 
         if (playerMover != null && combatStage != null && combatStage.playerStart != null)
             playerMover.SnapTo(combatStage.playerStart);
@@ -385,8 +383,8 @@ public class AutoBattleController : MonoBehaviour
 
         for (int i = 0; i < shape.Length && i < types.Length; i++)
         {
-            for (int k = 0; k < shape[i]; k++)
-                playerRoundPool.Add(types[i]);
+            for (int k = 0; k < shape[i]; k++) playerRoundPool.Add(types[i]);
+
         }
 
         originalPlayerRoundPool.AddRange(playerRoundPool);
@@ -397,8 +395,8 @@ public class AutoBattleController : MonoBehaviour
         enemyQueue.Clear();
 
         List<MoveType> enemyPool = GenerateEnemyRoundPool();
-        if (enemyPool.Count == 0 || rules == null)
-            return;
+        if (enemyPool.Count == 0 || rules == null) return;
+
 
         MoveType hotStyle = enemyPreferredStyle;
         if (enemyArchetype != EnemyArchetype.Master)
@@ -484,10 +482,8 @@ public class AutoBattleController : MonoBehaviour
 
         for (int i = 0; i < shape.Length && i < orderedTypes.Length; i++)
         {
-            for (int k = 0; k < shape[i]; k++)
-                result.Add(orderedTypes[i]);
+            for (int k = 0; k < shape[i]; k++) result.Add(orderedTypes[i]);
         }
-
         return result;
     }
 
@@ -551,9 +547,11 @@ public class AutoBattleController : MonoBehaviour
         if (statusText != null)
         {
             if (playerQueue.Count < rules.slotCount)
+            {
                 statusText.text = $"Выбран ход {playerQueue.Count}/{rules.slotCount}: {ToRu(selected)}";
-            else
-                statusText.text = "Цепочка готова. Нажми Бой";
+            } 
+            else statusText.text = "Цепочка готова. Нажми Бой";
+
         }
     }
 
@@ -561,8 +559,8 @@ public class AutoBattleController : MonoBehaviour
     {
         currentOffer.Clear();
 
-        if (playerQueue.Count >= rules.slotCount || playerRoundPool.Count <= 0 || rules == null)
-            return;
+        if (playerQueue.Count >= rules.slotCount || playerRoundPool.Count <= 0 || rules == null) return;
+
 
         bool mustGuaranteeMeaningful = forceMeaningfulAfterReset;
 
@@ -583,28 +581,26 @@ public class AutoBattleController : MonoBehaviour
 
         for (int i = 0; i < playerRoundPool.Count; i++)
         {
-            if (i == firstIndex)
-                continue;
+            if (i == firstIndex) continue;
 
             MoveType candidate = playerRoundPool[i];
-            if (candidate != first)
-                hasDifferentTypeAlternative = true;
+            if (candidate != first) hasDifferentTypeAlternative = true;
+
         }
 
         for (int i = 0; i < playerRoundPool.Count; i++)
         {
-            if (i == firstIndex)
-                continue;
+            if (i == firstIndex) continue;
 
             MoveType candidate = playerRoundPool[i];
 
             // Better UX rule:
             // avoid identical pairs like Hand/Hand unless there is literally no other type left.
-            if (hasDifferentTypeAlternative && candidate == first)
-                continue;
+            if (hasDifferentTypeAlternative && candidate == first) continue;
 
-            if (mustGuaranteeMeaningful && !IsMeaningfulChoice(candidate) && !IsMeaningfulChoice(first))
-                continue;
+
+            if (mustGuaranteeMeaningful && !IsMeaningfulChoice(candidate) && !IsMeaningfulChoice(first)) continue;
+
 
             candidateMoves.Add(candidate);
             candidateWeights.Add(GetOfferWeight(candidate));
@@ -641,11 +637,11 @@ public class AutoBattleController : MonoBehaviour
 
             MoveType move = playerRoundPool[i];
 
-            if (hasDifferentTypeAlternative && move == firstMove)
-                continue;
+            if (hasDifferentTypeAlternative && move == firstMove) continue;
 
-            if (!mustGuaranteeMeaningful || IsMeaningfulChoice(move))
-                fallback.Add(move);
+
+            if (!mustGuaranteeMeaningful || IsMeaningfulChoice(move)) fallback.Add(move);
+
         }
 
         if (fallback.Count > 0)
@@ -688,15 +684,15 @@ public class AutoBattleController : MonoBehaviour
 
     private bool IsMeaningfulChoice(MoveType move)
     {
-        return ContinuesCurrentSeries(move)
-            || CountersVisibleEnemy(move)
-            || HelpsPotentialTriple(move);
+        return ContinuesCurrentSeries(move) || CountersVisibleEnemy(move) || HelpsPotentialTriple(move);
+
+
     }
 
     private bool ContinuesCurrentSeries(MoveType move)
     {
-        if (playerQueue.Count == 0)
-            return false;
+        if (playerQueue.Count == 0) return false;
+
 
         int streak = GetCurrentSeriesLength(playerQueue);
         return streak > 0 && playerQueue[playerQueue.Count - 1] == move;
@@ -707,16 +703,14 @@ public class AutoBattleController : MonoBehaviour
         int visibleCount = Mathf.Min(enemyQueue.Count, rules != null ? rules.enemyVisibleMoves : 3);
         for (int i = 0; i < visibleCount; i++)
         {
-            if (BattleResolver.Beats(move, enemyQueue[i]))
-                return true;
+            if (BattleResolver.Beats(move, enemyQueue[i])) return true;
         }
         return false;
     }
 
     private bool MatchesPlayerDominantStyle(MoveType move)
     {
-        if (playerQueue.Count == 0)
-            return false;
+        if (playerQueue.Count == 0) return false;
 
         MoveType dominant = playerQueue.GroupBy(x => x).OrderByDescending(g => g.Count()).ThenBy(g => g.Key).First().Key;
         return dominant == move;
@@ -731,8 +725,8 @@ public class AutoBattleController : MonoBehaviour
 
     private int GetCurrentSeriesLength(List<MoveType> queue)
     {
-        if (queue == null || queue.Count == 0)
-            return 0;
+        if (queue == null || queue.Count == 0) return 0;
+
 
         MoveType tail = queue[queue.Count - 1];
         int length = 1;
@@ -943,8 +937,8 @@ public class AutoBattleController : MonoBehaviour
                 break;
         }
 
-        if (rules.resultPause > 0f)
-            yield return new WaitForSeconds(rules.resultPause);
+        if (rules.resultPause > 0f) yield return new WaitForSeconds(rules.resultPause);
+
 
         currentSlotActive = false;
         playerPendingDamageFx = PendingDamageFxKind.None;
@@ -967,8 +961,8 @@ public class AutoBattleController : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        if (!fighter.AttackFinished)
-            fighter.ForceAttackFinished();
+        if (!fighter.AttackFinished) fighter.ForceAttackFinished();
+
     }
 
     private IEnumerator WaitForBothAttackFinish(float timeout)
@@ -1213,11 +1207,10 @@ public class AutoBattleController : MonoBehaviour
 
     private void ShowFloatingDamage(Transform worldAnchor, int amount)
     {
-        if (amount <= 0)
-            return;
+        if (amount <= 0) return;
 
-        if (!TryGetUiLocalPoint(worldAnchor, out Vector2 localPoint))
-            return;
+
+        if (!TryGetUiLocalPoint(worldAnchor, out Vector2 localPoint)) return;
 
         FloatingCombatText instance = Instantiate(floatingDamagePrefab, floatingDamageRoot);
         instance.Play(localPoint + floatingDamageScreenOffset, amount);
@@ -1225,12 +1218,12 @@ public class AutoBattleController : MonoBehaviour
 
     private void ShowFloatingExchangeMessage()
     {
-        if (string.IsNullOrWhiteSpace(equalExchangeMessage))
-            return;
+        if (string.IsNullOrWhiteSpace(equalExchangeMessage)) return;
+
 
         Transform messageAnchor = GetExchangeMessageAnchor();
-        if (!TryGetUiLocalPoint(messageAnchor, out Vector2 localPoint))
-            return;
+        if (!TryGetUiLocalPoint(messageAnchor, out Vector2 localPoint)) return;
+
 
         FloatingCombatText instance = Instantiate(floatingDamagePrefab, floatingDamageRoot);
         instance.PlayInfo(localPoint + floatingExchangeMessageScreenOffset, equalExchangeMessage);
@@ -1238,20 +1231,15 @@ public class AutoBattleController : MonoBehaviour
 
     private Transform GetExchangeMessageAnchor()
     {
-        if (combatStage != null && combatStage.impactFxPoint != null)
-            return combatStage.impactFxPoint;
+        if (combatStage != null && combatStage.impactFxPoint != null) return combatStage.impactFxPoint;
 
-        if (playerDamageAnchor != null)
-            return playerDamageAnchor;
+        if (playerDamageAnchor != null) return playerDamageAnchor;
 
-        if (enemyDamageAnchor != null)
-            return enemyDamageAnchor;
+        if (enemyDamageAnchor != null) return enemyDamageAnchor;
 
-        if (playerAnimator != null)
-            return playerAnimator.transform;
+        if (playerAnimator != null) return playerAnimator.transform;
 
-        if (enemyAnimator != null)
-            return enemyAnimator.transform;
+        if (enemyAnimator != null) return enemyAnimator.transform;
 
         return null;
     }
@@ -1260,16 +1248,15 @@ public class AutoBattleController : MonoBehaviour
     {
         localPoint = Vector2.zero;
 
-        if (floatingDamageRoot == null || floatingDamagePrefab == null || worldAnchor == null)
-            return false;
+        if (floatingDamageRoot == null || floatingDamagePrefab == null || worldAnchor == null) return false;
+
 
         Camera cam = Camera.main;
-        if (cam == null)
-            return false;
+        if (cam == null) return false;
+
 
         Vector3 screenPoint = cam.WorldToScreenPoint(worldAnchor.position);
-        if (screenPoint.z < 0f)
-            return false;
+        if (screenPoint.z < 0f) return false;
 
         Canvas rootCanvas = floatingDamageRoot.GetComponentInParent<Canvas>();
         Camera uiCamera = null;
@@ -1354,8 +1341,8 @@ public class AutoBattleController : MonoBehaviour
             if (useSwordImpact)
                 return combatStage.playerSwordImpact.position;
 
-            if (combatStage.playerImpact != null)
-                return combatStage.playerImpact.position;
+            if (combatStage.playerImpact != null) return combatStage.playerImpact.position;
+
         }
 
         return playerMover != null ? playerMover.transform.position : Vector3.zero;
@@ -1668,9 +1655,8 @@ public class AutoBattleController : MonoBehaviour
             SetText(playerQiText, $"Qi Игрока: {playerStats.CurrentQi}/{playerStats.MaxQi}");
             SetText(playerHpBarText, $"{playerStats.CurrentHP}/{playerStats.MaxHP}");
             SetText(playerQiBarText, $"{playerStats.CurrentQi}/{playerStats.MaxQi}");
-            SetText(playerRankText, $"Ранг: {GameCore.Instance.GetRankLabelRu(playerStats.Rank)}");
+            SetText(playerRankText, $"Ранг: {GameCore.Instance.Ranks[(int)playerStats.Rank].Name.ToLower()}");
         }
-
         if (enemyStats != null)
         {
             SetBar(enemyHpFillImage, enemyStats.CurrentHP, enemyStats.MaxHP);
@@ -1679,7 +1665,7 @@ public class AutoBattleController : MonoBehaviour
             SetText(enemyQiText, $"Qi Врага: {enemyStats.CurrentQi}/{enemyStats.MaxQi}");
             SetText(enemyHpBarText, $"{enemyStats.CurrentHP}/{enemyStats.MaxHP}");
             SetText(enemyQiBarText, $"{enemyStats.CurrentQi}/{enemyStats.MaxQi}");
-            SetText(enemyRankText, $"Ранг: {GameCore.Instance.GetRankLabelRu(enemyStats.Rank)}");
+            SetText(enemyRankText, $"Ранг: {GameCore.Instance.Ranks[(int)enemyStats.Rank].Name.ToLower()}");
         }
     }
 
@@ -1723,44 +1709,43 @@ public class AutoBattleController : MonoBehaviour
                 }
             }
         }
-
         RefreshOfferViews();
     }
 
     private void RefreshOfferViews()
     {
-        MoveType? left = currentOffer.Count > 0 ? currentOffer[0] : (MoveType?)null;
-        MoveType? right = currentOffer.Count > 1 ? currentOffer[1] : (MoveType?)null;
+        MoveType? left = currentOffer.Count > 0 ? currentOffer[0] : null;
+        MoveType? right = currentOffer.Count > 1 ? currentOffer[1] : null;
 
         if (choiceLeftView != null)
+        {
             choiceLeftView.SetMove(left);
-        else
-            SetChoiceButtonLabel(GetChoiceLeftButton(), left);
+        }  
+        else SetChoiceButtonLabel(GetChoiceLeftButton(), left);
 
         if (choiceRightView != null)
+        {
             choiceRightView.SetMove(right);
-        else
-            SetChoiceButtonLabel(GetChoiceRightButton(), right);
+        }   
+        else SetChoiceButtonLabel(GetChoiceRightButton(), right);
     }
 
     private void SetChoiceButtonLabel(Button button, MoveType? move)
     {
-        if (button == null)
-            return;
+        if (button == null) return;
 
-        TMP_Text text = button.GetComponentInChildren<TMP_Text>();
-        if (text != null)
-            text.text = move.HasValue ? ToRu(move.Value) : "-";
+        var text = button.GetComponentInChildren<TMP_Text>();
+        if (text != null) text.text = move.HasValue ? ToRu(move.Value) : "-";
     }
 
     private static void RemoveFirstOccurrence(List<MoveType> list, MoveType move)
     {
-        if (list == null)
-            return;
+        if (list == null) return;
 
         int index = list.IndexOf(move);
-        if (index >= 0)
-            list.RemoveAt(index);
+
+        if (index >= 0) list.RemoveAt(index);
+
     }
 
     private static MoveType[] ShuffleMoves(MoveType[] array)
@@ -1817,8 +1802,8 @@ public class AutoBattleController : MonoBehaviour
 
     private void ClearFloatingCombatTexts()
     {
-        if (floatingDamageRoot == null)
-            return;
+        if (floatingDamageRoot == null) return;
+
 
         for (int i = floatingDamageRoot.childCount - 1; i >= 0; i--)
         {
@@ -1828,8 +1813,8 @@ public class AutoBattleController : MonoBehaviour
 
     private void SetBar(Image fillImage, int current, int max)
     {
-        if (fillImage == null)
-            return;
+        if (fillImage == null) return;
+
 
         float normalized = max > 0 ? Mathf.Clamp01((float)current / max) : 0f;
         fillImage.fillAmount = normalized;
@@ -1837,8 +1822,7 @@ public class AutoBattleController : MonoBehaviour
 
     private void SetText(TMP_Text textField, string value)
     {
-        if (textField != null)
-            textField.text = value;
+        if (textField != null) textField.text = value;
     }
 
     private static string ToRu(MoveType move)
@@ -1952,9 +1936,7 @@ public class AutoBattleController : MonoBehaviour
 
     private void ShowResultPanel(string title)
     {
-        if (resultTitleText != null) resultTitleText.text = title;
-        if (resultInfoText != null && playerStats != null)
-            resultInfoText.text = $"У игрока осталось HP: {playerStats.CurrentHP}/{playerStats.MaxHP}\nУ игрока осталось Qi: {playerStats.CurrentQi}/{playerStats.MaxQi}";
+        if (resultTitleText != null) resultTitleText.text = title;           
         if (resultPanel != null) resultPanel.SetActive(true);
         RefreshButtonStates();
     }

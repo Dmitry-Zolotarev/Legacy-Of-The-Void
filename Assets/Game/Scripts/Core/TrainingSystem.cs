@@ -23,6 +23,7 @@ public class TrainingSystem : MonoBehaviour
     private void Awake()
     {
         spawner = GetComponent<ParticleSpawner>();
+        animator.gameObject.SetActive(false);
     }
     private void FixedUpdate()
     {

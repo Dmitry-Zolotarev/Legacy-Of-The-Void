@@ -17,7 +17,7 @@ public class GameCore : MonoBehaviour
 
     [SerializeField] private GameObject ToolTipCanvas;
     [SerializeField] private GameObject GameOverWindow;
-    [SerializeField] private GameObject StartHelpCanvas;
+    
     [SerializeField] private GameObject CombatHelpCanvas;
     [SerializeField] private GameObject AgeCanvas;
     [SerializeField] private List<string> SurnameList;
@@ -29,22 +29,22 @@ public class GameCore : MonoBehaviour
     public List<Technique> Techniques;
     public List<MeridianLevel> MeridianLevels;
     public GameObject CombatSystem;
+    public GameObject StartHelpCanvas;
     public GameObject MainHub;
     public CharacterData Master;
     public static GameCore Instance;
     [HideInInspector] public System.Random random = new System.Random();
     public bool StartComicShown = false;
+    public bool StartHelpShown = false;
+    public bool CombatHelpShown = false;
     private ParticleSpawner spawner;
 
     void Awake()
     {
-        StartHelpCanvas.SetActive(true);
         if (Instance == null) Instance = this;
         if (SaveManager.NeedLoad) 
         {
-            SaveManager.Load(this);
-            StartHelpCanvas.SetActive(false);
-            CombatHelpCanvas.SetActive(false);
+            SaveManager.Load(this);          
         }   
         spawner = GetComponent<ParticleSpawner>();
     }
@@ -52,10 +52,10 @@ public class GameCore : MonoBehaviour
     {
         AgeLabel?.SetText(Master.Age.ToString());
         ComicsCanvas?.SetActive(!StartComicShown);
+        CombatHelpCanvas.SetActive(!CombatHelpShown);
     }
     public string GenerateFullName()
     {
-        var random = new System.Random();
         string surname = SurnameList?[random.Next(0, SurnameList.Count)];
         string name = NameList?[random.Next(0, NameList.Count)];
         return $"{surname} {name}";
@@ -99,22 +99,10 @@ public class GameCore : MonoBehaviour
             ToolTipCanvas.SetActive(false);
         }
         MainHubUI.Instance.RefreshUI();
-    }
-    
-    public string GetRankLabelRu(MasterRank rank)
+    } 
+    public void SaveAndExit()
     {
-        try
-        {
-            return Ranks[(int)rank].Name.ToLower();
-        }
-        catch { return "основа"; }        
-    }
-    public void SaveGame()
-    {
-        if (Year > 0) 
-        {
-            SaveManager.Save(this);
-        }
+        SaveManager.Save(this);
         SceneManager.LoadScene(0);
     }
     public string GetRankForBecomeTeacher()
@@ -136,6 +124,7 @@ public class GameCore : MonoBehaviour
             demon.SetComicSprite();
         } 
         ScreenManager.Instance.OpenMenu((int)Canvases.MapCanvas);
+        CombatHelpShown = true;
     }
     public void AdvanceTime(int years)
     {

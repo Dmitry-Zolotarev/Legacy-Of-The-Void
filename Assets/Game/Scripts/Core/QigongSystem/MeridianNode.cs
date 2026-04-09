@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(RectTransform))]
-[RequireComponent(typeof(Image))]
 public class MeridianNode : MonoBehaviour
 {
     public int StartSealStrength = 15;
@@ -18,8 +17,6 @@ public class MeridianNode : MonoBehaviour
     {
         SealStrength = StartSealStrength;
         rectTransform = GetComponent<RectTransform>();
-        nodeImage = GetComponent<Image>();
-        defaultSprite = nodeImage.sprite;
     }
     private void Update()
     {
@@ -49,7 +46,6 @@ public class MeridianNode : MonoBehaviour
     }
     public void UpdateNode()
     {
-        
         nodeImage.sprite = defaultSprite;
         SealStrength = StartSealStrength;
         IsOpened = false;

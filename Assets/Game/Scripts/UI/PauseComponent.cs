@@ -25,7 +25,6 @@ public class PauseComponent : MonoBehaviour
             PauseMenu.SetActive(true);
             Time.timeScale = 0f;
         }
-        Debug.Log("Pause Pressed " + PauseMenu);
     }
     private void FixedUpdate()
     {

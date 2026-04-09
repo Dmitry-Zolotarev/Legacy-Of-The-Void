@@ -22,7 +22,11 @@ public class SaveData
 
     public int OpenedMeridians;
     public int CurrentRank;
+
+
     public bool StartComicShown;
+    public bool StartHelpShown;
+    public bool CombatHelpShown;
     public bool HasStudent;
 
     public string StudentName;

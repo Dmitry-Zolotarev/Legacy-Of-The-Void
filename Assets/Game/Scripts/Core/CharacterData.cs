@@ -30,7 +30,6 @@ public class CharacterData
 
     public CharacterData()
     {
-        Name = GameCore.Instance?.GenerateFullName();
         LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
     }
     public CharacterData(SaveData data)

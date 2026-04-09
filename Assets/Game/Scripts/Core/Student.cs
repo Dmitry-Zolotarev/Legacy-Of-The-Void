@@ -4,6 +4,7 @@ public class Student : CharacterData
 {
     public Student()
     {
+        Name = GameCore.Instance?.GenerateFullName();
         Age = Random.Range(10, 13);
     }
     public Student(SaveData data)

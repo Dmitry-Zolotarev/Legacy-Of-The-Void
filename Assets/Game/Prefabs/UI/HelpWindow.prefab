@@ -295,7 +295,6 @@ GameObject:
   - component: {fileID: 2679731254597310886}
   - component: {fileID: 498501294536291776}
   - component: {fileID: 7202548196170819421}
-  - component: {fileID: 205324171546900188}
   m_Layer: 5
   m_Name: HelpWindow
   m_TagString: Untagged
@@ -363,23 +362,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &205324171546900188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4882673101658261144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7ad30d130b7caf4884b594e0586075e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TechniquesWindow
-  TechniquePanels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &4959764142347635163
 GameObject:
   m_ObjectHideFlags: 0

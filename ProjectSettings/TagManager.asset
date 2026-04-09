@@ -19,6 +19,7 @@ TagManager:
   - MeridianScreen
   - OptionsMenu
   - PauseCanvas
+  - GymCanvas
   layers:
   - Default
   - TransparentFX

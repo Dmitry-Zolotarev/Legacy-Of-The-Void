@@ -55,6 +55,8 @@ public static class SaveManager
         }
 
         data.StartComicShown = game.StartComicShown;
+        data.StartHelpShown = game.StartHelpShown;
+        data.CombatHelpShown = game.CombatHelpShown;
         data.DemonStates.Clear();
         foreach (var demon in game.Enemies)
         {
@@ -79,7 +81,9 @@ public static class SaveManager
         SaveData data = JsonUtility.FromJson<SaveData>(json);
         game.Master = new CharacterData(data);
         game.Year = data.Year;
-        game.StartComicShown = data.StartComicShown;   
+        game.StartComicShown = data.StartComicShown;
+        game.StartHelpShown = data.StartHelpShown;
+        game.CombatHelpShown = data.CombatHelpShown;
 
         for (int i = 0; i < game.Enemies.Count; i++)
         {
