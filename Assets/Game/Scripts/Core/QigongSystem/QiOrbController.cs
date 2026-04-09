@@ -5,11 +5,14 @@ public class QiOrbController : MonoBehaviour
 {
     public float MinSpeed = 25f;
     public float MaxSpeed = 25f;
-    [SerializeField] private float DantianRadius = 70f;
-    
+    [SerializeField] private float AccelerationDelta = 1f;
+    [SerializeField] private float DantianRadius = 45f;
+    [SerializeField] private bool InBreakthroughMode = false;
+
     [HideInInspector] public float StartSpeed, CurrentSpeed;
     [HideInInspector] public bool OnDantian = true;
-    [SerializeField] private bool InBreakthroughMode = false;   
+    
+    
     public float AngleDegrees = 0;
     public int QiAmount = 5;
 
@@ -58,9 +61,14 @@ public class QiOrbController : MonoBehaviour
         }    
         else
         {
-            if (Input.GetMouseButton(0) && CurrentSpeed < MaxSpeed) CurrentSpeed += Time.deltaTime;
-
-            if (Input.GetMouseButton(1) && CurrentSpeed > MinSpeed) CurrentSpeed -= Time.deltaTime;
+            if (Input.GetMouseButton(0) && CurrentSpeed < MaxSpeed)
+            {
+                CurrentSpeed += AccelerationDelta * Time.deltaTime;
+            }
+            if (Input.GetMouseButton(1) && CurrentSpeed > MinSpeed)
+            {
+                CurrentSpeed -= AccelerationDelta * Time.deltaTime;
+            }
         }
         if (OnDantian) MoveAlongDantian();
         else MoveDirectly();  
