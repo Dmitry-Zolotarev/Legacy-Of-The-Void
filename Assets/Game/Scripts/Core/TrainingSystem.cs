@@ -18,7 +18,7 @@ public class TrainingSystem : MonoBehaviour
     [SerializeField] private float trainingTime = 2f;
     private ParticleSpawner spawner;
     private int BodyBonus = 1;
-    private bool IsTraining = false;
+    public bool IsTraining = false;
     private void Awake()
     {
         spawner = GetComponent<ParticleSpawner>();
@@ -35,11 +35,17 @@ public class TrainingSystem : MonoBehaviour
     }
     public void OnEnable()
     {
+        IsTraining = false;
+        animator.SetBool("IsTraining", false);
         background.sprite = gymBackground;
         animator.gameObject.SetActive(true);
         UpdateLabels();
     }
-    public void OnDisable()
+    private void FixedUpdate()
+    {
+        UpdateLabels();
+    }
+    private void OnDisable()
     {
         animator.gameObject.SetActive(false);
         background.sprite = combatBackground;
@@ -52,28 +58,26 @@ public class TrainingSystem : MonoBehaviour
         {
             IsTraining = true;
             animator.SetBool("IsTraining", true);
-            yield return new WaitForSeconds(trainingTime / 2);
+            yield return new WaitForSeconds(trainingTime * 0.5f);
             
             if (master.BodyElixirs > 0)
             {
                 BodyBonus *= ElixirPower;
-                UpdateLabels();
+                
                 spawner.Spawn(BodyElixirsLabel.transform, $"-1", Color.red);
             }
             int bodyTrained = master.TrainBody(BodyBonus);
 
             if(bodyTrained > StartBodyBonus) master.BodyElixirs--;
 
-            spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
-
+            spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);          
             
-            
-
             GameCore.Instance.AdvanceTime(1);
 
-            yield return new WaitForSeconds(trainingTime / 2);
+            yield return new WaitForSeconds(trainingTime * 0.5f);
             IsTraining = false;
             animator.SetBool("IsTraining", false);
+            
         }
     }
 }

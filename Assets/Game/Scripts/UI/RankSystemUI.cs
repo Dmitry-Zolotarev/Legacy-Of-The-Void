@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class RankSystemUI : MonoBehaviour
 {
-    
+    [HideInInspector] public bool ShowStudentWindow = false;
     [SerializeField] private TextMeshProUGUI CurrentRankLabel;
     [SerializeField] private TextMeshProUGUI NextRankLabel;
     [SerializeField] private TextMeshProUGUI NeedBodyLabel;
@@ -12,7 +13,8 @@ public class RankSystemUI : MonoBehaviour
     [SerializeField] private GameObject FinalVoidBreakCanvas;
     [SerializeField] private GameObject StudentUnlockedWindow;
     [SerializeField] private TextMeshProUGUI StudentNameLabel;
-    [HideInInspector] public bool ShowStudentWindow = false;
+    [SerializeField] private Slider rankBar;
+    
     public static RankSystemUI Instance;
     private CharacterData master;
 
@@ -35,6 +37,7 @@ public class RankSystemUI : MonoBehaviour
     public void UpdateLabels()
     {
         master = GameCore.Instance.Master;
+        rankBar.value = master.CurrentRank;
         CurrentRankLabel.SetText(GameCore.Instance.Ranks[master.CurrentRank].Name);
         NextRankLabel.SetText(master.GetNextRank().Name);
         NeedBodyLabel.SetText($"Телосложение: {master.Body} / {GameCore.Instance.Ranks[master.CurrentRank].MaxBody}");

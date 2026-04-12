@@ -10,6 +10,7 @@ using TMPro;
 public class GameCore : MonoBehaviour
 {
     [HideInInspector] public int Year = 1;
+    [HideInInspector] public int Month = 0;
     [HideInInspector] public Demons SelectedDemon = Demons.NoDemon;    
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
@@ -126,15 +127,22 @@ public class GameCore : MonoBehaviour
         ScreenManager.Instance.OpenMenu((int)Canvases.MapCanvas);
         CombatHelpShown = true;
     }
-    public void AdvanceTime(int years)
+    public void AdvanceTime(int months)
     {
+        Month += months;      
+        int years = Month / 12;
+        Month %= 12;
+
         Year += years;
         Master.Age += years;
         if (Master.Student != null) Master.Student.Age += years;
 
         if (Master.Age > Master.LifeLimit) KillMaster();
 
-        AgeLabel?.SetText(Master.Age.ToString());
-        spawner.Spawn(AgeLabel.transform, $"+{years}", Color.red);
+        if(years > 0)
+        {
+            AgeLabel?.SetText(Master.Age.ToString());
+            spawner.Spawn(AgeLabel.transform, $"+{years}", Color.red);
+        }       
     }
 }

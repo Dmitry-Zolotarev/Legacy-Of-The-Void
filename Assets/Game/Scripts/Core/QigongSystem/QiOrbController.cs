@@ -7,8 +7,6 @@ public class QiOrbController : MonoBehaviour
     public float MaxSpeed = 25f;
     [SerializeField] private float AccelerationDelta = 1f;
     [SerializeField] private float DantianRadius = 45f;
-    [SerializeField] private bool InBreakthroughMode = false;
-
     [HideInInspector] public float StartSpeed, CurrentSpeed;
     [HideInInspector] public bool OnDantian = true;
     
@@ -26,16 +24,9 @@ public class QiOrbController : MonoBehaviour
     {
         OnDantian = true;
     }
-    public float GetSpeedDelta()
-    {
-        return CurrentSpeed - StartSpeed;
-    }
     public void MoveAlongDantian()
     {
         float deltaSpeed = CurrentSpeed;
-
-        if (!InBreakthroughMode) deltaSpeed *= deltaSpeed;//„тобы ускорение и замедление шара были заметнее
-
         AngleDegrees = (AngleDegrees + deltaSpeed * Time.deltaTime * 5f) % 360f;
         transform.localPosition = new Vector2(-Mathf.Cos(AngleDegrees * Mathf.Deg2Rad), Mathf.Sin(AngleDegrees * Mathf.Deg2Rad)) * DantianRadius;
     }
@@ -52,24 +43,10 @@ public class QiOrbController : MonoBehaviour
         }       
     }
     private void Update()
-    {   
-        if (InBreakthroughMode)
-        {
-            if(Input.GetMouseButtonDown(1) && OnDantian) Shoot();
+    {
+        if (Input.GetMouseButtonDown(1) && OnDantian) Shoot();
+        if (transform.localPosition.magnitude > DantianRadius * 7f) OnDantian = true;
 
-            if (transform.localPosition.magnitude > DantianRadius * 7f) OnDantian = true;
-        }    
-        else
-        {
-            if (Input.GetMouseButton(0) && CurrentSpeed < MaxSpeed)
-            {
-                CurrentSpeed += AccelerationDelta * Time.deltaTime;
-            }
-            if (Input.GetMouseButton(1) && CurrentSpeed > MinSpeed)
-            {
-                CurrentSpeed -= AccelerationDelta * Time.deltaTime;
-            }
-        }
         if (OnDantian) MoveAlongDantian();
         else MoveDirectly();  
     }

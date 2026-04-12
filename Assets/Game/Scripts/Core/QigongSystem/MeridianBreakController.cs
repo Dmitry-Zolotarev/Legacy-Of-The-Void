@@ -113,9 +113,6 @@ public class MeridianBreakController : MonoBehaviour
         {
             ScreenManager.Instance.OpenMenu((int)Canvases.StudentCanvas);
         }
-        else
-        {
-            ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
-        }
+        else ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
     }
 }

@@ -20553,7 +20553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.15
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53447,6 +53447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameCore
   Year: 1
+  Month: 0
   SelectedDemon: 4
   GameOverHeader: {fileID: 6050231683959451572}
   GameOverDescrption: {fileID: 74615230}
