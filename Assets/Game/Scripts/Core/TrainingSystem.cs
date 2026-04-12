@@ -15,19 +15,14 @@ public class TrainingSystem : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Sprite gymBackground;
     [SerializeField] private Sprite combatBackground;
-    [SerializeField] private GameObject mainHub;
     [SerializeField] private float trainingTime = 2f;
     private ParticleSpawner spawner;
     private int BodyBonus = 1;
-
+    private bool IsTraining = false;
     private void Awake()
     {
         spawner = GetComponent<ParticleSpawner>();
         animator.gameObject.SetActive(false);
-    }
-    private void FixedUpdate()
-    {
-        UpdateLabels();        
     }
     private void UpdateLabels()
     {
@@ -36,25 +31,29 @@ public class TrainingSystem : MonoBehaviour
     }
     public void TrainBody()
     {
-        StartCoroutine(TrainBodyCoroutine());   
+        if(!IsTraining) StartCoroutine(TrainBodyCoroutine());   
+    }
+    public void OnEnable()
+    {
+        background.sprite = gymBackground;
+        animator.gameObject.SetActive(true);
+        UpdateLabels();
+    }
+    public void OnDisable()
+    {
+        animator.gameObject.SetActive(false);
+        background.sprite = combatBackground;
     }
     private IEnumerator TrainBodyCoroutine()
     {      
         var master = GameCore.Instance.Master;
         BodyBonus = StartBodyBonus;
-
         if (master.Body < master.MaxBody)
         {
-            mainHub.SetActive(false);
-            background.sprite = gymBackground;
-            animator.gameObject.SetActive(true);
-            animator.Play("Push Up");
-            yield return new WaitForSeconds(trainingTime);
-
-            background.sprite = combatBackground;
-            animator.gameObject.SetActive(false);
-            mainHub.SetActive(true);
-
+            IsTraining = true;
+            animator.SetBool("IsTraining", true);
+            yield return new WaitForSeconds(trainingTime / 2);
+            
             if (master.BodyElixirs > 0)
             {
                 BodyBonus *= ElixirPower;
@@ -67,7 +66,14 @@ public class TrainingSystem : MonoBehaviour
 
             spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
 
+            
+            
+
             GameCore.Instance.AdvanceTime(1);
+
+            yield return new WaitForSeconds(trainingTime / 2);
+            IsTraining = false;
+            animator.SetBool("IsTraining", false);
         }
     }
 }

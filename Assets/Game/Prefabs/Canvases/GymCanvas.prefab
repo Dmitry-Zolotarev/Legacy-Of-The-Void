@@ -651,8 +651,8 @@ GameObject:
   - component: {fileID: 8442613498859158555}
   - component: {fileID: 5314217859242201562}
   - component: {fileID: 802880743678593171}
-  - component: {fileID: 7338719037398591157}
   - component: {fileID: 8638916977195883152}
+  - component: {fileID: 6193026638812457279}
   m_Layer: 5
   m_Name: GymCanvas
   m_TagString: GymCanvas
@@ -755,36 +755,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2647354798077949136}
   m_CullTransparentMesh: 1
---- !u!114 &7338719037398591157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647354798077949136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 2619591857597635248, guid: 5371446122b2e72428c8da1f6f871617, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &8638916977195883152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,6 +768,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
   objectToSpawn: {fileID: 1558020293674316438, guid: 15fe694bfda1c8146a64082ed2d29786, type: 3}
+--- !u!114 &6193026638812457279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647354798077949136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c338592d8c027904d915a3c94fe1b05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrainingSystem
+  BodyElixirsLabel: {fileID: 1255337903380530000}
+  QiElixirsLabel: {fileID: 907714208461844027}
+  BodyLabel: {fileID: 2356405778097929512}
+  StartBodyBonus: 1
+  ElixirPower: 2
+  animator: {fileID: 0}
+  background: {fileID: 0}
+  gymBackground: {fileID: 2619591857597635248, guid: 384a25dc098cae644a79adf89c0f4423, type: 3}
+  combatBackground: {fileID: -2477528096776276882, guid: 059a27a33f216b1489563d379b3ff393, type: 3}
+  trainingTime: 2
 --- !u!1 &2975978424480349775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,7 +1480,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6193026638812457279}
         m_TargetAssemblyTypeName: TrainingSystem, Assembly-CSharp
         m_MethodName: TrainBody
         m_Mode: 1

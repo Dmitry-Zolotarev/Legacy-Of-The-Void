@@ -16,7 +16,7 @@ public enum Canvases
 
 public class ScreenManager : MonoBehaviour
 {
-    [SerializeField] private GameObject MainHubCanvas;
+    public GameObject MainHubCanvas;
     public GameObject[] Menus;
     public static ScreenManager Instance;
     void Awake()
@@ -26,6 +26,7 @@ public class ScreenManager : MonoBehaviour
     public void OpenMenu(int menuID)
     {
         Time.timeScale = 1f;
+        MainHubCanvas.SetActive(false);
         var master = GameCore.Instance.Master;
         if (Menus[menuID].tag == "MeditationScreen" && master.Qi >= master.MaxQi) return;
         if (Menus[menuID].tag == "MeridianScreen" && master.OpenedMeridians >= 12) return;
@@ -39,6 +40,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void CloseMenus()
     {
+        MainHubCanvas.SetActive(true);
         foreach (var menu in Menus) menu?.SetActive(false);
         MainHubUI.Instance.RefreshUI();
     }

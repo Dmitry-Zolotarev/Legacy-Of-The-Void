@@ -1915,7 +1915,7 @@ PrefabInstance:
     - target: {fileID: 4956944932400207599, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1610948833}
+      objectReference: {fileID: 7216678341364607152}
     - target: {fileID: 4956944932400207599, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: TrainBody
@@ -1952,18 +1952,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CloseMenus
       objectReference: {fileID: 0}
-    - target: {fileID: 6193026638812457279, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
-      propertyPath: mainHub
-      value: 
-      objectReference: {fileID: 1934468469}
-    - target: {fileID: 6193026638812457279, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1866939110}
-    - target: {fileID: 6193026638812457279, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
-      propertyPath: background
-      value: 
-      objectReference: {fileID: 86649403}
     - target: {fileID: 6358410169364103709, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -2132,6 +2120,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7370370073057108201, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
   m_PrefabInstance: {fileID: 109819546}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &109819548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 907714208461844027, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+  m_PrefabInstance: {fileID: 109819546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &115231927
 GameObject:
   m_ObjectHideFlags: 0
@@ -11798,6 +11797,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583525596}
   m_CullTransparentMesh: 1
+--- !u!114 &584154196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2356405778097929512, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+  m_PrefabInstance: {fileID: 109819546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &594554315
 GameObject:
   m_ObjectHideFlags: 0
@@ -20610,10 +20620,6 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
       propertyPath: m_CullingMode
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: 64224b798b43bf744a2ff41c5e984ccb, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -37768,6 +37774,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1136895366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1255337903380530000, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
+  m_PrefabInstance: {fileID: 109819546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1153709559
 GameObject:
   m_ObjectHideFlags: 0
@@ -41718,17 +41735,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2647354798077949136, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
   m_PrefabInstance: {fileID: 109819546}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1610948833 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6193026638812457279, guid: 81c9c8115e1220542973409c3b2990a8, type: 3}
-  m_PrefabInstance: {fileID: 109819546}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610948828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c338592d8c027904d915a3c94fe1b05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrainingSystem
 --- !u!1001 &1614756291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43050,17 +43056,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 924297648}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 79888970}
+        m_TargetAssemblyTypeName: ScreenManager, Assembly-CSharp
+        m_MethodName: OpenMenu
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1673012889
 MonoBehaviour:
@@ -53888,6 +53894,7 @@ GameObject:
   - component: {fileID: 7216678341364607150}
   - component: {fileID: 732060958781261622}
   - component: {fileID: 7216678341364607151}
+  - component: {fileID: 7216678341364607152}
   - component: {fileID: 4977427096360615752}
   m_Layer: 0
   m_Name: GameCore
@@ -56109,6 +56116,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
   objectToSpawn: {fileID: 1558020293674316438, guid: 15fe694bfda1c8146a64082ed2d29786, type: 3}
+--- !u!114 &7216678341364607152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077678069027460159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c338592d8c027904d915a3c94fe1b05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrainingSystem
+  BodyElixirsLabel: {fileID: 1136895366}
+  QiElixirsLabel: {fileID: 109819548}
+  BodyLabel: {fileID: 584154196}
+  StartBodyBonus: 1
+  ElixirPower: 2
+  animator: {fileID: 1866939110}
+  background: {fileID: 86649403}
+  gymBackground: {fileID: 2619591857597635248, guid: 384a25dc098cae644a79adf89c0f4423, type: 3}
+  combatBackground: {fileID: -2477528096776276882, guid: 059a27a33f216b1489563d379b3ff393, type: 3}
+  mainHub: {fileID: 1934468469}
+  trainingTime: 2.5
 --- !u!1 &7226730323331034138
 GameObject:
   m_ObjectHideFlags: 0
