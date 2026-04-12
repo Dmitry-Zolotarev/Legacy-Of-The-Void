@@ -81,7 +81,8 @@ public class MeditationController : MonoBehaviour
         if (Time.time > giveQiTime + tickTime)
         {  
             GameCore.Instance.AdvanceTime(1);
-            giveQiTime = Time.time;                   
+            giveQiTime = Time.time;
+            QiElixirsLabel.SetText(master.QiElixirs.ToString());
         }
         if (master.Qi == master.MaxQi) ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
     }
