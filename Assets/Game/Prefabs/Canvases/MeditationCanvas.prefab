@@ -1202,9 +1202,8 @@ MonoBehaviour:
   Dantian: {fileID: 2517906251855682269}
   StartQiBonus: 4
   ElixirPower: 3
-  RhythmAmplitude: 2
   RhythmFrequency: 1
-  BreathingAmplitude: 0.02
+  BreathingAmplitude: 0.03
   tickTime: 0.5
 --- !u!114 &3013153892008050433
 MonoBehaviour:

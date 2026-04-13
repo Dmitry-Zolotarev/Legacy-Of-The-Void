@@ -19,13 +19,11 @@ public class MeditationController : MonoBehaviour
 
     [SerializeField] private int StartQiBonus = 2;
     [SerializeField] private int ElixirPower = 2;
-    [SerializeField] private float RhythmAmplitude = 2f;
-    [SerializeField] private float RhythmFrequency = 1f;
+    [SerializeField] private float BreathingFrequency = 1f;
     [SerializeField] private float BreathingAmplitude = 0.03f;
     [SerializeField] private float tickTime = 0.5f;
 
     public static MeditationController Instance;
-
     private CharacterData master;
     private float QiBonus = 2;
     private float QiGained = 0f;
@@ -33,7 +31,7 @@ public class MeditationController : MonoBehaviour
     private float giveQiTime;
     private float sessionTime = 0f;
     private ParticleSpawner spawner;
-    private float smoothFill = 0;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -56,7 +54,6 @@ public class MeditationController : MonoBehaviour
             master.QiElixirs--;
             spawner.Spawn(QiElixirsLabel.transform, "-1", Color.red);
         }
-        smoothFill = master.Qi / master.MaxQi;
     }
     private void UpdateUI()
     {
@@ -66,7 +63,7 @@ public class MeditationController : MonoBehaviour
     }
     private void Update()
     {
-        currentPhase = Mathf.Sin(sessionTime * RhythmFrequency) * RhythmFrequency;
+        currentPhase = Mathf.Sin(sessionTime * BreathingFrequency);
 
         sessionTime += Time.deltaTime;
         QiGained += QiBonus * Time.deltaTime;

@@ -19184,6 +19184,30 @@ PrefabInstance:
       propertyPath: autoBattleController
       value: 
       objectReference: {fileID: 625828827}
+    - target: {fileID: 2172498054003239026, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172498054003239026, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172498054003239026, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 79888970}
+    - target: {fileID: 2172498054003239026, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseMenus
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172498054003239026, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScreenManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172498054003239026, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2647354798077949136, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
       propertyPath: m_Name
       value: MapCanvas
