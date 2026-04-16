@@ -16,16 +16,17 @@ public class MeditationController : MonoBehaviour
     [SerializeField] private GameObject MouseButtonsHint;    
     [SerializeField] private GameObject AgeLabel;
     [SerializeField] private Transform Dantian;
+    [SerializeField] private int InternalDemonIncrease = 1;
 
-    [SerializeField] private int StartQiBonus = 2;
-    [SerializeField] private int ElixirPower = 2;
+
     [SerializeField] private float BreathingFrequency = 1f;
     [SerializeField] private float BreathingAmplitude = 0.03f;
     [SerializeField] private float tickTime = 0.5f;
-
+    [SerializeField] private int ElixirPower = 2;
+    [SerializeField] private int SpendMonths = 4;
     public static MeditationController Instance;
     private CharacterData master;
-    private float QiBonus = 2;
+    private float QiBonus = 1;
     private float QiGained = 0f;
     private float currentPhase = 0;
     private float giveQiTime;
@@ -46,11 +47,11 @@ public class MeditationController : MonoBehaviour
         UpdateUI();
         QiGained = 0f;
         sessionTime = 0f;
-        QiBonus = StartQiBonus;
+        QiBonus = master.InternalDemon.GetCurrentState().QiBonus;
 
         if (master.QiElixirs > 0)
         {
-            QiBonus = StartQiBonus * ElixirPower;
+            QiBonus *= ElixirPower;
             master.QiElixirs--;
             spawner.Spawn(QiElixirsLabel.transform, "-1", Color.red);
         }
@@ -77,9 +78,10 @@ public class MeditationController : MonoBehaviour
 
         if (Time.time > giveQiTime + tickTime)
         {  
-            GameCore.Instance.AdvanceTime(1);
+            GameCore.Instance.AdvanceTime(SpendMonths);
             giveQiTime = Time.time;
             QiElixirsLabel.SetText(master.QiElixirs.ToString());
+            master.InternalDemon.Increase(InternalDemonIncrease);
         }
         if (master.Qi == master.MaxQi) ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
     }

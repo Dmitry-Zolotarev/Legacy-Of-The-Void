@@ -26,9 +26,12 @@ public class GameCore : MonoBehaviour
     
     public GameObject ComicsCanvas;
     public List<Rank> Ranks;
-    public List<Demon> Enemies;
+    public List<Enemy> Enemies;
     public List<Technique> Techniques;
     public List<MeridianLevel> MeridianLevels;
+    public List<InternalDemonState> InternalDemonStates;
+
+
     public GameObject CombatSystem;
     public GameObject StartHelpCanvas;
     public GameObject MainHub;

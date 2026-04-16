@@ -11,6 +11,7 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private Slider BodyBar;
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private Slider QiBar;
+    [SerializeField] private TextMeshProUGUI InternalDemonLabel;
 
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;   
@@ -41,6 +42,8 @@ public class StatsPanel : MonoBehaviour
 
             QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
             if (QiBar != null) QiBar.value = (float)master.Qi / master.MaxQi;
+
+            InternalDemonLabel?.SetText($"Внутренний демон: {master.InternalDemon.GetCurrentState().Name.ToLower()}");
 
             MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
             RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());

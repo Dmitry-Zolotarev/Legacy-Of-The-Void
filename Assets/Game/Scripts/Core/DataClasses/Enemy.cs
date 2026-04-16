@@ -10,7 +10,7 @@ public enum Demons
     NoDemon
 }
 [System.Serializable]
-public class Demon
+public class Enemy
 {
     [HideInInspector] public bool IsDead;
     [SerializeField] Sprite ComicSprite;

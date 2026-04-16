@@ -7,12 +7,11 @@ public class CharacterData
 {
     protected System.Random random = new System.Random();
     [HideInInspector] public int Generation = 1;
-    [HideInInspector] public int LifeLimit;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
     [HideInInspector] public List<Technique> KnownTechniques = new List<Technique>();
-
-    public int Age = 14;
+    public int Age = 30;
+    public int LifeLimit = 70;
     public string Name = "Со Мин";
     public int MinLifeLimit = 65;
     public int MaxLifeLimit = 85;
@@ -25,12 +24,15 @@ public class CharacterData
     public int CurrentRank = 0;
     public int BodyElixirs = 0;
     public int QiElixirs = 0;
+
     public Student Student;
-    public MasterRank RankForBecomeTeacher = MasterRank.PeakMaster;
+    public InternalDemon InternalDemon = new InternalDemon();
+    
+    public MasterRank RankForBecomeTeacher = MasterRank.ThirdRate;
 
     public CharacterData()
     {
-        LifeLimit = random.Next(MinLifeLimit, MaxLifeLimit + 1);
+
     }
     public CharacterData(SaveData data)
     {
@@ -63,10 +65,12 @@ public class CharacterData
         
         OpenedMeridians++;
     }
-    public int TrainBody(int amount)
+    public int TrainBody(int coefficient)
     {
         int startBody = Body;
-        Body += amount;
+        var bonus = InternalDemon.GetCurrentState().BodyTrainBonus * coefficient;
+        Body += bonus;
+
         if (Body > MaxBody) Body = MaxBody;
         return Body - startBody;
     }

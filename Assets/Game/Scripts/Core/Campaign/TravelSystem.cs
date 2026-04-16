@@ -6,19 +6,9 @@ public class TravelSystem : MonoBehaviour
 {   
     [SerializeField] private TextMeshProUGUI SilverLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;
-    [SerializeField] private TextMeshProUGUI BattleDescriptionLabel;
     [SerializeField] private TooltipTrigger RankPanel;
-    [SerializeField] private GameObject ChonMaButton;
     [HideInInspector] public int SilverBonus = 0;
-    [HideInInspector] public TravelToFightButton SelectedLevel;
-    public BattleLaunchButton BattleLaunchButton;
-    public GameObject TravelSystemCanvas;
-    public GameObject TravelFightDialog;
-    public TextMeshProUGUI TravelResultText;
-    public TextMeshProUGUI LootedSilverText;
     
-    public Image EnemyImage;
-
     public static TravelSystem Instance;
     [SerializeField] private GameObject[] demonButtons;
 
@@ -26,39 +16,19 @@ public class TravelSystem : MonoBehaviour
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        TravelSystemCanvas.SetActive(false);
 
         for(int i = 0; i < demonButtons.Length; i++)
         {
             demonButtons[i].SetActive(!GameCore.Instance.Enemies[i].IsDead);
         }
     }
-    private void TryActivateChonMa()
-    {
-        bool allDemonsMurdered = true;
-        
-        for(int i = 0; i < 3; i++)
-        {
-            if (!GameCore.Instance.Enemies[i].IsDead) allDemonsMurdered = false;
-        }
-        ChonMaButton.gameObject.SetActive(allDemonsMurdered);
-    }
     private void OnEnable()
     {
-        TravelFightDialog.SetActive(false);
-        TravelSystemCanvas.SetActive(false);
-        TryActivateChonMa();
         UpdateLabels();
     }
     private void OnDisable()
     {
         ToolTip.Instance.HideTooltip();
-    }
-    public void ShowFightDialog(string battleDescription)
-    {
-        BattleDescriptionLabel.SetText(battleDescription);
-        TravelSystemCanvas.SetActive(true);
-        TravelFightDialog.SetActive(true);
     }
     private void UpdateLabels()
     {

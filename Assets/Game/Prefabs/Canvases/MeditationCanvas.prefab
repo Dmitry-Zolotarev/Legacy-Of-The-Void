@@ -1200,11 +1200,11 @@ MonoBehaviour:
   MouseButtonsHint: {fileID: 0}
   AgeLabel: {fileID: 0}
   Dantian: {fileID: 2517906251855682269}
-  StartQiBonus: 4
-  ElixirPower: 3
-  RhythmFrequency: 1
+  BreathingFrequency: 1
   BreathingAmplitude: 0.03
   tickTime: 0.5
+  ElixirPower: 3
+  SpendMonths: 2
 --- !u!114 &3013153892008050433
 MonoBehaviour:
   m_ObjectHideFlags: 0

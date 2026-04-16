@@ -6,13 +6,15 @@ public class MeridianNode : MonoBehaviour
 {
     public int StartSealStrength = 15;
     private int SealStrength;
-    public bool IsOpened = false;  
-    [SerializeField] private RectTransform QiOrb;
+    public bool IsOpened = false;     
     private RectTransform rectTransform;
+
+    [SerializeField] private RectTransform QiOrb;
     [SerializeField] private Sprite NodeBreakStrong;
     [SerializeField] private Sprite NodeBreakWeak;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Image nodeImage;
+    [SerializeField] private int InternalDemonIncrease = 2;
     public void Start()
     {
         SealStrength = StartSealStrength;
@@ -35,7 +37,8 @@ public class MeridianNode : MonoBehaviour
         if (!IsOpened && SealStrength <= 0)
         {
             IsOpened = true;
-            gameObject.SetActive(false);    
+            gameObject.SetActive(false);
+            GameCore.Instance.Master.InternalDemon.Increase(2);
         }
     }
     bool IsOverlap(RectTransform a, RectTransform b)

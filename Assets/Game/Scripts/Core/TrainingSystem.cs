@@ -9,13 +9,16 @@ public class TrainingSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI BodyElixirsLabel;
     [SerializeField] private TextMeshProUGUI QiElixirsLabel;
     [SerializeField] private TextMeshProUGUI BodyLabel;
-    [SerializeField] private int StartBodyBonus = 1;
-    [SerializeField] private int ElixirPower = 2;
     [SerializeField] private Animator animator;
     [SerializeField] private Image background;
     [SerializeField] private Sprite gymBackground;
     [SerializeField] private Sprite combatBackground;
-    [SerializeField] private float trainingTime = 2f;
+
+    [SerializeField] private float trainingTime = 4f;
+    [SerializeField] private int ElixirPower = 2;
+    [SerializeField] private int SpendMonths = 6;
+    [SerializeField] private int InternalDemonIncrease = 4;
+
     private ParticleSpawner spawner;
     private int BodyBonus = 1;
     public bool IsTraining = false;
@@ -53,7 +56,7 @@ public class TrainingSystem : MonoBehaviour
     private IEnumerator TrainBodyCoroutine()
     {      
         var master = GameCore.Instance.Master;
-        BodyBonus = StartBodyBonus;
+        BodyBonus = 1;
         if (master.Body < master.MaxBody)
         {
             IsTraining = true;
@@ -63,16 +66,15 @@ public class TrainingSystem : MonoBehaviour
             if (master.BodyElixirs > 0)
             {
                 BodyBonus *= ElixirPower;
-                
+                master.BodyElixirs--;
                 spawner.Spawn(BodyElixirsLabel.transform, $"-1", Color.red);
             }
-            int bodyTrained = master.TrainBody(BodyBonus);
+            int bodyTrained = master.TrainBody(BodyBonus);       
+            spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
 
-            if(bodyTrained > StartBodyBonus) master.BodyElixirs--;
+            master.InternalDemon.Increase(InternalDemonIncrease);
 
-            spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);          
-            
-            GameCore.Instance.AdvanceTime(1);
+            GameCore.Instance.AdvanceTime(SpendMonths);
 
             yield return new WaitForSeconds(trainingTime * 0.5f);
             IsTraining = false;

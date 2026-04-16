@@ -7,6 +7,8 @@ public class QiOrbController : MonoBehaviour
     public float MaxSpeed = 25f;
     [SerializeField] private float AccelerationDelta = 1f;
     [SerializeField] private float DantianRadius = 45f;
+    [SerializeField] private int InternalDemonIncrease = 3;
+
     [HideInInspector] public float StartSpeed, CurrentSpeed;
     [HideInInspector] public bool OnDantian = true;
     
@@ -45,7 +47,12 @@ public class QiOrbController : MonoBehaviour
     private void Update()
     {
         if (Input.GetMouseButtonDown(1) && OnDantian) Shoot();
-        if (transform.localPosition.magnitude > DantianRadius * 7f) OnDantian = true;
+        if (transform.localPosition.magnitude > DantianRadius * 7f) 
+        {
+            OnDantian = true;
+            GameCore.Instance.Master.InternalDemon.Increase(InternalDemonIncrease);
+        }
+        
 
         if (OnDantian) MoveAlongDantian();
         else MoveDirectly();  
