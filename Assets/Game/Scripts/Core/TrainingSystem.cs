@@ -72,7 +72,7 @@ public class TrainingSystem : MonoBehaviour
             int bodyTrained = master.TrainBody(BodyBonus);       
             spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
 
-            master.InternalDemon.Increase(InternalDemonIncrease);
+            master.InternalDemon.Change(InternalDemonIncrease);
 
             GameCore.Instance.AdvanceTime(SpendMonths);
 

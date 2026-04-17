@@ -38,7 +38,7 @@ public class MeridianNode : MonoBehaviour
         {
             IsOpened = true;
             gameObject.SetActive(false);
-            GameCore.Instance.Master.InternalDemon.Increase(2);
+            GameCore.Instance.Master.InternalDemon.Change(InternalDemonIncrease);
         }
     }
     bool IsOverlap(RectTransform a, RectTransform b)

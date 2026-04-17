@@ -81,7 +81,7 @@ public class MeditationController : MonoBehaviour
             GameCore.Instance.AdvanceTime(SpendMonths);
             giveQiTime = Time.time;
             QiElixirsLabel.SetText(master.QiElixirs.ToString());
-            master.InternalDemon.Increase(InternalDemonIncrease);
+            master.InternalDemon.Change(InternalDemonIncrease);
         }
         if (master.Qi == master.MaxQi) ScreenManager.Instance.OpenMenu((int)Canvases.GymCanvas);
     }

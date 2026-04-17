@@ -19214,7 +19214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2647354798077949136, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
       propertyPath: m_Name
-      value: MapCanvas
+      value: TravekCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 2647354798077949136, guid: 2ca7e3626126c4f4fae43465d1ff706f, type: 3}
       propertyPath: m_IsActive

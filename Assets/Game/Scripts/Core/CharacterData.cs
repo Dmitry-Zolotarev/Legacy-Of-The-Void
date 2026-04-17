@@ -83,6 +83,7 @@ public class CharacterData
     {
         if (Qi >= amount) Qi -= amount; 
     }
+    public void RecoverQi() => Qi = MaxQi;
     public Rank GetNextRank()
     {
         int i = CurrentRank < GameCore.Instance.Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;   

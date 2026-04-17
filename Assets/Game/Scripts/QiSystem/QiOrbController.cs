@@ -50,7 +50,7 @@ public class QiOrbController : MonoBehaviour
         if (transform.localPosition.magnitude > DantianRadius * 7f) 
         {
             OnDantian = true;
-            GameCore.Instance.Master.InternalDemon.Increase(InternalDemonIncrease);
+            GameCore.Instance.Master.InternalDemon.Change(InternalDemonIncrease);
         }
         
 

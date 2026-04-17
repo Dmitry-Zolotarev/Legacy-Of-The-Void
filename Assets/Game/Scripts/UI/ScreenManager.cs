@@ -4,7 +4,7 @@ public enum Canvases
     MeridiansCanvas,
     MeditationCanvas,
     StatsPanel,
-    MapCanvas,
+    TravelCanvas,
     GymCanvas,
     ShopCanvas,
     RankCanvas,

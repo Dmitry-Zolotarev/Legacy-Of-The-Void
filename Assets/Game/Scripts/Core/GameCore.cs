@@ -127,7 +127,7 @@ public class GameCore : MonoBehaviour
             ComicsCanvas.SetActive(true);
             demon.SetComicSprite();
         } 
-        ScreenManager.Instance.OpenMenu((int)Canvases.MapCanvas);
+        ScreenManager.Instance.OpenMenu((int)Canvases.TravelCanvas);
         CombatHelpShown = true;
     }
     public void AdvanceTime(int months)
