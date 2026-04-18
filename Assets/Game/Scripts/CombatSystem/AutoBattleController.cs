@@ -825,9 +825,10 @@ public class AutoBattleController : MonoBehaviour
                 if (playerAnimator != null) playerAnimator.PlayVictory();
                 if (enemyAnimator != null) enemyAnimator.PlayDefeat();
                 PlayOneShot(victorySfx);
-                TravelSystem.Instance.AddSilverToPlayer();
                 ShowResultPanel($"Вы победили и получили {TravelSystem.Instance.SilverBonus} серебра");
                 GameCore.Instance.Enemies[(int)GameCore.Instance.SelectedDemon].IsDead = true;
+                TravelSystem.Instance.AddSilverToPlayer();
+                TravelSystem.Instance.UpdateStage();
             }
             else
             {

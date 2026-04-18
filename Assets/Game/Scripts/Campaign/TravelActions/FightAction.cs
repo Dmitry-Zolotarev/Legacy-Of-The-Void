@@ -6,9 +6,9 @@ public class FightAction : TravelAction
 
     public override void DoAction()
     {
-        base.DoAction();
         TravelSystem.Instance.SilverBonus = GameCore.Instance.random.Next(minSilverBonus, maxSilverBonus + 1);
-        LaunchBattle();       
+        LaunchBattle();
+        base.DoAction();
     }
 
     private void LaunchBattle()

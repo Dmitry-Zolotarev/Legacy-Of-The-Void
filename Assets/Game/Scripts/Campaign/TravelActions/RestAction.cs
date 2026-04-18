@@ -3,8 +3,10 @@
 public class RestAction : TravelAction
 {
     public override void DoAction()
-    {       
-        base.DoAction();
+    {
+        TravelSystem.Instance.UpdateStage();
         GameCore.Instance.Master.RecoverQi();
+        
+        base.DoAction();
     }
 }

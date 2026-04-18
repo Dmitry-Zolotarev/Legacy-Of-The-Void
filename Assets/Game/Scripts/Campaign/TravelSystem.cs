@@ -3,12 +3,13 @@ using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(Image))]
+[RequireComponent(typeof(ParticleSpawner))]
 public class TravelSystem : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI SilverLabel;
-    [SerializeField] private TextMeshProUGUI RankLabel;
-    [SerializeField] private TooltipTrigger RankPanel;
-    [SerializeField] private TextMeshProUGUI StageNameLabel;
+    [SerializeField] private TextMeshProUGUI silverAmountLabel;
+    [SerializeField] private TextMeshProUGUI rankLabel;
+    [SerializeField] private TooltipTrigger rankPanel;
+    [SerializeField] private TextMeshProUGUI stageNameLabel;
 
     [SerializeField] private CampaignStage[] campaignStages;
     [SerializeField] private TravelPanel fightPanel;
@@ -20,11 +21,13 @@ public class TravelSystem : MonoBehaviour
     
 
     public static TravelSystem Instance;
+    private ParticleSpawner spawner;
     private Image background;
     private void Awake()
     {
         if (Instance == null) Instance = this;
         background = GetComponent<Image>();
+        spawner = GetComponent<ParticleSpawner>();
         UpdateStage();
     }
     private void OnEnable()
@@ -37,17 +40,17 @@ public class TravelSystem : MonoBehaviour
     }
     private void UpdateLabels()
     {
-        SilverLabel?.SetText(GameCore.Instance.Master.Silver.ToString());
+        silverAmountLabel?.SetText(GameCore.Instance.Master.Silver.ToString());
 
         var rankName = GameCore.Instance.Ranks[GameCore.Instance.Master.CurrentRank].Name;
 
-        RankPanel.tooltipText = "Ранг игрока:\n" + rankName;
-        RankLabel?.SetText(rankName);
+        rankPanel.tooltipText = "Ранг игрока:\n" + rankName;
+        rankLabel?.SetText(rankName);
     }
     public void AddSilverToPlayer()
     {
         GameCore.Instance.Master.Silver += SilverBonus;
-        UpdateStage();
+        spawner.Spawn(silverAmountLabel.transform, $"+{SilverBonus}", Color.green);
     }
     private bool NotNull(TravelAction action)
     {
@@ -71,7 +74,7 @@ public class TravelSystem : MonoBehaviour
             if(stage.BackgroundSprite != null) background.sprite = stage.BackgroundSprite;
             CurrentStage++;
             UpdateLabels();
-            StageNameLabel.SetText(stage.StageName);
+            stageNameLabel.SetText(stage.StageName);
         }   
     }
 }
