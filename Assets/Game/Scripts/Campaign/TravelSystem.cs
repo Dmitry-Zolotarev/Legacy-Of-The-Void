@@ -49,8 +49,12 @@ public class TravelSystem : MonoBehaviour
     }
     public void AddSilverToPlayer()
     {
-        GameCore.Instance.Master.Silver += SilverBonus;
-        spawner.Spawn(silverAmountLabel.transform, $"+{SilverBonus}", Color.green);
+        if (SilverBonus > 0)
+        {
+            GameCore.Instance.Master.Silver += SilverBonus;
+            spawner.Spawn(silverAmountLabel.transform, $"+{SilverBonus}", new Color(0, 0.8f, 0));
+        }
+        SilverBonus = 0;
     }
     private bool NotNull(TravelAction action)
     {
