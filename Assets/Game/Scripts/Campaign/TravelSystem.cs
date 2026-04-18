@@ -49,19 +49,23 @@ public class TravelSystem : MonoBehaviour
         GameCore.Instance.Master.Silver += SilverBonus;
         UpdateStage();
     }
+    private bool NotNull(TravelAction action)
+    {
+        return action != null && !string.IsNullOrEmpty(action.HeaderText);
+    } 
     public void UpdateStage()
     {
         if (CurrentStage < campaignStages.Length)
         {
             var stage = campaignStages[CurrentStage];
 
-            fightPanel?.gameObject.SetActive(stage.FightAction != null);
+            fightPanel?.gameObject.SetActive(NotNull(stage.FightAction));
             fightPanel?.UpdateAction(stage.FightAction);
 
-            lootPanel?.gameObject.SetActive(stage.LootAction != null);
+            lootPanel?.gameObject.SetActive(NotNull(stage.LootAction));
             lootPanel?.UpdateAction(stage.LootAction);
 
-            restPanel?.gameObject.SetActive(stage.RestAction != null);
+            restPanel?.gameObject.SetActive(NotNull(stage.RestAction));
             restPanel?.UpdateAction(stage.RestAction);
 
             if(stage.BackgroundSprite != null) background.sprite = stage.BackgroundSprite;
