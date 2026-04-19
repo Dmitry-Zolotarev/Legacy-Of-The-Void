@@ -3,13 +3,16 @@ using UnityEngine.UI;
 using TMPro;
 
 [RequireComponent(typeof(Image))]
-[RequireComponent(typeof(ParticleSpawner))]
 public class TravelSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI silverAmountLabel;
     [SerializeField] private TextMeshProUGUI rankLabel;
-    [SerializeField] private TooltipTrigger rankPanel;
     [SerializeField] private TextMeshProUGUI stageNameLabel;
+    [SerializeField] private TextMeshProUGUI LootedSilverLabel;
+
+    [SerializeField] private TooltipTrigger rankPanel;
+    
+    [SerializeField] private GameObject ModalWindowsCanvas;
 
     [SerializeField] private CampaignStage[] campaignStages;
     [SerializeField] private TravelPanel fightPanel;
@@ -21,13 +24,12 @@ public class TravelSystem : MonoBehaviour
     
 
     public static TravelSystem Instance;
-    private ParticleSpawner spawner;
     private Image background;
     private void Awake()
     {
         if (Instance == null) Instance = this;
         background = GetComponent<Image>();
-        spawner = GetComponent<ParticleSpawner>();
+        ModalWindowsCanvas.SetActive(false);
         UpdateStage();
     }
     private void OnEnable()
@@ -51,10 +53,14 @@ public class TravelSystem : MonoBehaviour
     {
         if (SilverBonus > 0)
         {
-            GameCore.Instance.Master.Silver += SilverBonus;
-            spawner.Spawn(silverAmountLabel.transform, $"+{SilverBonus}", new Color(0, 0.8f, 0));
+            GameCore.Instance.Master.Silver += SilverBonus;        
         }
         SilverBonus = 0;
+    }
+    public void ShowLootDialog()
+    {
+        ModalWindowsCanvas.SetActive(true);
+        LootedSilverLabel.SetText(SilverBonus.ToString());
     }
     private bool NotNull(TravelAction action)
     {
