@@ -16,12 +16,4 @@ public class TravelAction
         GameCore.Instance.Master.InternalDemon.Change(InternalDemonChange);
         GameCore.Instance.AdvanceTime(TimeCostInMonths);
     }
-    public virtual string GetEffectsDescription()
-    {
-        return $"\nВремя: +{TimeCostInMonths} мес, демон: {InternalDemonChange}";
-    }
-    public virtual string GetRewardsDescription()
-    {
-        return $"\nСеребро: {minSilverBonus} - {maxSilverBonus}";
-    }
 }

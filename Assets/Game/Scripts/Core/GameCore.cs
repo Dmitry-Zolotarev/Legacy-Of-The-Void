@@ -94,10 +94,7 @@ public class GameCore : MonoBehaviour
         }
         else
         {
-            var newGeneration = Master.Generation + 1;
-            Master = new CharacterData();
-            Master.Generation = newGeneration;
-            GameOverDescrption?.SetText("Ученик не подготовлен");
+            GameOverDescrption?.SetText("Линия секты Хуашань прервана");
             MainHubUI.Instance.gameObject.SetActive(false);
             AgeCanvas.SetActive(false);
             ToolTipCanvas.SetActive(false);
@@ -108,10 +105,6 @@ public class GameCore : MonoBehaviour
     {
         SaveManager.Save(this);
         SceneManager.LoadScene(0);
-    }
-    public string GetRankForBecomeTeacher()
-    {
-        return Ranks[(int)Master.RankForBecomeTeacher].Name;
     }
     public void EndFight()
     {

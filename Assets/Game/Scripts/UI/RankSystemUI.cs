@@ -4,15 +4,12 @@ using TMPro;
 
 public class RankSystemUI : MonoBehaviour
 {
-    [HideInInspector] public bool ShowStudentWindow = false;
     [SerializeField] private TextMeshProUGUI CurrentRankLabel;
     [SerializeField] private TextMeshProUGUI NextRankLabel;
     [SerializeField] private TextMeshProUGUI NeedBodyLabel;
     [SerializeField] private TextMeshProUGUI NeedMeridiansLabel;
     [SerializeField] private TextMeshProUGUI NeedQiLabel;
     [SerializeField] private GameObject FinalVoidBreakCanvas;
-    [SerializeField] private GameObject StudentUnlockedWindow;
-    [SerializeField] private TextMeshProUGUI StudentNameLabel;
     [SerializeField] private Slider rankBar;
     
     public static RankSystemUI Instance;
@@ -27,12 +24,6 @@ public class RankSystemUI : MonoBehaviour
         UpdateLabels();
 
         if (master.CurrentRank >= GameCore.Instance.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
-
-        StudentUnlockedWindow.SetActive(ShowStudentWindow);
-
-        if(ShowStudentWindow) StudentNameLabel.SetText(master.Student.GetFullName());
-
-        ShowStudentWindow = false;
     }
     public void UpdateLabels()
     {

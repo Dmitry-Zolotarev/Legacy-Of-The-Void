@@ -4,9 +4,10 @@ public class LootAction : TravelAction
 {
     public override void DoAction()
     {
-        TravelSystem.Instance.SilverBonus = GameCore.Instance.random.Next(minSilverBonus, maxSilverBonus + 1);
-        TravelSystem.Instance.ShowLootDialog();
-        TravelSystem.Instance.AddSilverToPlayer();
         base.DoAction();
+        TravelSystem.Instance.SilverBonus = GameCore.Instance.random.Next(minSilverBonus, maxSilverBonus + 1);
+        TravelSystem.Instance.TravelPanels.SetActive(false);
+        TravelSystem.Instance.AddSilverToPlayer();
+        TravelSystem.Instance.ShowLootDialog();     
     }
 }

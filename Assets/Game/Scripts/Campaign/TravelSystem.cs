@@ -15,16 +15,17 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private GameObject ModalWindowsCanvas;
 
     [SerializeField] private CampaignStage[] campaignStages;
-    [SerializeField] private TravelPanel fightPanel;
     [SerializeField] private TravelPanel lootPanel;
+    [SerializeField] private TravelPanel fightPanel;
     [SerializeField] private TravelPanel restPanel;
 
     [HideInInspector] public int CurrentStage = 0;
     [HideInInspector] public int SilverBonus = 0;
     
-
     public static TravelSystem Instance;
+    public GameObject TravelPanels;
     private Image background;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -33,6 +34,10 @@ public class TravelSystem : MonoBehaviour
         UpdateStage();
     }
     private void OnEnable()
+    {
+        UpdateLabels();
+    }
+    private void FixedUpdate()
     {
         UpdateLabels();
     }
@@ -55,7 +60,6 @@ public class TravelSystem : MonoBehaviour
         {
             GameCore.Instance.Master.Silver += SilverBonus;        
         }
-        SilverBonus = 0;
     }
     public void ShowLootDialog()
     {
@@ -83,7 +87,6 @@ public class TravelSystem : MonoBehaviour
 
             if(stage.BackgroundSprite != null) background.sprite = stage.BackgroundSprite;
             CurrentStage++;
-            UpdateLabels();
             stageNameLabel.SetText(stage.StageName);
         }   
     }

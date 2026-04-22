@@ -48,14 +48,7 @@ public class StudentRoomUI : MonoBehaviour
             NameLabel?.SetText("Ученик " + student.GetFullName());
             QiLabel?.SetText($"Ци: {student.Qi} / {student.MaxQi}");
             MeridiansLabel?.SetText($"Меридианы: {student.OpenedMeridians} / {GameCore.Instance.Master.OpenedMeridians / 2}");          
-        }
-        else
-        {
-            ToggleElements(false);
-            NameLabel?.SetText($"Ученик будет назначен после получения ранга «{GameCore.Instance.GetRankForBecomeTeacher()}»");
-            QiLabel?.SetText("");
-            MeridiansLabel?.SetText("");
-        }       
+        }      
     }
     public void GiveQi() => student.SeedQI(GameCore.Instance.Master);
     

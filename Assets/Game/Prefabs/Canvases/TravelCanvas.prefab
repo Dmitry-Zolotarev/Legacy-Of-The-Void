@@ -815,7 +815,7 @@ RectTransform:
   m_LocalScale: {x: 1.4285715, y: 1.4285715, z: 1.4285715}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5997178253208110781}
+  - {fileID: 771144350603037961}
   m_Father: {fileID: 7370370073057108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1464,15 +1464,23 @@ MonoBehaviour:
   silverAmountLabel: {fileID: 2797090504181547172}
   rankLabel: {fileID: 5803918486145133363}
   stageNameLabel: {fileID: 720707674497358642}
-  LootedSilverLabel: {fileID: 6356970565971180983}
+  LootedSilverLabel: {fileID: 122047336288876035}
   rankPanel: {fileID: 304368416587758768}
   ModalWindowsCanvas: {fileID: 1488354250786054842}
   campaignStages:
   - StageName: "\u041E\u043A\u0440\u0435\u0441\u0442\u043D\u043E\u0441\u0442\u0438
       \u0425\u0443\u0430\u0448\u0430\u043D\u0438"
+    LootAction:
+      HeaderText: "\u0421\u043E\u0431\u0440\u0430\u0442\u044C \u0442\u0440\u0430\u0432\u044B
+        \u043D\u0430 \u0441\u043A\u043B\u043E\u043D\u0435"
+      Icon: {fileID: 1808579828608436471, guid: 39d8108dc293c1e4f8de5fcad53a737a, type: 3}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 100
+      maxSilverBonus: 200
     FightAction:
       HeaderText: "\u0420\u0430\u0437\u043E\u0433\u043D\u0430\u0442\u044C \u043C\u0430\u0440\u043E\u0434\u0435\u0440\u043E\u0432"
-      Icon: {fileID: -2477528096776276882, guid: 059a27a33f216b1489563d379b3ff393, type: 3}
+      Icon: {fileID: -7081333369067775580, guid: 22ba4fa7b5adc88468f0648ceb87421d, type: 3}
       InternalDemonChange: 0
       TimeCostInMonths: 0
       minSilverBonus: 200
@@ -1504,25 +1512,24 @@ MonoBehaviour:
           craneKick: 0
           moonSlash: 0
           voidPalm: 0
-    LootAction:
-      HeaderText: "\u0421\u043E\u0431\u0440\u0430\u0442\u044C \u0442\u0440\u0430\u0432\u044B
-        \u043D\u0430 \u0441\u043A\u043B\u043E\u043D\u0435"
-      Icon: {fileID: 0}
-      InternalDemonChange: 0
-      TimeCostInMonths: 0
-      minSilverBonus: 100
-      maxSilverBonus: 200
     RestAction:
       HeaderText: "\u041E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C\u0441\u044F
         \u0443 \u043A\u0430\u043C\u043D\u044F \u043F\u0430\u043C\u044F\u0442\u0438"
-      Icon: {fileID: 0}
+      Icon: {fileID: 8342068172354792507, guid: 924f3b534f7d5014594c7debcde116c7, type: 3}
       InternalDemonChange: 0
       TimeCostInMonths: 0
       minSilverBonus: 0
       maxSilverBonus: 0
-    BackgroundSprite: {fileID: 0}
+    BackgroundSprite: {fileID: -855298285791758126, guid: 097ab2946a8e7c9458e71410bb69f3e9, type: 3}
   - StageName: "\u0411\u0440\u043E\u0448\u0435\u043D\u043D\u044B\u0435 \u043C\u0430\u0441\u0442\u0435\u0440\u0441\u043A\u0438\u0435
       \u0425\u0443\u0430\u0448\u0430\u043D\u0438"
+    LootAction:
+      HeaderText: "\u0412\u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043B\u0430\u0434\u043E\u0432\u0443\u044E"
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 150
+      maxSilverBonus: 300
     FightAction:
       HeaderText: "\u0420\u0430\u0437\u043E\u0433\u043D\u0430\u0442\u044C \u0431\u0430\u043D\u0434\u0438\u0442\u043E\u0432"
       Icon: {fileID: 0}
@@ -1557,6 +1564,120 @@ MonoBehaviour:
           craneKick: 0
           moonSlash: 0
           voidPalm: 0
+    RestAction:
+      HeaderText: "\u041F\u043E\u0441\u0438\u0434\u0435\u0442\u044C \u043D\u0430
+        \u043F\u043B\u043E\u0449\u0430\u0434\u043A\u0435"
+      Icon: {fileID: 8342068172354792507, guid: 924f3b534f7d5014594c7debcde116c7, type: 3}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 0
+      maxSilverBonus: 0
+    BackgroundSprite: {fileID: 6937817954938267909, guid: f51f0317b5fa3654cbad772840cb11db, type: 3}
+  - StageName: "\u041F\u0435\u0440\u0432\u044B\u0439 \u043C\u0430\u0441\u0442\u0435\u0440
+      \u0434\u0435\u043C\u043E\u043D\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E
+      \u043F\u0430\u0432\u0438\u043B\u044C\u043E\u043D\u0430  "
+    LootAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 150
+      maxSilverBonus: 300
+    FightAction:
+      HeaderText: "\u0411\u043E\u0439 \u0441 \u0434\u0435\u043C\u043E\u043D\u043E\u043C "
+      Icon: {fileID: 1460363524, guid: 22ba4fa7b5adc88468f0648ceb87421d, type: 3}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 300
+      maxSilverBonus: 600
+      BattleData:
+        Player:
+          Rank: 0
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+        Enemy:
+          Rank: 1
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+    RestAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 0
+      maxSilverBonus: 0
+    BackgroundSprite: {fileID: -6470460504253458178, guid: f5f573969e2b9924a9d7940c9caf6bae, type: 3}
+  - StageName: "\u0421\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u043F\u0435\u0440\u0435\u0432\u0430\u043B"
+    LootAction:
+      HeaderText: "\u041E\u0431\u044B\u0441\u043A\u0430\u0442\u044C \u0433\u043E\u0440\u043D\u044B\u0439
+        \u0441\u0445\u0440\u043E\u043D"
+      Icon: {fileID: 2036046950, guid: 39d8108dc293c1e4f8de5fcad53a737a, type: 3}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 150
+      maxSilverBonus: 300
+    FightAction:
+      HeaderText: "\u0420\u0430\u0437\u0431\u0438\u0442\u044C \u0434\u043E\u0437\u043E\u0440\u043D\u044B\u0445"
+      Icon: {fileID: -8630436, guid: 22ba4fa7b5adc88468f0648ceb87421d, type: 3}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 300
+      maxSilverBonus: 600
+      BattleData:
+        Player:
+          Rank: 0
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+        Enemy:
+          Rank: 1
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+    RestAction:
+      HeaderText: "\u041E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C\u0441\u044F
+        \u0443 \u0445\u043E\u043B\u043E\u0434\u043D\u043E\u0433\u043E \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0430"
+      Icon: {fileID: 1053723155, guid: 924f3b534f7d5014594c7debcde116c7, type: 3}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 0
+      maxSilverBonus: 0
+    BackgroundSprite: {fileID: -4178046375966092550, guid: 07ba8d1b900b65d4e8b8eb452cbf8e1f, type: 3}
+  - StageName: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439 \u0440\u0430\u0441\u043F\u0430\u0434\u043E\u043A"
     LootAction:
       HeaderText: "\u0412\u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043B\u0430\u0434\u043E\u0432\u0443\u044E"
       Icon: {fileID: 0}
@@ -1564,16 +1685,6 @@ MonoBehaviour:
       TimeCostInMonths: 0
       minSilverBonus: 150
       maxSilverBonus: 300
-    RestAction:
-      HeaderText: "\u041F\u043E\u0441\u0438\u0434\u0435\u0442\u044C \u043D\u0430
-        \u043F\u043B\u043E\u0449\u0430\u0434\u043A\u0435"
-      Icon: {fileID: 0}
-      InternalDemonChange: 0
-      TimeCostInMonths: 0
-      minSilverBonus: 0
-      maxSilverBonus: 0
-    BackgroundSprite: {fileID: 0}
-  - StageName: 
     FightAction:
       HeaderText: 
       Icon: {fileID: 0}
@@ -1608,6 +1719,15 @@ MonoBehaviour:
           craneKick: 0
           moonSlash: 0
           voidPalm: 0
+    RestAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 0
+      maxSilverBonus: 0
+    BackgroundSprite: {fileID: 4130640169021434097, guid: 3bfe37f9711d8b842928e58e91a3e254, type: 3}
+  - StageName: 
     LootAction:
       HeaderText: "\u0412\u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043B\u0430\u0434\u043E\u0432\u0443\u044E"
       Icon: {fileID: 0}
@@ -1615,6 +1735,40 @@ MonoBehaviour:
       TimeCostInMonths: 0
       minSilverBonus: 150
       maxSilverBonus: 300
+    FightAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 300
+      maxSilverBonus: 600
+      BattleData:
+        Player:
+          Rank: 0
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+        Enemy:
+          Rank: 1
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
     RestAction:
       HeaderText: 
       Icon: {fileID: 0}
@@ -1623,11 +1777,162 @@ MonoBehaviour:
       minSilverBonus: 0
       maxSilverBonus: 0
     BackgroundSprite: {fileID: 0}
+  - StageName: 
+    LootAction:
+      HeaderText: "\u0412\u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043B\u0430\u0434\u043E\u0432\u0443\u044E"
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 150
+      maxSilverBonus: 300
+    FightAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 300
+      maxSilverBonus: 600
+      BattleData:
+        Player:
+          Rank: 0
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+        Enemy:
+          Rank: 1
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+    RestAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 0
+      maxSilverBonus: 0
+    BackgroundSprite: {fileID: 0}
+  - StageName: 
+    LootAction:
+      HeaderText: "\u0412\u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043B\u0430\u0434\u043E\u0432\u0443\u044E"
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 150
+      maxSilverBonus: 300
+    FightAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 300
+      maxSilverBonus: 600
+      BattleData:
+        Player:
+          Rank: 0
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+        Enemy:
+          Rank: 1
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+    RestAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 0
+      maxSilverBonus: 0
+    BackgroundSprite: {fileID: 0}
+  - StageName: 
+    LootAction:
+      HeaderText: "\u0412\u0441\u043A\u0440\u044B\u0442\u044C \u043A\u043B\u0430\u0434\u043E\u0432\u0443\u044E"
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 150
+      maxSilverBonus: 300
+    FightAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 300
+      maxSilverBonus: 600
+      BattleData:
+        Player:
+          Rank: 0
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+        Enemy:
+          Rank: 1
+          useManualStats: 0
+          bodyLevel: 0
+          qiLevel: 0
+          overrideStartHp: 0
+          startHp: 0
+          overrideStartQi: 0
+          startQi: 0
+          dragonFist: 0
+          craneKick: 0
+          moonSlash: 0
+          voidPalm: 0
+    RestAction:
+      HeaderText: 
+      Icon: {fileID: 0}
+      InternalDemonChange: 0
+      TimeCostInMonths: 0
+      minSilverBonus: 0
+      maxSilverBonus: 0
+    BackgroundSprite: {fileID: 0}
+  lootPanel: {fileID: 6258039808850819763}
   fightPanel: {fileID: 4009781735338713396}
-  lootPanel: {fileID: 0}
-  restPanel: {fileID: 0}
+  restPanel: {fileID: 5052230177237965231}
   CurrentStage: 0
   SilverBonus: 0
+  TravelPanels: {fileID: 4288543515544623193}
 --- !u!114 &303739654958644782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5492,6 +5797,167 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &587293358015659394
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8765934773597476234}
+    m_Modifications:
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3941935552061004431, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_Name
+      value: TravelResultsWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1488354250786054842}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 4288543515544623193}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+--- !u!114 &122047336288876035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 691273222439553921, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+  m_PrefabInstance: {fileID: 587293358015659394}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!224 &771144350603037961 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
+  m_PrefabInstance: {fileID: 587293358015659394}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1140383178819618067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5642,132 +6108,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
   m_PrefabInstance: {fileID: 1140383178819618067}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5886092948301198902
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8765934773597476234}
-    m_Modifications:
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 780
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 365
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3941935552061004431, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_Name
-      value: TravelResultsWindow
-      objectReference: {fileID: 0}
-    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1488354250786054842}
-    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 8993439218843358372, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
---- !u!224 &5997178253208110781 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 186296306959282315, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-  m_PrefabInstance: {fileID: 5886092948301198902}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6356970565971180983 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 691273222439553921, guid: 9d06b42e350f2ee4da14c0b56a605f21, type: 3}
-  m_PrefabInstance: {fileID: 5886092948301198902}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI

@@ -4,7 +4,6 @@ using TMPro;
 public class StatsPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI MasterNameLabel;
-    [SerializeField] private TextMeshProUGUI GenerationLabel;
     [SerializeField] private TextMeshProUGUI AgeLabel;
 
     [SerializeField] private TextMeshProUGUI BodyLabel;
@@ -12,7 +11,8 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI QiLabel;
     [SerializeField] private Slider QiBar;
     [SerializeField] private TextMeshProUGUI InternalDemonLabel;
-
+    [SerializeField] private Slider InternalDemonBar;
+    [SerializeField] private TextMeshProUGUI InternalDemonState;
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
     [SerializeField] private TextMeshProUGUI RankLabel;   
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
@@ -33,7 +33,6 @@ public class StatsPanel : MonoBehaviour
         try
         {
             master = GameCore.Instance.Master;
-            GenerationLabel?.SetText("Поколение: " + master.Generation);
             MasterNameLabel?.SetText($"Мастер {master.Name}, {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
             AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
 
@@ -43,13 +42,16 @@ public class StatsPanel : MonoBehaviour
             QiLabel?.SetText($"Ци: {master.Qi} / {master.MaxQi}");
             if (QiBar != null) QiBar.value = (float)master.Qi / master.MaxQi;
 
-            InternalDemonLabel?.SetText($"Внутренний демон: {master.InternalDemon.GetCurrentState().Name.ToLower()}");
+            InternalDemonLabel?.SetText($"Внутренний демон: {master.InternalDemon.Value} / {master.InternalDemon.MaxValue}");
+            if (InternalDemonBar != null) InternalDemonBar.value = (float)master.InternalDemon.Value / master.InternalDemon.MaxValue;
+            InternalDemonState?.SetText(master.InternalDemon.GetCurrentState().Name);
 
             MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
             RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());
 
             HasStudentLabel?.SetText(master.Student == null ? "Нет ученика" : $"Ученик: {master.Student.GetFullName()}");
         }
-        catch { }       
+        catch { }
+        
     }
 }

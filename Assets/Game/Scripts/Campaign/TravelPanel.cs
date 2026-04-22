@@ -16,8 +16,6 @@ public class TravelPanel : MonoBehaviour
         {
             Header.SetText(action.HeaderText);
             if(action.Icon != null) Icon.sprite = action.Icon;
-            Effects.SetText(action.GetEffectsDescription());
-            Rewards.SetText(action.GetRewardsDescription());
             Action = action;
         } 
     }

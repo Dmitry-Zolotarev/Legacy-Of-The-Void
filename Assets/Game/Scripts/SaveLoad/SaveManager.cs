@@ -21,7 +21,6 @@ public static class SaveManager
 
         data.Age = master.Age;
         data.Name = master.Name;
-        data.Generation = master.Generation;
         data.LifeLimit = master.LifeLimit;
 
         data.Body = master.Body;

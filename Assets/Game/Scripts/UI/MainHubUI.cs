@@ -5,17 +5,14 @@ using TMPro;
 public class MainHubUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI SilverAmountLabel;
-
     [SerializeField] private Image MasterSprite;
     [SerializeField] private Sprite YoungMasterSprite;
     [SerializeField] private Sprite AdultMasterSprite;
     [SerializeField] private Sprite OldMasterSprite;
     [SerializeField] private StatsPanel MiniStatsPanel;
-    [SerializeField] private GameObject AgeNotification;
     [SerializeField] private TextMeshProUGUI RankLabel;
     [SerializeField] private TooltipTrigger RankPanel;
-    [SerializeField] private int BecomeAdultAge = 25;
-    [SerializeField] private int NotificationAge = 40;
+    [SerializeField] private int BecomeAdultAge = 30;
     [SerializeField] private int BecomeOldAge = 60;
     public static MainHubUI Instance;
     private CharacterData master;
@@ -37,7 +34,6 @@ public class MainHubUI : MonoBehaviour
         Time.timeScale = 1f;
         if (GameCore.Instance == null || GameCore.Instance.Master == null) return;
         master = GameCore.Instance.Master;
-        AgeNotification.SetActive(master != null && master.Age >= NotificationAge && master.CurrentRank < (int)master.RankForBecomeTeacher);
         UpdateLabels();
         UpdateMasterSprite();
     }

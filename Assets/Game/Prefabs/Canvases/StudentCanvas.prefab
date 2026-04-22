@@ -654,7 +654,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -67436354190651672, guid: 27f53c3a00d0cde48a57f76599712b2e, type: 3}
+  m_Sprite: {fileID: 6892925347048985009, guid: 45d3001543ddaca4e8c817e200e9f1c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -828,8 +828,8 @@ MonoBehaviour:
   MeridiansLabel: {fileID: 9093983432275803989}
   StudyButtons: {fileID: 5477856832486410199}
   StudentMeridianBreakthrough: {fileID: 0}
-  YoungStudent: {fileID: -67436354190651672, guid: 27f53c3a00d0cde48a57f76599712b2e, type: 3}
-  AdultStudent: {fileID: -8968671075551924894, guid: d900e5a758e44c64983ca41cb8271b19, type: 3}
+  YoungStudent: {fileID: 6892925347048985009, guid: 45d3001543ddaca4e8c817e200e9f1c8, type: 3}
+  AdultStudent: {fileID: 3919968732762759500, guid: 7d31302ed8a6ac944af35d60319029a8, type: 3}
   StudentGameObject: {fileID: 1785131588051183641}
 --- !u!1 &3474193239835161867
 GameObject:
@@ -921,12 +921,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsPanel
   MasterNameLabel: {fileID: 1463351447735409886}
-  GenerationLabel: {fileID: 2356405778097929512}
   AgeLabel: {fileID: 0}
   BodyLabel: {fileID: 0}
   BodyBar: {fileID: 0}
   QiLabel: {fileID: 5007561406942170260}
   QiBar: {fileID: 0}
+  InternalDemonLabel: {fileID: 0}
+  InternalDemonBar: {fileID: 0}
+  InternalDemonState: {fileID: 0}
   MeridiansLabel: {fileID: 4548740372050744700}
   RankLabel: {fileID: 4021764739911593890}
   HasStudentLabel: {fileID: 0}

@@ -74,9 +74,6 @@ public class RankBreakController : MonoBehaviour
     private void ExitToRankMenu()
     {
         UpdateNodes();
-
-        if(master.CurrentRank == (int)master.RankForBecomeTeacher)RankSystemUI.Instance.ShowStudentWindow = true; 
-
         ScreenManager.Instance.OpenMenu((int)Canvases.RankCanvas);
     }
 }

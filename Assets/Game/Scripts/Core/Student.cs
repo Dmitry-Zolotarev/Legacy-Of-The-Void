@@ -1,11 +1,10 @@
 using UnityEngine;
 
+[System.Serializable]
 public class Student : CharacterData
 {
     public Student()
     {
-        Name = GameCore.Instance?.GenerateFullName();
-        Age = Random.Range(10, 13);
     }
     public Student(SaveData data)
     {
@@ -24,7 +23,6 @@ public class Student : CharacterData
     }
     public void Inherit(CharacterData master)
     {
-        Generation = master.Generation + 1;
         Silver = master.Silver;
         BodyElixirs = master.BodyElixirs;
         QiElixirs = master.QiElixirs;

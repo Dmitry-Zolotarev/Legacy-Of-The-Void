@@ -1,20 +1,16 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[System.Serializable]
 public class CharacterData
 {
     protected System.Random random = new System.Random();
-    [HideInInspector] public int Generation = 1;
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
     [HideInInspector] public List<Technique> KnownTechniques = new List<Technique>();
-    public int Age = 30;
-    public int LifeLimit = 70;
+    public int Age = 14;
+    public int LifeLimit = 80;
     public string Name = "Со Мин";
-    public int MinLifeLimit = 65;
-    public int MaxLifeLimit = 85;
     public int Body = 5;
     public int MaxBody = 5;
     public int Qi = 0;
@@ -28,18 +24,15 @@ public class CharacterData
     public Student Student;
     public InternalDemon InternalDemon = new InternalDemon();
     
-    public MasterRank RankForBecomeTeacher = MasterRank.ThirdRate;
-
     public CharacterData()
     {
-
+        if (!(this is Student)) Student = new Student();
     }
     public CharacterData(SaveData data)
     {
         Age = data.Age;
         LifeLimit = data.LifeLimit;
         Name = data.Name;
-        Generation = data.Generation;
         MaxBody = data.MaxBody;
         Body = data.Body;
         MaxQi = data.MaxQi;
@@ -97,7 +90,6 @@ public class CharacterData
     public void UpdateRank()
     {
         if(CurrentRank < GameCore.Instance.Ranks.Count - 1) CurrentRank++;
-        if (CurrentRank == (int)RankForBecomeTeacher) Student = new Student();
         MaxBody = GameCore.Instance.Ranks[CurrentRank].MaxBody;
     }
     public string GetFullName()
