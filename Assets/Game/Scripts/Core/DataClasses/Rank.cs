@@ -5,13 +5,14 @@ public enum MasterRank
     SecondRate,
     FirstRate,
     PeakMaster,
-    OneFlower,
-    FiveQi
+    OneFlower
 }
 [System.Serializable]
 public class Rank
 {
     public string Name;
-    public int needMeridians;
+    public int NeedMeridians;
     public int MaxBody;
+    public RankItems RequiredItem;
+    public int RequiredItemsCount = 1;
 }

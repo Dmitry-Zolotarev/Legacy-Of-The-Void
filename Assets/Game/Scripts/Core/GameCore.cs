@@ -28,6 +28,7 @@ public class GameCore : MonoBehaviour
     public List<Technique> Techniques;
     public List<MeridianLevel> MeridianLevels;
     public List<InternalDemonState> InternalDemonStates;
+    public List<RankItem> RankItems;
 
     public GameObject CombatSystem;
     public GameObject StartHelpCanvas;
@@ -55,6 +56,10 @@ public class GameCore : MonoBehaviour
         AgeLabel?.SetText(Master.Age.ToString());
         ComicsCanvas?.SetActive(!StartComicShown);
         CombatHelpCanvas.SetActive(!CombatHelpShown);
+    }
+    public RankItem GetRankItem()
+    {
+        return RankItems[(int)Ranks[Master.GetNextRankID()].RequiredItem];
     }
     public string GenerateFullName()
     {

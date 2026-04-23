@@ -5,7 +5,9 @@ using TMPro;
 public class RankSystemUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI CurrentRankLabel;
+    
     [SerializeField] private TextMeshProUGUI NextRankLabel;
+    [SerializeField] private TextMeshProUGUI RequiredItemLabel;
     [SerializeField] private TextMeshProUGUI NeedBodyLabel;
     [SerializeField] private TextMeshProUGUI NeedMeridiansLabel;
     [SerializeField] private TextMeshProUGUI NeedQiLabel;
@@ -14,7 +16,6 @@ public class RankSystemUI : MonoBehaviour
     
     public static RankSystemUI Instance;
     private CharacterData master;
-
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -31,15 +32,18 @@ public class RankSystemUI : MonoBehaviour
         rankBar.value = master.CurrentRank;
         CurrentRankLabel.SetText(GameCore.Instance.Ranks[master.CurrentRank].Name);
         NextRankLabel.SetText(master.GetNextRank().Name);
+
+        var item = GameCore.Instance.GetRankItem();
+        RequiredItemLabel.SetText($"{item.name}: {item.count} / {master.GetNextRank().RequiredItemsCount}");
         NeedBodyLabel.SetText($"Телосложение: {master.Body} / {GameCore.Instance.Ranks[master.CurrentRank].MaxBody}");
-        NeedMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().needMeridians}");
+        NeedMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().NeedMeridians}");
         NeedQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 20}");
     }   
     public void TryRankBreakthrough()
     {
         var currentRank = GameCore.Instance.Ranks[master.CurrentRank];
         
-        if (master.Body >= currentRank.MaxBody && master.OpenedMeridians >= master.GetNextRank().needMeridians && master.Qi >= master.GetNextRankID() * 20)
+        if (master.Body >= currentRank.MaxBody && master.OpenedMeridians >= master.GetNextRank().NeedMeridians && master.Qi >= master.GetNextRankID() * 20)
         {
             if (master.CurrentRank < GameCore.Instance.Ranks.Count - 1) ScreenManager.Instance.OpenMenu(7);
         }          

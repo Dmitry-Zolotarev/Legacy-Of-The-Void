@@ -5,15 +5,11 @@ using TMPro;
 public class TravelSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI silverAmountLabel;
-    [SerializeField] private TextMeshProUGUI rankLabel;
     [SerializeField] private TextMeshProUGUI stageNameLabel;
-    [SerializeField] private TextMeshProUGUI LootedSilverLabel;
-
-    [SerializeField] private TooltipTrigger rankPanel;
     
     [SerializeField] private GameObject ModalWindowsCanvas;
 
-    [SerializeField] private CampaignStage[] campaignStages;
+    
     [SerializeField] private TravelPanel lootPanel;
     [SerializeField] private TravelPanel fightPanel;
     [SerializeField] private TravelPanel restPanel;
@@ -21,11 +17,11 @@ public class TravelSystem : MonoBehaviour
 
     [HideInInspector] public int CurrentStage = 0;
     [HideInInspector] public int SilverBonus = 0;
-    
-    public static TravelSystem Instance;
+   
+    public static TravelSystem Instance;    
+    public TextMeshProUGUI LootLabel;
     public GameObject TravelPanels;
-    
-
+    [SerializeField] private CampaignStage[] campaignStages;
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -47,11 +43,6 @@ public class TravelSystem : MonoBehaviour
     private void UpdateLabels()
     {
         silverAmountLabel?.SetText(GameCore.Instance.Master.Silver.ToString());
-
-        var rankName = GameCore.Instance.Ranks[GameCore.Instance.Master.CurrentRank].Name;
-
-        rankPanel.tooltipText = "Ранг игрока:\n" + rankName;
-        rankLabel?.SetText(rankName);
     }
     public void AddSilverToPlayer()
     {
@@ -63,7 +54,6 @@ public class TravelSystem : MonoBehaviour
     public void ShowLootDialog()
     {
         ModalWindowsCanvas.SetActive(true);
-        LootedSilverLabel.SetText(SilverBonus.ToString());
     }
     private bool NotNull(TravelAction action)
     {

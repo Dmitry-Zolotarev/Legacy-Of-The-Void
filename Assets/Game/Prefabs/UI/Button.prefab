@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 570928361962673966}
   - component: {fileID: 1917589606072779828}
   - component: {fileID: 6609311091281154901}
-  - component: {fileID: 149596724449972159}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -121,32 +120,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1917589606072779828}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 149596724449972159}
-        m_TargetAssemblyTypeName: LoadSceneComponent, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &149596724449972159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335628345974112680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1085c6bc79c3c944db2ec63d9fa0323e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LoadSceneComponent
-  sceneName: MainHub
+      m_Calls: []
 --- !u!1 &4082774735836272582
 GameObject:
   m_ObjectHideFlags: 0
