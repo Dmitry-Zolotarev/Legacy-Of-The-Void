@@ -8,8 +8,11 @@ public class CharacterData
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
     [HideInInspector] public List<Technique> KnownTechniques = new List<Technique>();
+    [HideInInspector] public int WoundDebuff = 0;
+    [HideInInspector] public int LifeLimit;
+
+    public int StartLifeLimit = 80;
     public int Age = 14;
-    public int LifeLimit = 80;
     public string Name = "Со Мин";
     public int Body = 5;
     public int MaxBody = 5;
@@ -20,6 +23,7 @@ public class CharacterData
     public int CurrentRank = 0;
     public int BodyElixirs = 0;
     public int QiElixirs = 0;
+    
 
     public Student Student;
     public InternalDemon InternalDemon = new InternalDemon();
@@ -36,7 +40,9 @@ public class CharacterData
         MaxBody = data.MaxBody;
         Body = data.Body;
         MaxQi = data.MaxQi;
+        InternalDemon.Value = data.InternalDemonValue;
         OpenedMeridians = data.OpenedMeridians;
+        WoundDebuff = data.Wounds;
         Qi = data.Qi;
         if (data.HasStudent) Student = new Student(data);
 
@@ -49,6 +55,16 @@ public class CharacterData
         {
             KnownTechniques.Add(GameCore.Instance.Techniques[i]);
         }
+    }
+    public void SetWounds(int value)
+    {
+        WoundDebuff += value;
+        LifeLimit = StartLifeLimit - WoundDebuff;
+    }
+    public void HealWounds()
+    {      
+        LifeLimit = StartLifeLimit;
+        WoundDebuff = 0;
     }
     public void OpenMeridian()
     {
@@ -76,7 +92,6 @@ public class CharacterData
     {
         if (Qi >= amount) Qi -= amount; 
     }
-    public void RecoverQi() => Qi = MaxQi;
     public Rank GetNextRank()
     {
         int i = CurrentRank < GameCore.Instance.Ranks.Count - 1 ? CurrentRank + 1 : CurrentRank;   

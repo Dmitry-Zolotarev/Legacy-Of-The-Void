@@ -5,7 +5,7 @@ public class StatsPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI MasterNameLabel;
     [SerializeField] private TextMeshProUGUI AgeLabel;
-
+    [SerializeField] private TextMeshProUGUI LifeRemainLabel;
     [SerializeField] private TextMeshProUGUI BodyLabel;
     [SerializeField] private Slider BodyBar;
     [SerializeField] private TextMeshProUGUI QiLabel;
@@ -34,6 +34,7 @@ public class StatsPanel : MonoBehaviour
         {
             master = GameCore.Instance.Master;
             MasterNameLabel?.SetText($"Мастер {master.Name}, {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
+            LifeRemainLabel?.SetText($"Остаток жизни: {master.LifeLimit - master.Age} {GameCore.Instance.GetYearWord(master.LifeLimit - master.Age)}");
             AgeLabel?.SetText($"Возраст: {master.Age} {GameCore.Instance.GetYearWord(master.Age)}");
 
             BodyLabel?.SetText($"Телосложение: {master.Body} / {master.MaxBody}");

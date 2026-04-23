@@ -13,7 +13,9 @@ public class TrainingSystem : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Sprite gymBackground;
     [SerializeField] private Sprite combatBackground;
+    [SerializeField] private GameObject AgePanel;
     [SerializeField] private GameObject UI;
+
 
     [SerializeField] private float trainingTime = 4f;
     [SerializeField] private int ElixirPower = 2;
@@ -61,14 +63,16 @@ public class TrainingSystem : MonoBehaviour
         if (master.Body < master.MaxBody)
         {
             IsTraining = true;
-            animator.SetBool("IsTraining", true);
-            UI.SetActive(false);
+            animator?.SetBool("IsTraining", true);
+            AgePanel?.SetActive(false);
+            UI?.SetActive(false);
 
             yield return new WaitForSeconds(trainingTime);
 
             IsTraining = false;
-            animator.SetBool("IsTraining", false);
-            UI.SetActive(true);
+            animator?.SetBool("IsTraining", false);
+            AgePanel?.SetActive(true);
+            UI?.SetActive(true);
 
             if (master.BodyElixirs > 0)
             {

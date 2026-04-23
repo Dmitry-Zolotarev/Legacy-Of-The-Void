@@ -13,7 +13,6 @@ public class AutoBattleController : MonoBehaviour
         Normal,
         TechniqueDamage
     }
-
     [Header("Core")]
     [SerializeField] private BattleRules rules;
     [SerializeField] private CombatStage combatStage;
@@ -793,23 +792,26 @@ public class AutoBattleController : MonoBehaviour
             battleFinished = true;
             if (playerStats.CurrentHP <= 0 && enemyStats.CurrentHP <= 0)
             {
-                if (playerAnimator != null) playerAnimator.PlayDefeat();
-                if (enemyAnimator != null) enemyAnimator.PlayDefeat();
+                GameCore.Instance.Master.SetWounds((int)enemyStats.Rank + 1);
+                playerAnimator?.PlayDefeat();
+                enemyAnimator?.PlayDefeat();
                 PlayOneShot(defeatSfx);
                 ShowResultPanel("Ничья");
+                
             }
             else if (enemyStats.CurrentHP <= 0)
             {
-                if (playerAnimator != null) playerAnimator.PlayVictory();
-                if (enemyAnimator != null) enemyAnimator.PlayDefeat();
+                playerAnimator?.PlayVictory();
+                enemyAnimator?.PlayDefeat();
                 PlayOneShot(victorySfx);
                 ShowResultPanel($"Вы победили и получили {TravelSystem.Instance.SilverBonus} серебра");
                 TravelSystem.Instance.AddSilverToPlayer(); 
             }
             else
             {
-                if (playerAnimator != null) playerAnimator.PlayDefeat();
-                if (enemyAnimator != null) enemyAnimator.PlayVictory();
+                GameCore.Instance.Master.SetWounds((int)enemyStats.Rank + 1);
+                playerAnimator?.PlayDefeat();
+                enemyAnimator?.PlayVictory();
                 PlayOneShot(defeatSfx);
                 ShowResultPanel("Вы проиграли");
             }

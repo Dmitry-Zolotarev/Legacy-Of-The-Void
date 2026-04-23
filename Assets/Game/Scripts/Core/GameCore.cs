@@ -10,7 +10,8 @@ using TMPro;
 public class GameCore : MonoBehaviour
 {
     [HideInInspector] public int Year = 1;
-    [HideInInspector] public int Month = 0;  
+    [HideInInspector] public int Month = 0;
+    [HideInInspector] public int CurrentStage = 0;
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
     [SerializeField] private TextMeshProUGUI AgeLabel;
@@ -44,12 +45,15 @@ public class GameCore : MonoBehaviour
     void Awake()
     {
         CombatSystem?.SetActive(false);
+        spawner = GetComponent<ParticleSpawner>();
+        Master.LifeLimit = Master.StartLifeLimit;
+
         if (Instance == null) Instance = this;
         if (SaveManager.NeedLoad) 
         {
             SaveManager.Load(this);          
         }   
-        spawner = GetComponent<ParticleSpawner>();
+        
     }
     void Start()
     {

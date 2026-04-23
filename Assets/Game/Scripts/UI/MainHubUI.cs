@@ -10,8 +10,6 @@ public class MainHubUI : MonoBehaviour
     [SerializeField] private Sprite AdultMasterSprite;
     [SerializeField] private Sprite OldMasterSprite;
     [SerializeField] private StatsPanel MiniStatsPanel;
-    [SerializeField] private TextMeshProUGUI RankLabel;
-    [SerializeField] private TooltipTrigger RankPanel;
     [SerializeField] private int BecomeAdultAge = 30;
     [SerializeField] private int BecomeOldAge = 60;
     public static MainHubUI Instance;
@@ -58,7 +56,5 @@ public class MainHubUI : MonoBehaviour
         SilverAmountLabel?.SetText(master.Silver.ToString());
 
         var rankName = GameCore.Instance.Ranks[GameCore.Instance.Master.CurrentRank].Name;
-        RankPanel.tooltipText = "Ранг игрока:\n" + rankName;
-        RankLabel?.SetText(rankName);
     }
 }

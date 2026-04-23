@@ -19,10 +19,12 @@ public class SaveData
     public int Silver;
     public int BodyElixirs;
     public int QiElixirs;
+    public int InternalDemonValue;
+    public int Wounds;
 
     public int OpenedMeridians;
     public int CurrentRank;
-
+    public int CurrentStage;
 
     public bool StartComicShown;
     public bool StartHelpShown;

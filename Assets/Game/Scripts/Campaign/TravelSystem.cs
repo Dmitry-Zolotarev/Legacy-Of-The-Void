@@ -6,22 +6,23 @@ public class TravelSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI silverAmountLabel;
     [SerializeField] private TextMeshProUGUI stageNameLabel;
-    
-    [SerializeField] private GameObject ModalWindowsCanvas;
 
-    
     [SerializeField] private TravelPanel lootPanel;
     [SerializeField] private TravelPanel fightPanel;
     [SerializeField] private TravelPanel restPanel;
     [SerializeField] private Image background;
 
-    [HideInInspector] public int CurrentStage = 0;
+    
     [HideInInspector] public int SilverBonus = 0;
-   
+
+    public GameObject ModalWindowsCanvas;
     public static TravelSystem Instance;    
     public TextMeshProUGUI LootLabel;
     public GameObject TravelPanels;
+
+    [SerializeField] private GameObject[] modalWindows;
     [SerializeField] private CampaignStage[] campaignStages;
+    
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -40,9 +41,19 @@ public class TravelSystem : MonoBehaviour
     {
         ToolTip.Instance.HideTooltip();
     }
+    public void OpenWindow(int windowID)
+    {
+        for (int i = 0; i < modalWindows.Length; i++) modalWindows[i]?.SetActive(i == windowID);
+    }
     private void UpdateLabels()
     {
-        silverAmountLabel?.SetText(GameCore.Instance.Master.Silver.ToString());
+        try
+        {
+            silverAmountLabel?.SetText(GameCore.Instance.Master.Silver.ToString());
+            var backroundSprite = campaignStages[GameCore.Instance.CurrentStage - 1].BackgroundSprite;
+            if (backroundSprite != null) background.sprite = backroundSprite;
+        }
+        catch { }      
     }
     public void AddSilverToPlayer()
     {
@@ -51,19 +62,15 @@ public class TravelSystem : MonoBehaviour
             GameCore.Instance.Master.Silver += SilverBonus;        
         }
     }
-    public void ShowLootDialog()
-    {
-        ModalWindowsCanvas.SetActive(true);
-    }
     private bool NotNull(TravelAction action)
     {
         return action != null && !string.IsNullOrEmpty(action.HeaderText);
     } 
     public void UpdateStage()
     {
-        if (CurrentStage < campaignStages.Length)
+        if (GameCore.Instance.CurrentStage < campaignStages.Length)
         {
-            var stage = campaignStages[CurrentStage];
+            var stage = campaignStages[GameCore.Instance.CurrentStage];
 
             fightPanel?.gameObject.SetActive(NotNull(stage.FightAction));
             fightPanel?.UpdateAction(stage.FightAction);
@@ -74,8 +81,7 @@ public class TravelSystem : MonoBehaviour
             restPanel?.gameObject.SetActive(NotNull(stage.RestAction));
             restPanel?.UpdateAction(stage.RestAction);
 
-            if(stage.BackgroundSprite != null) background.sprite = stage.BackgroundSprite;
-            CurrentStage++;
+            GameCore.Instance.CurrentStage++;
             stageNameLabel.SetText(stage.StageName);
         }   
     }

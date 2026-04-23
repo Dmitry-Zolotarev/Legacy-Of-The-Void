@@ -5,8 +5,10 @@ public class RestAction : TravelAction
 {
     public override void DoAction()
     {
-        TravelSystem.Instance.UpdateStage();
-        GameCore.Instance.Master.RecoverQi();
+        GameCore.Instance.Master.HealWounds();
+        TravelSystem.Instance.TravelPanels.SetActive(false);
+        TravelSystem.Instance.ModalWindowsCanvas.SetActive(true);
+        TravelSystem.Instance.OpenWindow(1);  
         base.DoAction();
     }
     public override List<string> GetRewardRows()

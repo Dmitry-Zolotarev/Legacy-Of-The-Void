@@ -9,8 +9,9 @@ public class LootAction : TravelAction
     {
         GameCore.Instance.RankItems[(int)rankItem].count++;
         TravelSystem.Instance.TravelPanels.SetActive(false);
-        TravelSystem.Instance.ShowLootDialog();
         TravelSystem.Instance.LootLabel.SetText(GameCore.Instance.RankItems[(int)rankItem].name);
+        TravelSystem.Instance.ModalWindowsCanvas.SetActive(true);
+        TravelSystem.Instance.OpenWindow(0);
         base.DoAction();
     }
     public override List<string> GetRewardRows()

@@ -10,7 +10,6 @@ public static class SaveManager
     {
         return File.Exists(Path);
     }
-
     public static void Save(GameCore game)
     {
         SaveData data = new SaveData();
@@ -30,7 +29,9 @@ public static class SaveManager
 
         data.Silver = master.Silver;
         data.BodyElixirs = master.BodyElixirs;
-        data.QiElixirs = master.QiElixirs;     
+        data.QiElixirs = master.QiElixirs;
+        data.InternalDemonValue = master.InternalDemon.Value;
+        data.Wounds = master.WoundDebuff;
 
         data.OpenedMeridians = master.OpenedMeridians;
         data.CurrentRank = master.CurrentRank;
@@ -56,6 +57,7 @@ public static class SaveManager
         data.StartComicShown = game.StartComicShown;
         data.StartHelpShown = game.StartHelpShown;
         data.CombatHelpShown = game.CombatHelpShown;
+        data.CurrentStage = game.CurrentStage - 1;
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(Path, json);
@@ -64,8 +66,6 @@ public static class SaveManager
 
     public static void Load(GameCore game)
     {
-        NeedLoad = false;
-
         if (!SaveExists())
         {
             Debug.LogWarning("Save file not found");
@@ -78,7 +78,8 @@ public static class SaveManager
         game.StartComicShown = data.StartComicShown;
         game.StartHelpShown = data.StartHelpShown;
         game.CombatHelpShown = data.CombatHelpShown;
-        Debug.Log("Game Loaded");
+        game.CurrentStage = data.CurrentStage;
+        NeedLoad = false;
     }
     public static void DeleteSave()
     {
