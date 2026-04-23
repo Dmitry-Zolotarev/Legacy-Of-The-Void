@@ -56,11 +56,6 @@ public static class SaveManager
         data.StartComicShown = game.StartComicShown;
         data.StartHelpShown = game.StartHelpShown;
         data.CombatHelpShown = game.CombatHelpShown;
-        data.DemonStates.Clear();
-        foreach (var demon in game.Enemies)
-        {
-            data.DemonStates.Add(demon.IsDead);
-        }
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(Path, json);
@@ -83,11 +78,6 @@ public static class SaveManager
         game.StartComicShown = data.StartComicShown;
         game.StartHelpShown = data.StartHelpShown;
         game.CombatHelpShown = data.CombatHelpShown;
-
-        for (int i = 0; i < game.Enemies.Count; i++)
-        {
-            game.Enemies[i].IsDead = data.DemonStates[i];
-        }
         Debug.Log("Game Loaded");
     }
     public static void DeleteSave()

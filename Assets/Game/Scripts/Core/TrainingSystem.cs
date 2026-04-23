@@ -8,11 +8,12 @@ public class TrainingSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI BodyElixirsLabel;
     [SerializeField] private TextMeshProUGUI QiElixirsLabel;
-    [SerializeField] private TextMeshProUGUI BodyLabel;
+    [SerializeField] private TextMeshProUGUI BodyLabel;  
     [SerializeField] private Animator animator;
     [SerializeField] private Image background;
     [SerializeField] private Sprite gymBackground;
     [SerializeField] private Sprite combatBackground;
+    [SerializeField] private GameObject UI;
 
     [SerializeField] private float trainingTime = 4f;
     [SerializeField] private int ElixirPower = 2;
@@ -61,8 +62,14 @@ public class TrainingSystem : MonoBehaviour
         {
             IsTraining = true;
             animator.SetBool("IsTraining", true);
-            yield return new WaitForSeconds(trainingTime * 0.5f);
-            
+            UI.SetActive(false);
+
+            yield return new WaitForSeconds(trainingTime);
+
+            IsTraining = false;
+            animator.SetBool("IsTraining", false);
+            UI.SetActive(true);
+
             if (master.BodyElixirs > 0)
             {
                 BodyBonus *= ElixirPower;
@@ -76,9 +83,7 @@ public class TrainingSystem : MonoBehaviour
 
             GameCore.Instance.AdvanceTime(SpendMonths);
 
-            yield return new WaitForSeconds(trainingTime * 0.5f);
-            IsTraining = false;
-            animator.SetBool("IsTraining", false);
+            
             
         }
     }

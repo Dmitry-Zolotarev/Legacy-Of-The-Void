@@ -33,7 +33,6 @@ public class AutoBattleController : MonoBehaviour
     [SerializeField] private TMP_Text enemyHpText;
     [SerializeField] private TMP_Text playerQiText;
     [SerializeField] private TMP_Text enemyQiText;
-    [SerializeField] private TMP_Text statusText;
     [SerializeField] private TMP_Text playerQiSpendPopupText;
     [SerializeField] private TMP_Text enemyQiSpendPopupText;
     [SerializeField] private TMP_Text playerRankText;
@@ -78,7 +77,6 @@ public class AutoBattleController : MonoBehaviour
 
     [Header("Right Buttons")]
     [SerializeField] private Button clearButton;
-    [SerializeField] private Button fightButton;
     [SerializeField] private Button rerollEnemyButton;
     [SerializeField] private Button helpButton;
 
@@ -275,7 +273,6 @@ public class AutoBattleController : MonoBehaviour
         if (right != null) right.onClick.AddListener(() => PickCurrentOffer(1));
 
         if (clearButton != null) clearButton.onClick.AddListener(ClearPlayerQueue);
-        if (fightButton != null) fightButton.onClick.AddListener(TryStartBattle);
         if (restartButton != null) restartButton.onClick.AddListener(ResetBattle);
 
         buttonsHasBinded = true;
@@ -292,7 +289,6 @@ public class AutoBattleController : MonoBehaviour
         if (right != null) right.onClick.RemoveAllListeners();
 
         if (clearButton != null) clearButton.onClick.RemoveAllListeners();
-        if (fightButton != null) fightButton.onClick.RemoveAllListeners();
         if (restartButton != null) restartButton.onClick.RemoveAllListeners();
 
         buttonsHasBinded = false;
@@ -353,7 +349,6 @@ public class AutoBattleController : MonoBehaviour
 
         PrepareNewRoundState();
         RefreshUI();
-        if (statusText != null) statusText.text = "Выбери 1 из 2 и собери цепочку из 5 ходов";
         RefreshButtonStates();
     }
 
@@ -543,16 +538,6 @@ public class AutoBattleController : MonoBehaviour
 
         RefreshUI();
         RefreshButtonStates();
-
-        if (statusText != null)
-        {
-            if (playerQueue.Count < rules.slotCount)
-            {
-                statusText.text = $"Выбран ход {playerQueue.Count}/{rules.slotCount}: {ToRu(selected)}";
-            } 
-            else statusText.text = "Цепочка готова. Нажми Бой";
-
-        }
     }
 
     private void BuildNextPlayerOffer(bool forceMeaningfulAfterReset)
@@ -762,8 +747,6 @@ public class AutoBattleController : MonoBehaviour
         BuildNextPlayerOffer(true);
         RefreshUI();
         RefreshButtonStates();
-
-        if (statusText != null) statusText.text = "Цепочка очищена. Выбери новую пару";
     }
 
     private void RerollEnemy()
@@ -774,15 +757,13 @@ public class AutoBattleController : MonoBehaviour
     private void TryStartBattle()
     {
         if (isBusy || battleFinished || rules == null || playerStats == null || enemyStats == null) return;
-        if (playerQueue.Count < rules.slotCount)
+        if (playerQueue.Count >= rules.slotCount)
         {
-            if (statusText != null) statusText.text = "Нужно собрать 5 ходов";
-            return;
-        }
-        PlayOneShot(uiConfirmSfx != null ? uiConfirmSfx : uiClickSfx);
-        revealEnemyFullQueue = true;
-        RefreshSlots();
-        StartCoroutine(BattleRoutine());
+            PlayOneShot(uiConfirmSfx != null ? uiConfirmSfx : uiClickSfx);
+            revealEnemyFullQueue = true;
+            RefreshSlots();
+            StartCoroutine(BattleRoutine());
+        } 
     }
 
     private IEnumerator BattleRoutine()
@@ -801,7 +782,6 @@ public class AutoBattleController : MonoBehaviour
         for (int i = 0; i < resolution.slots.Count; i++)
         {
             SlotResolution slot = resolution.slots[i];
-            if (statusText != null) statusText.text = BuildSlotStatus(slot);
             yield return PlaySlot(slot);
             if (playerStats.CurrentHP <= 0 || enemyStats.CurrentHP <= 0)
                 break;
@@ -813,7 +793,6 @@ public class AutoBattleController : MonoBehaviour
             battleFinished = true;
             if (playerStats.CurrentHP <= 0 && enemyStats.CurrentHP <= 0)
             {
-                if (statusText != null) statusText.text = "Взаимное убийство - ничья";
                 if (playerAnimator != null) playerAnimator.PlayDefeat();
                 if (enemyAnimator != null) enemyAnimator.PlayDefeat();
                 PlayOneShot(defeatSfx);
@@ -821,18 +800,14 @@ public class AutoBattleController : MonoBehaviour
             }
             else if (enemyStats.CurrentHP <= 0)
             {
-                if (statusText != null) statusText.text = "Победа игрока";
                 if (playerAnimator != null) playerAnimator.PlayVictory();
                 if (enemyAnimator != null) enemyAnimator.PlayDefeat();
                 PlayOneShot(victorySfx);
                 ShowResultPanel($"Вы победили и получили {TravelSystem.Instance.SilverBonus} серебра");
-                GameCore.Instance.Enemies[(int)GameCore.Instance.SelectedDemon].IsDead = true;
-                TravelSystem.Instance.AddSilverToPlayer();
-                TravelSystem.Instance.UpdateStage();
+                TravelSystem.Instance.AddSilverToPlayer(); 
             }
             else
             {
-                if (statusText != null) statusText.text = "Победа врага";
                 if (playerAnimator != null) playerAnimator.PlayDefeat();
                 if (enemyAnimator != null) enemyAnimator.PlayVictory();
                 PlayOneShot(defeatSfx);
@@ -841,13 +816,13 @@ public class AutoBattleController : MonoBehaviour
             isBusy = false;
             RefreshButtonStates();
             yield return new WaitForSeconds(ShowResultsTime);
+            if(playerStats.CurrentHP > 0) TravelSystem.Instance.UpdateStage();
             GameCore.Instance.EndFight();
         }
         PrepareNewRoundState();
         RefreshUI();
         isBusy = false;
         RefreshButtonStates();
-        if (statusText != null) statusText.text = "Следующий раунд: выбери 1 из 2 и собери цепочку";
     }
     private IEnumerator PlaySlot(SlotResolution slot)
     {
@@ -965,7 +940,6 @@ public class AutoBattleController : MonoBehaviour
         if (!fighter.AttackFinished) fighter.ForceAttackFinished();
 
     }
-
     private IEnumerator WaitForBothAttackFinish(float timeout)
     {
         float timer = 0f;
@@ -1656,7 +1630,6 @@ public class AutoBattleController : MonoBehaviour
             SetText(playerQiText, $"Qi Игрока: {playerStats.CurrentQi}/{playerStats.MaxQi}");
             SetText(playerHpBarText, $"{playerStats.CurrentHP}/{playerStats.MaxHP}");
             SetText(playerQiBarText, $"{playerStats.CurrentQi}/{playerStats.MaxQi}");
-            SetText(playerRankText, $"Ранг: {GameCore.Instance.Ranks[(int)playerStats.Rank].Name.ToLower()}");
         }
         if (enemyStats != null)
         {
@@ -1666,7 +1639,6 @@ public class AutoBattleController : MonoBehaviour
             SetText(enemyQiText, $"Qi Врага: {enemyStats.CurrentQi}/{enemyStats.MaxQi}");
             SetText(enemyHpBarText, $"{enemyStats.CurrentHP}/{enemyStats.MaxHP}");
             SetText(enemyQiBarText, $"{enemyStats.CurrentQi}/{enemyStats.MaxQi}");
-            SetText(enemyRankText, $"Ранг: {GameCore.Instance.Ranks[(int)enemyStats.Rank].Name.ToLower()}");
         }
     }
 
@@ -1930,9 +1902,10 @@ public class AutoBattleController : MonoBehaviour
         SetButtonVisible(palmButton, false);
 
         SetButton(clearButton, canClear);
-        SetButton(fightButton, queueReady);
         SetButton(rerollEnemyButton, false);
         SetButton(helpButton, inputAllowed);
+
+        if (queueReady) TryStartBattle();
     }
 
     private void ShowResultPanel(string title)
@@ -1941,19 +1914,6 @@ public class AutoBattleController : MonoBehaviour
         if (resultPanel != null) resultPanel.SetActive(true);
         RefreshButtonStates();
     }
-
-    private string BuildSlotStatus(SlotResolution slot)
-    {
-        string playerLabel = ToRu(slot.playerMove);
-        string enemyLabel = ToRu(slot.enemyMove);
-        if (slot.playerAttackKind == AttackKind.Technique)
-            playerLabel += $" ({slot.playerTechniqueType})";
-        if (slot.enemyAttackKind == AttackKind.Technique)
-            enemyLabel += $" ({slot.enemyTechniqueType})";
-        return $"Слот {slot.slotIndex + 1}: {playerLabel} vs {enemyLabel}";
-    }
-
-
     public void SetupExternalBattle(BattleLaunchData data)
     {
         if (data == null)

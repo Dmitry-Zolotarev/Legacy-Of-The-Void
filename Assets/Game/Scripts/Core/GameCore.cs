@@ -10,8 +10,7 @@ using TMPro;
 public class GameCore : MonoBehaviour
 {
     [HideInInspector] public int Year = 1;
-    [HideInInspector] public int Month = 0;
-    [HideInInspector] public Demons SelectedDemon = Demons.NoDemon;    
+    [HideInInspector] public int Month = 0;  
     [SerializeField] private TextMeshProUGUI GameOverHeader;
     [SerializeField] private TextMeshProUGUI GameOverDescrption;
     [SerializeField] private TextMeshProUGUI AgeLabel;
@@ -26,11 +25,9 @@ public class GameCore : MonoBehaviour
     
     public GameObject ComicsCanvas;
     public List<Rank> Ranks;
-    public List<Enemy> Enemies;
     public List<Technique> Techniques;
     public List<MeridianLevel> MeridianLevels;
     public List<InternalDemonState> InternalDemonStates;
-
 
     public GameObject CombatSystem;
     public GameObject StartHelpCanvas;
@@ -45,6 +42,7 @@ public class GameCore : MonoBehaviour
 
     void Awake()
     {
+        CombatSystem?.SetActive(false);
         if (Instance == null) Instance = this;
         if (SaveManager.NeedLoad) 
         {
@@ -109,17 +107,8 @@ public class GameCore : MonoBehaviour
     public void EndFight()
     {
         MusicPlayer.Instance.PlayMainMusic();
-        Instance.MainHub?.SetActive(true);
-        Instance.CombatSystem?.SetActive(false);
-
-        var demon = Enemies[(int)SelectedDemon];
-
-        AdvanceTime(1);
-        if (SelectedDemon != Demons.NoDemon && demon.IsDead) 
-        {           
-            ComicsCanvas.SetActive(true);
-            demon.SetComicSprite();
-        } 
+        MainHub?.SetActive(true);
+        CombatSystem?.SetActive(false);
         ScreenManager.Instance.OpenMenu((int)Canvases.TravelCanvas);
         CombatHelpShown = true;
     }

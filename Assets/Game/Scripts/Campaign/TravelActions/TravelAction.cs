@@ -12,7 +12,6 @@ public class TravelAction
     public int maxSilverBonus = 800;
     public virtual void DoAction()
     {
-        if(!(this is FightAction)) TravelSystem.Instance.UpdateStage();
         GameCore.Instance.Master.InternalDemon.Change(InternalDemonChange);
         GameCore.Instance.AdvanceTime(TimeCostInMonths);
     }

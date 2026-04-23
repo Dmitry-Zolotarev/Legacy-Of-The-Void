@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[RequireComponent(typeof(Image))]
 public class TravelSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI silverAmountLabel;
@@ -18,18 +17,18 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private TravelPanel lootPanel;
     [SerializeField] private TravelPanel fightPanel;
     [SerializeField] private TravelPanel restPanel;
+    [SerializeField] private Image background;
 
     [HideInInspector] public int CurrentStage = 0;
     [HideInInspector] public int SilverBonus = 0;
     
     public static TravelSystem Instance;
     public GameObject TravelPanels;
-    private Image background;
+    
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        background = GetComponent<Image>();
         ModalWindowsCanvas.SetActive(false);
         UpdateStage();
     }

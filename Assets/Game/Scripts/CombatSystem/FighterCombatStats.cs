@@ -199,20 +199,6 @@ public class FighterCombatStats : MonoBehaviour
             return minTier.ToString();
         return $"{minTier}-{maxTier}";
     }
-
-    public string GetRankLabelRu()
-    {
-        switch (rank)
-        {
-            case MasterRank.ThirdRate: return "Третьесортный";
-            case MasterRank.SecondRate: return "Второсортный";
-            case MasterRank.FirstRate: return "Первосортный";
-            case MasterRank.PeakMaster: return "Мастер пика";
-            case MasterRank.OneFlower: return "Один цветок";
-            default: return "?";
-        }
-    }
-
     private void ApplyRankPresetIfNeeded()
     {
         if (useManualStats)
