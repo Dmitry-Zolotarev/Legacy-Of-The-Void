@@ -8,12 +8,11 @@ public class CharacterData
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
     [HideInInspector] public List<Technique> KnownTechniques = new List<Technique>();
-    [HideInInspector] public int Wounds = 0;
-    [HideInInspector] public int LifeLimit;
-    [HideInInspector] private int WoundThreshold = 5;
+    [SerializeField] private int WoundThreshold = 5;
 
-    public int StartLifeLimit = 80;
+    public int Wounds = 0;
     public int Age = 14;
+    public int LifeLimit = 80;
     public string Name = "Со Мин";
     public int Body = 5;
     public int MaxBody = 5;
@@ -22,7 +21,6 @@ public class CharacterData
     public int Silver = 20;
     public int OpenedMeridians = 0;
     public int CurrentRank = 0;
-    public int BodyElixirs = 0;
     public int QiElixirs = 0;
     
 
@@ -48,7 +46,6 @@ public class CharacterData
         if (data.HasStudent) Student = new Student(data);
 
         Silver = data.Silver;
-        BodyElixirs = data.BodyElixirs;
         QiElixirs = data.QiElixirs;
         CurrentRank = data.CurrentRank;
 
@@ -60,24 +57,32 @@ public class CharacterData
     public void SetWounds(int value)
     {
         Wounds += value;
-        LifeLimit = StartLifeLimit - Wounds;
-    }
-    public void HealWounds()
-    {      
-        LifeLimit = StartLifeLimit;
-        Wounds = 0;
+        LifeLimit -= value;
+        if (Age >= LifeLimit) GameCore.Instance.KillMaster();
     }
     public string GetWoundsDescription()
     {
-        if (Wounds > WoundThreshold)
+        if (Wounds >= WoundThreshold)
         {
-            return "Тяжёлые ранения";
+            return "Тяжелые ранения";
         } 
         else if (Wounds > 0)
         {
-            return "Лёгкие ранения";
+            return "Легкие ранения";
         }
         return "Нет ранений";
+    }
+    public Color GetWoundsColor()
+    {
+        if (Wounds >= WoundThreshold)
+        {
+            return Color.orange;
+        }
+        else if (Wounds > 0)
+        {
+            return Color.yellow;
+        }
+        return Color.lightGreen;
     }
     public void OpenMeridian()
     {

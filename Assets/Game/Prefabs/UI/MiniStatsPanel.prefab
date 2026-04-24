@@ -1017,14 +1017,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatsPanel
   MasterNameLabel: {fileID: 6307167149654385394}
-  GenerationLabel: {fileID: 0}
   AgeLabel: {fileID: 0}
+  LifeRemainLabel: {fileID: 0}
   BodyLabel: {fileID: 5437824768999733717}
   BodyBar: {fileID: 7452146621527248301}
   QiLabel: {fileID: 5002381125751824013}
   QiBar: {fileID: 9195335091159404987}
-  MeridiansLabel: {fileID: 7487365272186274869}
-  RankLabel: {fileID: 0}
+  InternalDemonLabel: {fileID: 0}
+  InternalDemonBar: {fileID: 0}
+  InternalDemonState: {fileID: 0}
+  MeridiansLabel: {fileID: 0}
+  RankLabel: {fileID: 7487365272186274869}
+  WoundsLabel: {fileID: 0}
   HasStudentLabel: {fileID: 9028422217751513715}
   DoRegularUpdate: 0
 --- !u!1 &8551947684044177169

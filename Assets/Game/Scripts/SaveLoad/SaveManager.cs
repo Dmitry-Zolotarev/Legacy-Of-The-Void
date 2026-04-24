@@ -28,7 +28,6 @@ public static class SaveManager
         data.MaxQi = master.MaxQi;
 
         data.Silver = master.Silver;
-        data.BodyElixirs = master.BodyElixirs;
         data.QiElixirs = master.QiElixirs;
         data.InternalDemonValue = master.InternalDemon.Value;
         data.Wounds = master.Wounds;
@@ -44,7 +43,7 @@ public static class SaveManager
         }
         foreach (var item in game.RankItems)
         {
-            data.RankItemCounts.Add(item.Count);
+            data.RankItems.Add(item.Unlocked);
         }
         if (data.HasStudent)
         {
@@ -77,11 +76,11 @@ public static class SaveManager
         string json = File.ReadAllText(Path);
         SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-        int n = Mathf.Min(game.RankItems.Count, data.RankItemCounts.Count);
+        int n = Mathf.Min(game.RankItems.Count, data.RankItems.Count);
 
         for (int i = 0; i < n; i++)
         {
-            game.RankItems[i].Count = data.RankItemCounts[i];
+            game.RankItems[i].Unlocked = data.RankItems[i];
         }
         game.Master = new CharacterData(data);
         game.Year = data.Year;

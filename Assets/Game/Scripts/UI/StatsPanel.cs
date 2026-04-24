@@ -50,9 +50,13 @@ public class StatsPanel : MonoBehaviour
 
             MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
             RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());
-
-            WoundsLabel?.SetText(master.GetWoundsDescription());
             HasStudentLabel?.SetText(master.Student == null ? "Нет ученика" : $"Ученик: {master.Student.GetFullName()}");
+
+            if (WoundsLabel != null)
+            {
+                WoundsLabel.SetText(master.GetWoundsDescription());
+                WoundsLabel.color = master.GetWoundsColor();
+            }     
         }
         catch { }
         

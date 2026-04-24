@@ -4,15 +4,17 @@ using UnityEngine;
 [System.Serializable]
 public class FightAction : TravelAction
 {
-    [SerializeField] private BattleLaunchData BattleData;
     [SerializeField] private int minSilverBonus = 400;
     [SerializeField] private int maxSilverBonus = 800;
     [SerializeField] private RankItem rankItem;
+    [SerializeField] private bool isFinalBoss;
+    [SerializeField] private BattleLaunchData BattleData;
+
 
     public override void DoAction()
     {
         TravelSystem.Instance.SilverBonus = GameCore.Instance.random.Next(minSilverBonus, maxSilverBonus + 1);
-        if(rankItem.Count > 0) TravelSystem.Instance.LootItem = rankItem;
+        if(rankItem.Unlocked) TravelSystem.Instance.LootItem = rankItem;
         LaunchBattle();
         base.DoAction();
     }
@@ -29,9 +31,15 @@ public class FightAction : TravelAction
     public override List<string> GetRewardRows()
     {
         var stringList = new List<string>();
-        stringList.Add($"Серебро: {minSilverBonus} - {maxSilverBonus}");
+
+        if(isFinalBoss)
+        {
+            stringList.Add("Прохождение игры");
+        }
+        else stringList.Add($"Серебро: {minSilverBonus} - {maxSilverBonus}");
+
         string itemName = "";
-        if (rankItem.Count > 0) itemName = rankItem.name;
+        if (rankItem.Unlocked) itemName = rankItem.name;
         stringList.Add(itemName);
         return stringList;
     }

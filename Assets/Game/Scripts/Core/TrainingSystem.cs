@@ -6,7 +6,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(ParticleSpawner))]
 public class TrainingSystem : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI BodyElixirsLabel;
     [SerializeField] private TextMeshProUGUI QiElixirsLabel;
     [SerializeField] private TextMeshProUGUI BodyLabel;  
     [SerializeField] private Animator animator;
@@ -32,7 +31,6 @@ public class TrainingSystem : MonoBehaviour
     }
     private void UpdateLabels()
     {
-        BodyElixirsLabel?.SetText(GameCore.Instance.Master.BodyElixirs.ToString());
         QiElixirsLabel?.SetText(GameCore.Instance.Master.QiElixirs.ToString());
     }
     public void TrainBody()
@@ -74,12 +72,6 @@ public class TrainingSystem : MonoBehaviour
             AgePanel?.SetActive(true);
             UI?.SetActive(true);
 
-            if (master.BodyElixirs > 0)
-            {
-                BodyBonus *= ElixirPower;
-                master.BodyElixirs--;
-                spawner.Spawn(BodyElixirsLabel.transform, $"-1", Color.red);
-            }
             int bodyTrained = master.TrainBody(BodyBonus);       
             spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
 

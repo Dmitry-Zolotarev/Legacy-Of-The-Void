@@ -24,7 +24,6 @@ public class Student : CharacterData
     public void Inherit(CharacterData master)
     {
         Silver = master.Silver;
-        BodyElixirs = master.BodyElixirs;
         QiElixirs = master.QiElixirs;
     }
 }

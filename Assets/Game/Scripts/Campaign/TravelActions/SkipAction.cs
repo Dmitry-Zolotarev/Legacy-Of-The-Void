@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 
 [System.Serializable]
-public class RestAction : TravelAction
+public class SkipAction : TravelAction
 {
     public override void DoAction()
     {
-        GameCore.Instance.Master.Wounds = 0;
-        TravelSystem.Instance.TravelPanels.SetActive(false);
-        TravelSystem.Instance.ModalWindowsCanvas.SetActive(true);
-        TravelSystem.Instance.OpenWindow(1);  
+        TravelSystem.Instance.UpdateStage();
         base.DoAction();
     }
     public override List<string> GetRewardRows()

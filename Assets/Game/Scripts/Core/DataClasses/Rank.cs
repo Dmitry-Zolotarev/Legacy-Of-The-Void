@@ -14,5 +14,4 @@ public class Rank
     public int NeedMeridians;
     public int MaxBody;
     public RankItems RequiredItem;
-    public int RequiredItemsCount = 1;
 }

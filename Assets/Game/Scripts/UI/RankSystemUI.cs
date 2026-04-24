@@ -32,7 +32,9 @@ public class RankSystemUI : MonoBehaviour
         NextRankLabel.SetText(master.GetNextRank().Name);
 
         var item = GameCore.Instance.GetRankItem();
-        RequiredItemLabel.SetText($"{item.name}: {item.Count} / {master.GetNextRank().RequiredItemsCount}");
+        int count = item.Unlocked ? 1 : 0;
+
+        RequiredItemLabel.SetText($"{item.name}: {count} / 1");
         NeedBodyLabel.SetText($"Телосложение: {master.Body} / {GameCore.Instance.Ranks[master.CurrentRank].MaxBody}");
         NeedMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().NeedMeridians}");
         NeedQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 20}");

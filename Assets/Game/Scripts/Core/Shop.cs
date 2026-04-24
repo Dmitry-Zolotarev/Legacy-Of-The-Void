@@ -6,12 +6,9 @@ using System.Collections.Generic;
 [RequireComponent(typeof(ParticleSpawner))]
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private int BodyElixirPrice = 50;
     [SerializeField] private int QiElixirPrice = 100;
     [SerializeField] private TextMeshProUGUI SilverAmountLabel;
-    [SerializeField] private TextMeshProUGUI BodyElixirsLabel;
     [SerializeField] private TextMeshProUGUI QiElixirsLabel;
-    [SerializeField] private TextMeshProUGUI BodyElixirPriceLabel;
     [SerializeField] private TextMeshProUGUI QiElixirPriceLabel;
     [SerializeField] private Image Merchant;
     [SerializeField] private Sprite[] MerchantSprites;
@@ -48,23 +45,8 @@ public class Shop : MonoBehaviour
             TechniqueLots[i].gameObject.SetActive(master.CurrentRank >= technique.RequiredRank && !master.KnownTechniques.Contains(technique));       
         }   
         SilverAmountLabel?.SetText(master.Silver.ToString());
-        BodyElixirsLabel?.SetText(master.BodyElixirs.ToString());
         QiElixirsLabel?.SetText(master.QiElixirs.ToString());
-        BodyElixirPriceLabel?.SetText(BodyElixirPrice.ToString());
         QiElixirPriceLabel?.SetText(QiElixirPrice.ToString());
-    }
-    
-    public void BuyBodyElixir()
-    {
-        if (master.Silver >= BodyElixirPrice)
-        {
-            master.Silver -= BodyElixirPrice;
-            master.BodyElixirs++;
-
-            spawner.Spawn(SilverAmountLabel.transform, $"-{BodyElixirPrice}", Color.red);
-            spawner.Spawn(BodyElixirsLabel.transform, $"+1", Color.green);
-        }
-        UpdateUI();
     }
     public void BuyQiElixir()
     {

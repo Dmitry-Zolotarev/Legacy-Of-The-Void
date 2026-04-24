@@ -11,7 +11,7 @@ public enum RankItems
 [System.Serializable]
 public class RankItem
 {
-    public int Count = 0;
+    public bool Unlocked;
     public RankItems ID = RankItems.SecondFlowPill; 
     public string name = "";
 }

@@ -22,8 +22,6 @@ public class GameCore : MonoBehaviour
     
     [SerializeField] private GameObject CombatHelpCanvas;
     [SerializeField] private GameObject AgeCanvas;
-    [SerializeField] private List<string> SurnameList;
-    [SerializeField] private List<string> NameList;
     
     public GameObject ComicsCanvas;
     public List<Rank> Ranks;
@@ -47,7 +45,6 @@ public class GameCore : MonoBehaviour
     {
         CombatSystem?.SetActive(false);
         spawner = GetComponent<ParticleSpawner>();
-        Master.LifeLimit = Master.StartLifeLimit;
 
         if (Instance == null) Instance = this;
         if (SaveManager.NeedLoad) 
@@ -70,12 +67,6 @@ public class GameCore : MonoBehaviour
     {
         return RankItems[(int)Ranks[Master.GetNextRankID()].RequiredItem];
     }
-    public string GenerateFullName()
-    {
-        string surname = SurnameList?[random.Next(0, SurnameList.Count)];
-        string name = NameList?[random.Next(0, NameList.Count)];
-        return $"{surname} {name}";
-    }
     public static string GetEnumDescription(Enum value)
     {
         var field = value.GetType().GetField(value.ToString());
@@ -91,22 +82,29 @@ public class GameCore : MonoBehaviour
         if (years % 10 == 1) yearWord = "год";
         return yearWord;
     }
-    private void KillMaster()
+    public void EndFight()
+    {
+        MusicPlayer.Instance.PlayMainMusic();
+        MainHub?.SetActive(true);
+        CombatSystem?.SetActive(false);
+        CombatHelpShown = true;
+        if (!GameOverWindow.activeSelf) ScreenManager.Instance.OpenMenu((int)Canvases.TravelCanvas);
+    }
+    public void KillMaster()
     {
         ScreenManager.Instance.CloseMenus();
         GameOverHeader?.SetText($"Мастер {Master.Name} умер");
         
         GameOverWindow.SetActive(true);
-        if (Master.CurrentRank >= (int)MasterRank.FirstRate)
+        if (Master.Student != null)
         {
-            if (Master.Student == null) Master.Student = new Student();
             Master.Student.Inherit(Master);
             Master = Master.Student;
             GameOverDescrption?.SetText("Наследство передано ученику");
         }
         else
         {
-            GameOverDescrption?.SetText("Линия секты Хуашань прервана");
+            GameOverDescrption?.SetText("Линия школы Хуашань прервана");
             MainHubUI.Instance.gameObject.SetActive(false);
             AgeCanvas.SetActive(false);
             ToolTipCanvas.SetActive(false);
@@ -117,15 +115,7 @@ public class GameCore : MonoBehaviour
     {
         SaveManager.Save(this);
         SceneManager.LoadScene(0);
-    }
-    public void EndFight()
-    {
-        MusicPlayer.Instance.PlayMainMusic();
-        MainHub?.SetActive(true);
-        CombatSystem?.SetActive(false);
-        ScreenManager.Instance.OpenMenu((int)Canvases.TravelCanvas);
-        CombatHelpShown = true;
-    }
+    }   
     public void AdvanceTime(int months)
     {
         Month += months;      
@@ -136,7 +126,7 @@ public class GameCore : MonoBehaviour
         Master.Age += years;
         if (Master.Student != null) Master.Student.Age += years;
 
-        if (Master.Age > Master.LifeLimit) KillMaster();
+        if (Master.Age >= Master.LifeLimit) KillMaster();
 
         if(years > 0)
         {

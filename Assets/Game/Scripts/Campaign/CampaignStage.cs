@@ -4,8 +4,10 @@ using UnityEngine;
 public class CampaignStage 
 {
     public string StageName;
+    public string Description;
     public Sprite BackgroundSprite;
     public LootAction LootAction;
     public FightAction FightAction;  
-    public RestAction RestAction;   
+    public RestAction RestAction;
+    public SkipAction SkipAction;
 }

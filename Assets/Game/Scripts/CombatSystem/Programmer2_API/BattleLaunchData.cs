@@ -19,7 +19,8 @@ public class BattleLaunchData
         Player.overrideStartQi = true;
         Player.startQi = master.Qi;
         Player.qiLevel = master.MaxQi / 5 - 4;
-        Player.bodyLevel = master.Body;
+        Player.bodyLevel = master.Body - master.Wounds;
+        if (Player.bodyLevel < 0) Player.bodyLevel = 0;
 
         Player.dragonFist = GameCore.Instance.Master.IsTechniqueUnlocked(TechniqueType.DragonFist);
         Player.craneKick = GameCore.Instance.Master.IsTechniqueUnlocked(TechniqueType.CraneKick);

@@ -5,7 +5,7 @@ public class GameOverButton : MonoBehaviour
     [SerializeField] private GameObject gameOverCanvas;
     private void OnEnable()
     {
-        if (!MainHubUI.Instance.gameObject.activeSelf) SaveManager.DeleteSave();
+        if (!MainHubUI.Instance.gameObject.activeSelf) SaveManager.DeleteSave();        
     }
     public void GameOver()
     {
