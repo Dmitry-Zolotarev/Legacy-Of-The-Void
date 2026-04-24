@@ -31,7 +31,7 @@ public static class SaveManager
         data.BodyElixirs = master.BodyElixirs;
         data.QiElixirs = master.QiElixirs;
         data.InternalDemonValue = master.InternalDemon.Value;
-        data.Wounds = master.WoundDebuff;
+        data.Wounds = master.Wounds;
 
         data.OpenedMeridians = master.OpenedMeridians;
         data.CurrentRank = master.CurrentRank;

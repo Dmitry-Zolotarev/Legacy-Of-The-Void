@@ -14,7 +14,8 @@ public class StatsPanel : MonoBehaviour
     [SerializeField] private Slider InternalDemonBar;
     [SerializeField] private TextMeshProUGUI InternalDemonState;
     [SerializeField] private TextMeshProUGUI MeridiansLabel;
-    [SerializeField] private TextMeshProUGUI RankLabel;   
+    [SerializeField] private TextMeshProUGUI RankLabel;
+    [SerializeField] private TextMeshProUGUI WoundsLabel;
     [SerializeField] private TextMeshProUGUI HasStudentLabel;
     [SerializeField] private bool DoRegularUpdate = false;
     private CharacterData master;
@@ -50,6 +51,7 @@ public class StatsPanel : MonoBehaviour
             MeridiansLabel?.SetText($"Открыто меридианов: {master.OpenedMeridians} / {GameCore.Instance.MeridianLevels.Count}");
             RankLabel?.SetText("Ранг: " + GameCore.Instance.Ranks[master.CurrentRank].Name.ToLower());
 
+            WoundsLabel?.SetText(master.GetWoundsDescription());
             HasStudentLabel?.SetText(master.Student == null ? "Нет ученика" : $"Ученик: {master.Student.GetFullName()}");
         }
         catch { }

@@ -9,6 +9,7 @@ using TMPro;
 [RequireComponent(typeof(ParticleSpawner))]
 public class GameCore : MonoBehaviour
 {
+    [HideInInspector] public float PlayTime = 0f;
     [HideInInspector] public int Year = 1;
     [HideInInspector] public int Month = 0;
     [HideInInspector] public int CurrentStage = 0;
@@ -42,7 +43,7 @@ public class GameCore : MonoBehaviour
     public bool CombatHelpShown = false;
     private ParticleSpawner spawner;
 
-    void Awake()
+    private void Awake()
     {
         CombatSystem?.SetActive(false);
         spawner = GetComponent<ParticleSpawner>();
@@ -55,11 +56,15 @@ public class GameCore : MonoBehaviour
         }   
         
     }
-    void Start()
+    private void Start()
     {
         AgeLabel?.SetText(Master.Age.ToString());
         ComicsCanvas?.SetActive(!StartComicShown);
         CombatHelpCanvas.SetActive(!CombatHelpShown);
+    }
+    private void Update()
+    {
+        PlayTime += Time.deltaTime;
     }
     public RankItem GetRankItem()
     {

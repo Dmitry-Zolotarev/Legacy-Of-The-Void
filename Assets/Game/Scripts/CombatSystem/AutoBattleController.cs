@@ -241,7 +241,6 @@ public class AutoBattleController : MonoBehaviour
 
         if (Instance == null) Instance = this;
     }
-
     private void Start()
     {
         BindButtons();
@@ -789,23 +788,17 @@ public class AutoBattleController : MonoBehaviour
         bool hasWinner = playerStats.CurrentHP <= 0 || enemyStats.CurrentHP <= 0;
         if (hasWinner)
         {
-            battleFinished = true;
-            if (playerStats.CurrentHP <= 0 && enemyStats.CurrentHP <= 0)
-            {
-                GameCore.Instance.Master.SetWounds((int)enemyStats.Rank + 1);
-                playerAnimator?.PlayDefeat();
-                enemyAnimator?.PlayDefeat();
-                PlayOneShot(defeatSfx);
-                ShowResultPanel("Ничья");
-                
-            }
-            else if (enemyStats.CurrentHP <= 0)
+            
+            if (playerStats.CurrentHP > 0)
             {
                 playerAnimator?.PlayVictory();
                 enemyAnimator?.PlayDefeat();
                 PlayOneShot(victorySfx);
-                ShowResultPanel($"Вы победили и получили {TravelSystem.Instance.SilverBonus} серебра");
-                TravelSystem.Instance.AddSilverToPlayer(); 
+                TravelSystem.Instance.PickLoot();
+
+                string lootString = "";
+                if (TravelSystem.Instance.LootItem.name != null) lootString = $"\n{TravelSystem.Instance.LootItem.name}";
+                ShowResultPanel($"Вы победили\n\nПолучено: {TravelSystem.Instance.SilverBonus} серебра" + lootString);             
             }
             else
             {
@@ -813,9 +806,10 @@ public class AutoBattleController : MonoBehaviour
                 playerAnimator?.PlayDefeat();
                 enemyAnimator?.PlayVictory();
                 PlayOneShot(defeatSfx);
-                ShowResultPanel("Вы проиграли");
+                ShowResultPanel("Вы проиграли\n\nПолучены ранения");
             }
             isBusy = false;
+            battleFinished = true;
             RefreshButtonStates();
             yield return new WaitForSeconds(ShowResultsTime);
             if(playerStats.CurrentHP > 0) TravelSystem.Instance.UpdateStage();
@@ -1955,5 +1949,4 @@ public class AutoBattleController : MonoBehaviour
         RefreshUI();
         RefreshButtonStates();
     }
-
 }

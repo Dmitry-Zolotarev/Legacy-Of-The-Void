@@ -23,8 +23,6 @@ public class RankSystemUI : MonoBehaviour
     private void OnEnable()
     {
         UpdateLabels();
-
-        if (master.CurrentRank >= GameCore.Instance.Ranks.Count - 1) FinalVoidBreakCanvas?.SetActive(true);
     }
     public void UpdateLabels()
     {
@@ -34,7 +32,7 @@ public class RankSystemUI : MonoBehaviour
         NextRankLabel.SetText(master.GetNextRank().Name);
 
         var item = GameCore.Instance.GetRankItem();
-        RequiredItemLabel.SetText($"{item.name}: {item.count} / {master.GetNextRank().RequiredItemsCount}");
+        RequiredItemLabel.SetText($"{item.name}: {item.Count} / {master.GetNextRank().RequiredItemsCount}");
         NeedBodyLabel.SetText($"Телосложение: {master.Body} / {GameCore.Instance.Ranks[master.CurrentRank].MaxBody}");
         NeedMeridiansLabel.SetText($"Меридианы: {master.OpenedMeridians} / {master.GetNextRank().NeedMeridians}");
         NeedQiLabel.SetText($"Текущая ци: {master.Qi} / {master.GetNextRankID() * 20}");

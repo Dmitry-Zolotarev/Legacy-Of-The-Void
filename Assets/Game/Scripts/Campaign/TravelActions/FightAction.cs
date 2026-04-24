@@ -1,14 +1,18 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class FightAction : TravelAction
 {
-    public BattleLaunchData BattleData;
-    public int minSilverBonus = 400;
-    public int maxSilverBonus = 800;
+    [SerializeField] private BattleLaunchData BattleData;
+    [SerializeField] private int minSilverBonus = 400;
+    [SerializeField] private int maxSilverBonus = 800;
+    [SerializeField] private RankItem rankItem;
+
     public override void DoAction()
     {
         TravelSystem.Instance.SilverBonus = GameCore.Instance.random.Next(minSilverBonus, maxSilverBonus + 1);
+        if(rankItem.Count > 0) TravelSystem.Instance.LootItem = rankItem;
         LaunchBattle();
         base.DoAction();
     }
@@ -26,6 +30,9 @@ public class FightAction : TravelAction
     {
         var stringList = new List<string>();
         stringList.Add($"Серебро: {minSilverBonus} - {maxSilverBonus}");
+        string itemName = "";
+        if (rankItem.Count > 0) itemName = rankItem.name;
+        stringList.Add(itemName);
         return stringList;
     }
     public override List<string> GetEffectRows()

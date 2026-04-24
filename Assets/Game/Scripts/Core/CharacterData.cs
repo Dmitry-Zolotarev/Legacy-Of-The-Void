@@ -8,8 +8,9 @@ public class CharacterData
     [HideInInspector] public bool DiscipleUnlocked = false;
     [HideInInspector] public bool FinalBreakReadyFlag = false;
     [HideInInspector] public List<Technique> KnownTechniques = new List<Technique>();
-    [HideInInspector] public int WoundDebuff = 0;
+    [HideInInspector] public int Wounds = 0;
     [HideInInspector] public int LifeLimit;
+    [HideInInspector] private int WoundThreshold = 5;
 
     public int StartLifeLimit = 80;
     public int Age = 14;
@@ -42,7 +43,7 @@ public class CharacterData
         MaxQi = data.MaxQi;
         InternalDemon.Value = data.InternalDemonValue;
         OpenedMeridians = data.OpenedMeridians;
-        WoundDebuff = data.Wounds;
+        Wounds = data.Wounds;
         Qi = data.Qi;
         if (data.HasStudent) Student = new Student(data);
 
@@ -58,13 +59,25 @@ public class CharacterData
     }
     public void SetWounds(int value)
     {
-        WoundDebuff += value;
-        LifeLimit = StartLifeLimit - WoundDebuff;
+        Wounds += value;
+        LifeLimit = StartLifeLimit - Wounds;
     }
     public void HealWounds()
     {      
         LifeLimit = StartLifeLimit;
-        WoundDebuff = 0;
+        Wounds = 0;
+    }
+    public string GetWoundsDescription()
+    {
+        if (Wounds > WoundThreshold)
+        {
+            return "Тяжёлые ранения";
+        } 
+        else if (Wounds > 0)
+        {
+            return "Лёгкие ранения";
+        }
+        return "Нет ранений";
     }
     public void OpenMeridian()
     {
