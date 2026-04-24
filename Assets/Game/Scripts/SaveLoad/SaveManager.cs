@@ -42,8 +42,11 @@ public static class SaveManager
         {
             data.KnownTechniques.Add(technique.Type);
         }
-
-        if(data.HasStudent)
+        foreach (var item in game.RankItems)
+        {
+            data.RankItemCounts.Add(item.Count);
+        }
+        if (data.HasStudent)
         {
             data.StudentName = master.Student.Name;
             data.StudentAge = master.Student.Age;
@@ -73,6 +76,13 @@ public static class SaveManager
         }
         string json = File.ReadAllText(Path);
         SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+        int n = Mathf.Min(game.RankItems.Count, data.RankItemCounts.Count);
+
+        for (int i = 0; i < n; i++)
+        {
+            game.RankItems[i].Count = data.RankItemCounts[i];
+        }
         game.Master = new CharacterData(data);
         game.Year = data.Year;
         game.StartComicShown = data.StartComicShown;

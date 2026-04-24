@@ -39,4 +39,5 @@ public class SaveData
     public int StudentMaxQi;
     public int StudentOpenedMeridians;
     public List<int> KnownTechniques = new List<int>();
+    public List<int> RankItemCounts = new List<int>();
 }
