@@ -246,6 +246,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 4280733389367079454}
+  InternalDemonIncrease: 2
 --- !u!1 &641680945234014597
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +312,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 7580290278369082106}
+  InternalDemonIncrease: 2
 --- !u!1 &1023176403525152167
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +378,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 4906064234803707379}
+  InternalDemonIncrease: 2
 --- !u!1 &1452995529825401607
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +597,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 4837743769009059169}
+  InternalDemonIncrease: 2
 --- !u!1 &1619207865459326147
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,8 +784,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: -400}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -640, y: -400}
+  m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2165799388187804537
 CanvasRenderer:
@@ -1484,6 +1488,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 8764687395503279644}
+  InternalDemonIncrease: 2
 --- !u!1 &4395244259177108920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1554,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 1249806836410269967}
+  InternalDemonIncrease: 2
 --- !u!1 &4442839672044216054
 GameObject:
   m_ObjectHideFlags: 0
@@ -1689,6 +1695,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 2516183548909188208}
+  InternalDemonIncrease: 2
 --- !u!1 &5140835116445334827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,6 +1911,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 4954421370525851592}
+  InternalDemonIncrease: 2
 --- !u!1 &5666962037629321770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2154,6 +2162,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 7466261002169287357}
+  InternalDemonIncrease: 2
 --- !u!1 &6971431231893895105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,6 +2543,7 @@ MonoBehaviour:
   MaxSpeed: 30
   AccelerationDelta: 5
   DantianRadius: 70
+  InternalDemonIncrease: 3
   StartSpeed: 0
   CurrentSpeed: 0
   OnDantian: 1
@@ -2604,6 +2614,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 5860183796334972000}
+  InternalDemonIncrease: 2
 --- !u!1 &7803774390287114983
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,6 +2755,7 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 3805268567708972304}
+  InternalDemonIncrease: 2
 --- !u!1 &8310191206975476623
 GameObject:
   m_ObjectHideFlags: 0
@@ -2886,8 +2898,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u041D\u0430\u0437\u0430\u0434"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3b532f9d2530e2944adaeebc6c4dd83f, type: 2}
+  m_sharedMaterial: {fileID: 4041680305039466951, guid: 3b532f9d2530e2944adaeebc6c4dd83f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2911,8 +2923,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3021,3 +3033,4 @@ MonoBehaviour:
   NodeBreakWeak: {fileID: -2626698475689645945, guid: e3a8720f2f75c0140a187959a48dac0b, type: 3}
   defaultSprite: {fileID: 1647056779937603151, guid: e7e52e6aa40b10c4bbb2326f74250efa, type: 3}
   nodeImage: {fileID: 515029204634701635}
+  InternalDemonIncrease: 2

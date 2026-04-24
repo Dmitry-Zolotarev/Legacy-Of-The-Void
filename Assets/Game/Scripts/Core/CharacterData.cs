@@ -92,10 +92,10 @@ public class CharacterData
         
         OpenedMeridians++;
     }
-    public int TrainBody(int coefficient)
+    public int TrainBody()
     {
         int startBody = Body;
-        var bonus = InternalDemon.GetCurrentState().BodyTrainBonus * coefficient;
+        var bonus = InternalDemon.GetCurrentState().BodyTrainBonus;
         Body += bonus;
 
         if (Body > MaxBody) Body = MaxBody;

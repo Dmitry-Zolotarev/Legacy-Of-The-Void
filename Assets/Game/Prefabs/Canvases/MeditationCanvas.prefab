@@ -602,6 +602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatsPanel
   MasterNameLabel: {fileID: 0}
   AgeLabel: {fileID: 0}
+  LifeRemainLabel: {fileID: 0}
   BodyLabel: {fileID: 0}
   BodyBar: {fileID: 0}
   QiLabel: {fileID: 0}
@@ -611,6 +612,7 @@ MonoBehaviour:
   InternalDemonState: {fileID: 5679989899740855399}
   MeridiansLabel: {fileID: 0}
   RankLabel: {fileID: 0}
+  WoundsLabel: {fileID: 0}
   HasStudentLabel: {fileID: 0}
   DoRegularUpdate: 1
 --- !u!1 &2789676103491106918
@@ -1646,7 +1648,7 @@ MonoBehaviour:
   BreathingAmplitude: 0.03
   tickTime: 0.5
   ElixirPower: 3
-  SpendMonths: 2
+  SpendMonths: 1
 --- !u!114 &3013153892008050433
 MonoBehaviour:
   m_ObjectHideFlags: 0

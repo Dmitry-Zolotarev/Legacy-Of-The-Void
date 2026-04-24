@@ -12,18 +12,13 @@ public class TrainingSystem : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Sprite gymBackground;
     [SerializeField] private Sprite combatBackground;
-    [SerializeField] private GameObject AgePanel;
-    [SerializeField] private GameObject UI;
-
-
-    [SerializeField] private float trainingTime = 4f;
-    [SerializeField] private int ElixirPower = 2;
-    [SerializeField] private int SpendMonths = 6;
+    [SerializeField] private float trainingTime = 3f;
+    [SerializeField] private int SpendMonths = 4;
     [SerializeField] private int InternalDemonIncrease = 4;
 
     private ParticleSpawner spawner;
-    private int BodyBonus = 1;
     public bool IsTraining = false;
+
     private void Awake()
     {
         spawner = GetComponent<ParticleSpawner>();
@@ -35,7 +30,8 @@ public class TrainingSystem : MonoBehaviour
     }
     public void TrainBody()
     {
-        if(!IsTraining) StartCoroutine(TrainBodyCoroutine());   
+        if (!IsTraining) StartCoroutine(TrainBodyCoroutine());
+        else IsTraining = false;
     }
     public void OnEnable()
     {
@@ -55,32 +51,20 @@ public class TrainingSystem : MonoBehaviour
         background.sprite = combatBackground;
     }
     private IEnumerator TrainBodyCoroutine()
-    {      
+    {
+        IsTraining = true;
+        animator?.SetBool("IsTraining", true);
         var master = GameCore.Instance.Master;
-        BodyBonus = 1;
-        if (master.Body < master.MaxBody)
+        while (master.Body < master.MaxBody && IsTraining)
         {
-            IsTraining = true;
-            animator?.SetBool("IsTraining", true);
-            AgePanel?.SetActive(false);
-            UI?.SetActive(false);
-
+            IsTraining = true;           
             yield return new WaitForSeconds(trainingTime);
-
-            IsTraining = false;
-            animator?.SetBool("IsTraining", false);
-            AgePanel?.SetActive(true);
-            UI?.SetActive(true);
-
-            int bodyTrained = master.TrainBody(BodyBonus);       
+            int bodyTrained = master.TrainBody();    
             spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
-
             master.InternalDemon.Change(InternalDemonIncrease);
-
-            GameCore.Instance.AdvanceTime(SpendMonths);
-
-            
-            
+            GameCore.Instance.AdvanceTime(SpendMonths);  
         }
+        animator?.SetBool("IsTraining", false);
+        IsTraining = false;
     }
 }
