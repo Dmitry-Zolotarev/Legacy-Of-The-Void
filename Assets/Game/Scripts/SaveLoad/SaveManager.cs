@@ -59,7 +59,9 @@ public static class SaveManager
         data.StartComicShown = game.StartComicShown;
         data.StartHelpShown = game.StartHelpShown;
         data.CombatHelpShown = game.CombatHelpShown;
-        data.CurrentStage = game.CurrentStage - 1;
+
+        data.CurrentStage = game.CurrentStage;
+        if (data.CurrentStage > 0) data.CurrentStage--;
 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(Path, json);
