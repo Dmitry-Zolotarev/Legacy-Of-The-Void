@@ -728,6 +728,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -865,9 +866,9 @@ RectTransform:
   - {fileID: 3800633828407934114}
   m_Father: {fileID: 7370370073057108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -822, y: 298}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 228, y: -375}
   m_SizeDelta: {x: 520, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8439575554200061523
@@ -922,6 +923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StatsPanel
   MasterNameLabel: {fileID: 1463351447735409886}
   AgeLabel: {fileID: 0}
+  LifeRemainLabel: {fileID: 0}
   BodyLabel: {fileID: 0}
   BodyBar: {fileID: 0}
   QiLabel: {fileID: 5007561406942170260}
@@ -931,6 +933,7 @@ MonoBehaviour:
   InternalDemonState: {fileID: 0}
   MeridiansLabel: {fileID: 4548740372050744700}
   RankLabel: {fileID: 4021764739911593890}
+  WoundsLabel: {fileID: 0}
   HasStudentLabel: {fileID: 0}
   DoRegularUpdate: 1
 --- !u!1 &5031807472868580086
@@ -1177,9 +1180,9 @@ RectTransform:
   - {fileID: 1176003470473840587}
   m_Father: {fileID: 7370370073057108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.5, y: -520}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -2.5, y: 153}
   m_SizeDelta: {x: 695, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5610453562479193315
@@ -1898,9 +1901,9 @@ RectTransform:
   - {fileID: 1842851865653912957}
   m_Father: {fileID: 7370370073057108201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -820, y: -10}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 230, y: -10}
   m_SizeDelta: {x: 520, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5469731289438881327
@@ -2275,19 +2278,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2327,11 +2330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -850
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -520
+      value: 153
       objectReference: {fileID: 0}
     - target: {fileID: 5419491480207571336, guid: 6ad0952c62492504ebf2aade3888e26d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
