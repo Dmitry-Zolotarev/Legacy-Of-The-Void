@@ -1213,11 +1213,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!224 &86649406 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6395693404580210012, guid: 101c4b09de1652848a1a8158cce74ef0, type: 3}
-  m_PrefabInstance: {fileID: 5649395145514396750}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &86649407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37835,8 +37830,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 304.46042, y: 88.49668}
-  m_SizeDelta: {x: 566.2988, y: 282.0163}
+  m_AnchoredPosition: {x: 300, y: 70}
+  m_SizeDelta: {x: 550, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1290637306
 MonoBehaviour:
@@ -45323,7 +45318,6 @@ Transform:
   - {fileID: 215406249}
   - {fileID: 1177366898}
   - {fileID: 1938562999}
-  - {fileID: 86649406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934725650
@@ -52364,7 +52358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -60}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 110, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3389909380421896056
@@ -53044,7 +53038,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1934468470}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1143277613683094090, guid: 101c4b09de1652848a1a8158cce74ef0, type: 3}
       propertyPath: SecondsBeforeClose
@@ -53061,6 +53055,10 @@ PrefabInstance:
     - target: {fileID: 2786636456977516394, guid: 101c4b09de1652848a1a8158cce74ef0, type: 3}
       propertyPath: m_LocalScale.z
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2939161649469912618, guid: 101c4b09de1652848a1a8158cce74ef0, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3289010185849945041, guid: 101c4b09de1652848a1a8158cce74ef0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -53715,6 +53713,7 @@ SceneRoots:
   - {fileID: 1690900535}
   - {fileID: 1705401603}
   - {fileID: 1865580103}
+  - {fileID: 5649395145514396750}
   - {fileID: 1934468470}
   - {fileID: 1865231411}
   - {fileID: 86649409}
