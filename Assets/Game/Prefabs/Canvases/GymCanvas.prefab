@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 802880743678593171}
   - component: {fileID: 8638916977195883152}
   - component: {fileID: 6193026638812457279}
+  - component: {fileID: 7551982828376045665}
   m_Layer: 5
   m_Name: GymCanvas
   m_TagString: GymCanvas
@@ -329,13 +330,24 @@ MonoBehaviour:
   background: {fileID: 0}
   gymBackground: {fileID: 2619591857597635248, guid: 5371446122b2e72428c8da1f6f871617, type: 3}
   combatBackground: {fileID: -2477528096776276882, guid: 059a27a33f216b1489563d379b3ff393, type: 3}
-  AgePanel: {fileID: 0}
-  UI: {fileID: 3052208636427353524}
   trainingTime: 2
-  ElixirPower: 2
   SpendMonths: 6
   InternalDemonIncrease: 4
   IsTraining: 0
+--- !u!114 &7551982828376045665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647354798077949136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  playSoundCooldown: 0
+  sound: {fileID: 8300000, guid: 48fff8ebc6fa469418b0356892b60226, type: 3}
 --- !u!1 &3052208636427353524
 GameObject:
   m_ObjectHideFlags: 0

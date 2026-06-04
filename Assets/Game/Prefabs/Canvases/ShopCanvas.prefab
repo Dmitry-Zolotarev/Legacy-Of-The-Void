@@ -875,6 +875,7 @@ GameObject:
   - component: {fileID: 7338719037398591157}
   - component: {fileID: 2558463002869219745}
   - component: {fileID: 8638916977195883152}
+  - component: {fileID: 7551982828376045665}
   m_Layer: 5
   m_Name: ShopCanvas
   m_TagString: Untagged
@@ -1056,6 +1057,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParticleSpawner
   objectToSpawn: {fileID: 1558020293674316438, guid: 15fe694bfda1c8146a64082ed2d29786, type: 3}
+--- !u!114 &7551982828376045665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647354798077949136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  sound: {fileID: 8300000, guid: b13c5a6f564c7c94e8fb264a95707170, type: 3}
 --- !u!1 &2712008209103818484
 GameObject:
   m_ObjectHideFlags: 0

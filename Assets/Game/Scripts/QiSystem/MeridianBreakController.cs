@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlaySoundsComponent))]
 public class MeridianBreakController : MonoBehaviour
 {
     [SerializeField] private QiOrbController QiOrb;
@@ -12,12 +13,17 @@ public class MeridianBreakController : MonoBehaviour
     [SerializeField] private GameObject MouseIcon;
     [SerializeField] private Image QiFluid;
 
+    private PlaySoundsComponent audioPlayer;
     private CharacterData master;
 
     [SerializeField] private List<MeridianNode> Nodes = new List<MeridianNode>();
     private int NodesCount;
     private bool[] nodeStates;
 
+    private void Awake()
+    {
+        audioPlayer = GetComponent<PlaySoundsComponent>();
+    }
     private void OnEnable()
     {
         if (GameCore.Instance != null && GameCore.Instance.Master != null)
@@ -70,7 +76,6 @@ public class MeridianBreakController : MonoBehaviour
         {
             StartSession(GameCore.Instance.Master, 12);
         }
-
         CheckNodes();
         UpdateUI();
     }
@@ -83,7 +88,8 @@ public class MeridianBreakController : MonoBehaviour
         {
             if (Nodes[i].IsOpened && !nodeStates[i])
             {
-                master.OpenMeridian();
+                audioPlayer?.Play();
+                master?.OpenMeridian();
             }
             nodeStates[i] = Nodes[i].IsOpened;
         }

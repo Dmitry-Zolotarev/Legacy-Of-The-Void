@@ -1,36 +1,16 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class PlaySoundsComponent : MonoBehaviour
 {
-    [SerializeField] private float playSoundCooldown = 0.2f;
-    [SerializeField] private List<AudioData> sounds;
-    private AudioSource source;
+    [SerializeField] private AudioClip sound;
     private float lastPlayTime;
-    private void Start()
+
+    public void Play()
     {
-        source = GetComponent<AudioSource>();
-    }
-    public void Play(string id)
-    {
-        foreach(var audioData in sounds)
+        if (sound != null && Time.time > lastPlayTime)
         {
-            if (audioData.id == id && Time.time > lastPlayTime + playSoundCooldown) 
-            {
-                lastPlayTime = Time.time;
-                source.PlayOneShot(audioData.clip);
-                break;
-            }           
+            lastPlayTime = Time.time;
+            SFXPlayer.Instance.AudioSource?.PlayOneShot(sound);
         }
-    }
-    [Serializable]
-    public class AudioData
-    {
-        [SerializeField] private string _id;
-        [SerializeField] private AudioClip _clip;
-        public string id => _id;
-        public AudioClip clip => _clip;
     }
 }

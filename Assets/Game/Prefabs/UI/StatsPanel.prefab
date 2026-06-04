@@ -1714,6 +1714,7 @@ GameObject:
   - component: {fileID: 2199543845392422439}
   - component: {fileID: 6278926417506748144}
   - component: {fileID: 1346468338049586061}
+  - component: {fileID: 2212024587013400480}
   m_Layer: 5
   m_Name: InternalDemon
   m_TagString: Untagged
@@ -1836,12 +1837,29 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 34.265244, z: -175.00763, w: 0}
+  m_margin: {x: 0, y: 34.265244, z: -108.08533, w: 98.885506}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2212024587013400480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8091965704390126265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11cc3efb29c6ee94486e3d7df8baf4bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TooltipTrigger
+  tooltipText: "\u0412\u043D\u0443\u0442\u0440\u0435\u043D\u043D\u0438\u0439 \u0434\u0435\u043C\u043E\u043D
+    \u0441\u043D\u0438\u0436\u0430\u0435\u0442 \u044D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u043E\u0441\u0442\u044C
+    \u0442\u0440\u0435\u043D\u0438\u0440\u043E\u0432\u043E\u043A  \u043C\u0435\u0434\u0438\u0442\u0430\u0446\u0438\u0438"
+  offset: {x: 80, y: 60, z: 0}
+  fontSize: 15
 --- !u!1 &8162985946449330987
 GameObject:
   m_ObjectHideFlags: 0

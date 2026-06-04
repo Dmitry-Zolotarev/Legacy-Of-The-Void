@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -896,6 +896,7 @@ GameObject:
   - component: {fileID: 802880743678593171}
   - component: {fileID: 7338719037398591157}
   - component: {fileID: 4329256475384984102}
+  - component: {fileID: 7551982828376045665}
   m_Layer: 5
   m_Name: MeridiansCanvas
   m_TagString: MeridianScreen
@@ -1060,6 +1061,19 @@ MonoBehaviour:
   - {fileID: 7629696558905493224}
   - {fileID: 2530834862135785361}
   - {fileID: 9200591911895868315}
+--- !u!114 &7551982828376045665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2647354798077949136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  sound: {fileID: 8300000, guid: 7ba6865cbb1392a49adaf3a5f4655b8e, type: 3}
 --- !u!1 &3449631408484815519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1754,7 +1768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2463,6 +2477,7 @@ GameObject:
   - component: {fileID: 4032265238214597197}
   - component: {fileID: 824702947786632280}
   - component: {fileID: 7977781971474927700}
+  - component: {fileID: 2350662326152164285}
   m_Layer: 5
   m_Name: QiOrb
   m_TagString: Untagged
@@ -2549,6 +2564,19 @@ MonoBehaviour:
   OnDantian: 1
   AngleDegrees: 0
   QiAmount: 5
+--- !u!114 &2350662326152164285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665861656000280129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  sound: {fileID: 8300000, guid: 0ed5a882dc200284e8b45f9825063b19, type: 3}
 --- !u!1 &7747116919105151455
 GameObject:
   m_ObjectHideFlags: 0

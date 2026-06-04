@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(ParticleSpawner))]
+[RequireComponent(typeof(PlaySoundsComponent))]
 public class TrainingSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI QiElixirsLabel;
@@ -17,11 +18,13 @@ public class TrainingSystem : MonoBehaviour
     [SerializeField] private int InternalDemonIncrease = 4;
 
     private ParticleSpawner spawner;
+    private PlaySoundsComponent audioPlayer;
     public bool IsTraining = false;
 
     private void Awake()
     {
         spawner = GetComponent<ParticleSpawner>();
+        audioPlayer = GetComponent<PlaySoundsComponent>();
         animator.gameObject.SetActive(false);
     }
     private void UpdateLabels()
@@ -51,10 +54,14 @@ public class TrainingSystem : MonoBehaviour
         background.sprite = combatBackground;
     }
     private IEnumerator TrainBodyCoroutine()
-    {
-        IsTraining = true;
-        animator?.SetBool("IsTraining", true);
+    {     
         var master = GameCore.Instance.Master;
+
+        if(master.Body < master.MaxBody)
+        {
+            IsTraining = true;
+            animator?.SetBool("IsTraining", true);
+        }        
         while (master.Body < master.MaxBody && IsTraining)
         {
             IsTraining = true;           
@@ -62,8 +69,10 @@ public class TrainingSystem : MonoBehaviour
             int bodyTrained = master.TrainBody();    
             spawner.Spawn(BodyLabel.transform, $"+{bodyTrained}", Color.green);
             master.InternalDemon.Change(InternalDemonIncrease);
-            GameCore.Instance.AdvanceTime(SpendMonths);  
-        }
+            GameCore.Instance.AdvanceTime(SpendMonths);
+            
+        }   
+        if(IsTraining) audioPlayer.Play();
         animator?.SetBool("IsTraining", false);
         IsTraining = false;
     }

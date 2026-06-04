@@ -96,7 +96,7 @@ public class TravelSystem : MonoBehaviour
             stageDescriptionLabel.SetText(stage.Description);
 
             GameCore.Instance.CurrentStage++;
-            
+            PickLoot();
         }   
         else finalVoidBreakCanvas.SetActive(true);
     }

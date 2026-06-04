@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Transform))]
+[RequireComponent(typeof(PlaySoundsComponent))]
 public class QiOrbController : MonoBehaviour
 {
     public float MinSpeed = 25f;
@@ -11,11 +11,15 @@ public class QiOrbController : MonoBehaviour
 
     [HideInInspector] public float StartSpeed, CurrentSpeed;
     [HideInInspector] public bool OnDantian = true;
-    
-    
+
+    private PlaySoundsComponent audioPlayer;
     public float AngleDegrees = 0;
     public int QiAmount = 5;
 
+    private void Awake()
+    {
+        audioPlayer = GetComponent<PlaySoundsComponent>();
+    }
     private void OnEnable()
     {
         StartSpeed = (MinSpeed + MaxSpeed) / 2f;
@@ -42,6 +46,7 @@ public class QiOrbController : MonoBehaviour
         {
             OnDantian = false;
             GameCore.Instance.Master.SpendQi(QiAmount);
+            audioPlayer.Play();
         }       
     }
     private void Update()

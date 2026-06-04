@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(ParticleSpawner))]
+[RequireComponent(typeof(PlaySoundsComponent))]
 public class Shop : MonoBehaviour
 {
     [SerializeField] private int QiElixirPrice = 100;
@@ -15,12 +16,15 @@ public class Shop : MonoBehaviour
     [SerializeField] private List<GameObject> TechniqueLots;
     [SerializeField] private List<TextMeshProUGUI> TechniqueNameLabels;
     [SerializeField] private List<TextMeshProUGUI> TechniquePriceLabels;
+
     private ParticleSpawner spawner;
+    private PlaySoundsComponent audioPlayer;
     private CharacterData master;
 
     private void Awake()
     {
         spawner = GetComponent<ParticleSpawner>();
+        audioPlayer = GetComponent<PlaySoundsComponent>();
     }
     private void OnEnable()
     {
@@ -57,6 +61,7 @@ public class Shop : MonoBehaviour
 
             spawner.Spawn(SilverAmountLabel.transform, $"-{QiElixirPrice}", Color.red);
             spawner.Spawn(QiElixirsLabel.transform, $"+1", Color.green);
+            audioPlayer.Play();
         }
         UpdateUI();
     }
@@ -69,6 +74,7 @@ public class Shop : MonoBehaviour
             master.KnownTechniques.Add(technique);
 
             spawner.Spawn(SilverAmountLabel.transform, $"-{technique.Price}", Color.red);
+            audioPlayer.Play();
         }
         UpdateUI();
     }

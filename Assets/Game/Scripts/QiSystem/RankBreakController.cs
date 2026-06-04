@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(PlaySoundsComponent))]
 public class RankBreakController : MonoBehaviour
 {
     [SerializeField] private QiOrbController QiOrb;  
@@ -13,11 +14,16 @@ public class RankBreakController : MonoBehaviour
     [SerializeField] private GameObject MouseIcon;
     [SerializeField] private Image QiFluid;
 
+    private int nextRank = 1;
+    private int maxFilledNodes = 0;
     private CharacterData master;
     private CharacterData lastMaster;
+    private PlaySoundsComponent audioPlayer;
 
-    private int nextRank = 1;
-
+    private void Awake()
+    {
+        audioPlayer = GetComponent<PlaySoundsComponent>();
+    }
     void OnEnable()
     {
         Cursor.visible = false;
@@ -39,10 +45,16 @@ public class RankBreakController : MonoBehaviour
             lastMaster = master;
         }
         UpdateUI();
+
         int filledNodes = 0;
         for (int i = 0; i < nextRank; i++)
         {
-            if (Nodes[i].IsFilled) filledNodes++;
+            if (Nodes[i].IsFilled) filledNodes++;                     
+        }
+        if (filledNodes > maxFilledNodes)
+        {
+            maxFilledNodes = filledNodes;
+            audioPlayer.Play();
         }
         FilledNodesLabel?.SetText($"Заполнено узлов: {filledNodes} / {nextRank}");
 
@@ -63,6 +75,7 @@ public class RankBreakController : MonoBehaviour
     }
     private void UpdateNodes()
     {
+        maxFilledNodes = 0;
         nextRank = master.CurrentRank + 1;
 
         for (int i = 0; i < Nodes.Count; i++)
@@ -74,6 +87,6 @@ public class RankBreakController : MonoBehaviour
     private void ExitToRankMenu()
     {
         UpdateNodes();
-        ScreenManager.Instance.OpenMenu((int)Canvases.RankCanvas);
+        ScreenManager.Instance.OpenMenu((int)Canvases.RankCanvas);      
     }
 }
