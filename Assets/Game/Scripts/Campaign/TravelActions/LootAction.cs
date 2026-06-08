@@ -7,7 +7,7 @@ public class LootAction : TravelAction
     [SerializeField] private RankItems rankItem;
     public override void DoAction()
     {
-        GameCore.Instance.RankItems[(int)rankItem].Unlocked = true;
+        TravelSystem.Instance.LootItem = GameCore.Instance.RankItems[(int)rankItem];
         TravelSystem.Instance.TravelPanels.SetActive(false);
         TravelSystem.Instance.LootLabel.SetText(GameCore.Instance.RankItems[(int)rankItem].name);
         TravelSystem.Instance.ModalWindowsCanvas.SetActive(true);

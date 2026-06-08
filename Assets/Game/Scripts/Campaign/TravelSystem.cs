@@ -63,11 +63,13 @@ public class TravelSystem : MonoBehaviour
     {
         if (SilverBonus > 0)
         {
-            GameCore.Instance.Master.Silver += SilverBonus;        
+            GameCore.Instance.Master.Silver += SilverBonus;
+            SilverBonus = 0;
         }
         if (LootItem != null)
         {
             GameCore.Instance.RankItems[(int)LootItem.ID].Unlocked = true;
+            LootItem = null;
         }
     }
     private bool NotNull(TravelAction action)
