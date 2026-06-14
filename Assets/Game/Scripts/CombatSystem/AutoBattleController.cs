@@ -795,7 +795,7 @@ public class AutoBattleController : MonoBehaviour
                 enemyAnimator?.PlayDefeat();
                 PlayOneShot(victorySfx);
                 string lootString = "";
-                if (TravelSystem.Instance.LootItem.name != null) lootString = $"\n{TravelSystem.Instance.LootItem.name}";
+                if (TravelSystem.Instance.LootItem != null  && TravelSystem.Instance.LootItem.name != null) lootString = $"\n{TravelSystem.Instance.LootItem.name}";
                 ShowResultPanel($"Вы победили\n\nПолучено: {TravelSystem.Instance.SilverBonus} серебра" + lootString);             
             }
             else

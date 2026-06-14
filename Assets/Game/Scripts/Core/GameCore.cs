@@ -50,7 +50,7 @@ public class GameCore : MonoBehaviour
         if (SaveManager.NeedLoad) 
         {
             SaveManager.Load(this);          
-        }   
+        }
         
     }
     private void Start()
