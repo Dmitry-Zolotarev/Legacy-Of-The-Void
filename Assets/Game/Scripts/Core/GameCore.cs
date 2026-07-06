@@ -19,7 +19,7 @@ public class GameCore : MonoBehaviour
 
     [SerializeField] private GameObject ToolTipCanvas;
     [SerializeField] private GameObject GameOverWindow;
-    
+    [SerializeField] private GameObject StudentButton;
     [SerializeField] private GameObject CombatHelpCanvas;
     [SerializeField] private GameObject AgeCanvas;
     
@@ -101,6 +101,7 @@ public class GameCore : MonoBehaviour
             Master.Student.Inherit(Master);
             Master = Master.Student;
             GameOverDescrption?.SetText("Наследство передано ученику");
+            StudentButton?.SetActive(false);
         }
         else
         {

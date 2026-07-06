@@ -9,7 +9,7 @@ public class MainHubUI : MonoBehaviour
     [SerializeField] private Sprite YoungMasterSprite;
     [SerializeField] private Sprite AdultMasterSprite;
     [SerializeField] private Sprite OldMasterSprite;
-    [SerializeField] private StatsPanel MiniStatsPanel;
+    [SerializeField] private StatsPanel MiniStatsPanel;    
     [SerializeField] private int BecomeAdultAge = 30;
     [SerializeField] private int BecomeOldAge = 60;
     public static MainHubUI Instance;
@@ -32,6 +32,9 @@ public class MainHubUI : MonoBehaviour
         Time.timeScale = 1f;
         if (GameCore.Instance == null || GameCore.Instance.Master == null) return;
         master = GameCore.Instance.Master;
+
+        
+
         UpdateLabels();
         UpdateMasterSprite();
     }
@@ -54,7 +57,6 @@ public class MainHubUI : MonoBehaviour
         if (master == null) return;  
         MiniStatsPanel.UpdateLabels();
         SilverAmountLabel?.SetText(master.Silver.ToString());
-
         var rankName = GameCore.Instance.Ranks[GameCore.Instance.Master.CurrentRank].Name;
     }
 }
