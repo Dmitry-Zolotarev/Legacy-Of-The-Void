@@ -8,7 +8,7 @@ public class RestAction : TravelAction
         GameCore.Instance.Master.Wounds = 0;
         TravelSystem.Instance.TravelPanels.SetActive(false);
         TravelSystem.Instance.ModalWindowsCanvas.SetActive(true);
-        TravelSystem.Instance.OpenWindow(1);  
+        TravelSystem.Instance.OpenWindow(1);
         base.DoAction();
     }
     public override List<string> GetRewardRows()

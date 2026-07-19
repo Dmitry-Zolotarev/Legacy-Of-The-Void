@@ -9,5 +9,4 @@ public class CampaignStage
     public LootAction LootAction;
     public FightAction FightAction;  
     public RestAction RestAction;
-    public SkipAction SkipAction;
 }

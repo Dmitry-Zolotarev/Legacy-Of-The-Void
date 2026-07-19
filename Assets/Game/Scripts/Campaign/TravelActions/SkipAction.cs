@@ -5,7 +5,7 @@ public class SkipAction : TravelAction
 {
     public override void DoAction()
     {
-        TravelSystem.Instance.UpdateStage();
+        TravelSystem.Instance.UpdateStage(1);
         base.DoAction();
     }
     public override List<string> GetRewardRows()

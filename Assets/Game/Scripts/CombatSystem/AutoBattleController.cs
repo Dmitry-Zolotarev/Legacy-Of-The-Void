@@ -810,7 +810,14 @@ public class AutoBattleController : MonoBehaviour
             battleFinished = true;
             RefreshButtonStates();
             yield return new WaitForSeconds(ShowResultsTime);
-            if(playerStats.CurrentHP > 0) TravelSystem.Instance.UpdateStage();
+            if (playerStats.CurrentHP > 0)
+            {
+                TravelSystem.Instance.UpdateStage(1);
+            }
+            else if (TravelSystem.Instance.LootItem != null)
+            {
+                TravelSystem.Instance.UpdateStage(-1);
+            } 
             GameCore.Instance.EndFight();
         }
         PrepareNewRoundState();

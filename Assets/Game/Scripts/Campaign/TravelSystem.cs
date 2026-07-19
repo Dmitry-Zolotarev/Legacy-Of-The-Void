@@ -11,7 +11,6 @@ public class TravelSystem : MonoBehaviour
     [SerializeField] private TravelPanel lootPanel;
     [SerializeField] private TravelPanel fightPanel;
     [SerializeField] private TravelPanel restPanel;
-    [SerializeField] private TravelPanel skipPanel;
     [SerializeField] private Image background;
 
     
@@ -31,7 +30,7 @@ public class TravelSystem : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         ModalWindowsCanvas.SetActive(false);
-        UpdateStage();
+        UpdateStage(1);
     }
     private void OnEnable()
     {
@@ -47,7 +46,11 @@ public class TravelSystem : MonoBehaviour
     }
     public void OpenWindow(int windowID)
     {
-        for (int i = 0; i < modalWindows.Length; i++) modalWindows[i]?.SetActive(i == windowID);
+        for (int i = 0; i < modalWindows.Length; i++) 
+        {
+            modalWindows[i]?.SetActive(i == windowID);
+            if(i == windowID) UpdateStage(1);
+        }      
     }
     private void UpdateLabels()
     {
@@ -76,7 +79,7 @@ public class TravelSystem : MonoBehaviour
     {
         return action != null && !string.IsNullOrEmpty(action.HeaderText);
     } 
-    public void UpdateStage()
+    public void UpdateStage(int offset)
     {
         if (GameCore.Instance.CurrentStage < campaignStages.Length)
         {          
@@ -91,13 +94,10 @@ public class TravelSystem : MonoBehaviour
             restPanel?.gameObject.SetActive(NotNull(stage.RestAction));
             restPanel?.UpdateAction(stage.RestAction);
 
-            skipPanel?.gameObject.SetActive(NotNull(stage.SkipAction));
-            skipPanel?.UpdateAction(stage.SkipAction);
-
             stageNameLabel.SetText(stage.StageName);
             stageDescriptionLabel.SetText(stage.Description);
 
-            GameCore.Instance.CurrentStage++;
+            GameCore.Instance.CurrentStage += offset;
             PickLoot();
         }   
         else finalVoidBreakCanvas.SetActive(true);
